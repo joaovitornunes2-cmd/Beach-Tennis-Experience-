@@ -845,7 +845,7 @@ tr:hover td{background:var(--off-white)}
       <div class="admin-section active" id="admin-exp">
         <div class="admin-table-wrap">
           <table id="tableExp">
-            <thead><tr><th>#</th><th>Nome</th><th>Turma</th><th>Telefone</th><th>Email</th><th>Cidade</th><th>Praticou?</th></tr></thead>
+            <thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Turma</th><th>Telefone</th><th>CEP</th><th>Email</th><th>Praticou?</th></tr></thead>
             <tbody id="tbodyExp"></tbody>
           </table>
         </div>
@@ -853,7 +853,7 @@ tr:hover td{background:var(--off-white)}
       <div class="admin-section" id="admin-tor">
         <div class="admin-table-wrap">
           <table id="tableTor">
-            <thead><tr><th>#</th><th>Nome</th><th>Categoria</th><th>Nível</th><th>Telefone</th><th>Email</th><th>Cidade</th></tr></thead>
+            <thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Categoria</th><th>Telefone</th><th>CEP</th><th>Email</th></tr></thead>
             <tbody id="tbodyTor"></tbody>
           </table>
         </div>
@@ -910,7 +910,11 @@ tr:hover td{background:var(--off-white)}
         <div class="mfg">
           <div class="mf-group full">
             <label>Nome completo *</label>
-            <input type="text" id="m_exp_nome" placeholder="Seu nome">
+            <input type="text" id="m_exp_nome" placeholder="Seu nome completo">
+          </div>
+          <div class="mf-group">
+            <label>CPF *</label>
+            <input type="text" id="m_exp_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
           </div>
           <div class="mf-group">
             <label>Data de nascimento *</label>
@@ -918,15 +922,15 @@ tr:hover td{background:var(--off-white)}
           </div>
           <div class="mf-group">
             <label>Telefone / WhatsApp *</label>
-            <input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999">
+            <input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)">
+          </div>
+          <div class="mf-group">
+            <label>CEP *</label>
+            <input type="text" id="m_exp_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('exp')">
           </div>
           <div class="mf-group full">
             <label>E-mail *</label>
             <input type="email" id="m_exp_email" placeholder="seuemail@email.com">
-          </div>
-          <div class="mf-group">
-            <label>Cidade *</label>
-            <input type="text" id="m_exp_cidade" placeholder="Goiânia">
           </div>
           <div class="mf-group">
             <label>Já praticou Beach Tennis?</label>
@@ -953,19 +957,27 @@ tr:hover td{background:var(--off-white)}
         <div class="mfg">
           <div class="mf-group full">
             <label>Nome completo *</label>
-            <input type="text" id="m_tor_nome" placeholder="Seu nome">
+            <input type="text" id="m_tor_nome" placeholder="Seu nome completo">
+          </div>
+          <div class="mf-group">
+            <label>CPF *</label>
+            <input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
+          </div>
+          <div class="mf-group">
+            <label>Data de nascimento *</label>
+            <input type="date" id="m_tor_nasc">
           </div>
           <div class="mf-group">
             <label>Telefone / WhatsApp *</label>
-            <input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999">
+            <input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)">
+          </div>
+          <div class="mf-group">
+            <label>CEP *</label>
+            <input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')">
           </div>
           <div class="mf-group">
             <label>E-mail *</label>
             <input type="email" id="m_tor_email" placeholder="seuemail@email.com">
-          </div>
-          <div class="mf-group">
-            <label>Cidade *</label>
-            <input type="text" id="m_tor_cidade" placeholder="Goiânia">
           </div>
           <div class="mf-group">
             <label>Categoria *</label>
@@ -1195,14 +1207,14 @@ function renderAdmin(){
   // Exp table
   const turmaNames = {'1':'T1 08h','2':'T2 09h','3':'T3 10h','4':'T4 11h'};
   document.getElementById('tbodyExp').innerHTML = data.expList.length?
-    data.expList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma}</span></td><td>${e.tel}</td><td>${e.email}</td><td>${e.cidade}</td><td>${e.praticou==='sim'?'Sim':'Não'}</td></tr>`).join(''):
-    '<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
+    data.expList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td>${e.cpf||'-'}</td><td>${e.nasc||'-'}</td><td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma}</span></td><td>${e.tel}</td><td>${e.cep||'-'}</td><td>${e.email}</td><td>${e.praticou==='sim'?'Sim':'Não'}</td></tr>`).join(''):
+    '<tr><td colspan="9" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
 
   // Tor table
   const catNames = {masc_ini:'Masc. Iniciante',masc_int:'Masc. Intermediário',fem_ini:'Fem. Iniciante',fem_int:'Fem. Intermediário'};
   document.getElementById('tbodyTor').innerHTML = data.torList.length?
-    data.torList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td>${catNames[e.cat]||e.cat}</td><td><span class="nivel-badge nivel-${e.nivel}">${e.nivel}</span></td><td>${e.tel}</td><td>${e.email}</td><td>${e.cidade}</td></tr>`).join(''):
-    '<tr><td colspan="7" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
+    data.torList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td>${e.cpf||'-'}</td><td>${e.nasc||'-'}</td><td>${catNames[e.cat]||e.cat}</td><td>${e.tel}</td><td>${e.cep||'-'}</td><td>${e.email}</td></tr>`).join(''):
+    '<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
 
   // Wait table
   document.getElementById('tbodyWait').innerHTML = data.waitList.length?
@@ -1324,21 +1336,22 @@ function onModalCatSelect(){
 }
 
 function submitModalExp(){
-  const nome = document.getElementById('m_exp_nome').value.trim();
-  const nasc = document.getElementById('m_exp_nasc').value;
-  const tel = document.getElementById('m_exp_tel').value.trim();
+  const nome  = document.getElementById('m_exp_nome').value.trim();
+  const cpf   = document.getElementById('m_exp_cpf').value.trim();
+  const nasc  = document.getElementById('m_exp_nasc').value;
+  const tel   = document.getElementById('m_exp_tel').value.trim();
+  const cep   = document.getElementById('m_exp_cep').value.trim();
   const email = document.getElementById('m_exp_email').value.trim();
-  const cidade = document.getElementById('m_exp_cidade').value.trim();
   const turma = document.getElementById('m_exp_turma').value;
   const praticou = document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
 
-  if(!nome||!nasc||!tel||!email||!cidade||!turma){
+  if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){
     alert('Por favor, preencha todos os campos obrigatórios e selecione uma turma.');return;
   }
 
   const t = data.turmas[turma];
   const isWait = t.inscritos >= MAX_TURMA;
-  const entry = {nome,nasc,tel,email,cidade,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
+  const entry = {nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
 
   if(isWait){
     data.waitList.push(entry);
@@ -1360,20 +1373,22 @@ function submitModalExp(){
 }
 
 function submitModalTor(){
-  const nome = document.getElementById('m_tor_nome').value.trim();
-  const tel = document.getElementById('m_tor_tel').value.trim();
+  const nome  = document.getElementById('m_tor_nome').value.trim();
+  const cpf   = document.getElementById('m_tor_cpf').value.trim();
+  const nasc  = document.getElementById('m_tor_nasc').value;
+  const tel   = document.getElementById('m_tor_tel').value.trim();
+  const cep   = document.getElementById('m_tor_cep').value.trim();
   const email = document.getElementById('m_tor_email').value.trim();
-  const cidade = document.getElementById('m_tor_cidade').value.trim();
-  const cat = document.getElementById('m_tor_cat').value;
+  const cat   = document.getElementById('m_tor_cat').value;
 
-  if(!nome||!tel||!email||!cidade||!cat){
+  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){
     alert('Por favor, preencha todos os campos obrigatórios.');return;
   }
 
   const c = data.cats[cat];
   const isWait = c.inscritos >= MAX_CAT;
   const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
-  const entry = {nome,tel,email,cidade,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
+  const entry = {nome,cpf,nasc,tel,cep,email,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
 
   if(isWait){
     data.waitList.push(entry);
@@ -1390,6 +1405,43 @@ function submitModalTor(){
 
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mSuccessTor').classList.add('active');
+}
+
+// ===== MÁSCARAS =====
+function maskCPF(el){
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+  else if(v.length>6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+  else if(v.length>3) v = v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+  el.value = v;
+}
+
+function maskTel(el){
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>10) v = v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  else if(v.length>6) v = v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
+  else if(v.length>2) v = v.replace(/(\d{2})(\d+)/,'($1) $2');
+  el.value = v;
+}
+
+function maskCEP(el){
+  let v = el.value.replace(/\D/g,'').slice(0,8);
+  if(v.length>5) v = v.replace(/(\d{5})(\d{1,3})/,'$1-$2');
+  el.value = v;
+}
+
+async function buscaCEP(form){
+  const cepEl = document.getElementById(`m_${form}_cep`);
+  const raw = cepEl.value.replace(/\D/g,'');
+  if(raw.length !== 8) return;
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${raw}/json/`);
+    const d = await res.json();
+    if(d.erro) return;
+    // mostra feedback visual sutil no campo
+    cepEl.style.borderColor = '#2e7d32';
+    setTimeout(()=>cepEl.style.borderColor='', 2000);
+  } catch(e){}
 }
 
 // INIT
