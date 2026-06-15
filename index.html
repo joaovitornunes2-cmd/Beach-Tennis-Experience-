@@ -359,6 +359,71 @@ tr:hover td{background:var(--off-white)}
 @media(max-width:640px){
   .cards-destaque-grid{grid-template-columns:1fr}
 }
+
+/* ===== MODAL DE INSCRIÇÃO ===== */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem}
+.modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-box{background:#fff;border-radius:16px;width:100%;max-width:580px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;margin:auto}
+.modal-header{background:#111111;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.modal-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:#CC1B1B;margin:0}
+.modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:1.75rem;cursor:pointer;line-height:1;transition:color .2s;padding:0 .25rem}
+.modal-close:hover{color:#fff}
+.modal-body{padding:2rem}
+
+/* Step 0 – seleção de modalidade */
+.modal-step{display:none}
+.modal-step.active{display:block}
+.modal-choice-title{font-size:1rem;font-weight:700;color:#111;margin-bottom:1.25rem;text-align:center}
+.modal-choices{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.5rem}
+.choice-card{border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .2s;background:#fff}
+.choice-card:hover{border-color:#CC1B1B;transform:translateY(-2px);box-shadow:0 6px 20px rgba(204,27,27,.15)}
+.choice-card.selected{border-color:#CC1B1B;background:rgba(204,27,27,.05)}
+.choice-icon{font-size:2.25rem;margin-bottom:.6rem}
+.choice-label{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.4rem}
+.choice-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1.5px;color:#111;line-height:1;margin-bottom:.5rem}
+.choice-desc{font-size:.8rem;color:#666;line-height:1.5}
+.btn-modal-next{width:100%;background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.9rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:1rem}
+.btn-modal-next:hover{background:#E83030;transform:translateY(-1px)}
+.btn-modal-next:disabled{background:#ccc;cursor:default;transform:none}
+
+/* Formulários dentro do modal */
+.modal-form-header{margin-bottom:1.5rem}
+.modal-form-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:#111;margin-bottom:.25rem}
+.modal-form-header p{font-size:.85rem;color:#666}
+.mfg{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.mfg .full{grid-column:1/-1}
+.mf-group{display:flex;flex-direction:column;gap:.35rem}
+.mf-group label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#111}
+.mf-group input,.mf-group select{border:1.5px solid #e0e0e0;border-radius:6px;padding:.625rem .875rem;font-size:.95rem;font-family:'Inter',sans-serif;color:#222;transition:border-color .2s;background:#fff;width:100%}
+.mf-group input:focus,.mf-group select:focus{outline:none;border-color:#CC1B1B}
+.mf-radio-row{display:flex;gap:1rem}
+.mf-radio{display:flex;align-items:center;gap:.35rem;cursor:pointer;font-size:.9rem;color:#333}
+.mf-radio input{accent-color:#CC1B1B}
+.btn-modal-back{background:none;border:1.5px solid #ddd;border-radius:8px;padding:.7rem 1.25rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555;transition:all .2s}
+.btn-modal-back:hover{border-color:#999;color:#111}
+.modal-form-actions{display:flex;gap:.75rem;margin-top:1.25rem}
+.modal-form-actions .btn-modal-next{flex:1;margin-top:0}
+.modal-success{display:none;text-align:center;padding:1rem 0}
+.modal-success .success-ico{font-size:3.5rem;margin-bottom:1rem}
+.modal-success h3{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem}
+.modal-success p{font-size:.9rem;color:#555;line-height:1.6;max-width:360px;margin:0 auto 1.5rem}
+.modal-success .btn-modal-next{max-width:240px;margin:0 auto}
+.modal-waitlist-note{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:.85rem;color:#795548;display:none}
+.modal-turmas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
+.modal-turma-card{border:2px solid #e0e0e0;border-radius:10px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s}
+.modal-turma-card:hover{border-color:#CC1B1B}
+.modal-turma-card.selected{border-color:#CC1B1B;background:rgba(204,27,27,.05)}
+.modal-turma-card.full{opacity:.6;cursor:default}
+.modal-turma-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;line-height:1}
+.modal-turma-hora{font-weight:700;font-size:.9rem;color:#111;margin:.2rem 0 .15rem}
+.modal-turma-vagas{font-size:.75rem;color:#888;text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:540px){
+  .modal-choices{grid-template-columns:1fr}
+  .mfg{grid-template-columns:1fr}
+  .mfg .full{grid-column:1}
+  .modal-turmas-grid{grid-template-columns:1fr 1fr}
+  .modal-body{padding:1.25rem}
+}
 </style>
 </head>
 <body>
@@ -373,7 +438,7 @@ tr:hover td{background:var(--off-white)}
       <li><a href="#professores">Professores</a></li>
       <li><a href="#cronograma">Cronograma</a></li>
     </ul>
-    <a href="#inscricao" class="nav-cta">Garanta sua vaga</a>
+    <a href="#" onclick="event.preventDefault();openModal()" class="nav-cta">Garanta sua vaga</a>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
@@ -419,7 +484,7 @@ tr:hover td{background:var(--off-white)}
     </div>
 
     <div class="hero-btns-stack fade-up delay-3">
-      <a href="#inscricao" class="btn-primary btn-full">Garanta sua vaga</a>
+      <a href="#inscricao" onclick="event.preventDefault();openModal()" class="btn-primary btn-full">Garanta sua vaga</a>
       <a href="#evento" class="btn-outline btn-full">Saiba mais</a>
     </div>
 
@@ -478,7 +543,7 @@ tr:hover td{background:var(--off-white)}
           Certificado
         </li>
       </ul>
-      <a href="#inscricao" onclick="document.querySelector('[data-tab=exp]')?.click()" class="card-destaque__btn">Quero aprender Beach Tennis</a>
+      <a href="#" onclick="event.preventDefault();openModal('exp')" class="card-destaque__btn">Quero aprender Beach Tennis</a>
     </div>
 
     <!-- CARD 2: SUPER 8 -->
@@ -499,7 +564,7 @@ tr:hover td{background:var(--off-white)}
           Troféu para o campeão
         </li>
       </ul>
-      <a href="#inscricao" onclick="document.querySelector('[data-tab=tor]')?.click()" class="card-destaque__btn">Quero jogar o Super 8</a>
+      <a href="#" onclick="event.preventDefault();openModal('tor')" class="card-destaque__btn">Quero jogar o Super 8</a>
     </div>
 
   </div>
@@ -755,7 +820,7 @@ tr:hover td{background:var(--off-white)}
     </div>
     <div class="footer-bottom">
       <p>© 2026 Beach Tennis Experience · Organizado por Clubinho das Raquetes · Realizado no CT SkyFit Passeio das Águas</p>
-      <a href="#inscricao" class="footer-cta">Quero participar →</a>
+      <a href="#" onclick="event.preventDefault();openModal()" class="footer-cta">Quero participar →</a>
     </div>
   </div>
 </footer>
@@ -801,6 +866,144 @@ tr:hover td{background:var(--off-white)}
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL DE INSCRIÇÃO ===== -->
+<div class="modal-overlay" id="modalInscricao">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Inscrição</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 0: escolha de modalidade -->
+      <div class="modal-step active" id="mStep0">
+        <p class="modal-choice-title">Como você quer participar?</p>
+        <div class="modal-choices">
+          <div class="choice-card" id="choiceExp" onclick="selectChoice('exp')">
+            <div class="choice-icon">🎾</div>
+            <div class="choice-label">Iniciante</div>
+            <div class="choice-name">Experiência Guiada</div>
+            <div class="choice-desc">Nunca jogou? Aprenda com professores certificados em turmas de até 6 pessoas.</div>
+          </div>
+          <div class="choice-card" id="choiceTor" onclick="selectChoice('tor')">
+            <div class="choice-icon">🏆</div>
+            <div class="choice-label">Competição</div>
+            <div class="choice-name">Super 8</div>
+            <div class="choice-desc">Já pratica? Dispute o torneio exclusivo com apenas 8 atletas por categoria.</div>
+          </div>
+        </div>
+        <button class="btn-modal-next" id="btnNextChoice" disabled onclick="goToForm()">Continuar →</button>
+      </div>
+
+      <!-- STEP 1: Formulário Experiência -->
+      <div class="modal-step" id="mStepExp">
+        <div class="modal-form-header">
+          <h3>🎾 Experiência para Iniciantes</h3>
+          <p>Preencha seus dados e escolha o horário da turma.</p>
+        </div>
+        <div class="modal-waitlist-note" id="mWaitExp">⚠️ Esta turma está lotada. Você entrará na lista de espera.</div>
+        <div class="modal-turmas-grid" id="mTurmasGrid"></div>
+        <div class="mfg">
+          <div class="mf-group full">
+            <label>Nome completo *</label>
+            <input type="text" id="m_exp_nome" placeholder="Seu nome">
+          </div>
+          <div class="mf-group">
+            <label>Data de nascimento *</label>
+            <input type="date" id="m_exp_nasc">
+          </div>
+          <div class="mf-group">
+            <label>Telefone / WhatsApp *</label>
+            <input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999">
+          </div>
+          <div class="mf-group full">
+            <label>E-mail *</label>
+            <input type="email" id="m_exp_email" placeholder="seuemail@email.com">
+          </div>
+          <div class="mf-group">
+            <label>Cidade *</label>
+            <input type="text" id="m_exp_cidade" placeholder="Goiânia">
+          </div>
+          <div class="mf-group">
+            <label>Já praticou Beach Tennis?</label>
+            <div class="mf-radio-row">
+              <label class="mf-radio"><input type="radio" name="m_exp_praticou" value="nao" checked> Não</label>
+              <label class="mf-radio"><input type="radio" name="m_exp_praticou" value="sim"> Sim</label>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="m_exp_turma" value="">
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
+          <button class="btn-modal-next" onclick="submitModalExp()">Confirmar inscrição</button>
+        </div>
+      </div>
+
+      <!-- STEP 1: Formulário Super 8 -->
+      <div class="modal-step" id="mStepTor">
+        <div class="modal-form-header">
+          <h3>🏆 Torneio Super 8</h3>
+          <p>Preencha seus dados para garantir sua vaga no torneio.</p>
+        </div>
+        <div class="modal-waitlist-note" id="mWaitTor">⚠️ Esta categoria está lotada. Você entrará na lista de espera.</div>
+        <div class="mfg">
+          <div class="mf-group full">
+            <label>Nome completo *</label>
+            <input type="text" id="m_tor_nome" placeholder="Seu nome">
+          </div>
+          <div class="mf-group">
+            <label>Telefone / WhatsApp *</label>
+            <input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999">
+          </div>
+          <div class="mf-group">
+            <label>E-mail *</label>
+            <input type="email" id="m_tor_email" placeholder="seuemail@email.com">
+          </div>
+          <div class="mf-group">
+            <label>Cidade *</label>
+            <input type="text" id="m_tor_cidade" placeholder="Goiânia">
+          </div>
+          <div class="mf-group">
+            <label>Categoria *</label>
+            <select id="m_tor_cat" onchange="onModalCatSelect()">
+              <option value="">Selecione...</option>
+              <option value="masc_ini">Masculino – Iniciante</option>
+              <option value="masc_int">Masculino – Intermediário</option>
+              <option value="fem_ini">Feminino – Iniciante</option>
+              <option value="fem_int">Feminino – Intermediário</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
+          <button class="btn-modal-next" onclick="submitModalTor()">Confirmar inscrição</button>
+        </div>
+      </div>
+
+      <!-- Sucesso Experiência -->
+      <div class="modal-step" id="mSuccessExp">
+        <div class="modal-success" style="display:block">
+          <div class="success-ico">✅</div>
+          <h3>Inscrição confirmada!</h3>
+          <p id="mSuccessExpMsg">Sua vaga na experiência foi reservada. Em breve entraremos em contato pelo WhatsApp.</p>
+          <button class="btn-modal-next" onclick="closeModal()">Fechar</button>
+        </div>
+      </div>
+
+      <!-- Sucesso Super 8 -->
+      <div class="modal-step" id="mSuccessTor">
+        <div class="modal-success" style="display:block">
+          <div class="success-ico">🏆</div>
+          <h3>Inscrição no Super 8!</h3>
+          <p id="mSuccessTorMsg">Sua vaga no torneio foi reservada. Em breve entraremos em contato pelo WhatsApp.</p>
+          <button class="btn-modal-next" onclick="closeModal()">Fechar</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1032,6 +1235,161 @@ function copyPix(elId, btn){
   }).catch(()=>{
     btn.textContent='Copiar manualmente';
   });
+}
+
+// ===== MODAL DE INSCRIÇÃO =====
+let modalChoice = null;
+
+function openModal(preChoice){
+  modalChoice = null;
+  // reset all steps
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mStep0').classList.add('active');
+  document.getElementById('choiceExp').classList.remove('selected');
+  document.getElementById('choiceTor').classList.remove('selected');
+  document.getElementById('btnNextChoice').disabled = true;
+  document.getElementById('modalInscricao').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderModalTurmas();
+  // se já veio com uma escolha pré-selecionada (ex: botão "Quero aprender" ou "Quero jogar Super 8")
+  if(preChoice){
+    selectChoice(preChoice);
+    goToForm();
+  }
+}
+
+function closeModal(){
+  document.getElementById('modalInscricao').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// fechar clicando no overlay
+document.getElementById('modalInscricao').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
+
+function selectChoice(c){
+  modalChoice = c;
+  document.getElementById('choiceExp').classList.toggle('selected', c==='exp');
+  document.getElementById('choiceTor').classList.toggle('selected', c==='tor');
+  document.getElementById('btnNextChoice').disabled = false;
+}
+
+function goToForm(){
+  if(!modalChoice) return;
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById(modalChoice==='exp' ? 'mStepExp' : 'mStepTor').classList.add('active');
+  renderModalTurmas();
+}
+
+function backToChoice(){
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mStep0').classList.add('active');
+}
+
+function renderModalTurmas(){
+  const grid = document.getElementById('mTurmasGrid');
+  if(!grid) return;
+  const horarios = ['08h – 09h','09h – 10h','10h – 11h','11h – 12h'];
+  grid.innerHTML = '';
+  for(let i=1;i<=4;i++){
+    const t = data.turmas[i];
+    const restantes = MAX_TURMA - t.inscritos;
+    const isFull = restantes <= 0;
+    const selVal = document.getElementById('m_exp_turma')?.value;
+    const isSel = selVal == i;
+    grid.innerHTML += `
+      <div class="modal-turma-card ${isFull?'full':''} ${isSel?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
+        <div class="modal-turma-num">T${i}</div>
+        <div class="modal-turma-hora">${horarios[i-1]}</div>
+        <div class="modal-turma-vagas">${isFull?'Lotada':''+restantes+' vaga'+(restantes!==1?'s':'')}</div>
+      </div>`;
+  }
+}
+
+function selectModalTurma(n){
+  document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('mtc'+n).classList.add('selected');
+  document.getElementById('m_exp_turma').value = n;
+  const t = data.turmas[n];
+  document.getElementById('mWaitExp').style.display = (t.inscritos>=MAX_TURMA)?'block':'none';
+}
+
+function onModalCatSelect(){
+  const v = document.getElementById('m_tor_cat').value;
+  const msg = document.getElementById('mWaitTor');
+  if(!v){msg.style.display='none';return;}
+  const c = data.cats[v];
+  msg.style.display = (c.inscritos>=MAX_CAT)?'block':'none';
+}
+
+function submitModalExp(){
+  const nome = document.getElementById('m_exp_nome').value.trim();
+  const nasc = document.getElementById('m_exp_nasc').value;
+  const tel = document.getElementById('m_exp_tel').value.trim();
+  const email = document.getElementById('m_exp_email').value.trim();
+  const cidade = document.getElementById('m_exp_cidade').value.trim();
+  const turma = document.getElementById('m_exp_turma').value;
+  const praticou = document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
+
+  if(!nome||!nasc||!tel||!email||!cidade||!turma){
+    alert('Por favor, preencha todos os campos obrigatórios e selecione uma turma.');return;
+  }
+
+  const t = data.turmas[turma];
+  const isWait = t.inscritos >= MAX_TURMA;
+  const entry = {nome,nasc,tel,email,cidade,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
+
+  if(isWait){
+    data.waitList.push(entry);
+  } else {
+    t.inscritos++;
+    data.expList.push(entry);
+  }
+  save();
+  renderTurmas();
+  renderModalTurmas();
+
+  const turmaNames = ['','T1 08h','T2 09h','T3 10h','T4 11h'];
+  document.getElementById('mSuccessExpMsg').textContent = isWait
+    ? `Você está na lista de espera para ${turmaNames[turma]}. Se uma vaga abrir, entraremos em contato.`
+    : `Sua vaga na ${turmaNames[turma]} foi reservada! Em breve entraremos em contato pelo WhatsApp.`;
+
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mSuccessExp').classList.add('active');
+}
+
+function submitModalTor(){
+  const nome = document.getElementById('m_tor_nome').value.trim();
+  const tel = document.getElementById('m_tor_tel').value.trim();
+  const email = document.getElementById('m_tor_email').value.trim();
+  const cidade = document.getElementById('m_tor_cidade').value.trim();
+  const cat = document.getElementById('m_tor_cat').value;
+
+  if(!nome||!tel||!email||!cidade||!cat){
+    alert('Por favor, preencha todos os campos obrigatórios.');return;
+  }
+
+  const c = data.cats[cat];
+  const isWait = c.inscritos >= MAX_CAT;
+  const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+  const entry = {nome,tel,email,cidade,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
+
+  if(isWait){
+    data.waitList.push(entry);
+  } else {
+    c.inscritos++;
+    data.torList.push(entry);
+  }
+  save();
+  renderCats();
+
+  document.getElementById('mSuccessTorMsg').textContent = isWait
+    ? `Você está na lista de espera para ${catNames[cat]}. Entraremos em contato se abrir vaga.`
+    : `Sua vaga em ${catNames[cat]} está confirmada! Entraremos em contato pelo WhatsApp.`;
+
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mSuccessTor').classList.add('active');
 }
 
 // INIT
