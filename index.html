@@ -737,7 +737,22 @@ tr:hover td{background:var(--off-white)}
 <!-- WA FLOAT -->
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
-<script>
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBCCuHPBx9kd87AQHy8z3WU6Nlx6OL6Ads",
+  authDomain: "beach-tennis-expercience.firebaseapp.com",
+  projectId: "beach-tennis-expercience",
+  storageBucket: "beach-tennis-expercience.firebasestorage.app",
+  messagingSenderId: "997128122804",
+  appId: "1:997128122804:web:991c9e3f87390518df82e1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 // DATA STORE (in-memory, simulating DB)
 const MAX_TURMA = 6;
 const MAX_CAT = 8;
@@ -750,13 +765,25 @@ let data = {
   waitList: []
 };
 
-// Load from localStorage if available
-try {
-  const saved = localStorage.getItem('bte_data');
-  if(saved) data = JSON.parse(saved);
-} catch(e){}
+/// Carrega dados do Firestore
+async function loadFromFirestore() {
+  const snap = await getDoc(doc(db, 'config', 'data'));
+  if(snap.exists()) {
+    const d = snap.data();
+    data.turmas = d.turmas || data.turmas;
+    data.cats   = d.cats   || data.cats;
+    renderTurmas(); renderCats();
+  }
+  // Escuta inscrições em tempo real
+  onSnapshot(collection(db, 'expList'),  s => { data.expList  = s.docs.map(d=>d.data()); });
+  onSnapshot(collection(db, 'torList'),  s => { data.torList  = s.docs.map(d=>d.data()); });
+  onSnapshot(collection(db, 'waitList'), s => { data.waitList = s.docs.map(d=>d.data()); });
+}
+loadFromFirestore();
 
-function save(){ try{ localStorage.setItem('bte_data', JSON.stringify(data)); }catch(e){} }
+async function save() {
+  await setDoc(doc(db, 'config', 'data'), { turmas: data.turmas, cats: data.cats });
+}
 
 // TURMA CARDS
 function renderTurmas(){
@@ -844,13 +871,12 @@ function submitExp(){
   const entry = {nome,nasc,tel,email,cidade,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
 
   if(isWait){
-    data.waitList.push(entry);
+    await addDoc(collection(db, 'waitList'), entry);
   } else {
     t.inscritos++;
-    data.expList.push(entry);
-  }
-  save();
-  renderTurmas();
+    await addDoc(collection(db, 'expList'), entry);
+    await save();
+  }  renderTurmas();
   document.getElementById('formExp').style.display='none';
   document.getElementById('expSuccess').style.display='block';
   document.getElementById('waitlistMsg').style.display='none';
@@ -874,12 +900,12 @@ function submitTor(){
   const entry = {nome,tel,email,cidade,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
 
   if(isWait){
-    data.waitList.push(entry);
+    await addDoc(collection(db, 'waitList'), entry);
   } else {
     c.inscritos++;
-    data.torList.push(entry);
+    await addDoc(collection(db, 'torList'), entry);
+    await save();
   }
-  save();
   renderCats();
   document.getElementById('formTor').style.display='none';
   document.getElementById('torSuccess').style.display='block';
