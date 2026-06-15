@@ -198,31 +198,87 @@ footer{background:#111111;color:#fff;padding:3rem 2rem 1.5rem}
 
 /* ADMIN PANEL */
 .admin-toggle{position:fixed;bottom:2rem;right:2rem;background:#111111;color:#fff;border:none;border-radius:50px;padding:.625rem 1.25rem;font-size:.8rem;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif}
-.admin-panel{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.7);overflow-y:auto}
+.admin-panel{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);overflow-y:auto;backdrop-filter:blur(6px)}
 .admin-panel.open{display:block}
-.admin-content{background:#fff;max-width:1000px;margin:2rem auto;border-radius:var(--radius);overflow:hidden}
-.admin-header{background:#111111;color:#fff;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:2px;color:#CC1B1B}
-.admin-close{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1}
-.admin-body{padding:2rem}
-.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
-.stat-box{background:var(--off-white);border-radius:var(--radius-sm);padding:1rem;text-align:center}
-.stat-box .num{font-size:2rem;font-weight:700;color:var(--blue)}
-.stat-box .lbl{font-size:.75rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.admin-table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.875rem}
-th{background:var(--blue-dark);color:#fff;padding:.75rem 1rem;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:1px}
-td{padding:.625rem 1rem;border-bottom:1px solid var(--gray-light)}
-tr:hover td{background:var(--off-white)}
-.badge{display:inline-block;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.admin-content{background:#fff;max-width:1160px;margin:1.5rem auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+
+/* LOGIN */
+.admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;min-height:340px;gap:1.5rem}
+.admin-login-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#CC1B1B}
+.admin-login h3{font-size:1.1rem;font-weight:700;color:#111;margin:0}
+.admin-login p{font-size:.85rem;color:#888;margin:-.75rem 0 0;text-align:center}
+.admin-login-form{display:flex;flex-direction:column;gap:.75rem;width:100%;max-width:320px}
+.admin-login-form input{border:1.5px solid #e0e0e0;border-radius:8px;padding:.75rem 1rem;font-size:.95rem;font-family:'Inter',sans-serif;width:100%;transition:border-color .2s}
+.admin-login-form input:focus{outline:none;border-color:#CC1B1B}
+.admin-login-btn{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.875rem;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.admin-login-btn:hover{background:#E83030}
+.admin-login-err{background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;display:none;text-align:center}
+
+/* HEADER */
+.admin-header{background:#111111;color:#fff;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.admin-header-left{display:flex;align-items:center;gap:1rem}
+.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:#CC1B1B;margin:0}
+.admin-header-sub{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.admin-header-right{display:flex;align-items:center;gap:.75rem}
+.admin-sync-badge{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);border-radius:20px;padding:.3rem .75rem}
+.admin-sync-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.admin-close{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s}
+.admin-close:hover{color:#fff}
+.admin-logout{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;border-radius:6px;padding:.4rem .875rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.admin-logout:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* BODY */
+.admin-body{padding:1.75rem 2rem}
+
+/* STATS */
+.admin-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
+.stat-box{background:var(--off-white);border-radius:12px;padding:1.1rem 1rem;text-align:center;border:1.5px solid transparent;transition:border-color .2s}
+.stat-box:hover{border-color:#CC1B1B}
+.stat-box .num{font-family:'Bebas Neue',sans-serif;font-size:2.25rem;color:var(--blue);line-height:1}
+.stat-box .lbl{font-size:.7rem;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:.25rem}
+
+/* TOOLBAR */
+.admin-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.admin-search{display:flex;align-items:center;gap:.5rem;background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.5rem .875rem;flex:1;max-width:320px}
+.admin-search input{border:none;background:transparent;font-size:.9rem;font-family:'Inter',sans-serif;width:100%;color:#222}
+.admin-search input:focus{outline:none}
+.admin-search svg{color:#aaa;flex-shrink:0}
+.btn-export{background:#111;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
+.btn-export:hover{background:#333}
+
+/* TABS */
+.tab-section-titles{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.admin-tab-btn{background:var(--off-white);border:1.5px solid transparent;padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gray);font-family:'Inter',sans-serif;transition:all .2s}
+.admin-tab-btn.active{background:#CC1B1B;color:#fff;border-color:#CC1B1B}
+.admin-section{display:none}
+.admin-section.active{display:block}
+
+/* TABLE */
+.admin-table-wrap{overflow-x:auto;border-radius:10px;border:1.5px solid #eee}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+th{background:#111;color:#fff;padding:.75rem 1rem;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+td{padding:.625rem 1rem;border-bottom:1px solid #f0f0f0;white-space:nowrap;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fafafa}
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .badge-exp{background:#e3f2fd;color:#1565c0}
 .badge-tor{background:#f3e5f5;color:#6a1b9a}
 .badge-wait{background:#fff3e0;color:#e65100}
-.tab-section-titles{display:flex;gap:1rem;margin-bottom:1.5rem}
-.admin-tab-btn{background:var(--off-white);border:none;padding:.5rem 1rem;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gray);font-family:'Inter',sans-serif}
-.admin-tab-btn.active{background:var(--blue);color:#fff}
-.admin-section{display:none}
-.admin-section.active{display:block}
+.badge-ok{background:#e8f5e9;color:#2e7d32}
+.badge-espera{background:#fff3e0;color:#e65100}
+.empty-row td{text-align:center;color:#aaa;padding:2.5rem;font-size:.9rem}
+
+/* LOADING */
+.admin-loading{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:2rem;color:#888;font-size:.9rem}
+.spinner{width:20px;height:20px;border:2.5px solid #eee;border-top-color:#CC1B1B;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+  .admin-stats{grid-template-columns:repeat(2,1fr)}
+  .admin-body{padding:1.25rem}
+  .admin-header{padding:1rem 1.25rem}
+}
 
 /* LEVEL BADGES */
 /* PAYMENT */
@@ -831,44 +887,149 @@ tr:hover td{background:var(--off-white)}
 <!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
   <div class="admin-content">
-    <div class="admin-header">
-      <h2>PAINEL ADMINISTRATIVO</h2>
-      <button class="admin-close" onclick="toggleAdmin()">✕</button>
-    </div>
-    <div class="admin-body">
-      <div class="admin-stats" id="adminStats"></div>
-      <div class="tab-section-titles">
-        <button class="admin-tab-btn active" onclick="switchAdminTab('exp')">Experiência</button>
-        <button class="admin-tab-btn" onclick="switchAdminTab('tor')">Torneio Super 8</button>
-        <button class="admin-tab-btn" onclick="switchAdminTab('wait')">Lista de Espera</button>
+
+    <!-- TELA DE LOGIN -->
+    <div id="adminLoginScreen">
+      <div style="background:#111;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#CC1B1B">PAINEL ADMINISTRATIVO</span>
+        <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="toggleAdmin()">✕</button>
       </div>
-      <div class="admin-section active" id="admin-exp">
-        <div class="admin-table-wrap">
-          <table id="tableExp">
-            <thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Turma</th><th>Telefone</th><th>CEP</th><th>Email</th><th>Praticou?</th></tr></thead>
-            <tbody id="tbodyExp"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="admin-section" id="admin-tor">
-        <div class="admin-table-wrap">
-          <table id="tableTor">
-            <thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Categoria</th><th>Telefone</th><th>CEP</th><th>Email</th></tr></thead>
-            <tbody id="tbodyTor"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="admin-section" id="admin-wait">
-        <div class="admin-table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Nome</th><th>Tipo</th><th>Turma/Cat.</th><th>Telefone</th><th>Email</th></tr></thead>
-            <tbody id="tbodyWait"></tbody>
-          </table>
+      <div class="admin-login">
+        <div class="admin-login-logo">🎾 BTE · Acesso Restrito</div>
+        <h3>Entre com sua senha</h3>
+        <p>Apenas a organização do evento tem acesso a este painel.</p>
+        <div class="admin-login-form">
+          <input type="password" id="adminPwdInput" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doAdminLogin()">
+          <div class="admin-login-err" id="adminLoginErr">Senha incorreta. Tente novamente.</div>
+          <button class="admin-login-btn" onclick="doAdminLogin()">Entrar no painel</button>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- PAINEL PRINCIPAL (após login) -->
+    <div id="adminMainScreen" style="display:none">
+      <div class="admin-header">
+        <div class="admin-header-left">
+          <div>
+            <h2>PAINEL ADMINISTRATIVO</h2>
+            <div class="admin-header-sub">Beach Tennis Experience · 20 de Junho</div>
+          </div>
+        </div>
+        <div class="admin-header-right">
+          <div class="admin-sync-badge">
+            <div class="admin-sync-dot"></div>
+            <span id="syncStatus">Conectado ao Firebase</span>
+          </div>
+          <button class="admin-logout" onclick="doAdminLogout()">Sair</button>
+          <button class="admin-close" onclick="toggleAdmin()">✕</button>
+        </div>
+      </div>
+
+      <div class="admin-body">
+        <!-- STATS -->
+        <div class="admin-stats" id="adminStats">
+          <div class="stat-box"><div class="num" id="st-exp">–</div><div class="lbl">Exp. Confirmados</div></div>
+          <div class="stat-box"><div class="num" id="st-tor">–</div><div class="lbl">Torneio Inscritos</div></div>
+          <div class="stat-box"><div class="num" id="st-wait">–</div><div class="lbl">Lista de Espera</div></div>
+          <div class="stat-box"><div class="num" id="st-vagas">–</div><div class="lbl">Vagas Exp. Livres</div></div>
+          <div class="stat-box"><div class="num" id="st-total">–</div><div class="lbl">Total Cadastros</div></div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tab-section-titles">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('exp')">🎾 Experiência Iniciantes</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Torneio Super 8</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('wait')">⏳ Lista de Espera</button>
+        </div>
+
+        <!-- TAB: EXPERIÊNCIA -->
+        <div class="admin-section active" id="admin-exp">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Buscar por nome, CPF ou e-mail..." oninput="filterTable('tbodyExp', this.value)">
+            </div>
+            <button class="btn-export" onclick="exportCSV('exp')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+          <div class="admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Protocolo</th><th>Nome Completo</th><th>CPF</th>
+                  <th>Nascimento</th><th>Telefone</th><th>CEP</th><th>E-mail</th>
+                  <th>Turma</th><th>Praticou?</th><th>Status</th><th>Cadastro em</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyExp">
+                <tr><td colspan="12" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB: TORNEIO -->
+        <div class="admin-section" id="admin-tor">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Buscar por nome, CPF ou e-mail..." oninput="filterTable('tbodyTor', this.value)">
+            </div>
+            <button class="btn-export" onclick="exportCSV('tor')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+          <div class="admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Protocolo</th><th>Nome Completo</th><th>CPF</th>
+                  <th>Nascimento</th><th>Telefone</th><th>CEP</th><th>E-mail</th>
+                  <th>Categoria</th><th>Status</th><th>Cadastro em</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyTor">
+                <tr><td colspan="11" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB: ESPERA -->
+        <div class="admin-section" id="admin-wait">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Buscar..." oninput="filterTable('tbodyWait', this.value)">
+            </div>
+            <button class="btn-export" onclick="exportCSV('wait')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+          <div class="admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Nome Completo</th><th>CPF</th><th>Telefone</th>
+                  <th>E-mail</th><th>Tipo</th><th>Turma / Categoria</th><th>Cadastro em</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyWait">
+                <tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /.admin-body -->
+    </div><!-- /#adminMainScreen -->
+
+  </div><!-- /.admin-content -->
+</div><!-- /.admin-panel -->
 
 <!-- ===== MODAL DE INSCRIÇÃO ===== -->
 <div class="modal-overlay" id="modalInscricao">
@@ -1023,30 +1184,59 @@ tr:hover td{background:var(--off-white)}
 <!-- WA FLOAT -->
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
-<script>
-// DATA STORE (in-memory, simulating DB)
+<script type="module">
+// ========================================================
+// FIREBASE CONFIG
+// ========================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBCCuHPBx9kd87AQHy8z3WU6Nlx6OL6Ads",
+  authDomain: "beach-tennis-expercience.firebaseapp.com",
+  projectId: "beach-tennis-expercience",
+  storageBucket: "beach-tennis-expercience.firebasestorage.app",
+  messagingSenderId: "997128122804",
+  appId: "1:997128122804:web:991c9e3f87390518df82e1"
+};
+
+const app   = initializeApp(firebaseConfig);
+const db    = getFirestore(app);
+
+// ========================================================
+// CONTADORES LOCAIS (para controle de vagas em tempo real)
+// ========================================================
 const MAX_TURMA = 6;
-const MAX_CAT = 8;
+const MAX_CAT   = 8;
 
 let data = {
-  turmas: {1:{inscritos:0},2:{inscritos:1},3:{inscritos:0},4:{inscritos:0}},
-  cats: {masc_ini:{inscritos:0},masc_int:{inscritos:0},fem_ini:{inscritos:0},fem_int:{inscritos:0}},
-  expList: [],
-  torList: [],
+  turmas:   {1:{inscritos:0},2:{inscritos:1},3:{inscritos:0},4:{inscritos:0}},
+  cats:     {masc_ini:{inscritos:0},masc_int:{inscritos:0},fem_ini:{inscritos:0},fem_int:{inscritos:0}},
+  expList:  [],
+  torList:  [],
   waitList: []
 };
 
-// Load from localStorage if available
-try {
-  const saved = localStorage.getItem('bte_data');
-  if(saved) data = JSON.parse(saved);
-} catch(e){}
+try{ const s=localStorage.getItem('bte_data'); if(s) data=JSON.parse(s); }catch(e){}
+function save(){ try{ localStorage.setItem('bte_data',JSON.stringify(data)); }catch(e){} }
 
-function save(){ try{ localStorage.setItem('bte_data', JSON.stringify(data)); }catch(e){} }
+// ========================================================
+// PROTOCOLO
+// ========================================================
+function gerarProtocolo(tipo){
+  const prefix = tipo === 'exp' ? 'EXP' : 'S8';
+  const ts = Date.now().toString(36).toUpperCase();
+  const rnd = Math.random().toString(36).substring(2,5).toUpperCase();
+  return `${prefix}-${ts}-${rnd}`;
+}
 
-// TURMA CARDS
+// ========================================================
+// RENDER TURMAS (grade de horários no modal)
+// ========================================================
 function renderTurmas(){
   const grid = document.getElementById('turmasGrid');
+  if(!grid) return;
   const horarios = ['08h00 – 09h00','09h00 – 10h00','10h00 – 11h00','11h00 – 12h00'];
   grid.innerHTML = '';
   for(let i=1;i<=4;i++){
@@ -1064,38 +1254,30 @@ function renderTurmas(){
       </div>`;
   }
 }
-
-function selectTurma(n){
+window.selectTurma = function(n){
   document.querySelectorAll('.turma-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('tc'+n).classList.add('selected');
-  document.getElementById('exp_turma').value=n;
-  onTurmaSelect();
-}
+  const tc = document.getElementById('tc'+n);
+  if(tc) tc.classList.add('selected');
+  const expTurma = document.getElementById('exp_turma');
+  if(expTurma) expTurma.value = n;
+};
 
-function onTurmaSelect(){
-  const v = document.getElementById('exp_turma').value;
-  const msg = document.getElementById('waitlistMsg');
-  if(!v){msg.style.display='none';return;}
-  const t = data.turmas[v];
-  msg.style.display = (t.inscritos>=MAX_TURMA)?'block':'none';
-}
-
-// CATEGORY CARDS
 function renderCats(){
   const grid = document.getElementById('catsGrid');
+  if(!grid) return;
   const cats = [
-    {key:'masc_ini', icon:'male', title:'MASCULINO INICIANTE'},
-    {key:'masc_int', icon:'male', title:'MASCULINO INTERMEDIÁRIO'},
-    {key:'fem_ini',  icon:'female', title:'FEMININO INICIANTE'},
-    {key:'fem_int',  icon:'female', title:'FEMININO INTERMEDIÁRIO'},
+    {key:'masc_ini',title:'MASCULINO INICIANTE'},
+    {key:'masc_int',title:'MASCULINO INTERMEDIÁRIO'},
+    {key:'fem_ini', title:'FEMININO INICIANTE'},
+    {key:'fem_int', title:'FEMININO INTERMEDIÁRIO'},
   ];
   grid.innerHTML = cats.map(c => {
     const t = data.cats[c.key];
     const restantes = Math.max(0, MAX_CAT - t.inscritos);
     const pct = (t.inscritos/MAX_CAT)*100;
     return `<div class="cat-card">
-      <div class="cat-icon" style="display:flex;align-items:center;justify-content:center">${c.icon === "male" ? '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2\"/></svg>' : '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"7\" r=\"4\"/><path d=\"M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2\"/></svg>'}</div>
-      <div class="cat-title" style="font-size:1.1rem">${c.title}</div>
+      <div class="cat-icon" style="font-size:2rem;margin-bottom:.5rem">🎾</div>
+      <div class="cat-title" style="font-size:1rem">${c.title}</div>
       <div class="cat-vagas">Vagas disponíveis</div>
       <div class="cat-count" id="cc_${c.key}">${restantes} / ${MAX_CAT}</div>
       <div class="vagas-bar" style="margin-top:.5rem"><div class="vagas-fill" style="width:${pct}%"></div></div>
@@ -1103,158 +1285,13 @@ function renderCats(){
   }).join('');
 }
 
-function onCatSelect(){
-  const v = document.getElementById('tor_cat').value;
-  const msg = document.getElementById('waitlistTorMsg');
-  if(!v){msg.style.display='none';return;}
-  const c = data.cats[v];
-  msg.style.display = (c.inscritos>=MAX_CAT)?'block':'none';
-}
-
-// SUBMIT EXPERIENCE
-function submitExp(){
-  const nome = document.getElementById('exp_nome').value.trim();
-  const nasc = document.getElementById('exp_nasc').value;
-  const tel = document.getElementById('exp_tel').value.trim();
-  const email = document.getElementById('exp_email').value.trim();
-  const cidade = document.getElementById('exp_cidade').value.trim();
-  const turma = document.getElementById('exp_turma').value;
-  const praticou = document.querySelector('input[name="exp_praticou"]:checked')?.value||'nao';
-
-  if(!nome||!nasc||!tel||!email||!cidade||!turma){
-    alert('Por favor, preencha todos os campos obrigatórios.');return;
-  }
-
-  const t = data.turmas[turma];
-  const isWait = t.inscritos >= MAX_TURMA;
-  const entry = {nome,nasc,tel,email,cidade,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
-
-  if(isWait){
-    data.waitList.push(entry);
-  } else {
-    t.inscritos++;
-    data.expList.push(entry);
-  }
-  save();
-  renderTurmas();
-  document.getElementById('formExp').style.display='none';
-  document.getElementById('expSuccess').style.display='block';
-  document.getElementById('waitlistMsg').style.display='none';
-}
-
-// SUBMIT TORNEIO
-function submitTor(){
-  const nome = document.getElementById('tor_nome').value.trim();
-  const tel = document.getElementById('tor_tel').value.trim();
-  const email = document.getElementById('tor_email').value.trim();
-  const cidade = document.getElementById('tor_cidade').value.trim();
-  const cat = document.getElementById('tor_cat').value;
-
-  if(!nome||!tel||!email||!cidade||!cat){
-    alert('Por favor, preencha todos os campos obrigatórios.');return;
-  }
-
-  const c = data.cats[cat];
-  const isWait = c.inscritos >= MAX_CAT;
-  const catNames = {'masc_ini':'Super 8 Masculino – Iniciante','masc_int':'Super 8 Masculino – Intermediário','fem_ini':'Super 8 Feminino – Iniciante','fem_int':'Super 8 Feminino – Intermediário'};
-  const entry = {nome,tel,email,cidade,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
-
-  if(isWait){
-    data.waitList.push(entry);
-  } else {
-    c.inscritos++;
-    data.torList.push(entry);
-  }
-  save();
-  renderCats();
-  document.getElementById('formTor').style.display='none';
-  document.getElementById('torSuccess').style.display='block';
-  document.getElementById('waitlistTorMsg').style.display='none';
-}
-
-// TABS
-function switchTab(tab){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor'][i]===tab));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
-}
-
-// ADMIN
-function toggleAdmin(){
-  const p = document.getElementById('adminPanel');
-  p.classList.toggle('open');
-  if(p.classList.contains('open')) renderAdmin();
-}
-
-function switchAdminTab(t){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','wait'][i]===t));
-  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('admin-'+t).classList.add('active');
-}
-
-function renderAdmin(){
-  // Stats
-  const totalExp = data.expList.length;
-  const totalTor = data.torList.length;
-  const totalWait = data.waitList.length;
-  const totalVagas = Object.values(data.turmas).reduce((a,t)=>a+(MAX_TURMA-t.inscritos),0) + Object.values(data.cats).reduce((a,c)=>a+(MAX_CAT-c.inscritos),0);
-  document.getElementById('adminStats').innerHTML = `
-    <div class="stat-box"><div class="num">${totalExp}</div><div class="lbl">Inscritos Exp.</div></div>
-    <div class="stat-box"><div class="num">${totalTor}</div><div class="lbl">Inscritos Torneio</div></div>
-    <div class="stat-box"><div class="num">${totalWait}</div><div class="lbl">Em espera</div></div>
-    <div class="stat-box"><div class="num">${totalVagas}</div><div class="lbl">Vagas restantes</div></div>`;
-
-  // Exp table
-  const turmaNames = {'1':'T1 08h','2':'T2 09h','3':'T3 10h','4':'T4 11h'};
-  document.getElementById('tbodyExp').innerHTML = data.expList.length?
-    data.expList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td>${e.cpf||'-'}</td><td>${e.nasc||'-'}</td><td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma}</span></td><td>${e.tel}</td><td>${e.cep||'-'}</td><td>${e.email}</td><td>${e.praticou==='sim'?'Sim':'Não'}</td></tr>`).join(''):
-    '<tr><td colspan="9" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
-
-  // Tor table
-  const catNames = {masc_ini:'Masc. Iniciante',masc_int:'Masc. Intermediário',fem_ini:'Fem. Iniciante',fem_int:'Fem. Intermediário'};
-  document.getElementById('tbodyTor').innerHTML = data.torList.length?
-    data.torList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td>${e.cpf||'-'}</td><td>${e.nasc||'-'}</td><td>${catNames[e.cat]||e.cat}</td><td>${e.tel}</td><td>${e.cep||'-'}</td><td>${e.email}</td></tr>`).join(''):
-    '<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma inscrição ainda.</td></tr>';
-
-  // Wait table
-  document.getElementById('tbodyWait').innerHTML = data.waitList.length?
-    data.waitList.map((e,i)=>`<tr><td>${i+1}</td><td>${e.nome}</td><td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td><td>${e.turma||catNames[e.cat]||'-'}</td><td>${e.tel}</td><td>${e.email}</td></tr>`).join(''):
-    '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:2rem">Nenhuma pessoa em espera.</td></tr>';
-}
-
-// NAV MOBILE
-function toggleMenu(){
-  document.getElementById('navLinks').classList.toggle('open');
-}
-
-// PAYMENT TOGGLE
-function selectPay(form, method){
-  const options = document.querySelectorAll(`input[name="${form}_pay"]`);
-  options.forEach(o=>o.checked = o.value===method);
-  document.querySelectorAll(`.pay-option`).forEach(btn=>{
-    if(btn.querySelector(`input[name="${form}_pay"]`))
-      btn.classList.toggle('active', btn.querySelector('input').value===method);
-  });
-  document.getElementById(`${form}_pay_pix`).classList.toggle('active', method==='pix');
-  document.getElementById(`${form}_pay_card`).classList.toggle('active', method==='card');
-}
-
-function copyPix(elId, btn){
-  const raw = document.getElementById(elId).textContent.replace(/\D/g,'');
-  navigator.clipboard.writeText(raw).then(()=>{
-    btn.textContent='✅ Copiado!';
-    setTimeout(()=>btn.textContent='Copiar',2000);
-  }).catch(()=>{
-    btn.textContent='Copiar manualmente';
-  });
-}
-
-// ===== MODAL DE INSCRIÇÃO =====
+// ========================================================
+// MODAL DE INSCRIÇÃO
+// ========================================================
 let modalChoice = null;
 
-function openModal(preChoice){
+window.openModal = function(preChoice){
   modalChoice = null;
-  // reset all steps
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mStep0').classList.add('active');
   document.getElementById('choiceExp').classList.remove('selected');
@@ -1263,55 +1300,49 @@ function openModal(preChoice){
   document.getElementById('modalInscricao').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderModalTurmas();
-  // se já veio com uma escolha pré-selecionada (ex: botão "Quero aprender" ou "Quero jogar Super 8")
-  if(preChoice){
-    selectChoice(preChoice);
-    goToForm();
-  }
-}
+  if(preChoice){ selectChoice(preChoice); goToForm(); }
+};
 
-function closeModal(){
+window.closeModal = function(){
   document.getElementById('modalInscricao').classList.remove('open');
   document.body.style.overflow = '';
-}
+};
 
-// fechar clicando no overlay
 document.getElementById('modalInscricao').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 
-function selectChoice(c){
+window.selectChoice = function(c){
   modalChoice = c;
   document.getElementById('choiceExp').classList.toggle('selected', c==='exp');
   document.getElementById('choiceTor').classList.toggle('selected', c==='tor');
   document.getElementById('btnNextChoice').disabled = false;
-}
+};
 
-function goToForm(){
+window.goToForm = function(){
   if(!modalChoice) return;
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById(modalChoice==='exp' ? 'mStepExp' : 'mStepTor').classList.add('active');
+  document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
   renderModalTurmas();
-}
+};
 
-function backToChoice(){
+window.backToChoice = function(){
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mStep0').classList.add('active');
-}
+};
 
 function renderModalTurmas(){
   const grid = document.getElementById('mTurmasGrid');
   if(!grid) return;
   const horarios = ['08h – 09h','09h – 10h','10h – 11h','11h – 12h'];
   grid.innerHTML = '';
+  const selVal = document.getElementById('m_exp_turma')?.value;
   for(let i=1;i<=4;i++){
     const t = data.turmas[i];
     const restantes = MAX_TURMA - t.inscritos;
     const isFull = restantes <= 0;
-    const selVal = document.getElementById('m_exp_turma')?.value;
-    const isSel = selVal == i;
     grid.innerHTML += `
-      <div class="modal-turma-card ${isFull?'full':''} ${isSel?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
+      <div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
         <div class="modal-turma-num">T${i}</div>
         <div class="modal-turma-hora">${horarios[i-1]}</div>
         <div class="modal-turma-vagas">${isFull?'Lotada':''+restantes+' vaga'+(restantes!==1?'s':'')}</div>
@@ -1319,23 +1350,25 @@ function renderModalTurmas(){
   }
 }
 
-function selectModalTurma(n){
+window.selectModalTurma = function(n){
   document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('mtc'+n).classList.add('selected');
+  document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value = n;
   const t = data.turmas[n];
   document.getElementById('mWaitExp').style.display = (t.inscritos>=MAX_TURMA)?'block':'none';
-}
+};
 
-function onModalCatSelect(){
+window.onModalCatSelect = function(){
   const v = document.getElementById('m_tor_cat').value;
   const msg = document.getElementById('mWaitTor');
   if(!v){msg.style.display='none';return;}
-  const c = data.cats[v];
-  msg.style.display = (c.inscritos>=MAX_CAT)?'block':'none';
-}
+  msg.style.display = (data.cats[v].inscritos>=MAX_CAT)?'block':'none';
+};
 
-function submitModalExp(){
+// ========================================================
+// SUBMIT EXPERIÊNCIA → FIREBASE
+// ========================================================
+window.submitModalExp = async function(){
   const nome  = document.getElementById('m_exp_nome').value.trim();
   const cpf   = document.getElementById('m_exp_cpf').value.trim();
   const nasc  = document.getElementById('m_exp_nasc').value;
@@ -1346,33 +1379,45 @@ function submitModalExp(){
   const praticou = document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
 
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){
-    alert('Por favor, preencha todos os campos obrigatórios e selecione uma turma.');return;
+    alert('Por favor, preencha todos os campos obrigatórios e selecione uma turma.'); return;
   }
 
-  const t = data.turmas[turma];
+  const t      = data.turmas[turma];
   const isWait = t.inscritos >= MAX_TURMA;
-  const entry = {nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',isWait,ts:new Date().toISOString()};
+  const protocolo = gerarProtocolo('exp');
 
-  if(isWait){
-    data.waitList.push(entry);
-  } else {
-    t.inscritos++;
-    data.expList.push(entry);
+  const entry = {
+    protocolo, nome, cpf, nasc, tel, cep, email, turma,
+    praticou, tipo: 'exp', status: isWait ? 'espera' : 'confirmado',
+    criadoEm: serverTimestamp()
+  };
+
+  try {
+    const btnSubmit = document.querySelector('#mStepExp .btn-modal-next');
+    btnSubmit.textContent = 'Salvando...'; btnSubmit.disabled = true;
+    await addDoc(collection(db, 'inscricoes'), entry);
+    if(isWait){ data.waitList.push({...entry}); }
+    else { t.inscritos++; data.expList.push({...entry}); }
+    save(); renderTurmas(); renderModalTurmas();
+    const turmaNames = ['','T1 08h','T2 09h','T3 10h','T4 11h'];
+    document.getElementById('mSuccessExpMsg').innerHTML =
+      isWait
+        ? `Você está na lista de espera para ${turmaNames[turma]}. Se uma vaga abrir, entraremos em contato.`
+        : `✅ Vaga confirmada na ${turmaNames[turma]}!<br><small style="color:#888">Protocolo: <strong style="color:#111">${protocolo}</strong></small>`;
+    document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+    document.getElementById('mSuccessExp').classList.add('active');
+  } catch(err){
+    console.error(err);
+    alert('Erro ao salvar. Verifique sua conexão e tente novamente.');
+    const btnSubmit = document.querySelector('#mStepExp .btn-modal-next');
+    btnSubmit.textContent = 'Confirmar inscrição'; btnSubmit.disabled = false;
   }
-  save();
-  renderTurmas();
-  renderModalTurmas();
+};
 
-  const turmaNames = ['','T1 08h','T2 09h','T3 10h','T4 11h'];
-  document.getElementById('mSuccessExpMsg').textContent = isWait
-    ? `Você está na lista de espera para ${turmaNames[turma]}. Se uma vaga abrir, entraremos em contato.`
-    : `Sua vaga na ${turmaNames[turma]} foi reservada! Em breve entraremos em contato pelo WhatsApp.`;
-
-  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('mSuccessExp').classList.add('active');
-}
-
-function submitModalTor(){
+// ========================================================
+// SUBMIT TORNEIO → FIREBASE
+// ========================================================
+window.submitModalTor = async function(){
   const nome  = document.getElementById('m_tor_nome').value.trim();
   const cpf   = document.getElementById('m_tor_cpf').value.trim();
   const nasc  = document.getElementById('m_tor_nasc').value;
@@ -1382,69 +1427,286 @@ function submitModalTor(){
   const cat   = document.getElementById('m_tor_cat').value;
 
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){
-    alert('Por favor, preencha todos os campos obrigatórios.');return;
+    alert('Por favor, preencha todos os campos obrigatórios.'); return;
   }
 
-  const c = data.cats[cat];
+  const c      = data.cats[cat];
   const isWait = c.inscritos >= MAX_CAT;
-  const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
-  const entry = {nome,cpf,nasc,tel,cep,email,cat,nivel:catNames[cat],tipo:'tor',isWait,ts:new Date().toISOString()};
+  const protocolo = gerarProtocolo('tor');
+  const catNames  = {
+    masc_ini:'Super 8 Masculino – Iniciante', masc_int:'Super 8 Masculino – Intermediário',
+    fem_ini:'Super 8 Feminino – Iniciante',   fem_int:'Super 8 Feminino – Intermediário'
+  };
 
-  if(isWait){
-    data.waitList.push(entry);
-  } else {
-    c.inscritos++;
-    data.torList.push(entry);
-  }
-  save();
-  renderCats();
+  const entry = {
+    protocolo, nome, cpf, nasc, tel, cep, email, cat,
+    categoria: catNames[cat], tipo: 'tor',
+    status: isWait ? 'espera' : 'confirmado',
+    criadoEm: serverTimestamp()
+  };
 
-  document.getElementById('mSuccessTorMsg').textContent = isWait
-    ? `Você está na lista de espera para ${catNames[cat]}. Entraremos em contato se abrir vaga.`
-    : `Sua vaga em ${catNames[cat]} está confirmada! Entraremos em contato pelo WhatsApp.`;
-
-  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('mSuccessTor').classList.add('active');
-}
-
-// ===== MÁSCARAS =====
-function maskCPF(el){
-  let v = el.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
-  else if(v.length>6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
-  else if(v.length>3) v = v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
-  el.value = v;
-}
-
-function maskTel(el){
-  let v = el.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>10) v = v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-  else if(v.length>6) v = v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
-  else if(v.length>2) v = v.replace(/(\d{2})(\d+)/,'($1) $2');
-  el.value = v;
-}
-
-function maskCEP(el){
-  let v = el.value.replace(/\D/g,'').slice(0,8);
-  if(v.length>5) v = v.replace(/(\d{5})(\d{1,3})/,'$1-$2');
-  el.value = v;
-}
-
-async function buscaCEP(form){
-  const cepEl = document.getElementById(`m_${form}_cep`);
-  const raw = cepEl.value.replace(/\D/g,'');
-  if(raw.length !== 8) return;
   try {
-    const res = await fetch(`https://viacep.com.br/ws/${raw}/json/`);
-    const d = await res.json();
-    if(d.erro) return;
-    // mostra feedback visual sutil no campo
-    cepEl.style.borderColor = '#2e7d32';
-    setTimeout(()=>cepEl.style.borderColor='', 2000);
-  } catch(e){}
+    const btnSubmit = document.querySelector('#mStepTor .btn-modal-next');
+    btnSubmit.textContent = 'Salvando...'; btnSubmit.disabled = true;
+    await addDoc(collection(db, 'inscricoes'), entry);
+    if(isWait){ data.waitList.push({...entry}); }
+    else { c.inscritos++; data.torList.push({...entry}); }
+    save(); renderCats();
+    document.getElementById('mSuccessTorMsg').innerHTML =
+      isWait
+        ? `Você está na lista de espera para ${catNames[cat]}. Entraremos em contato se abrir vaga.`
+        : `✅ Vaga confirmada em ${catNames[cat]}!<br><small style="color:#888">Protocolo: <strong style="color:#111">${protocolo}</strong></small>`;
+    document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+    document.getElementById('mSuccessTor').classList.add('active');
+  } catch(err){
+    console.error(err);
+    alert('Erro ao salvar. Verifique sua conexão e tente novamente.');
+    const btnSubmit = document.querySelector('#mStepTor .btn-modal-next');
+    btnSubmit.textContent = 'Confirmar inscrição'; btnSubmit.disabled = false;
+  }
+};
+
+// ========================================================
+// MÁSCARAS
+// ========================================================
+window.maskCPF = function(el){
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>9) v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+  else if(v.length>6) v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+  else if(v.length>3) v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+  el.value=v;
+};
+window.maskTel = function(el){
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>10) v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  else if(v.length>6) v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
+  else if(v.length>2) v=v.replace(/(\d{2})(\d+)/,'($1) $2');
+  el.value=v;
+};
+window.maskCEP = function(el){
+  let v = el.value.replace(/\D/g,'').slice(0,8);
+  if(v.length>5) v=v.replace(/(\d{5})(\d{1,3})/,'$1-$2');
+  el.value=v;
+};
+window.buscaCEP = async function(form){
+  const el = document.getElementById(`m_${form}_cep`);
+  const raw = el.value.replace(/\D/g,'');
+  if(raw.length!==8) return;
+  try{
+    const r = await fetch(`https://viacep.com.br/ws/${raw}/json/`);
+    const d = await r.json();
+    if(!d.erro){ el.style.borderColor='#2e7d32'; setTimeout(()=>el.style.borderColor='',2000); }
+  }catch(e){}
+};
+
+// ========================================================
+// ADMIN – LOGIN / LOGOUT
+// ========================================================
+const ADMIN_PASSWORD = 'bte2025@'; // ← altere sua senha aqui
+let adminLogado = false;
+let unsubscribeAdmin = null;
+let allInscricoes = [];
+
+window.toggleAdmin = function(){
+  const p = document.getElementById('adminPanel');
+  const isOpen = p.classList.contains('open');
+  if(isOpen){
+    p.classList.remove('open');
+    if(unsubscribeAdmin){ unsubscribeAdmin(); unsubscribeAdmin=null; }
+  } else {
+    p.classList.add('open');
+    document.getElementById('adminLoginErr').style.display='none';
+    document.getElementById('adminPwdInput').value='';
+    if(adminLogado){
+      mostrarPainelPrincipal();
+    } else {
+      document.getElementById('adminLoginScreen').style.display='block';
+      document.getElementById('adminMainScreen').style.display='none';
+      setTimeout(()=>document.getElementById('adminPwdInput').focus(), 100);
+    }
+  }
+};
+
+window.doAdminLogin = function(){
+  const pwd = document.getElementById('adminPwdInput').value;
+  if(pwd === ADMIN_PASSWORD){
+    adminLogado = true;
+    document.getElementById('adminLoginErr').style.display='none';
+    mostrarPainelPrincipal();
+  } else {
+    document.getElementById('adminLoginErr').style.display='block';
+    document.getElementById('adminPwdInput').value='';
+    document.getElementById('adminPwdInput').focus();
+  }
+};
+
+window.doAdminLogout = function(){
+  adminLogado = false;
+  if(unsubscribeAdmin){ unsubscribeAdmin(); unsubscribeAdmin=null; }
+  document.getElementById('adminLoginScreen').style.display='block';
+  document.getElementById('adminMainScreen').style.display='none';
+  document.getElementById('adminPwdInput').value='';
+};
+
+function mostrarPainelPrincipal(){
+  document.getElementById('adminLoginScreen').style.display='none';
+  document.getElementById('adminMainScreen').style.display='block';
+  iniciarListenerFirebase();
 }
 
+// ========================================================
+// ADMIN – LISTENER FIREBASE EM TEMPO REAL
+// ========================================================
+function iniciarListenerFirebase(){
+  if(unsubscribeAdmin) return; // já está ouvindo
+  document.getElementById('syncStatus').textContent = 'Conectando...';
+  const q = query(collection(db,'inscricoes'), orderBy('criadoEm','asc'));
+  unsubscribeAdmin = onSnapshot(q, (snapshot)=>{
+    allInscricoes = snapshot.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('syncStatus').textContent = 'Ao vivo · Firebase';
+    renderAdminTabelas();
+  }, (err)=>{
+    console.error(err);
+    document.getElementById('syncStatus').textContent = '⚠ Erro de conexão';
+  });
+}
+
+// ========================================================
+// ADMIN – RENDER TABELAS
+// ========================================================
+const turmaNames = {'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
+
+function formatarData(ts){
+  if(!ts) return '–';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+}
+
+function formatarNasc(nasc){
+  if(!nasc) return '–';
+  const [y,m,d] = nasc.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function renderAdminTabelas(){
+  const exp  = allInscricoes.filter(i=>i.tipo==='exp' && i.status==='confirmado');
+  const tor  = allInscricoes.filter(i=>i.tipo==='tor' && i.status==='confirmado');
+  const wait = allInscricoes.filter(i=>i.status==='espera');
+
+  // STATS
+  const vagasLivres = Object.values(data.turmas).reduce((a,t)=>a+(MAX_TURMA-t.inscritos),0);
+  document.getElementById('st-exp').textContent   = exp.length;
+  document.getElementById('st-tor').textContent   = tor.length;
+  document.getElementById('st-wait').textContent  = wait.length;
+  document.getElementById('st-vagas').textContent = vagasLivres;
+  document.getElementById('st-total').textContent = allInscricoes.length;
+
+  // TABELA EXPERIÊNCIA
+  document.getElementById('tbodyExp').innerHTML = exp.length
+    ? exp.map((e,i)=>`<tr>
+        <td>${i+1}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
+        <td><strong>${e.nome}</strong></td>
+        <td>${e.cpf||'–'}</td>
+        <td>${formatarNasc(e.nasc)}</td>
+        <td>${e.tel||'–'}</td>
+        <td>${e.cep||'–'}</td>
+        <td>${e.email||'–'}</td>
+        <td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma}</span></td>
+        <td>${e.praticou==='sim'?'Sim':'Não'}</td>
+        <td><span class="badge badge-ok">Confirmado</span></td>
+        <td>${formatarData(e.criadoEm)}</td>
+      </tr>`).join('')
+    : `<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
+
+  // TABELA TORNEIO
+  document.getElementById('tbodyTor').innerHTML = tor.length
+    ? tor.map((e,i)=>`<tr>
+        <td>${i+1}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
+        <td><strong>${e.nome}</strong></td>
+        <td>${e.cpf||'–'}</td>
+        <td>${formatarNasc(e.nasc)}</td>
+        <td>${e.tel||'–'}</td>
+        <td>${e.cep||'–'}</td>
+        <td>${e.email||'–'}</td>
+        <td><span class="badge badge-tor">${e.categoria||e.cat||'–'}</span></td>
+        <td><span class="badge badge-ok">Confirmado</span></td>
+        <td>${formatarData(e.criadoEm)}</td>
+      </tr>`).join('')
+    : `<tr class="empty-row"><td colspan="11">Nenhuma inscrição confirmada ainda.</td></tr>`;
+
+  // TABELA ESPERA
+  document.getElementById('tbodyWait').innerHTML = wait.length
+    ? wait.map((e,i)=>`<tr>
+        <td>${i+1}</td>
+        <td><strong>${e.nome}</strong></td>
+        <td>${e.cpf||'–'}</td>
+        <td>${e.tel||'–'}</td>
+        <td>${e.email||'–'}</td>
+        <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
+        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma):(e.categoria||e.cat||'–')}</td>
+        <td>${formatarData(e.criadoEm)}</td>
+      </tr>`).join('')
+    : `<tr class="empty-row"><td colspan="8">Nenhuma pessoa em lista de espera.</td></tr>`;
+}
+
+// ========================================================
+// ADMIN – TABS
+// ========================================================
+window.switchAdminTab = function(tab){
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>
+    b.classList.toggle('active',['exp','tor','wait'][i]===tab));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('admin-'+tab).classList.add('active');
+};
+
+// ========================================================
+// ADMIN – BUSCA / FILTRO
+// ========================================================
+window.filterTable = function(tbodyId, term){
+  const rows = document.getElementById(tbodyId).querySelectorAll('tr:not(.empty-row)');
+  const t = term.toLowerCase();
+  rows.forEach(r=>{ r.style.display = r.textContent.toLowerCase().includes(t) ? '' : 'none'; });
+};
+
+// ========================================================
+// ADMIN – EXPORTAR CSV
+// ========================================================
+window.exportCSV = function(tipo){
+  let rows, headers;
+  if(tipo==='exp'){
+    headers = ['Protocolo','Nome','CPF','Nascimento','Telefone','CEP','Email','Turma','Praticou?','Status','Cadastro em'];
+    rows = allInscricoes.filter(i=>i.tipo==='exp').map(e=>[
+      e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.cep||'',e.email||'',
+      turmaNames[e.turma]||e.turma||'',e.praticou==='sim'?'Sim':'Não',e.status||'',formatarData(e.criadoEm)
+    ]);
+  } else if(tipo==='tor'){
+    headers = ['Protocolo','Nome','CPF','Nascimento','Telefone','CEP','Email','Categoria','Status','Cadastro em'];
+    rows = allInscricoes.filter(i=>i.tipo==='tor').map(e=>[
+      e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.cep||'',e.email||'',
+      e.categoria||e.cat||'',e.status||'',formatarData(e.criadoEm)
+    ]);
+  } else {
+    headers = ['Nome','CPF','Telefone','Email','Tipo','Turma/Categoria','Cadastro em'];
+    rows = allInscricoes.filter(i=>i.status==='espera').map(e=>[
+      e.nome||'',e.cpf||'',e.tel||'',e.email||'',e.tipo==='exp'?'Experiência':'Torneio',
+      e.tipo==='exp'?(turmaNames[e.turma]||e.turma||''):(e.categoria||e.cat||''),
+      formatarData(e.criadoEm)
+    ]);
+  }
+
+  const csv = [headers, ...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href=url; a.download=`bte_${tipo}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+};
+
+// ========================================================
 // INIT
+// ========================================================
 renderTurmas();
 renderCats();
 
@@ -1453,9 +1715,15 @@ const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});
 },{threshold:.1});
 document.querySelectorAll('.what-card,.prof-card,.tl-item,.turma-card').forEach(el=>{
-  el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';
+  el.style.opacity='0'; el.style.transition='opacity .5s, transform .5s';
   observer.observe(el);
 });
+
+// NAV MOBILE
+window.toggleMenu = function(){
+  document.getElementById('navLinks').classList.toggle('open');
+};
 </script>
+
 </body>
 </html>
