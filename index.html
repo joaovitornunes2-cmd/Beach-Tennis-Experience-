@@ -299,19 +299,10 @@ tbody tr:hover td{background:#fafafa}
 .pay-method-desc{font-size:.75rem;color:#888;margin-top:.2rem}
 .pay-detail-box{display:none;margin-top:.5rem}
 .pay-detail-box.active{display:block}
-/* PIX */
-.pix-container{background:#f8f8f8;border-radius:12px;padding:1.25rem;text-align:center}
-.pix-qr{width:280px;height:280px;margin:0 auto 1rem;border-radius:8px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 2px 12px rgba(0,0,0,.1)}
-.pix-qr img{width:100%;height:100%;object-fit:contain}
-.pix-valor-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#CC1B1B;margin-bottom:.25rem}
-.pix-valor-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#111;letter-spacing:1px;margin-bottom:1rem}
-.pix-actions{display:flex;flex-direction:column;gap:.5rem}
-.btn-pix-copy{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;font-size:.875rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;width:100%}
-.btn-pix-copy:hover{background:#E83030}
-.btn-pix-wa{display:flex;align-items:center;justify-content:center;gap:.5rem;background:#25D366;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;font-size:.875rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:background .2s;width:100%}
-.btn-pix-wa:hover{background:#1ebe5d}
-.pix-instrucao{font-size:.78rem;color:#888;margin-top:.75rem;line-height:1.5}
-/* CARTAO */
+
+/* PIX — processado via WhatsApp (sem QR Code) */
+
+/* CARTÃO */
 .card-container{background:#fff8e1;border:1px solid #ffe082;border-radius:12px;padding:1.25rem;text-align:center}
 .card-icon-big{font-size:2.5rem;margin-bottom:.75rem}
 .card-title{font-weight:700;font-size:1rem;color:#111;margin-bottom:.5rem}
@@ -765,7 +756,7 @@ select option:disabled{color:#bbb;font-style:italic}
           <div class="pay-method-card" id="payMethodPix" onclick="selectPayMethod('pix')">
             <div class="pay-method-icon">📱</div>
             <div class="pay-method-name">Pix</div>
-            <div class="pay-method-desc">Pagamento instantâneo</div>
+            <div class="pay-method-desc">Via WhatsApp</div>
           </div>
           <div class="pay-method-card" id="payMethodCard" onclick="selectPayMethod('card')">
             <div class="pay-method-icon">💳</div>
@@ -774,24 +765,20 @@ select option:disabled{color:#bbb;font-style:italic}
           </div>
         </div>
 
-        <!-- PIX -->
+        <!-- PIX — redirecionamento para WhatsApp -->
         <div class="pay-detail-box" id="payDetailPix">
-          <div class="pix-container">
-            <div class="pix-qr"><img id="pixQrImg" src="" alt="QR Code Pix"></div>
-            <div class="pix-valor-label">Valor a pagar</div>
-            <div class="pix-valor-num" id="pixValorNum">R$ 120,00</div>
-            <div class="pix-actions">
-              <button class="btn-pix-copy" onclick="copiarPix()">📋 Copiar código Pix</button>
-              <a class="btn-pix-wa" id="pixWaLink" href="#" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                Enviar comprovante via WhatsApp
-              </a>
-            </div>
-            <p class="pix-instrucao">Após o pagamento, envie o comprovante pelo WhatsApp para confirmarmos sua inscrição.</p>
+          <div class="card-container" style="background:#e8f5e9;border-color:#a5d6a7">
+            <div class="card-icon-big">📱</div>
+            <div class="card-title">Pagamento via Pix</div>
+            <div class="card-desc">Para pagar via Pix, entre em contato com nossa equipe pelo WhatsApp. Vamos te enviar a chave e confirmar sua vaga com segurança!</div>
+            <a class="btn-card-wa" id="pixWaLink" href="#" target="_blank" style="background:#25D366">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Quero pagar com Pix pelo WhatsApp
+            </a>
           </div>
           <div class="modal-form-actions" style="margin-top:1rem">
             <button class="btn-modal-back" onclick="backToFormFromPay()">← Voltar</button>
-            <button class="btn-modal-next" onclick="finalizarInscricao()">Já paguei, finalizar →</button>
+            <button class="btn-modal-next" onclick="finalizarInscricao()">Finalizei pelo WhatsApp →</button>
           </div>
         </div>
 
@@ -820,7 +807,7 @@ select option:disabled{color:#bbb;font-style:italic}
           <div class="pendente-titulo">Inscrição Registrada!</div>
           <p class="pendente-sub">Seus dados foram salvos. Assim que confirmarmos seu pagamento, sua vaga estará garantida.</p>
           <div class="pendente-protocolo">Protocolo: <strong id="pendProto"></strong></div>
-          <div class="pendente-aviso">📌 <strong>Próximo passo:</strong> Envie o comprovante de pagamento para o WhatsApp <strong>(62) 99804-1804</strong> informando seu protocolo. Sua vaga será confirmada em até 24h.</div>
+          <div class="pendente-aviso">📌 <strong>Próximo passo:</strong> Entre em contato pelo WhatsApp <strong>(62) 99804-1804</strong> informando seu protocolo para finalizar o pagamento. Sua vaga será confirmada em até 24h.</div>
           <button class="btn-modal-next" onclick="closeModal()">Entendido, fechar</button>
         </div>
       </div>
@@ -854,30 +841,20 @@ const auth = getAuth(app);
 const MAX_TURMA = 6;
 const MAX_CAT   = 8;
 const WA_NUM    = '5562998041804';
-const PIX_EXP   = '00020101021226700014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0222Pagamento joao-vitor-65204000053039865406120.005802BR592564608063 JOAO VITOR LEITA6007GOIANIA62290525QRCCkZLUerF3gFIRNjzIBRKqg6304DEBF';
-const PIX_TOR   = '00020101021226650014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0217Inscricao Super 85204000053039865406100.005802BR592564608063 JOAO VITOR LEITA6007GOIANIA62290525QRCCS7C2uTyeJocCTUTS4JykV6304F80F';
-const QR_EXP    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_exp_120.jpg.jpeg';
-const QR_TOR    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_tor_100.jpg.jpeg';
+// Pagamento via WhatsApp — Pix e Cartão processados manualmente pela organização
 
 // ===== CONTROLE DE VAGAS — FONTE ÚNICA DE VERDADE =====
-// Conta diretamente as inscrições reais do Firestore em tempo real.
-// Status 'pendente' e 'confirmado' ocupam vaga. 'espera' não ocupa.
-// Isso elimina qualquer contador auxiliar e garante consistência total.
-
 let vagasContagem = {
   turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
 
-// Listener público: escuta TODAS as inscrições com status pendente ou confirmado
-// e reconstrói o vagasContagem do zero a cada mudança — sem contador separado.
 const unsubVagasReal = onSnapshot(
   query(
     collection(db, 'inscricoes'),
     where('status', 'in', ['pendente', 'confirmado'])
   ),
   (snapshot) => {
-    // Zera tudo antes de recontar
     vagasContagem = {
       turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
       cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
@@ -886,21 +863,15 @@ const unsubVagasReal = onSnapshot(
       const data = d.data();
       if (data.tipo === 'exp' && data.turma) {
         const t = Number(data.turma);
-        if (vagasContagem.turmas[t] !== undefined) {
-          vagasContagem.turmas[t]++;
-        }
+        if (vagasContagem.turmas[t] !== undefined) vagasContagem.turmas[t]++;
       } else if (data.tipo === 'tor' && data.cat) {
-        if (vagasContagem.cats[data.cat] !== undefined) {
-          vagasContagem.cats[data.cat]++;
-        }
+        if (vagasContagem.cats[data.cat] !== undefined) vagasContagem.cats[data.cat]++;
       }
     });
     renderModalTurmas();
     atualizarSelectCategorias();
   },
-  (err) => {
-    console.error('Erro ao escutar inscrições para vagas:', err);
-  }
+  (err) => { console.error('Erro ao escutar inscrições para vagas:', err); }
 );
 
 function gerarProtocolo(tipo){
@@ -981,9 +952,9 @@ function atualizarSelectCategorias(){
   const grid = document.getElementById('mCatsGrid');
   if(!grid) return;
   const cats = [
-    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante'     },
+    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante'      },
     { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário'  },
-    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante'     },
+    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante'      },
     { key:'fem_int',  icon:'👩', genero:'Feminino',   nivel:'Intermediário'  },
   ];
   const selVal = document.getElementById('m_tor_cat').value;
@@ -1025,44 +996,34 @@ window.selectModalCat=function(key){
   document.getElementById('mWaitTor').style.display='none';
 };
 
-// ===== PAGAMENTO =====
+// ===== PAGAMENTO — PIX E CARTÃO VIA WHATSAPP =====
 window.selectPayMethod=function(method){
   currentPayMethod=method;
   document.getElementById('payMethodPix').classList.toggle('selected',method==='pix');
   document.getElementById('payMethodCard').classList.toggle('selected',method==='card');
   document.getElementById('payDetailPix').classList.toggle('active',method==='pix');
   document.getElementById('payDetailCard').classList.toggle('active',method==='card');
-  if(method==='card'&&currentEntry){
+  if(currentEntry){
     const tipo = currentEntry.tipo==='exp'?'Experiência Iniciantes':'Super 8';
     const turmaInfo = currentEntry.tipo==='exp'?` - Turma T${currentEntry.turma}`:`- ${currentEntry.categoria}`;
-    const msg = encodeURIComponent(`Olá! Gostaria de garantir minha inscrição na *Beach Tennis Experience* com cartão de crédito.\n\n🎾 *Modalidade:* ${tipo}${turmaInfo}\n👤 *Nome:* ${currentEntry.nome}\n🔑 *Protocolo:* ${currentProtocolo}\n\nAguardo orientações para finalizar o pagamento!`);
-    document.getElementById('cardWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
+    if(method==='pix'){
+      const msg = encodeURIComponent(`Olá! Gostaria de pagar via Pix minha inscrição na *Beach Tennis Experience*.\n\n🎾 *Modalidade:* ${tipo}${turmaInfo}\n👤 *Nome:* ${currentEntry.nome}\n🔑 *Protocolo:* ${currentProtocolo}\n\nAguardo a chave Pix para finalizar o pagamento!`);
+      document.getElementById('pixWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
+    }
+    if(method==='card'){
+      const msg = encodeURIComponent(`Olá! Gostaria de garantir minha inscrição na *Beach Tennis Experience* com cartão de crédito.\n\n🎾 *Modalidade:* ${tipo}${turmaInfo}\n👤 *Nome:* ${currentEntry.nome}\n🔑 *Protocolo:* ${currentProtocolo}\n\nAguardo orientações para finalizar o pagamento!`);
+      document.getElementById('cardWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
+    }
   }
-};
-
-window.copiarPix=function(){
-  const code = modalChoice==='exp'?PIX_EXP:PIX_TOR;
-  navigator.clipboard.writeText(code).then(()=>{
-    const btn=document.querySelector('.btn-pix-copy');
-    btn.textContent='✅ Código copiado!';
-    setTimeout(()=>btn.textContent='📋 Copiar código Pix',2500);
-  }).catch(()=>alert('Copie manualmente:\n\n'+code));
 };
 
 function setupPixUI(tipo){
-  const isExp=tipo==='exp';
-  document.getElementById('pixQrImg').src=isExp?QR_EXP:QR_TOR;
-  document.getElementById('pixValorNum').textContent=isExp?'R$ 120,00':'R$ 100,00';
-  document.getElementById('payValorDisplay').innerHTML=`R$ <span>${isExp?'120':'100'}</span>,00`;
-  if(currentEntry&&currentProtocolo){
-    const msg=encodeURIComponent(`Olá! Segue o comprovante do Pix referente à minha inscrição na *Beach Tennis Experience*.\n\n🔑 *Protocolo:* ${currentProtocolo}\n👤 *Nome:* ${currentEntry.nome}\n\nAguardo a confirmação!`);
-    document.getElementById('pixWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
-  }
+  // Pix agora via WhatsApp — link montado em selectPayMethod
+  const isExp = tipo === 'exp';
+  document.getElementById('payValorDisplay').innerHTML = `R$ <span>${isExp ? '120' : '100'}</span>,00`;
 }
 
 // ===== SUBMIT EXPERIÊNCIA =====
-// Verifica vagas consultando o Firestore ao vivo no momento do submit,
-// evitando condição de corrida entre usuários simultâneos.
 window.submitModalExp=async function(){
   const nome=document.getElementById('m_exp_nome').value.trim();
   const cpf=document.getElementById('m_exp_cpf').value.trim();
@@ -1078,7 +1039,6 @@ window.submitModalExp=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    // Consulta ao vivo para checar vagas reais no momento do clique
     const snapCheck = await getDocs(
       query(
         collection(db, 'inscricoes'),
@@ -1117,7 +1077,6 @@ window.submitModalExp=async function(){
 };
 
 // ===== SUBMIT TORNEIO =====
-// Mesma lógica: verifica vagas ao vivo no Firestore antes de salvar.
 window.submitModalTor=async function(){
   const nome=document.getElementById('m_tor_nome').value.trim();
   const cpf=document.getElementById('m_tor_cpf').value.trim();
@@ -1132,7 +1091,6 @@ window.submitModalTor=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    // Consulta ao vivo para checar vagas reais no momento do clique
     const snapCheck = await getDocs(
       query(
         collection(db, 'inscricoes'),
@@ -1171,7 +1129,7 @@ window.submitModalTor=async function(){
   }
 };
 
-// ===== FINALIZAR INSCRIÇÃO (após pagamento) =====
+// ===== FINALIZAR INSCRIÇÃO =====
 window.finalizarInscricao=async function(){
   if(!currentEntry?.id||!currentPayMethod){
     alert('Selecione uma forma de pagamento.');return;
@@ -1183,7 +1141,7 @@ window.finalizarInscricao=async function(){
     document.getElementById('mStepPendente').classList.add('active');
   }catch(err){
     console.error(err);
-    alert('Erro ao registrar pagamento. Sua inscrição foi salva, mas envie o comprovante pelo WhatsApp para confirmar.');
+    alert('Erro ao registrar pagamento. Sua inscrição foi salva — entre em contato pelo WhatsApp para confirmar.');
   }
 };
 
@@ -1204,9 +1162,7 @@ let allInscricoes    = [];
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    if (document.getElementById('adminPanel').classList.contains('open')) {
-      mostrarPainelPrincipal();
-    }
+    if (document.getElementById('adminPanel').classList.contains('open')) mostrarPainelPrincipal();
   } else {
     if (unsubscribeAdmin) { unsubscribeAdmin(); unsubscribeAdmin = null; }
     document.getElementById('adminLoginScreen').style.display = 'block';
@@ -1254,9 +1210,7 @@ window.doAdminLogin = async function() {
   }
 };
 
-window.doAdminLogout = async function() {
-  await signOut(auth);
-};
+window.doAdminLogout = async function() { await signOut(auth); };
 
 function mostrarPainelPrincipal() {
   document.getElementById('adminLoginScreen').style.display = 'none';
@@ -1266,11 +1220,8 @@ function mostrarPainelPrincipal() {
 
 function esc(str) {
   return String(str ?? '–')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
 }
 
 function iniciarListenerFirebase(){
