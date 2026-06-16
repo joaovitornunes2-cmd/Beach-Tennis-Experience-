@@ -834,13 +834,13 @@ tbody tr:hover td{background:#fafafa}
  *     match /inscricoes/{docId} {
  *       allow create: if true;
  *       allow read, update, delete: if request.auth != null
- *         && request.auth.token.email == "admin@beachtennisexp.com";
+ *         && request.auth.token.email == "joaovitornunes2@hotmail.com";
  *     }
  *   }
  * }
  *
  * USUÁRIO ADMIN — criar UMA VEZ via Firebase Console:
- *   Authentication → Add user → admin@beachtennisexp.com → (senha forte)
+ *   Authentication → Add user → joaovitornunes2@hotmail.com → (senha forte)
  * =====================================================================
  */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1105,7 +1105,7 @@ window.buscaCEP=async function(form){
 // ===== ADMIN =====
 // SEGURANÇA: autenticação via Firebase Auth (senha validada no servidor).
 // Para criar o usuário admin, execute UMA VEZ no console do Firebase:
-//   firebase auth:create-user --email admin@beachtennisexp.com --password SUA_SENHA_FORTE
+//   firebase auth:create-user --email joaovitornunes2@hotmail.com --password SUA_SENHA_FORTE
 // A senha NUNCA deve aparecer neste arquivo.
 
 let unsubscribeAdmin = null;
@@ -1146,7 +1146,7 @@ window.toggleAdmin = function() {
 };
 
 window.doAdminLogin = async function() {
-  const email = 'admin@beachtennisexp.com'; // e-mail fixo do admin do evento
+  const email = 'joaovitornunes2@hotmail.com'; // e-mail fixo do admin do evento
   const senha = document.getElementById('adminPwdInput').value;
   const errEl = document.getElementById('adminLoginErr');
   const btnEl = document.querySelector('.admin-login-btn');
