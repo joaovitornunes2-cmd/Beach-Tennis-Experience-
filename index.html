@@ -11,366 +11,34 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --blue:#CC1B1B;
-  --blue-light:#E83030;
-  --blue-dark:#111111;
-  --yellow:#CC1B1B;
-  --yellow-light:#E83030;
-  --white:#FFFFFF;
-  --off-white:#F5F5F5;
-  --gray-light:#E8EEF5;
-  --gray:#444444;
-  --gray-dark:#1a1a1a;
-  --sand:#F5F5F5;
-  --radius:12px;
-  --radius-sm:8px;
+  --blue:#CC1B1B;--blue-light:#E83030;--blue-dark:#111111;
+  --yellow:#CC1B1B;--yellow-light:#E83030;--white:#FFFFFF;
+  --off-white:#F5F5F5;--gray-light:#E8EEF5;--gray:#444444;
+  --gray-dark:#1a1a1a;--sand:#F5F5F5;--radius:12px;--radius-sm:8px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:#222222;background:#fff;overflow-x:hidden}
-
-/* NAV */
+body{font-family:'Inter',sans-serif;color:#222;background:#fff;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.97);backdrop-filter:blur(8px);padding:0 2rem}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--yellow);letter-spacing:2px;text-decoration:none}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--yellow)}
-.nav-cta{background:var(--yellow);color:var(--blue-dark);padding:.5rem 1.25rem;border-radius:6px;font-weight:700;text-decoration:none;font-size:.875rem;transition:background .2s}
+.nav-cta{background:var(--yellow);color:#fff;padding:.5rem 1.25rem;border-radius:6px;font-weight:700;text-decoration:none;font-size:.875rem;transition:background .2s}
 .nav-cta:hover{background:var(--yellow-light)}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{width:24px;height:2px;background:#fff;transition:all .3s}
-
-/* HERO */
 .hero{min-height:100vh;background:url("https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/public/skyfit_quadra_convertida.jpg") center/cover no-repeat;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:64px}
 .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(165deg,rgba(0,0,0,0.88) 0%,rgba(30,0,0,0.75) 50%,rgba(60,10,10,0.55) 100%)}
 .hero-deco{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:600px;height:600px;border:80px solid rgba(204,27,27,0.08);border-radius:50%}
 .hero-deco2{position:absolute;right:60px;top:50%;transform:translateY(-50%);width:400px;height:400px;border:2px solid rgba(204,27,27,0.15);border-radius:50%}
 .hero-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:2;width:100%}
-.hero-badge{display:inline-block;background:#CC1B1B;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:.35rem 1rem;border-radius:4px;margin-bottom:1.5rem}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,7rem);color:#fff;line-height:.95;letter-spacing:3px;margin-bottom:1.5rem}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,13vw,8rem);color:#fff;line-height:.92;letter-spacing:2px;margin-bottom:1rem}
 .hero h1 span{color:var(--yellow)}
 .hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.8);max-width:560px;line-height:1.6;margin-bottom:2.5rem}
-.hero-info{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
-.info-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:.5rem 1rem;border-radius:6px;font-size:.875rem;display:flex;align-items:center;gap:.5rem;backdrop-filter:blur(4px)}
-.info-pill .icon{font-size:1rem}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{background:var(--yellow);color:var(--blue-dark);padding:.875rem 2rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;transition:all .2s;display:inline-block;border:none;cursor:pointer}
-.btn-primary:hover{background:var(--yellow-light);transform:translateY(-2px)}
-.btn-outline{background:transparent;color:#fff;padding:.875rem 2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid rgba(255,255,255,0.4);transition:all .2s;display:inline-block}
-.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:.75rem;text-align:center;animation:bounce 2s infinite}
-.hero-scroll::after{content:'↓';display:block;font-size:1.2rem;margin-top:.25rem}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* SECTIONS */
-section{padding:5rem 2rem}
-.container{max-width:1200px;margin:0 auto}
-.section-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-light);margin-bottom:.75rem}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--blue-dark);letter-spacing:2px;margin-bottom:1rem;line-height:1}
-.section-title.white{color:#fff}
-.section-sub{font-size:1rem;color:var(--gray);max-width:600px;line-height:1.7;margin-bottom:3rem}
-
-/* TABS */
-.tabs-section{background:var(--off-white)}
-.tab-nav{display:flex;gap:.5rem;margin-bottom:2.5rem;border-bottom:2px solid var(--gray-light);padding-bottom:0}
-.tab-btn{background:none;border:none;padding:.875rem 1.5rem;font-size:1rem;font-weight:600;color:#444;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:8px 8px 0 0}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
-.tab-btn:hover:not(.active){color:var(--blue-light)}
-.tab-content{display:none}
-.tab-content.active{display:block}
-
-/* EXPERIENCE TAB */
-.exp-intro{background:#fff;border-radius:var(--radius);padding:2rem;border:1px solid var(--gray-light);margin-bottom:2rem}
-.exp-intro h3{font-size:1.5rem;font-weight:700;color:var(--blue-dark);margin-bottom:.75rem}
-.exp-intro p{color:#333333;line-height:1.7;margin-bottom:.75rem}
-.price-badge{display:inline-flex;align-items:baseline;gap:.25rem;background:var(--blue-dark);color:#fff;padding:.5rem 1.25rem;border-radius:6px;margin-top:.5rem}
-.price-badge .amount{font-size:1.5rem;font-weight:700}
-.price-badge .label{font-size:.8rem;opacity:.8}
-.cert-note{background:var(--sand);border-left:4px solid var(--yellow);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-top:1rem;font-size:.9rem;color:var(--blue-dark);font-weight:500}
-
-.turmas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem}
-.turma-card{background:#fff;border:2px solid var(--gray-light);border-radius:var(--radius);padding:1.25rem;transition:all .2s;cursor:pointer;position:relative;overflow:hidden}
-.turma-card:hover{border-color:var(--blue-light);transform:translateY(-2px)}
-.turma-card.full{opacity:.7;cursor:default}
-.turma-card.full::after{content:'LOTADA';position:absolute;top:12px;right:12px;background:#e74c3c;color:#fff;font-size:.65rem;font-weight:700;letter-spacing:1px;padding:.2rem .5rem;border-radius:4px}
-.turma-card.selected{border-color:var(--blue);background:rgba(26,125,212,.05)}
-.turma-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--blue);line-height:1}
-.turma-time{font-size:.95rem;font-weight:600;color:var(--blue-dark);margin:.25rem 0}
-.turma-vagas{font-size:.8rem;color:var(--gray)}
-.vagas-bar{height:4px;background:var(--gray-light);border-radius:2px;margin-top:.5rem;overflow:hidden}
-.vagas-fill{height:100%;background:var(--blue-light);border-radius:2px;transition:width .5s}
-.vagas-fill.warning{background:#f39c12}
-.vagas-fill.danger{background:#e74c3c}
-
-/* FORM */
-.form-card{background:#fff;border-radius:var(--radius);padding:2rem;border:1px solid var(--gray-light)}
-.form-card h3{font-size:1.2rem;font-weight:700;color:var(--blue-dark);margin-bottom:1.5rem}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-group{display:flex;flex-direction:column;gap:.4rem}
-.form-group.full{grid-column:1/-1}
-.form-group label{font-size:.8rem;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.5px}
-.form-group input,.form-group select{border:1.5px solid var(--gray-light);border-radius:6px;padding:.625rem .875rem;font-size:.95rem;font-family:'Inter',sans-serif;color:var(--gray-dark);transition:border-color .2s;background:#fff}
-.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--blue-light)}
-.radio-group{display:flex;gap:1rem}
-.radio-label{display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.95rem;color:var(--gray-dark)}
-.radio-label input{accent-color:var(--blue)}
-.form-submit{width:100%;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:1rem;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.5rem;font-family:'Inter',sans-serif}
-.form-submit:hover{background:var(--blue-light);transform:translateY(-1px)}
-.success-msg{display:none;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:1.5rem;text-align:center;margin-top:1rem}
-.success-msg h4{color:#2e7d32;font-size:1.1rem;margin-bottom:.5rem}
-.success-msg p{color:#388e3c;font-size:.9rem}
-.waitlist-msg{display:none;background:#fff8e1;border:1px solid #ffcc02;border-radius:8px;padding:1rem;margin-bottom:1rem}
-.waitlist-msg p{color:#f57f17;font-size:.9rem}
-
-/* SUPER 8 TAB */
-.tournament-header{background:linear-gradient(135deg,#111111,#CC1B1B);border-radius:var(--radius);padding:2rem;color:#fff;margin-bottom:2rem;position:relative;overflow:hidden}
-.tournament-header::before{content:'8';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:15rem;color:rgba(255,255,255,0.05);line-height:1}
-.tournament-header h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:2px;color:var(--yellow);margin-bottom:.5rem}
-.tournament-header p{opacity:.9;line-height:1.6;max-width:500px}
-.tournament-header .price-badge{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);margin-top:1rem}
-.cats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
-.cat-card{background:#fff;border:2px solid var(--gray-light);border-radius:var(--radius);padding:1.5rem;text-align:center}
-.cat-icon{font-size:2.5rem;margin-bottom:.75rem}
-.cat-title{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:var(--blue-dark);letter-spacing:1px}
-.cat-vagas{font-size:.85rem;color:var(--gray);margin:.25rem 0}
-.cat-count{font-size:1.5rem;font-weight:700;color:var(--blue)}
-.premiacao{background:linear-gradient(135deg,#f5f5f5,#ebebeb);border:2px solid var(--yellow);border-radius:var(--radius);padding:1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem}
-.premiacao .trophy{font-size:2.5rem}
-.premiacao h4{font-weight:700;color:#111111;margin-bottom:.25rem}
-.premiacao p{font-size:.875rem;color:var(--gray)}
-
-/* WHAT TO FIND */
-.what-section{background:var(--blue-dark)}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem}
-.what-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:1.5rem;transition:all .2s}
-.what-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px)}
-.what-icon{font-size:2rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:center;color:#fff}
-.what-title{font-weight:700;color:#fff;margin-bottom:.4rem}
-.what-desc{font-size:.85rem;color:rgba(255,255,255,0.6);line-height:1.5}
-
-/* PROFESSORS */
-.prof-grid{display:grid;grid-template-columns:1fr;max-width:600px;margin:0 auto;gap:2rem}
-.prof-card{background:#1a1a1a;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
-.prof-photo{height:500px;background:linear-gradient(135deg,#CC1B1B 0%,#111111 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.prof-initials{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(255,255,255,0.15);position:absolute}
-.prof-avatar{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.15);border:3px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#fff;position:relative;z-index:1}
-.prof-info{padding:1.5rem}
-.prof-name{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#ffffff;letter-spacing:1px;margin-bottom:.25rem}
-.prof-role{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue-light);margin-bottom:.75rem}
-.prof-desc{font-size:.9rem;color:rgba(255,255,255,0.75);line-height:1.7}
-
-/* SCHEDULE */
-.schedule-section{background:#111111}
-.timeline{position:relative;padding-left:2.5rem}
-.timeline::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#CC1B1B,#E83030)}
-.tl-item{position:relative;margin-bottom:1.5rem}
-.tl-dot{position:absolute;left:-2.5rem;width:1.5rem;height:1.5rem;background:#CC1B1B;border:3px solid #111111;border-radius:50%;top:0}
-.tl-time{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem}
-.tl-event{font-weight:600;color:#ffffff;margin-bottom:.25rem}
-.tl-desc{font-size:.875rem;color:rgba(255,255,255,0.70);line-height:1.5}
-.tl-all-day{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-top:1rem}
-.tl-all-day h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#CC1B1B;margin-bottom:.75rem}
-.tl-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.tl-tag{background:var(--blue-dark);color:#fff;padding:.3rem .75rem;border-radius:20px;font-size:.8rem;font-weight:500;display:inline-flex;align-items:center;gap:.4rem}
-
-/* PARTNERS PLACEHOLDER */
-.partners-section{padding:3rem 2rem;background:#fff;text-align:center}
-.partners-title{font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:1.5rem}
-.partners-placeholder{display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap}
-.partner-box{width:120px;height:60px;border:2px dashed var(--gray-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-
-/* FOOTER */
-footer{background:#111111;color:#fff;padding:3rem 2rem 1.5rem}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
-.footer-brand .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#CC1B1B;letter-spacing:2px;margin-bottom:.75rem}
-.footer-brand p{font-size:.875rem;color:rgba(255,255,255,0.6);line-height:1.6;max-width:280px}
-.footer-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#CC1B1B;margin-bottom:1rem}
-.footer-col p,.footer-col a{font-size:.875rem;color:rgba(255,255,255,0.7);line-height:1.8;text-decoration:none;display:block}
-.footer-col a:hover{color:var(--yellow)}
-.footer-social{display:flex;gap:.75rem;margin-top:1rem}
-.social-link{width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,0.7);font-size:.75rem;font-weight:700;transition:all .2s}
-.social-link:hover{background:#CC1B1B;color:#fff}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
-.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,0.4)}
-.footer-cta{background:#CC1B1B;color:var(--blue-dark);padding:.75rem 1.75rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:.9rem;transition:background .2s}
-.footer-cta:hover{background:#E83030}
-
-/* ADMIN PANEL */
-.admin-toggle{position:fixed;bottom:2rem;right:2rem;background:#111111;color:#fff;border:none;border-radius:50px;padding:.625rem 1.25rem;font-size:.8rem;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif}
-.admin-panel{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);overflow-y:auto;backdrop-filter:blur(6px)}
-.admin-panel.open{display:block}
-.admin-content{background:#fff;max-width:1160px;margin:1.5rem auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
-
-/* LOGIN */
-.admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;min-height:340px;gap:1.5rem}
-.admin-login-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#CC1B1B}
-.admin-login h3{font-size:1.1rem;font-weight:700;color:#111;margin:0}
-.admin-login p{font-size:.85rem;color:#888;margin:-.75rem 0 0;text-align:center}
-.admin-login-form{display:flex;flex-direction:column;gap:.75rem;width:100%;max-width:320px}
-.admin-login-form input{border:1.5px solid #e0e0e0;border-radius:8px;padding:.75rem 1rem;font-size:.95rem;font-family:'Inter',sans-serif;width:100%;transition:border-color .2s}
-.admin-login-form input:focus{outline:none;border-color:#CC1B1B}
-.admin-login-btn{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.875rem;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
-.admin-login-btn:hover{background:#E83030}
-.admin-login-err{background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;display:none;text-align:center}
-
-/* HEADER */
-.admin-header{background:#111111;color:#fff;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
-.admin-header-left{display:flex;align-items:center;gap:1rem}
-.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:#CC1B1B;margin:0}
-.admin-header-sub{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
-.admin-header-right{display:flex;align-items:center;gap:.75rem}
-.admin-sync-badge{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);border-radius:20px;padding:.3rem .75rem}
-.admin-sync-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;animation:pulse-dot 2s infinite}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
-.admin-close{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s}
-.admin-close:hover{color:#fff}
-.admin-logout{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;border-radius:6px;padding:.4rem .875rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
-.admin-logout:hover{background:rgba(255,255,255,.2);color:#fff}
-
-/* BODY */
-.admin-body{padding:1.75rem 2rem}
-
-/* STATS */
-.admin-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
-.stat-box{background:var(--off-white);border-radius:12px;padding:1.1rem 1rem;text-align:center;border:1.5px solid transparent;transition:border-color .2s}
-.stat-box:hover{border-color:#CC1B1B}
-.stat-box .num{font-family:'Bebas Neue',sans-serif;font-size:2.25rem;color:var(--blue);line-height:1}
-.stat-box .lbl{font-size:.7rem;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:.25rem}
-
-/* TOOLBAR */
-.admin-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
-.admin-search{display:flex;align-items:center;gap:.5rem;background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.5rem .875rem;flex:1;max-width:320px}
-.admin-search input{border:none;background:transparent;font-size:.9rem;font-family:'Inter',sans-serif;width:100%;color:#222}
-.admin-search input:focus{outline:none}
-.admin-search svg{color:#aaa;flex-shrink:0}
-.btn-export{background:#111;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
-.btn-export:hover{background:#333}
-
-/* TABS */
-.tab-section-titles{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.admin-tab-btn{background:var(--off-white);border:1.5px solid transparent;padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gray);font-family:'Inter',sans-serif;transition:all .2s}
-.admin-tab-btn.active{background:#CC1B1B;color:#fff;border-color:#CC1B1B}
-.admin-section{display:none}
-.admin-section.active{display:block}
-
-/* TABLE */
-.admin-table-wrap{overflow-x:auto;border-radius:10px;border:1.5px solid #eee}
-table{width:100%;border-collapse:collapse;font-size:.83rem}
-th{background:#111;color:#fff;padding:.75rem 1rem;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
-td{padding:.625rem 1rem;border-bottom:1px solid #f0f0f0;white-space:nowrap;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:#fafafa}
-.badge{display:inline-block;padding:.2rem .65rem;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.badge-exp{background:#e3f2fd;color:#1565c0}
-.badge-tor{background:#f3e5f5;color:#6a1b9a}
-.badge-wait{background:#fff3e0;color:#e65100}
-.badge-ok{background:#e8f5e9;color:#2e7d32}
-.badge-espera{background:#fff3e0;color:#e65100}
-.empty-row td{text-align:center;color:#aaa;padding:2.5rem;font-size:.9rem}
-
-/* LOADING */
-.admin-loading{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:2rem;color:#888;font-size:.9rem}
-.spinner{width:20px;height:20px;border:2.5px solid #eee;border-top-color:#CC1B1B;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-@media(max-width:768px){
-  .admin-stats{grid-template-columns:repeat(2,1fr)}
-  .admin-body{padding:1.25rem}
-  .admin-header{padding:1rem 1.25rem}
-}
-
-/* LEVEL BADGES */
-/* PAYMENT */
-.payment-section{margin:.5rem 0 1rem;border:1.5px solid var(--gray-light);border-radius:var(--radius-sm);overflow:hidden}
-.payment-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue-dark);padding:.625rem 1rem;background:var(--off-white);border-bottom:1.5px solid var(--gray-light)}
-.payment-options{display:flex;gap:0}
-.pay-option{flex:1;padding:.875rem 1rem;cursor:pointer;border:none;background:transparent;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.6rem;font-size:.9rem;font-weight:500;color:var(--gray);transition:all .2s;border-right:1.5px solid var(--gray-light)}
-.pay-option:last-child{border-right:none}
-.pay-option:hover{background:var(--off-white)}
-.pay-option.active{background:#fff;color:var(--blue-dark)}
-.pay-option input[type=radio]{accent-color:var(--blue)}
-.pay-detail{padding:1rem;border-top:1.5px solid var(--gray-light);display:none}
-.pay-detail.active{display:block}
-.pix-box{background:var(--off-white);border-radius:var(--radius-sm);padding:1rem;display:flex;flex-direction:column;gap:.5rem}
-.pix-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue)}
-.pix-key-row{display:flex;align-items:center;gap:.75rem}
-.pix-key{font-size:1rem;font-weight:700;color:var(--blue-dark);letter-spacing:.5px;font-family:'Inter',sans-serif}
-.pix-copy{background:var(--blue);color:#fff;border:none;border-radius:5px;padding:.35rem .75rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
-.pix-copy:hover{background:var(--blue-light)}
-.pix-note{font-size:.78rem;color:var(--gray);margin-top:.25rem}
-.card-box{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--radius-sm);padding:1rem;display:flex;gap:.75rem;align-items:flex-start}
-.card-icon{font-size:1.5rem;line-height:1;margin-top:.1rem}
-.card-text{font-size:.875rem;color:#5d4037;line-height:1.6}
-.card-text strong{color:var(--blue-dark)}
-.card-wa{display:inline-flex;align-items:center;gap:.4rem;background:#25D366;color:#fff;border:none;border-radius:5px;padding:.35rem .875rem;font-size:.8rem;font-weight:700;cursor:pointer;margin-top:.5rem;text-decoration:none;font-family:'Inter',sans-serif}
-
-/* SOCIAL PROJECT CARD */
-.social-project-card{margin-top:3rem;background:linear-gradient(135deg,rgba(204,27,27,0.12) 0%,rgba(204,27,27,0.05) 100%);border:1.5px solid rgba(204,27,27,0.35);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
-.social-project-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border:2px solid rgba(204,27,27,0.1);border-radius:50%}
-.social-project-card::after{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;border:2px solid rgba(204,27,27,0.06);border-radius:50%}
-.social-project-inner{display:flex;flex-direction:column;gap:1.25rem;position:relative;z-index:1}
-.social-project-top{display:flex;gap:1.25rem;align-items:flex-start}
-.social-icon{flex-shrink:0;width:56px;height:56px;background:#CC1B1B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 20px rgba(204,27,27,0.4)}
-.social-label{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.5rem}
-.social-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:#ffffff;line-height:1.1;margin-bottom:.75rem}
-.social-desc{font-size:.9rem;color:rgba(255,255,255,0.72);line-height:1.75;margin-bottom:0}
-.social-link{display:flex;align-items:center;gap:.5rem;color:#fff;background:#CC1B1B;padding:.625rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .2s,transform .2s;width:100%;box-sizing:border-box;word-break:break-all}
-.social-link:hover{background:#E83030;transform:translateY(-2px)}
-@media(max-width:768px){.social-project-card{padding:1.5rem}.social-icon{width:44px;height:44px}}
-
-.nivel-badge{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;font-weight:700}
-.nivel-iniciante{background:#e8f5e9;color:#2e7d32}
-.nivel-intermediario{background:#fff8e1;color:#f57f17}
-
-/* HERO SPONSORS */
-.hero-sponsors{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.15)}
-.hero-sponsors-label{font-size:.7rem;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
-
-
-
-
-
-
-.hero-sponsors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
-.sponsor-card{width:100%;aspect-ratio:4/3;padding:8px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,0.45),0 2px 6px rgba(0,0,0,0.2);transition:transform .25s,box-shadow .25s;overflow:hidden;box-sizing:border-box}
-.sponsor-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 48px rgba(0,0,0,0.65)}
-.sponsor-card.dark{background:#111}
-.sponsor-card img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;display:block}
-@media(min-width:540px){.hero-sponsors-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
-@media(min-width:900px){.hero-sponsors-grid{grid-template-columns:repeat(5,1fr);gap:18px}}
-.wa-float{position:fixed;bottom:2rem;left:2rem;background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.5rem;z-index:200;box-shadow:0 4px 15px rgba(37,211,102,0.4);transition:transform .2s}
-.wa-float:hover{transform:scale(1.1)}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--blue-dark);padding:1rem 2rem;gap:1rem;z-index:99}
-  .hero h1{font-size:3.5rem}
-  .hero-deco,.hero-deco2{display:none}
-  .form-grid{grid-template-columns:1fr}
-  .prof-grid{grid-template-columns:1fr}
-  .cats-grid{grid-template-columns:1fr}
-  .admin-stats{grid-template-columns:1fr 1fr}
-  .footer-top{grid-template-columns:1fr}
-  .footer-top>div{padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.1)}
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .6s ease forwards}
-.delay-1{animation-delay:.1s}
-.delay-2{animation-delay:.2s}
-.delay-3{animation-delay:.3s}
-
-/* SECTION DIVIDER */
-.divider{height:4px;background:linear-gradient(to right,#CC1B1B,#E83030,#CC1B1B);opacity:.5}
-
-/* HERO NEW LAYOUT */
 .hero-event-info{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem}
-.hero-event-date{font-size:clamp(.95rem,2.5vw,1.15rem);font-weight:700;color:#fff;letter-spacing:.5px;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.5)}
-.hero-event-tag{font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.8);margin:0;letter-spacing:.3px}
+.hero-event-date{font-size:clamp(.95rem,2.5vw,1.15rem);font-weight:700;color:#fff;letter-spacing:.5px;margin:0}
+.hero-event-tag{font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.8);margin:0}
 .hero-badge-vagas{display:inline-flex;align-items:center;gap:.35rem;background:#CC1B1B;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:.35rem .85rem;border-radius:30px;margin-top:.25rem;width:fit-content;box-shadow:0 3px 14px rgba(204,27,27,.55);animation:pulse-badge 2.2s infinite}
 @keyframes pulse-badge{0%,100%{box-shadow:0 3px 14px rgba(204,27,27,.55)}50%{box-shadow:0 4px 22px rgba(204,27,27,.9)}}
 .hero-info-stack{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;max-width:520px}
@@ -378,16 +46,26 @@ tbody tr:hover td{background:#fafafa}
 .pill-icon{display:flex;align-items:center;justify-content:center;min-width:1.4rem;color:#fff}
 .hero-btns-stack{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem;max-width:420px}
 .btn-full{width:100%;text-align:center;box-sizing:border-box}
-.btn-primary.btn-full{display:block;background:#CC1B1B;color:#fff;padding:1rem 2rem;border-radius:10px;font-weight:800;font-size:1.05rem;text-decoration:none;transition:all .2s}
-.btn-primary.btn-full:hover{background:#E83030;transform:translateY(-2px)}
+.btn-primary{background:var(--yellow);color:#fff;padding:.875rem 2rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;transition:all .2s;display:inline-block;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--yellow-light);transform:translateY(-2px)}
+.btn-primary.btn-full{display:block;padding:1rem 2rem;border-radius:10px;font-weight:800;font-size:1.05rem}
 .btn-outline.btn-full{display:block;background:transparent;color:#fff;padding:1rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;border:2px solid rgba(255,255,255,0.5);text-decoration:none;transition:all .2s;text-align:center}
 .btn-outline.btn-full:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
-@media(max-width:768px){
-  .hero h1{font-size:3.5rem}
-  .hero-info-stack,.hero-btns-stack{max-width:100%}
-}
-
-/* NOVOS CARDS LADO A LADO */
+.hero-sponsors{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.15)}
+.hero-sponsors-label{font-size:.7rem;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+.hero-sponsors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
+.sponsor-card{width:100%;aspect-ratio:4/3;padding:8px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,0.45);transition:transform .25s;overflow:hidden;box-sizing:border-box}
+.sponsor-card:hover{transform:translateY(-3px) scale(1.02)}
+.sponsor-card.dark{background:#111}
+.sponsor-card img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;display:block}
+@media(min-width:540px){.hero-sponsors-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:900px){.hero-sponsors-grid{grid-template-columns:repeat(5,1fr);gap:18px}}
+section{padding:5rem 2rem}
+.container{max-width:1200px;margin:0 auto}
+.section-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue-light);margin-bottom:.75rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--blue-dark);letter-spacing:2px;margin-bottom:1rem;line-height:1}
+.section-sub{font-size:1rem;color:var(--gray);max-width:600px;line-height:1.7;margin-bottom:3rem}
+.divider{height:4px;background:linear-gradient(to right,#CC1B1B,#E83030,#CC1B1B);opacity:.5}
 .cards-destaque-section{background:#111111;padding:5rem 2rem}
 .cards-destaque-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:960px;margin:0 auto}
 .card-destaque{border-radius:16px;padding:2.25rem;display:flex;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden}
@@ -403,7 +81,6 @@ tbody tr:hover td{background:#fafafa}
 .card-destaque__list li{display:flex;align-items:center;gap:.6rem;font-size:.95rem;font-weight:500}
 .card-destaque--exp .card-destaque__list li{color:#333}
 .card-destaque--tor .card-destaque__list li{color:rgba(255,255,255,.92)}
-.card-destaque__list li svg{flex-shrink:0}
 .card-destaque--exp .card-destaque__list li svg{color:#CC1B1B}
 .card-destaque--tor .card-destaque__list li svg{color:#fff}
 .card-destaque__btn{display:block;text-align:center;padding:1rem 1.5rem;border-radius:10px;font-weight:800;font-size:.95rem;text-decoration:none;transition:all .2s;letter-spacing:.3px}
@@ -412,11 +89,140 @@ tbody tr:hover td{background:#fafafa}
 .card-destaque--tor .card-destaque__btn{background:#fff;color:#CC1B1B}
 .card-destaque--tor .card-destaque__btn:hover{background:#f5f5f5;transform:translateY(-2px)}
 .card-destaque--tor::before{content:'8';position:absolute;right:-10px;bottom:-20px;font-family:'Bebas Neue',sans-serif;font-size:10rem;color:rgba(255,255,255,.08);line-height:1;pointer-events:none}
-@media(max-width:640px){
-  .cards-destaque-grid{grid-template-columns:1fr}
+@media(max-width:640px){.cards-destaque-grid{grid-template-columns:1fr}}
+.what-section{background:var(--blue-dark)}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem}
+.what-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:1.5rem;transition:all .2s}
+.what-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px)}
+.what-icon{font-size:2rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:center;color:#fff}
+.what-title{font-weight:700;color:#fff;margin-bottom:.4rem}
+.what-desc{font-size:.85rem;color:rgba(255,255,255,0.6);line-height:1.5}
+.prof-grid{display:grid;grid-template-columns:1fr;max-width:600px;margin:0 auto;gap:2rem}
+.prof-card{background:#1a1a1a;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.prof-photo{height:500px;overflow:hidden}
+.prof-info{padding:1.5rem}
+.prof-name{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#fff;letter-spacing:1px;margin-bottom:.25rem}
+.prof-role{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue-light);margin-bottom:.75rem}
+.prof-desc{font-size:.9rem;color:rgba(255,255,255,0.75);line-height:1.7}
+.schedule-section{background:#111111}
+.timeline{position:relative;padding-left:2.5rem}
+.timeline::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#CC1B1B,#E83030)}
+.tl-item{position:relative;margin-bottom:1.5rem}
+.tl-dot{position:absolute;left:-2.5rem;width:1.5rem;height:1.5rem;background:#CC1B1B;border:3px solid #111111;border-radius:50%;top:0}
+.tl-time{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem}
+.tl-event{font-weight:600;color:#fff;margin-bottom:.25rem}
+.tl-desc{font-size:.875rem;color:rgba(255,255,255,0.70);line-height:1.5}
+.tl-all-day{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-top:1rem}
+.tl-all-day h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#CC1B1B;margin-bottom:.75rem}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tl-tag{background:var(--blue-dark);color:#fff;padding:.3rem .75rem;border-radius:20px;font-size:.8rem;font-weight:500;display:inline-flex;align-items:center;gap:.4rem}
+.social-project-card{margin-top:3rem;background:linear-gradient(135deg,rgba(204,27,27,0.12) 0%,rgba(204,27,27,0.05) 100%);border:1.5px solid rgba(204,27,27,0.35);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.social-project-inner{display:flex;flex-direction:column;gap:1.25rem;position:relative;z-index:1}
+.social-project-top{display:flex;gap:1.25rem;align-items:flex-start}
+.social-icon{flex-shrink:0;width:56px;height:56px;background:#CC1B1B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 20px rgba(204,27,27,0.4)}
+.social-label{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.5rem}
+.social-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:#fff;line-height:1.1;margin-bottom:.75rem}
+.social-desc{font-size:.9rem;color:rgba(255,255,255,0.72);line-height:1.75}
+.social-link{display:flex;align-items:center;gap:.5rem;color:#fff;background:#CC1B1B;padding:.625rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .2s,transform .2s;width:100%;box-sizing:border-box}
+.social-link:hover{background:#E83030;transform:translateY(-2px)}
+footer{background:#111111;color:#fff;padding:3rem 2rem 1.5rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+.footer-brand .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#CC1B1B;letter-spacing:2px;margin-bottom:.75rem}
+.footer-brand p{font-size:.875rem;color:rgba(255,255,255,0.6);line-height:1.6;max-width:280px}
+.footer-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#CC1B1B;margin-bottom:1rem}
+.footer-col p,.footer-col a{font-size:.875rem;color:rgba(255,255,255,0.7);line-height:1.8;text-decoration:none;display:block}
+.footer-col a:hover{color:var(--yellow)}
+.footer-social{display:flex;gap:.75rem;margin-top:1rem}
+.social-link-ft{width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,0.7);font-size:.75rem;font-weight:700;transition:all .2s}
+.social-link-ft:hover{background:#CC1B1B;color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,0.4)}
+.footer-cta{background:#CC1B1B;color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:.9rem;transition:background .2s}
+.footer-cta:hover{background:#E83030}
+.wa-float{position:fixed;bottom:2rem;left:2rem;background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.5rem;z-index:200;box-shadow:0 4px 15px rgba(37,211,102,0.4);transition:transform .2s}
+.wa-float:hover{transform:scale(1.1)}
+.admin-toggle{position:fixed;bottom:2rem;right:2rem;background:#111111;color:#fff;border:none;border-radius:50px;padding:.625rem 1.25rem;font-size:.8rem;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif}
+.admin-panel{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);overflow-y:auto;backdrop-filter:blur(6px)}
+.admin-panel.open{display:block}
+.admin-content{background:#fff;max-width:1200px;margin:1.5rem auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+.admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;min-height:340px;gap:1.5rem}
+.admin-login-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#CC1B1B}
+.admin-login h3{font-size:1.1rem;font-weight:700;color:#111;margin:0}
+.admin-login p{font-size:.85rem;color:#888;margin:-.75rem 0 0;text-align:center}
+.admin-login-form{display:flex;flex-direction:column;gap:.75rem;width:100%;max-width:320px}
+.admin-login-form input{border:1.5px solid #e0e0e0;border-radius:8px;padding:.75rem 1rem;font-size:.95rem;font-family:'Inter',sans-serif;width:100%;transition:border-color .2s}
+.admin-login-form input:focus{outline:none;border-color:#CC1B1B}
+.admin-login-btn{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.875rem;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.admin-login-btn:hover{background:#E83030}
+.admin-login-err{background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;display:none;text-align:center}
+.admin-header{background:#111111;color:#fff;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:#CC1B1B;margin:0}
+.admin-header-sub{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.admin-header-right{display:flex;align-items:center;gap:.75rem}
+.admin-sync-badge{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);border-radius:20px;padding:.3rem .75rem}
+.admin-sync-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.admin-close{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s}
+.admin-close:hover{color:#fff}
+.admin-logout{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;border-radius:6px;padding:.4rem .875rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.admin-logout:hover{background:rgba(255,255,255,.2);color:#fff}
+.admin-body{padding:1.75rem 2rem}
+.admin-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
+.stat-box{background:var(--off-white);border-radius:12px;padding:1.1rem 1rem;text-align:center;border:1.5px solid transparent;transition:border-color .2s}
+.stat-box:hover{border-color:#CC1B1B}
+.stat-box .num{font-family:'Bebas Neue',sans-serif;font-size:2.25rem;color:var(--blue);line-height:1}
+.stat-box .lbl{font-size:.7rem;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:.25rem}
+.admin-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.admin-search{display:flex;align-items:center;gap:.5rem;background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.5rem .875rem;flex:1;max-width:320px}
+.admin-search input{border:none;background:transparent;font-size:.9rem;font-family:'Inter',sans-serif;width:100%;color:#222}
+.admin-search input:focus{outline:none}
+.admin-search svg{color:#aaa;flex-shrink:0}
+.btn-export{background:#111;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
+.btn-export:hover{background:#333}
+.tab-section-titles{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.admin-tab-btn{background:var(--off-white);border:1.5px solid transparent;padding:.5rem 1.1rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gray);font-family:'Inter',sans-serif;transition:all .2s}
+.admin-tab-btn.active{background:#CC1B1B;color:#fff;border-color:#CC1B1B}
+.admin-section{display:none}
+.admin-section.active{display:block}
+.admin-table-wrap{overflow-x:auto;border-radius:10px;border:1.5px solid #eee}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+th{background:#111;color:#fff;padding:.75rem 1rem;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
+td{padding:.625rem 1rem;border-bottom:1px solid #f0f0f0;white-space:nowrap;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fafafa}
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.badge-exp{background:#e3f2fd;color:#1565c0}
+.badge-tor{background:#f3e5f5;color:#6a1b9a}
+.badge-ok{background:#e8f5e9;color:#2e7d32}
+.badge-pendente{background:#fff3e0;color:#e65100}
+.badge-espera{background:#f5f5f5;color:#666}
+.empty-row td{text-align:center;color:#aaa;padding:2.5rem;font-size:.9rem}
+.admin-loading{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:2rem;color:#888;font-size:.9rem}
+.spinner{width:20px;height:20px;border:2.5px solid #eee;border-top-color:#CC1B1B;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-confirmar-pgto{background:#2e7d32;color:#fff;border:none;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;white-space:nowrap}
+.btn-confirmar-pgto:hover{background:#1b5e20}
+.btn-confirmar-pgto:disabled{background:#aaa;cursor:default}
+@media(max-width:768px){
+  .admin-stats{grid-template-columns:repeat(2,1fr)}
+  .admin-body{padding:1.25rem}
+  .admin-header{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--blue-dark);padding:1rem 2rem;gap:1rem;z-index:99}
+  .hero h1{font-size:3.5rem}
+  .hero-deco,.hero-deco2{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .footer-top>div{padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.1)}
 }
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .6s ease forwards}
+.delay-1{animation-delay:.1s}
+.delay-2{animation-delay:.2s}
+.delay-3{animation-delay:.3s}
 
-/* ===== MODAL DE INSCRIÇÃO ===== */
+/* ===== MODAL ===== */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem}
 .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
 .modal-box{background:#fff;border-radius:16px;width:100%;max-width:580px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;margin:auto}
@@ -425,8 +231,6 @@ tbody tr:hover td{background:#fafafa}
 .modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:1.75rem;cursor:pointer;line-height:1;transition:color .2s;padding:0 .25rem}
 .modal-close:hover{color:#fff}
 .modal-body{padding:2rem}
-
-/* Step 0 – seleção de modalidade */
 .modal-step{display:none}
 .modal-step.active{display:block}
 .modal-choice-title{font-size:1rem;font-weight:700;color:#111;margin-bottom:1.25rem;text-align:center}
@@ -441,8 +245,6 @@ tbody tr:hover td{background:#fafafa}
 .btn-modal-next{width:100%;background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.9rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:1rem}
 .btn-modal-next:hover{background:#E83030;transform:translateY(-1px)}
 .btn-modal-next:disabled{background:#ccc;cursor:default;transform:none}
-
-/* Formulários dentro do modal */
 .modal-form-header{margin-bottom:1.5rem}
 .modal-form-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:#111;margin-bottom:.25rem}
 .modal-form-header p{font-size:.85rem;color:#666}
@@ -459,11 +261,6 @@ tbody tr:hover td{background:#fafafa}
 .btn-modal-back:hover{border-color:#999;color:#111}
 .modal-form-actions{display:flex;gap:.75rem;margin-top:1.25rem}
 .modal-form-actions .btn-modal-next{flex:1;margin-top:0}
-.modal-success{display:none;text-align:center;padding:1rem 0}
-.modal-success .success-ico{font-size:3.5rem;margin-bottom:1rem}
-.modal-success h3{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem}
-.modal-success p{font-size:.9rem;color:#555;line-height:1.6;max-width:360px;margin:0 auto 1.5rem}
-.modal-success .btn-modal-next{max-width:240px;margin:0 auto}
 .modal-waitlist-note{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:.85rem;color:#795548;display:none}
 .modal-turmas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
 .modal-turma-card{border:2px solid #e0e0e0;border-radius:10px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s}
@@ -473,8 +270,50 @@ tbody tr:hover td{background:#fafafa}
 .modal-turma-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;line-height:1}
 .modal-turma-hora{font-weight:700;font-size:.9rem;color:#111;margin:.2rem 0 .15rem}
 .modal-turma-vagas{font-size:.75rem;color:#888;text-transform:uppercase;letter-spacing:.5px}
+
+/* PAGAMENTO */
+.pay-step-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#888;text-align:center;margin-bottom:1.25rem}
+.pay-valor{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#111;letter-spacing:2px;text-align:center;margin-bottom:1.5rem}
+.pay-valor span{color:#CC1B1B}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.pay-method-card{border:2px solid #e0e0e0;border-radius:12px;padding:1.25rem 1rem;text-align:center;cursor:pointer;transition:all .2s;background:#fff}
+.pay-method-card:hover{border-color:#CC1B1B;transform:translateY(-2px)}
+.pay-method-card.selected{border-color:#CC1B1B;background:rgba(204,27,27,.05)}
+.pay-method-icon{font-size:2rem;margin-bottom:.5rem}
+.pay-method-name{font-weight:700;font-size:.9rem;color:#111}
+.pay-method-desc{font-size:.75rem;color:#888;margin-top:.2rem}
+.pay-detail-box{display:none;margin-top:.5rem}
+.pay-detail-box.active{display:block}
+/* PIX */
+.pix-container{background:#f8f8f8;border-radius:12px;padding:1.25rem;text-align:center}
+.pix-qr{width:200px;height:200px;margin:0 auto 1rem;border-radius:8px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+.pix-qr img{width:100%;height:100%;object-fit:contain}
+.pix-valor-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#CC1B1B;margin-bottom:.25rem}
+.pix-valor-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#111;letter-spacing:1px;margin-bottom:1rem}
+.pix-actions{display:flex;flex-direction:column;gap:.5rem}
+.btn-pix-copy{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;font-size:.875rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;width:100%}
+.btn-pix-copy:hover{background:#E83030}
+.btn-pix-wa{display:flex;align-items:center;justify-content:center;gap:.5rem;background:#25D366;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;font-size:.875rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:background .2s;width:100%}
+.btn-pix-wa:hover{background:#1ebe5d}
+.pix-instrucao{font-size:.78rem;color:#888;margin-top:.75rem;line-height:1.5}
+/* CARTAO */
+.card-container{background:#fff8e1;border:1px solid #ffe082;border-radius:12px;padding:1.25rem;text-align:center}
+.card-icon-big{font-size:2.5rem;margin-bottom:.75rem}
+.card-title{font-weight:700;font-size:1rem;color:#111;margin-bottom:.5rem}
+.card-desc{font-size:.875rem;color:#555;line-height:1.6;margin-bottom:1rem}
+.btn-card-wa{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#25D366;color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:background .2s;width:100%}
+.btn-card-wa:hover{background:#1ebe5d}
+/* SUCESSO PENDENTE */
+.modal-pendente{text-align:center;padding:1rem 0}
+.pendente-ico{font-size:3.5rem;margin-bottom:1rem}
+.pendente-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem}
+.pendente-sub{font-size:.9rem;color:#555;line-height:1.6;max-width:380px;margin:0 auto 1.5rem}
+.pendente-protocolo{background:#f5f5f5;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#666;margin-bottom:1.5rem;text-align:center}
+.pendente-protocolo strong{color:#111;font-family:monospace;font-size:.9rem}
+.pendente-aviso{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:.875rem 1rem;font-size:.82rem;color:#795548;margin-bottom:1rem;text-align:left}
+
 @media(max-width:540px){
-  .modal-choices{grid-template-columns:1fr}
+  .modal-choices,.pay-methods{grid-template-columns:1fr}
   .mfg{grid-template-columns:1fr}
   .mfg .full{grid-column:1}
   .modal-turmas-grid{grid-template-columns:1fr 1fr}
@@ -484,7 +323,6 @@ tbody tr:hover td{background:#fafafa}
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">BTE</a>
@@ -501,14 +339,11 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-deco"></div>
   <div class="hero-deco2"></div>
   <div class="hero-inner">
-    <h1 class="fade-up delay-1" style="font-size:clamp(3.5rem,13vw,8rem);line-height:.92;letter-spacing:2px;margin-bottom:1rem">BEACH<br>TENNIS<br><span>EXPERIENCE</span></h1>
-
-    <!-- SUBTÍTULO E SELO -->
+    <h1 class="fade-up delay-1">BEACH<br>TENNIS<br><span>EXPERIENCE</span></h1>
     <div class="hero-event-info fade-up delay-2">
       <p class="hero-event-date">20 de Junho • SkyFit Passeio das Águas</p>
       <p class="hero-event-tag">Aulas para iniciantes + Super 8 competitivo</p>
@@ -517,217 +352,101 @@ tbody tr:hover td{background:#fafafa}
         Vagas Limitadas
       </span>
     </div>
-
     <p class="hero-sub fade-up delay-2">Uma experiência completa para quem deseja conhecer, praticar e viver o Beach Tennis ao lado de profissionais experientes.</p>
-
     <div class="hero-info-stack fade-up delay-2">
-      <div class="info-pill-new">
-        <span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-        20 de Junho
-      </div>
-      <div class="info-pill-new">
-        <span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        Shopping Passeio das Águas · SKYFIT Academia
-      </div>
-      <div class="info-pill-new">
-        <span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
-        Experiência de Beach Tennis
-      </div>
-      <div class="info-pill-new">
-        <span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>
-        Torneio Super 8
-      </div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>20 de Junho</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Shopping Passeio das Águas · SKYFIT Academia</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Experiência de Beach Tennis</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>Torneio Super 8</div>
     </div>
-
     <div class="hero-btns-stack fade-up delay-3">
       <a href="#inscricao" onclick="event.preventDefault();openModal()" class="btn-primary btn-full">Garanta sua vaga</a>
       <a href="#evento" class="btn-outline btn-full">Saiba mais</a>
     </div>
-
     <div class="hero-sponsors fade-up delay-3">
       <p class="hero-sponsors-label"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg> Patrocinadores &amp; parceiros do evento</p>
       <div class="hero-sponsors-grid">
-        <div class="sponsor-card" title="Clubinho das Raquetes" style="padding:0px">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_quadrada_1.jpg" alt="Clubinho das Raquetes" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;transform:scale(1.12);border-radius:18px">
-        </div>
-        <div class="sponsor-card dark" title="CT Skyfit Passeio das Águas" style="padding:8px;background:#111">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/skyfit_logo_preto_quadrado.jpg" alt="CT Skyfit Passeio das Águas" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain">
-        </div>
-        <div class="sponsor-card" title="Gelo Mineral" style="padding:8px">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_quadrada_2.jpg" alt="Gelo Mineral" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain">
-        </div>
-        <div class="sponsor-card dark" title="Vonpiper" style="padding:8px;background:#111">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/vonpiper_fundo_preto.jpg" alt="Vonpiper" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain">
-        </div>
-        <div class="sponsor-card" title="Ocean Brazil Coffee" style="padding:0px">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_azul_preenchido.jpg" alt="Ocean Brazil Coffee" style="max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover;border-radius:18px">
-        </div>
+        <div class="sponsor-card" title="Clubinho das Raquetes" style="padding:0"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_quadrada_1.jpg" alt="Clubinho das Raquetes" style="object-fit:contain;transform:scale(1.12);border-radius:18px"></div>
+        <div class="sponsor-card dark" title="CT Skyfit" style="background:#111"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/skyfit_logo_preto_quadrado.jpg" alt="Skyfit"></div>
+        <div class="sponsor-card" title="Gelo Mineral"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_quadrada_2.jpg" alt="Gelo Mineral"></div>
+        <div class="sponsor-card dark" title="Vonpiper" style="background:#111"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/vonpiper_fundo_preto.jpg" alt="Vonpiper"></div>
+        <div class="sponsor-card" title="Ocean Brazil Coffee" style="padding:0"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_azul_preenchido.jpg" alt="Ocean Brazil Coffee" style="object-fit:cover;border-radius:18px"></div>
       </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- CARDS DESTAQUE: EXPERIÊNCIA + SUPER 8 -->
 <section class="cards-destaque-section">
   <div class="cards-destaque-grid">
-
-    <!-- CARD 1: INICIANTES -->
     <div class="card-destaque card-destaque--exp">
       <div class="card-destaque__label">Iniciante</div>
       <h3 class="card-destaque__title">Experiência<br>para Iniciantes</h3>
       <ul class="card-destaque__list">
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Nunca jogou Beach Tennis?
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Turmas de até 6 pessoas
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Material disponível
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Certificado
-        </li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Nunca jogou Beach Tennis?</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Turmas de até 6 pessoas</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Material disponível</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Certificado · R$ 120</li>
       </ul>
       <a href="#" onclick="event.preventDefault();openModal('exp')" class="card-destaque__btn">Quero aprender Beach Tennis</a>
     </div>
-
-    <!-- CARD 2: SUPER 8 -->
     <div class="card-destaque card-destaque--tor">
       <div class="card-destaque__label">Competição</div>
       <h3 class="card-destaque__title">Super 8</h3>
       <ul class="card-destaque__list">
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Apenas 8 atletas por categoria
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Competição exclusiva
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Troféu para o campeão
-        </li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Apenas 8 atletas por categoria</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Competição exclusiva</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Troféu para o campeão · R$ 100</li>
       </ul>
       <a href="#" onclick="event.preventDefault();openModal('tor')" class="card-destaque__btn">Quero jogar o Super 8</a>
     </div>
-
   </div>
 </section>
 
-<!-- HORÁRIOS DAS AULAS -->
 <section id="inscricao" style="background:#fff;padding:4rem 2rem">
   <div class="container" style="max-width:860px">
-
-    <!-- FRASE DE DESTAQUE -->
     <div style="background:#111111;border-left:5px solid #CC1B1B;border-radius:10px;padding:1.25rem 1.75rem;display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1B1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,4vw,1.75rem);color:#fff;letter-spacing:2px;line-height:1">APENAS 6 VAGAS POR HORÁRIO</span>
     </div>
-
-    <!-- GRADE DE HORÁRIOS -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem">
-
-      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1;letter-spacing:1px">T1</div>
-        <div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">8h às 9h</div>
-        <div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div>
-      </div>
-
-      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1;letter-spacing:1px">T2</div>
-        <div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">9h às 10h</div>
-        <div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div>
-      </div>
-
-      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1;letter-spacing:1px">T3</div>
-        <div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">10h às 11h</div>
-        <div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div>
-      </div>
-
-      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1;letter-spacing:1px">T4</div>
-        <div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">11h às 12h</div>
-        <div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div>
-      </div>
-
+      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'"><div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1">T1</div><div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">8h às 9h</div><div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div></div>
+      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'"><div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1">T2</div><div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">9h às 10h</div><div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div></div>
+      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'"><div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1">T3</div><div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">10h às 11h</div><div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div></div>
+      <div style="border:2px solid #e0e0e0;border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='#CC1B1B'" onmouseout="this.style.borderColor='#e0e0e0'"><div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#CC1B1B;line-height:1">T4</div><div style="font-weight:700;font-size:1rem;color:#111;margin:.4rem 0 .2rem">11h às 12h</div><div style="font-size:.78rem;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:1px">6 vagas</div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- O QUE ENCONTRAR -->
 <section class="what-section" id="evento">
   <div class="container">
     <div class="section-label" style="color:var(--yellow)">No evento</div>
-    <h2 class="section-title white">O que você encontrará</h2>
+    <h2 class="section-title" style="color:#fff">O que você encontrará</h2>
     <p class="section-sub" style="color:rgba(255,255,255,0.6)">Um dia completo de imersão no mundo do Beach Tennis.</p>
     <div class="cards-grid">
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><line x1="14" y1="14" x2="21" y2="21"/></svg></div>
-        <div class="what-title">Experiência prática</div>
-        <div class="what-desc">Aulas guiadas com profissionais certificados para iniciantes</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div>
-        <div class="what-title">Torneio Super 8</div>
-        <div class="what-desc">Competição exclusiva para praticantes com troféu para o campeão</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <div class="what-title">Fotógrafo profissional</div>
-        <div class="what-desc">Cobertura fotográfica completa durante todo o evento</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></div>
-        <div class="what-title">Parceiros e patrocinadores</div>
-        <div class="what-desc">Ativações especiais e brindes dos nossos patrocinadores</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 2.5-1.5 4.5-3 6H10C8.5 11.5 7 9.5 7 7a5 5 0 0 1 5-5z"/><path d="M7 13h10l1.5 8H5.5L7 13z"/></svg></div>
-        <div class="what-title">Área atleta</div>
-        <div class="what-desc">Espaço dedicado para atletas com toda estrutura necessária</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="what-title">Espaço para acompanhantes</div>
-        <div class="what-desc">Acompanhantes entram gratuitamente e têm área dedicada</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <div class="what-title">Networking</div>
-        <div class="what-desc">Integração com a comunidade de Beach Tennis de Goiânia</div>
-      </div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><line x1="14" y1="14" x2="21" y2="21"/></svg></div><div class="what-title">Experiência prática</div><div class="what-desc">Aulas guiadas com profissionais certificados para iniciantes</div></div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div><div class="what-title">Torneio Super 8</div><div class="what-desc">Competição exclusiva para praticantes com troféu para o campeão</div></div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="what-title">Fotógrafo profissional</div><div class="what-desc">Cobertura fotográfica completa durante todo o evento</div></div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></div><div class="what-title">Parceiros e patrocinadores</div><div class="what-desc">Ativações especiais e brindes dos nossos patrocinadores</div></div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="what-title">Espaço para acompanhantes</div><div class="what-desc">Acompanhantes entram gratuitamente e têm área dedicada</div></div>
+      <div class="what-card"><div class="what-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="what-title">Networking</div><div class="what-desc">Integração com a comunidade de Beach Tennis de Goiânia</div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- PROFESSORES -->
 <section id="professores" style="background:#111111">
   <div class="container">
     <div class="section-label">Sua equipe</div>
     <h2 class="section-title" style="color:#fff">Quem estará com você nesta experiência</h2>
-    <p class="section-sub" style="color:rgba(255,255,255,0.65)">Profissionais experientes e apaixonados pelo Beach Tennis, prontos para conduzir você nesta jornada.</p>
+    <p class="section-sub" style="color:rgba(255,255,255,0.65)">Profissionais experientes e apaixonados pelo Beach Tennis.</p>
     <div class="prof-grid">
       <div class="prof-card">
-        <div class="prof-photo" style="padding:0;overflow:hidden">
-          <img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/leitaoedudueditado.jpg" alt="Eduardo Farina" style="width:100%;height:100%;object-fit:cover;object-position:center 20%">
-        </div>
+        <div class="prof-photo"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/leitaoedudueditado.jpg" alt="Eduardo e João" style="width:100%;height:100%;object-fit:cover;object-position:center 20%"></div>
         <div class="prof-info">
           <div style="display:flex;gap:2rem;flex-wrap:wrap">
             <div style="flex:1;min-width:180px">
@@ -735,27 +454,23 @@ tbody tr:hover td{background:#fafafa}
               <div class="prof-role">Professor & Treinador</div>
               <p class="prof-desc">Professor e capacitador especializado em Beach Tennis, atuando no desenvolvimento técnico de atletas e na condução de experiências esportivas de alto nível.</p>
             </div>
-            <div style="flex:1;min-width:180px;border-left:2px solid var(--gray-light);padding-left:2rem">
+            <div style="flex:1;min-width:180px;border-left:2px solid #333;padding-left:2rem">
               <div class="prof-name">João Leitão</div>
               <div class="prof-role">Professor & Capacitador</div>
-              <p class="prof-desc">Professor, treinador e desenvolvedor de atletas, com ampla experiência na formação de praticantes e na organização de eventos esportivos voltados ao Beach Tennis.</p>
+              <p class="prof-desc">Professor, treinador e desenvolvedor de atletas, com ampla experiência na formação de praticantes e na organização de eventos esportivos.</p>
             </div>
           </div>
         </div>
-      </div>      </div>
+      </div>
     </div>
-
-    <!-- PROJETO SOCIAL -->
     <div class="social-project-card">
       <div class="social-project-inner">
         <div class="social-project-top">
-          <div class="social-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="social-text">
+          <div class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div>
             <p class="social-label">Impacto social</p>
             <h3 class="social-title">Parte da receita deste evento vai além do esporte</h3>
-            <p class="social-desc">Uma parcela da receita arrecadada é destinada a um projeto social que leva os esportes de raquete para pessoas que talvez nunca tivessem a oportunidade de conhecer essas modalidades. Acreditamos que o esporte transforma vidas — e queremos que mais pessoas façam parte dessa transformação.</p>
+            <p class="social-desc">Uma parcela da receita arrecadada é destinada a um projeto social que leva os esportes de raquete para pessoas que talvez nunca tivessem a oportunidade de conhecer essas modalidades.</p>
           </div>
         </div>
         <a href="https://www.instagram.com/clubinhodasraquetesproject" target="_blank" class="social-link">
@@ -764,67 +479,41 @@ tbody tr:hover td{background:#fafafa}
         </a>
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- CRONOGRAMA -->
 <section class="schedule-section" id="cronograma">
   <div class="container">
     <div style="max-width:800px;margin:0 auto">
       <div class="section-label">Programação</div>
       <h2 class="section-title" style="color:#fff">Cronograma do dia</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.65)">Um dia cheio de atividades, aprendizado e muita diversão no Beach Tennis.</p>
+      <p class="section-sub" style="color:rgba(255,255,255,0.65)">Um dia cheio de atividades, aprendizado e muita diversão.</p>
       <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-time">08h00</div>
-          <div class="tl-event">Início das Experiências Guiadas</div>
-          <div class="tl-desc">Abertura oficial do evento. Turma 1 inicia as aulas com os professores.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-time">08h30</div>
-          <div class="tl-event">Início do Super 8</div>
-          <div class="tl-desc">Início do torneio nas categorias Masculino e Feminino.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-time">09h00 – 12h00</div>
-          <div class="tl-event">Continuação das Turmas de Introdução</div>
-          <div class="tl-desc">Turmas 2, 3 e 4 realizadas sequencialmente com grupos de até 6 participantes.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-time">Durante todo o dia</div>
-          <div class="tl-event">Programação simultânea</div>
-          <div class="tl-all-day">
-            <h4>Acontecendo ao longo do evento</h4>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h00</div><div class="tl-event">Início das Experiências Guiadas</div><div class="tl-desc">Abertura oficial do evento. Turma 1 inicia as aulas com os professores.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h30</div><div class="tl-event">Início do Super 8</div><div class="tl-desc">Início do torneio nas categorias Masculino e Feminino.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">09h00 – 12h00</div><div class="tl-event">Continuação das Turmas de Introdução</div><div class="tl-desc">Turmas 2, 3 e 4 realizadas sequencialmente com grupos de até 6 participantes.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Durante todo o dia</div><div class="tl-event">Programação simultânea</div>
+          <div class="tl-all-day"><h4>Acontecendo ao longo do evento</h4>
             <div class="tl-tags">
-              <span class="tl-tag"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg> Jogos do Super 8</span>
-              <span class="tl-tag"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg> Ativações dos parceiros</span>
-              <span class="tl-tag"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Área atleta aberta</span>
-              <span class="tl-tag"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Cobertura fotográfica</span>
-              <span class="tl-tag"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Networking</span>
+              <span class="tl-tag">🏆 Jogos do Super 8</span>
+              <span class="tl-tag">❤️ Ativações dos parceiros</span>
+              <span class="tl-tag">📸 Cobertura fotográfica</span>
+              <span class="tl-tag">🤝 Networking</span>
             </div>
-</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTATO -->
 <section style="background:#111111;padding:3.5rem 2rem;text-align:center">
   <div class="container" style="max-width:600px">
     <p style="font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.75rem">Contato</p>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,2.75rem);color:#fff;letter-spacing:2px;line-height:1.1;margin-bottom:2rem">Dúvidas? Fale com a organização</h2>
-    <a href="https://wa.me/5562998041804" target="_blank" rel="noopener"
-      style="display:inline-flex;align-items:center;gap:.75rem;background:#25D366;color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:1.05rem;padding:1rem 2rem;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,211,102,0.3)"
-      onmouseover="this.style.background='#1ebe5d';this.style.transform='translateY(-2px)'"
-      onmouseout="this.style.background='#25D366';this.style.transform='translateY(0)'">
+    <a href="https://wa.me/5562998041804" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.75rem;background:#25D366;color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:1.05rem;padding:1rem 2rem;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,211,102,0.3)" onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
       Falar no WhatsApp
     </a>
@@ -833,21 +522,6 @@ tbody tr:hover td{background:#fafafa}
 
 <div class="divider"></div>
 
-<!-- PARCEIROS -->
-<section class="partners-section">
-  <div class="container">
-    <p class="partners-title">Patrocinadores e parceiros</p>
-    <div class="partners-placeholder">
-      <div class="partner-box">Logo parceiro</div>
-      <div class="partner-box">Logo parceiro</div>
-      <div class="partner-box">Logo parceiro</div>
-      <div class="partner-box">Logo parceiro</div>
-    </div>
-    <p style="font-size:.75rem;color:var(--gray);margin-top:1rem">Quer ser parceiro deste evento? Fale conosco pelo WhatsApp.</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -855,23 +529,23 @@ tbody tr:hover td{background:#fafafa}
         <div class="logo">BEACH TENNIS EXPERIENCE</div>
         <p>Uma experiência completa para quem deseja conhecer, praticar e viver o Beach Tennis ao lado de profissionais experientes.</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/clubinhodasraquetes?igsh=dzNxdjN0NHpscmpt&utm_source=qr" class="social-link" target="_blank">CR</a>
-          <a href="https://www.instagram.com/joaoleitaocoach?igsh=MTIyMmdqeGg4ajJvcA%3D%3D&utm_source=qr" class="social-link" target="_blank">JL</a>
-          <a href="https://www.instagram.com/dudu_farinx?igsh=bTRlMzZ2NDhvMTU1" class="social-link" target="_blank">EF</a>
+          <a href="https://www.instagram.com/clubinhodasraquetes" class="social-link-ft" target="_blank">CR</a>
+          <a href="https://www.instagram.com/joaoleitaocoach" class="social-link-ft" target="_blank">JL</a>
+          <a href="https://www.instagram.com/dudu_farinx" class="social-link-ft" target="_blank">EF</a>
         </div>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
-        <a href="https://wa.me/5562998041804"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 5.29 5.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.95 15.5z"/></svg> (62) 99804-1804</a>
-        <a href="https://wa.me/5566996007162"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 5.29 5.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.95 15.5z"/></svg> (66) 996007162</a>
+        <a href="https://wa.me/5562998041804">(62) 99804-1804</a>
+        <a href="https://wa.me/5566996007162">(66) 996007162</a>
         <p style="margin-top:.5rem;font-size:.75rem;opacity:.5">Via WhatsApp</p>
       </div>
       <div class="footer-col">
         <h4>Evento</h4>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 20 de Junho de 2026</p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> A partir das 08h00</p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Shopping Passeio das Águas</p>
-        <p style="margin-left:1.4rem;font-size:.8rem;opacity:.7">Academia Skyfit · Goiânia/GO</p>
+        <p>20 de Junho de 2026</p>
+        <p>A partir das 08h00</p>
+        <p>Shopping Passeio das Águas</p>
+        <p style="font-size:.8rem;opacity:.7">Academia Skyfit · Goiânia/GO</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -881,14 +555,14 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </footer>
 
-<!-- ADMIN TOGGLE -->
-<button class="admin-toggle" onclick="toggleAdmin()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Painel Admin</button>
+<button class="admin-toggle" onclick="toggleAdmin()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+  Painel Admin
+</button>
 
 <!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
   <div class="admin-content">
-
-    <!-- TELA DE LOGIN -->
     <div id="adminLoginScreen">
       <div style="background:#111;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center">
         <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#CC1B1B">PAINEL ADMINISTRATIVO</span>
@@ -905,133 +579,85 @@ tbody tr:hover td{background:#fafafa}
         </div>
       </div>
     </div>
-
-    <!-- PAINEL PRINCIPAL (após login) -->
     <div id="adminMainScreen" style="display:none">
       <div class="admin-header">
-        <div class="admin-header-left">
-          <div>
-            <h2>PAINEL ADMINISTRATIVO</h2>
-            <div class="admin-header-sub">Beach Tennis Experience · 20 de Junho</div>
-          </div>
+        <div>
+          <h2>PAINEL ADMINISTRATIVO</h2>
+          <div class="admin-header-sub">Beach Tennis Experience · 20 de Junho</div>
         </div>
         <div class="admin-header-right">
-          <div class="admin-sync-badge">
-            <div class="admin-sync-dot"></div>
-            <span id="syncStatus">Conectado ao Firebase</span>
-          </div>
+          <div class="admin-sync-badge"><div class="admin-sync-dot"></div><span id="syncStatus">Conectado ao Firebase</span></div>
           <button class="admin-logout" onclick="doAdminLogout()">Sair</button>
           <button class="admin-close" onclick="toggleAdmin()">✕</button>
         </div>
       </div>
-
       <div class="admin-body">
-        <!-- STATS -->
-        <div class="admin-stats" id="adminStats">
-          <div class="stat-box"><div class="num" id="st-exp">–</div><div class="lbl">Exp. Confirmados</div></div>
-          <div class="stat-box"><div class="num" id="st-tor">–</div><div class="lbl">Torneio Inscritos</div></div>
-          <div class="stat-box"><div class="num" id="st-wait">–</div><div class="lbl">Lista de Espera</div></div>
-          <div class="stat-box"><div class="num" id="st-vagas">–</div><div class="lbl">Vagas Exp. Livres</div></div>
-          <div class="stat-box"><div class="num" id="st-total">–</div><div class="lbl">Total Cadastros</div></div>
+        <div class="admin-stats">
+          <div class="stat-box"><div class="num" id="st-exp">–</div><div class="lbl">Exp. Pagos</div></div>
+          <div class="stat-box"><div class="num" id="st-tor">–</div><div class="lbl">Torneio Pagos</div></div>
+          <div class="stat-box"><div class="num" id="st-pend">–</div><div class="lbl">Ag. Pagamento</div></div>
+          <div class="stat-box"><div class="num" id="st-wait">–</div><div class="lbl">Lista Espera</div></div>
+          <div class="stat-box"><div class="num" id="st-total">–</div><div class="lbl">Total</div></div>
         </div>
-
-        <!-- TABS -->
         <div class="tab-section-titles">
-          <button class="admin-tab-btn active" onclick="switchAdminTab('exp')">🎾 Experiência Iniciantes</button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Torneio Super 8</button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('wait')">⏳ Lista de Espera</button>
+          <button class="admin-tab-btn active" onclick="switchAdminTab('exp')">🎾 Experiência</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Super 8</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('pend')">⏳ Ag. Pagamento</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('wait')">📋 Lista Espera</button>
         </div>
 
-        <!-- TAB: EXPERIÊNCIA -->
+        <!-- TAB EXPERIÊNCIA -->
         <div class="admin-section active" id="admin-exp">
           <div class="admin-toolbar">
-            <div class="admin-search">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Buscar por nome, CPF ou e-mail..." oninput="filterTable('tbodyExp', this.value)">
-            </div>
-            <button class="btn-export" onclick="exportCSV('exp')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Exportar CSV
-            </button>
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyExp', this.value)"></div>
+            <button class="btn-export" onclick="exportCSV('exp')">⬇ Exportar CSV</button>
           </div>
           <div class="admin-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th><th>Protocolo</th><th>Nome Completo</th><th>CPF</th>
-                  <th>Nascimento</th><th>Telefone</th><th>CEP</th><th>E-mail</th>
-                  <th>Turma</th><th>Praticou?</th><th>Status</th><th>Cadastro em</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyExp">
-                <tr><td colspan="12" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
-              </tbody>
-            </table>
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Turma</th><th>Praticou?</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
+            <tbody id="tbodyExp"><tr><td colspan="13" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
 
-        <!-- TAB: TORNEIO -->
+        <!-- TAB TORNEIO -->
         <div class="admin-section" id="admin-tor">
           <div class="admin-toolbar">
-            <div class="admin-search">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Buscar por nome, CPF ou e-mail..." oninput="filterTable('tbodyTor', this.value)">
-            </div>
-            <button class="btn-export" onclick="exportCSV('tor')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Exportar CSV
-            </button>
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyTor', this.value)"></div>
+            <button class="btn-export" onclick="exportCSV('tor')">⬇ Exportar CSV</button>
           </div>
           <div class="admin-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th><th>Protocolo</th><th>Nome Completo</th><th>CPF</th>
-                  <th>Nascimento</th><th>Telefone</th><th>CEP</th><th>E-mail</th>
-                  <th>Categoria</th><th>Status</th><th>Cadastro em</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyTor">
-                <tr><td colspan="11" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
-              </tbody>
-            </table>
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Categoria</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
+            <tbody id="tbodyTor"><tr><td colspan="12" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
 
-        <!-- TAB: ESPERA -->
+        <!-- TAB PENDENTE -->
+        <div class="admin-section" id="admin-pend">
+          <div class="admin-toolbar">
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyPend', this.value)"></div>
+          </div>
+          <div class="admin-table-wrap">
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Pagamento</th><th>Cadastro</th><th>Confirmar</th></tr></thead>
+            <tbody id="tbodyPend"><tr><td colspan="10" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
+          </div>
+        </div>
+
+        <!-- TAB ESPERA -->
         <div class="admin-section" id="admin-wait">
           <div class="admin-toolbar">
-            <div class="admin-search">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Buscar..." oninput="filterTable('tbodyWait', this.value)">
-            </div>
-            <button class="btn-export" onclick="exportCSV('wait')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Exportar CSV
-            </button>
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyWait', this.value)"></div>
+            <button class="btn-export" onclick="exportCSV('wait')">⬇ Exportar CSV</button>
           </div>
           <div class="admin-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th><th>Nome Completo</th><th>CPF</th><th>Telefone</th>
-                  <th>E-mail</th><th>Tipo</th><th>Turma / Categoria</th><th>Cadastro em</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyWait">
-                <tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando dados...</div></td></tr>
-              </tbody>
-            </table>
+            <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th></tr></thead>
+            <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-      </div><!-- /.admin-body -->
-    </div><!-- /#adminMainScreen -->
-
-  </div><!-- /.admin-content -->
-</div><!-- /.admin-panel -->
-
-<!-- ===== MODAL DE INSCRIÇÃO ===== -->
+<!-- MODAL DE INSCRIÇÃO -->
 <div class="modal-overlay" id="modalInscricao">
   <div class="modal-box">
     <div class="modal-header">
@@ -1040,7 +666,7 @@ tbody tr:hover td{background:#fafafa}
     </div>
     <div class="modal-body">
 
-      <!-- STEP 0: escolha de modalidade -->
+      <!-- STEP 0: escolha -->
       <div class="modal-step active" id="mStep0">
         <p class="modal-choice-title">Como você quer participar?</p>
         <div class="modal-choices">
@@ -1048,19 +674,19 @@ tbody tr:hover td{background:#fafafa}
             <div class="choice-icon">🎾</div>
             <div class="choice-label">Iniciante</div>
             <div class="choice-name">Experiência Guiada</div>
-            <div class="choice-desc">Nunca jogou? Aprenda com professores certificados em turmas de até 6 pessoas.</div>
+            <div class="choice-desc">Aprenda com professores certificados em turmas de até 6 pessoas. R$ 120</div>
           </div>
           <div class="choice-card" id="choiceTor" onclick="selectChoice('tor')">
             <div class="choice-icon">🏆</div>
             <div class="choice-label">Competição</div>
             <div class="choice-name">Super 8</div>
-            <div class="choice-desc">Já pratica? Dispute o torneio exclusivo com apenas 8 atletas por categoria.</div>
+            <div class="choice-desc">Dispute o torneio exclusivo com apenas 8 atletas por categoria. R$ 100</div>
           </div>
         </div>
         <button class="btn-modal-next" id="btnNextChoice" disabled onclick="goToForm()">Continuar →</button>
       </div>
 
-      <!-- STEP 1: Formulário Experiência -->
+      <!-- STEP 1: Form Experiência -->
       <div class="modal-step" id="mStepExp">
         <div class="modal-form-header">
           <h3>🎾 Experiência para Iniciantes</h3>
@@ -1069,31 +695,13 @@ tbody tr:hover td{background:#fafafa}
         <div class="modal-waitlist-note" id="mWaitExp">⚠️ Esta turma está lotada. Você entrará na lista de espera.</div>
         <div class="modal-turmas-grid" id="mTurmasGrid"></div>
         <div class="mfg">
+          <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_exp_nome" placeholder="Seu nome completo"></div>
+          <div class="mf-group"><label>CPF *</label><input type="text" id="m_exp_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_exp_nasc"></div>
+          <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
+          <div class="mf-group"><label>CEP *</label><input type="text" id="m_exp_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('exp')"></div>
+          <div class="mf-group full"><label>E-mail *</label><input type="email" id="m_exp_email" placeholder="seuemail@email.com"></div>
           <div class="mf-group full">
-            <label>Nome completo *</label>
-            <input type="text" id="m_exp_nome" placeholder="Seu nome completo">
-          </div>
-          <div class="mf-group">
-            <label>CPF *</label>
-            <input type="text" id="m_exp_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
-          </div>
-          <div class="mf-group">
-            <label>Data de nascimento *</label>
-            <input type="date" id="m_exp_nasc">
-          </div>
-          <div class="mf-group">
-            <label>Telefone / WhatsApp *</label>
-            <input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)">
-          </div>
-          <div class="mf-group">
-            <label>CEP *</label>
-            <input type="text" id="m_exp_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('exp')">
-          </div>
-          <div class="mf-group full">
-            <label>E-mail *</label>
-            <input type="email" id="m_exp_email" placeholder="seuemail@email.com">
-          </div>
-          <div class="mf-group">
             <label>Já praticou Beach Tennis?</label>
             <div class="mf-radio-row">
               <label class="mf-radio"><input type="radio" name="m_exp_praticou" value="nao" checked> Não</label>
@@ -1104,11 +712,11 @@ tbody tr:hover td{background:#fafafa}
         <input type="hidden" id="m_exp_turma" value="">
         <div class="modal-form-actions">
           <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
-          <button class="btn-modal-next" onclick="submitModalExp()">Confirmar inscrição</button>
+          <button class="btn-modal-next" onclick="submitModalExp()">Ir para Pagamento →</button>
         </div>
       </div>
 
-      <!-- STEP 1: Formulário Super 8 -->
+      <!-- STEP 1: Form Super 8 -->
       <div class="modal-step" id="mStepTor">
         <div class="modal-form-header">
           <h3>🏆 Torneio Super 8</h3>
@@ -1116,31 +724,13 @@ tbody tr:hover td{background:#fafafa}
         </div>
         <div class="modal-waitlist-note" id="mWaitTor">⚠️ Esta categoria está lotada. Você entrará na lista de espera.</div>
         <div class="mfg">
+          <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
+          <div class="mf-group"><label>CPF *</label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc"></div>
+          <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
+          <div class="mf-group"><label>CEP *</label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
+          <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
           <div class="mf-group full">
-            <label>Nome completo *</label>
-            <input type="text" id="m_tor_nome" placeholder="Seu nome completo">
-          </div>
-          <div class="mf-group">
-            <label>CPF *</label>
-            <input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
-          </div>
-          <div class="mf-group">
-            <label>Data de nascimento *</label>
-            <input type="date" id="m_tor_nasc">
-          </div>
-          <div class="mf-group">
-            <label>Telefone / WhatsApp *</label>
-            <input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)">
-          </div>
-          <div class="mf-group">
-            <label>CEP *</label>
-            <input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')">
-          </div>
-          <div class="mf-group">
-            <label>E-mail *</label>
-            <input type="email" id="m_tor_email" placeholder="seuemail@email.com">
-          </div>
-          <div class="mf-group">
             <label>Categoria *</label>
             <select id="m_tor_cat" onchange="onModalCatSelect()">
               <option value="">Selecione...</option>
@@ -1153,27 +743,75 @@ tbody tr:hover td{background:#fafafa}
         </div>
         <div class="modal-form-actions">
           <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
-          <button class="btn-modal-next" onclick="submitModalTor()">Confirmar inscrição</button>
+          <button class="btn-modal-next" onclick="submitModalTor()">Ir para Pagamento →</button>
         </div>
       </div>
 
-      <!-- Sucesso Experiência -->
-      <div class="modal-step" id="mSuccessExp">
-        <div class="modal-success" style="display:block">
-          <div class="success-ico">✅</div>
-          <h3>Inscrição confirmada!</h3>
-          <p id="mSuccessExpMsg">Sua vaga na experiência foi reservada. Em breve entraremos em contato pelo WhatsApp.</p>
-          <button class="btn-modal-next" onclick="closeModal()">Fechar</button>
+      <!-- STEP 2: Pagamento -->
+      <div class="modal-step" id="mStepPay">
+        <p class="pay-step-title">Etapa 2 de 2 — Pagamento</p>
+        <div class="pay-valor" id="payValorDisplay">R$ <span>120</span>,00</div>
+        <div class="pay-methods">
+          <div class="pay-method-card" id="payMethodPix" onclick="selectPayMethod('pix')">
+            <div class="pay-method-icon">📱</div>
+            <div class="pay-method-name">Pix</div>
+            <div class="pay-method-desc">Pagamento instantâneo</div>
+          </div>
+          <div class="pay-method-card" id="payMethodCard" onclick="selectPayMethod('card')">
+            <div class="pay-method-icon">💳</div>
+            <div class="pay-method-name">Cartão de Crédito</div>
+            <div class="pay-method-desc">Via WhatsApp</div>
+          </div>
+        </div>
+
+        <!-- PIX -->
+        <div class="pay-detail-box" id="payDetailPix">
+          <div class="pix-container">
+            <div class="pix-qr"><img id="pixQrImg" src="" alt="QR Code Pix"></div>
+            <div class="pix-valor-label">Valor a pagar</div>
+            <div class="pix-valor-num" id="pixValorNum">R$ 120,00</div>
+            <div class="pix-actions">
+              <button class="btn-pix-copy" onclick="copiarPix()">📋 Copiar código Pix</button>
+              <a class="btn-pix-wa" id="pixWaLink" href="#" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                Enviar comprovante via WhatsApp
+              </a>
+            </div>
+            <p class="pix-instrucao">Após o pagamento, envie o comprovante pelo WhatsApp para confirmarmos sua inscrição.</p>
+          </div>
+          <div class="modal-form-actions" style="margin-top:1rem">
+            <button class="btn-modal-back" onclick="backToFormFromPay()">← Voltar</button>
+            <button class="btn-modal-next" onclick="finalizarInscricao()">Já paguei, finalizar →</button>
+          </div>
+        </div>
+
+        <!-- CARTÃO -->
+        <div class="pay-detail-box" id="payDetailCard">
+          <div class="card-container">
+            <div class="card-icon-big">💳</div>
+            <div class="card-title">Pagamento via Cartão de Crédito</div>
+            <div class="card-desc">Para pagar com cartão de crédito, entre em contato com nossa equipe pelo WhatsApp. Vamos te atender rapidinho e garantir sua vaga com segurança!</div>
+            <a class="btn-card-wa" id="cardWaLink" href="#" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Quero pagar com cartão pelo WhatsApp
+            </a>
+          </div>
+          <div class="modal-form-actions" style="margin-top:1rem">
+            <button class="btn-modal-back" onclick="backToFormFromPay()">← Voltar</button>
+            <button class="btn-modal-next" onclick="finalizarInscricao()">Finalizei pelo WhatsApp →</button>
+          </div>
         </div>
       </div>
 
-      <!-- Sucesso Super 8 -->
-      <div class="modal-step" id="mSuccessTor">
-        <div class="modal-success" style="display:block">
-          <div class="success-ico">🏆</div>
-          <h3>Inscrição no Super 8!</h3>
-          <p id="mSuccessTorMsg">Sua vaga no torneio foi reservada. Em breve entraremos em contato pelo WhatsApp.</p>
-          <button class="btn-modal-next" onclick="closeModal()">Fechar</button>
+      <!-- STEP 3: Pendente -->
+      <div class="modal-step" id="mStepPendente">
+        <div class="modal-pendente">
+          <div class="pendente-ico">⏳</div>
+          <div class="pendente-titulo">Inscrição Registrada!</div>
+          <p class="pendente-sub">Seus dados foram salvos. Assim que confirmarmos seu pagamento, sua vaga estará garantida.</p>
+          <div class="pendente-protocolo">Protocolo: <strong id="pendProto"></strong></div>
+          <div class="pendente-aviso">📌 <strong>Próximo passo:</strong> Envie o comprovante de pagamento para o WhatsApp <strong>(62) 99804-1804</strong> informando seu protocolo. Sua vaga será confirmada em até 24h.</div>
+          <button class="btn-modal-next" onclick="closeModal()">Entendido, fechar</button>
         </div>
       </div>
 
@@ -1181,15 +819,11 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- WA FLOAT -->
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
 <script type="module">
-// ========================================================
-// FIREBASE CONFIG
-// ========================================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp }
+import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, query, orderBy, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1200,337 +834,276 @@ const firebaseConfig = {
   messagingSenderId: "997128122804",
   appId: "1:997128122804:web:991c9e3f87390518df82e1"
 };
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
 
-const app   = initializeApp(firebaseConfig);
-const db    = getFirestore(app);
-
-// ========================================================
-// CONTADORES LOCAIS (para controle de vagas em tempo real)
-// ========================================================
+// ===== CONSTANTES =====
 const MAX_TURMA = 6;
 const MAX_CAT   = 8;
+const WA_NUM    = '5562998041804';
+const PIX_EXP   = '00020101021226700014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0222Pagamento joao-vitor-65204000053039865406120.005802BR592564608063 JOAO VITOR LEITA6007GOIANIA62290525QRCCkZLUerF3gFIRNjzIBRKqg6304DEBF';
+const PIX_TOR   = '00020101021226650014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0217Inscricao Super 85204000053039865406100.005802BR592564608063 JOAO VITOR LEITA6007GOIANIA62290525QRCCS7C2uTyeJocCTUTS4JykV6304F80F';
+const QR_EXP    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_exp_120.jpg.jpeg';
+const QR_TOR    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_tor_100.jpg.jpeg';
 
 let data = {
-  turmas:   {1:{inscritos:0},2:{inscritos:1},3:{inscritos:0},4:{inscritos:0}},
-  cats:     {masc_ini:{inscritos:0},masc_int:{inscritos:0},fem_ini:{inscritos:0},fem_int:{inscritos:0}},
-  expList:  [],
-  torList:  [],
-  waitList: []
+  turmas:{1:{inscritos:0},2:{inscritos:0},3:{inscritos:0},4:{inscritos:0}},
+  cats:{masc_ini:{inscritos:0},masc_int:{inscritos:0},fem_ini:{inscritos:0},fem_int:{inscritos:0}}
 };
+try{const s=localStorage.getItem('bte_data2');if(s)data=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem('bte_data2',JSON.stringify(data));}catch(e){}}
 
-try{ const s=localStorage.getItem('bte_data'); if(s) data=JSON.parse(s); }catch(e){}
-function save(){ try{ localStorage.setItem('bte_data',JSON.stringify(data)); }catch(e){} }
-
-// ========================================================
-// PROTOCOLO
-// ========================================================
 function gerarProtocolo(tipo){
-  const prefix = tipo === 'exp' ? 'EXP' : 'S8';
-  const ts = Date.now().toString(36).toUpperCase();
-  const rnd = Math.random().toString(36).substring(2,5).toUpperCase();
-  return `${prefix}-${ts}-${rnd}`;
+  const prefix = tipo==='exp'?'EXP':'S8';
+  return `${prefix}-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2,5).toUpperCase()}`;
 }
 
-// ========================================================
-// RENDER TURMAS (grade de horários no modal)
-// ========================================================
-function renderTurmas(){
-  const grid = document.getElementById('turmasGrid');
-  if(!grid) return;
-  const horarios = ['08h00 – 09h00','09h00 – 10h00','10h00 – 11h00','11h00 – 12h00'];
-  grid.innerHTML = '';
-  for(let i=1;i<=4;i++){
-    const t = data.turmas[i];
-    const restantes = MAX_TURMA - t.inscritos;
-    const pct = (t.inscritos/MAX_TURMA)*100;
-    const isFull = restantes <= 0;
-    const fillClass = restantes===1?'danger':restantes===2?'warning':'';
-    grid.innerHTML += `
-      <div class="turma-card ${isFull?'full':''}" id="tc${i}" onclick="selectTurma(${i})">
-        <div class="turma-num">T${i}</div>
-        <div class="turma-time">⏰ ${horarios[i-1]}</div>
-        <div class="turma-vagas">${isFull?'Lista de espera':''+restantes+' vaga'+(restantes!==1?'s':'')+' disponív'+(restantes!==1?'eis':'el')}</div>
-        <div class="vagas-bar"><div class="vagas-fill ${fillClass}" style="width:${pct}%"></div></div>
-      </div>`;
-  }
-}
-window.selectTurma = function(n){
-  document.querySelectorAll('.turma-card').forEach(c=>c.classList.remove('selected'));
-  const tc = document.getElementById('tc'+n);
-  if(tc) tc.classList.add('selected');
-  const expTurma = document.getElementById('exp_turma');
-  if(expTurma) expTurma.value = n;
-};
-
-function renderCats(){
-  const grid = document.getElementById('catsGrid');
-  if(!grid) return;
-  const cats = [
-    {key:'masc_ini',title:'MASCULINO INICIANTE'},
-    {key:'masc_int',title:'MASCULINO INTERMEDIÁRIO'},
-    {key:'fem_ini', title:'FEMININO INICIANTE'},
-    {key:'fem_int', title:'FEMININO INTERMEDIÁRIO'},
-  ];
-  grid.innerHTML = cats.map(c => {
-    const t = data.cats[c.key];
-    const restantes = Math.max(0, MAX_CAT - t.inscritos);
-    const pct = (t.inscritos/MAX_CAT)*100;
-    return `<div class="cat-card">
-      <div class="cat-icon" style="font-size:2rem;margin-bottom:.5rem">🎾</div>
-      <div class="cat-title" style="font-size:1rem">${c.title}</div>
-      <div class="cat-vagas">Vagas disponíveis</div>
-      <div class="cat-count" id="cc_${c.key}">${restantes} / ${MAX_CAT}</div>
-      <div class="vagas-bar" style="margin-top:.5rem"><div class="vagas-fill" style="width:${pct}%"></div></div>
-    </div>`;
-  }).join('');
-}
-
-// ========================================================
-// MODAL DE INSCRIÇÃO
-// ========================================================
+// ===== ESTADO DO MODAL =====
 let modalChoice = null;
+let currentEntry = null;
+let currentPayMethod = null;
+let currentProtocolo = null;
 
+// ===== MODAL =====
 window.openModal = function(preChoice){
-  modalChoice = null;
+  modalChoice=null; currentEntry=null; currentPayMethod=null; currentProtocolo=null;
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mStep0').classList.add('active');
   document.getElementById('choiceExp').classList.remove('selected');
   document.getElementById('choiceTor').classList.remove('selected');
-  document.getElementById('btnNextChoice').disabled = true;
+  document.getElementById('btnNextChoice').disabled=true;
   document.getElementById('modalInscricao').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
   renderModalTurmas();
-  if(preChoice){ selectChoice(preChoice); goToForm(); }
+  if(preChoice){selectChoice(preChoice);goToForm();}
 };
-
-window.closeModal = function(){
+window.closeModal=function(){
   document.getElementById('modalInscricao').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 };
+document.getElementById('modalInscricao').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-document.getElementById('modalInscricao').addEventListener('click', function(e){
-  if(e.target === this) closeModal();
-});
-
-window.selectChoice = function(c){
-  modalChoice = c;
-  document.getElementById('choiceExp').classList.toggle('selected', c==='exp');
-  document.getElementById('choiceTor').classList.toggle('selected', c==='tor');
-  document.getElementById('btnNextChoice').disabled = false;
+window.selectChoice=function(c){
+  modalChoice=c;
+  document.getElementById('choiceExp').classList.toggle('selected',c==='exp');
+  document.getElementById('choiceTor').classList.toggle('selected',c==='tor');
+  document.getElementById('btnNextChoice').disabled=false;
 };
-
-window.goToForm = function(){
-  if(!modalChoice) return;
+window.goToForm=function(){
+  if(!modalChoice)return;
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
   renderModalTurmas();
 };
-
-window.backToChoice = function(){
+window.backToChoice=function(){
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mStep0').classList.add('active');
 };
+window.backToFormFromPay=function(){
+  document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
+  currentPayMethod=null;
+  document.querySelectorAll('.pay-method-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.pay-detail-box').forEach(b=>b.classList.remove('active'));
+};
 
 function renderModalTurmas(){
-  const grid = document.getElementById('mTurmasGrid');
-  if(!grid) return;
-  const horarios = ['08h – 09h','09h – 10h','10h – 11h','11h – 12h'];
-  grid.innerHTML = '';
-  const selVal = document.getElementById('m_exp_turma')?.value;
+  const grid=document.getElementById('mTurmasGrid');
+  if(!grid)return;
+  const horarios=['08h – 09h','09h – 10h','10h – 11h','11h – 12h'];
+  grid.innerHTML='';
+  const selVal=document.getElementById('m_exp_turma')?.value;
   for(let i=1;i<=4;i++){
-    const t = data.turmas[i];
-    const restantes = MAX_TURMA - t.inscritos;
-    const isFull = restantes <= 0;
-    grid.innerHTML += `
-      <div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
-        <div class="modal-turma-num">T${i}</div>
-        <div class="modal-turma-hora">${horarios[i-1]}</div>
-        <div class="modal-turma-vagas">${isFull?'Lotada':''+restantes+' vaga'+(restantes!==1?'s':'')}</div>
-      </div>`;
+    const t=data.turmas[i];
+    const restantes=MAX_TURMA-t.inscritos;
+    const isFull=restantes<=0;
+    grid.innerHTML+=`<div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
+      <div class="modal-turma-num">T${i}</div>
+      <div class="modal-turma-hora">${horarios[i-1]}</div>
+      <div class="modal-turma-vagas">${isFull?'Lotada':restantes+' vaga'+(restantes!==1?'s':'')}</div>
+    </div>`;
+  }
+}
+window.selectModalTurma=function(n){
+  document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('mtc'+n)?.classList.add('selected');
+  document.getElementById('m_exp_turma').value=n;
+  document.getElementById('mWaitExp').style.display=(data.turmas[n].inscritos>=MAX_TURMA)?'block':'none';
+};
+window.onModalCatSelect=function(){
+  const v=document.getElementById('m_tor_cat').value;
+  const msg=document.getElementById('mWaitTor');
+  if(!v){msg.style.display='none';return;}
+  msg.style.display=(data.cats[v].inscritos>=MAX_CAT)?'block':'none';
+};
+
+// ===== PAGAMENTO =====
+window.selectPayMethod=function(method){
+  currentPayMethod=method;
+  document.getElementById('payMethodPix').classList.toggle('selected',method==='pix');
+  document.getElementById('payMethodCard').classList.toggle('selected',method==='card');
+  document.getElementById('payDetailPix').classList.toggle('active',method==='pix');
+  document.getElementById('payDetailCard').classList.toggle('active',method==='card');
+  if(method==='card'&&currentEntry){
+    const tipo = currentEntry.tipo==='exp'?'Experiência Iniciantes':'Super 8';
+    const turmaInfo = currentEntry.tipo==='exp'?` - Turma T${currentEntry.turma}`:`- ${currentEntry.categoria}`;
+    const msg = encodeURIComponent(`Olá! Gostaria de garantir minha inscrição na *Beach Tennis Experience* com cartão de crédito.\n\n🎾 *Modalidade:* ${tipo}${turmaInfo}\n👤 *Nome:* ${currentEntry.nome}\n🔑 *Protocolo:* ${currentProtocolo}\n\nAguardo orientações para finalizar o pagamento!`);
+    document.getElementById('cardWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
+  }
+};
+
+window.copiarPix=function(){
+  const code = modalChoice==='exp'?PIX_EXP:PIX_TOR;
+  navigator.clipboard.writeText(code).then(()=>{
+    const btn=document.querySelector('.btn-pix-copy');
+    btn.textContent='✅ Código copiado!';
+    setTimeout(()=>btn.textContent='📋 Copiar código Pix',2500);
+  }).catch(()=>alert('Copie manualmente:\n\n'+code));
+};
+
+function setupPixUI(tipo){
+  const isExp=tipo==='exp';
+  document.getElementById('pixQrImg').src=isExp?QR_EXP:QR_TOR;
+  document.getElementById('pixValorNum').textContent=isExp?'R$ 120,00':'R$ 100,00';
+  document.getElementById('payValorDisplay').innerHTML=`R$ <span>${isExp?'120':'100'}</span>,00`;
+  if(currentEntry&&currentProtocolo){
+    const msg=encodeURIComponent(`Olá! Segue o comprovante do Pix referente à minha inscrição na *Beach Tennis Experience*.\n\n🔑 *Protocolo:* ${currentProtocolo}\n👤 *Nome:* ${currentEntry.nome}\n\nAguardo a confirmação!`);
+    document.getElementById('pixWaLink').href=`https://wa.me/${WA_NUM}?text=${msg}`;
   }
 }
 
-window.selectModalTurma = function(n){
-  document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('mtc'+n)?.classList.add('selected');
-  document.getElementById('m_exp_turma').value = n;
-  const t = data.turmas[n];
-  document.getElementById('mWaitExp').style.display = (t.inscritos>=MAX_TURMA)?'block':'none';
-};
-
-window.onModalCatSelect = function(){
-  const v = document.getElementById('m_tor_cat').value;
-  const msg = document.getElementById('mWaitTor');
-  if(!v){msg.style.display='none';return;}
-  msg.style.display = (data.cats[v].inscritos>=MAX_CAT)?'block':'none';
-};
-
-// ========================================================
-// SUBMIT EXPERIÊNCIA → FIREBASE
-// ========================================================
-window.submitModalExp = async function(){
-  const nome  = document.getElementById('m_exp_nome').value.trim();
-  const cpf   = document.getElementById('m_exp_cpf').value.trim();
-  const nasc  = document.getElementById('m_exp_nasc').value;
-  const tel   = document.getElementById('m_exp_tel').value.trim();
-  const cep   = document.getElementById('m_exp_cep').value.trim();
-  const email = document.getElementById('m_exp_email').value.trim();
-  const turma = document.getElementById('m_exp_turma').value;
-  const praticou = document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
-
-  if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){
-    alert('Por favor, preencha todos os campos obrigatórios e selecione uma turma.'); return;
-  }
-
-  const t      = data.turmas[turma];
-  const isWait = t.inscritos >= MAX_TURMA;
-  const protocolo = gerarProtocolo('exp');
-
-  const entry = {
-    protocolo, nome, cpf, nasc, tel, cep, email, turma,
-    praticou, tipo: 'exp', status: isWait ? 'espera' : 'confirmado',
-    criadoEm: serverTimestamp()
-  };
-
-  try {
-    const btnSubmit = document.querySelector('#mStepExp .btn-modal-next');
-    btnSubmit.textContent = 'Salvando...'; btnSubmit.disabled = true;
-    await addDoc(collection(db, 'inscricoes'), entry);
-    if(isWait){ data.waitList.push({...entry}); }
-    else { t.inscritos++; data.expList.push({...entry}); }
-    save(); renderTurmas(); renderModalTurmas();
-    const turmaNames = ['','T1 08h','T2 09h','T3 10h','T4 11h'];
-    document.getElementById('mSuccessExpMsg').innerHTML =
-      isWait
-        ? `Você está na lista de espera para ${turmaNames[turma]}. Se uma vaga abrir, entraremos em contato.`
-        : `✅ Vaga confirmada na ${turmaNames[turma]}!<br><small style="color:#888">Protocolo: <strong style="color:#111">${protocolo}</strong></small>`;
-    document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
-    document.getElementById('mSuccessExp').classList.add('active');
-  } catch(err){
-    console.error(err);
-    alert('Erro ao salvar. Verifique sua conexão e tente novamente.');
-    const btnSubmit = document.querySelector('#mStepExp .btn-modal-next');
-    btnSubmit.textContent = 'Confirmar inscrição'; btnSubmit.disabled = false;
-  }
-};
-
-// ========================================================
-// SUBMIT TORNEIO → FIREBASE
-// ========================================================
-window.submitModalTor = async function(){
-  const nome  = document.getElementById('m_tor_nome').value.trim();
-  const cpf   = document.getElementById('m_tor_cpf').value.trim();
-  const nasc  = document.getElementById('m_tor_nasc').value;
-  const tel   = document.getElementById('m_tor_tel').value.trim();
-  const cep   = document.getElementById('m_tor_cep').value.trim();
-  const email = document.getElementById('m_tor_email').value.trim();
-  const cat   = document.getElementById('m_tor_cat').value;
-
-  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){
-    alert('Por favor, preencha todos os campos obrigatórios.'); return;
-  }
-
-  const c      = data.cats[cat];
-  const isWait = c.inscritos >= MAX_CAT;
-  const protocolo = gerarProtocolo('tor');
-  const catNames  = {
-    masc_ini:'Super 8 Masculino – Iniciante', masc_int:'Super 8 Masculino – Intermediário',
-    fem_ini:'Super 8 Feminino – Iniciante',   fem_int:'Super 8 Feminino – Intermediário'
-  };
-
-  const entry = {
-    protocolo, nome, cpf, nasc, tel, cep, email, cat,
-    categoria: catNames[cat], tipo: 'tor',
-    status: isWait ? 'espera' : 'confirmado',
-    criadoEm: serverTimestamp()
-  };
-
-  try {
-    const btnSubmit = document.querySelector('#mStepTor .btn-modal-next');
-    btnSubmit.textContent = 'Salvando...'; btnSubmit.disabled = true;
-    await addDoc(collection(db, 'inscricoes'), entry);
-    if(isWait){ data.waitList.push({...entry}); }
-    else { c.inscritos++; data.torList.push({...entry}); }
-    save(); renderCats();
-    document.getElementById('mSuccessTorMsg').innerHTML =
-      isWait
-        ? `Você está na lista de espera para ${catNames[cat]}. Entraremos em contato se abrir vaga.`
-        : `✅ Vaga confirmada em ${catNames[cat]}!<br><small style="color:#888">Protocolo: <strong style="color:#111">${protocolo}</strong></small>`;
-    document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
-    document.getElementById('mSuccessTor').classList.add('active');
-  } catch(err){
-    console.error(err);
-    alert('Erro ao salvar. Verifique sua conexão e tente novamente.');
-    const btnSubmit = document.querySelector('#mStepTor .btn-modal-next');
-    btnSubmit.textContent = 'Confirmar inscrição'; btnSubmit.disabled = false;
-  }
-};
-
-// ========================================================
-// MÁSCARAS
-// ========================================================
-window.maskCPF = function(el){
-  let v = el.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>9) v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
-  else if(v.length>6) v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
-  else if(v.length>3) v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
-  el.value=v;
-};
-window.maskTel = function(el){
-  let v = el.value.replace(/\D/g,'').slice(0,11);
-  if(v.length>10) v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-  else if(v.length>6) v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');
-  else if(v.length>2) v=v.replace(/(\d{2})(\d+)/,'($1) $2');
-  el.value=v;
-};
-window.maskCEP = function(el){
-  let v = el.value.replace(/\D/g,'').slice(0,8);
-  if(v.length>5) v=v.replace(/(\d{5})(\d{1,3})/,'$1-$2');
-  el.value=v;
-};
-window.buscaCEP = async function(form){
-  const el = document.getElementById(`m_${form}_cep`);
-  const raw = el.value.replace(/\D/g,'');
-  if(raw.length!==8) return;
+// ===== SUBMIT EXPERIÊNCIA =====
+window.submitModalExp=async function(){
+  const nome=document.getElementById('m_exp_nome').value.trim();
+  const cpf=document.getElementById('m_exp_cpf').value.trim();
+  const nasc=document.getElementById('m_exp_nasc').value;
+  const tel=document.getElementById('m_exp_tel').value.trim();
+  const cep=document.getElementById('m_exp_cep').value.trim();
+  const email=document.getElementById('m_exp_email').value.trim();
+  const turma=document.getElementById('m_exp_turma').value;
+  const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
+  if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
+  const t=data.turmas[turma];
+  const isWait=t.inscritos>=MAX_TURMA;
+  const protocolo=gerarProtocolo('exp');
+  currentProtocolo=protocolo;
+  const entry={protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
+    status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+  currentEntry={...entry,turma};
   try{
-    const r = await fetch(`https://viacep.com.br/ws/${raw}/json/`);
-    const d = await r.json();
-    if(!d.erro){ el.style.borderColor='#2e7d32'; setTimeout(()=>el.style.borderColor='',2000); }
-  }catch(e){}
+    const btn=document.querySelector('#mStepExp .btn-modal-next');
+    btn.textContent='Salvando...';btn.disabled=true;
+    const docRef=await addDoc(collection(db,'inscricoes'),entry);
+    currentEntry.id=docRef.id;
+    if(!isWait){t.inscritos++;save();renderModalTurmas();}
+    btn.textContent='Ir para Pagamento →';btn.disabled=false;
+    if(isWait){
+      document.getElementById('pendProto').textContent=protocolo;
+      document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('mStepPendente').classList.add('active');
+    } else {
+      setupPixUI('exp');
+      document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('mStepPay').classList.add('active');
+    }
+  }catch(err){
+    console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
+    const btn=document.querySelector('#mStepExp .btn-modal-next');
+    btn.textContent='Ir para Pagamento →';btn.disabled=false;
+  }
 };
 
-// ========================================================
-// ADMIN – LOGIN / LOGOUT
-// ========================================================
-const ADMIN_PASSWORD = 'bte2025@'; // ← altere sua senha aqui
-let adminLogado = false;
-let unsubscribeAdmin = null;
-let allInscricoes = [];
+// ===== SUBMIT TORNEIO =====
+window.submitModalTor=async function(){
+  const nome=document.getElementById('m_tor_nome').value.trim();
+  const cpf=document.getElementById('m_tor_cpf').value.trim();
+  const nasc=document.getElementById('m_tor_nasc').value;
+  const tel=document.getElementById('m_tor_tel').value.trim();
+  const cep=document.getElementById('m_tor_cep').value.trim();
+  const email=document.getElementById('m_tor_email').value.trim();
+  const cat=document.getElementById('m_tor_cat').value;
+  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos.');return;}
+  const c=data.cats[cat];
+  const isWait=c.inscritos>=MAX_CAT;
+  const protocolo=gerarProtocolo('tor');
+  currentProtocolo=protocolo;
+  const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+  const entry={protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
+    status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+  currentEntry={...entry};
+  try{
+    const btn=document.querySelector('#mStepTor .btn-modal-next');
+    btn.textContent='Salvando...';btn.disabled=true;
+    const docRef=await addDoc(collection(db,'inscricoes'),entry);
+    currentEntry.id=docRef.id;
+    if(!isWait){c.inscritos++;save();}
+    btn.textContent='Ir para Pagamento →';btn.disabled=false;
+    if(isWait){
+      document.getElementById('pendProto').textContent=protocolo;
+      document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('mStepPendente').classList.add('active');
+    } else {
+      setupPixUI('tor');
+      document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('mStepPay').classList.add('active');
+    }
+  }catch(err){
+    console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
+    const btn=document.querySelector('#mStepTor .btn-modal-next');
+    btn.textContent='Ir para Pagamento →';btn.disabled=false;
+  }
+};
 
-window.toggleAdmin = function(){
-  const p = document.getElementById('adminPanel');
-  const isOpen = p.classList.contains('open');
-  if(isOpen){
+// ===== FINALIZAR INSCRIÇÃO (após pagamento) =====
+window.finalizarInscricao=async function(){
+  if(!currentEntry?.id||!currentPayMethod){
+    alert('Selecione uma forma de pagamento.');return;
+  }
+  try{
+    await updateDoc(doc(db,'inscricoes',currentEntry.id),{pagamento:currentPayMethod});
+    document.getElementById('pendProto').textContent=currentProtocolo;
+    document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
+    document.getElementById('mStepPendente').classList.add('active');
+  }catch(err){console.error(err);}
+};
+
+// ===== MÁSCARAS =====
+window.maskCPF=function(el){let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');el.value=v;};
+window.maskTel=function(el){let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');else if(v.length>6)v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');else if(v.length>2)v=v.replace(/(\d{2})(\d+)/,'($1) $2');el.value=v;};
+window.maskCEP=function(el){let v=el.value.replace(/\D/g,'').slice(0,8);if(v.length>5)v=v.replace(/(\d{5})(\d{1,3})/,'$1-$2');el.value=v;};
+window.buscaCEP=async function(form){
+  const el=document.getElementById(`m_${form}_cep`);
+  const raw=el.value.replace(/\D/g,'');
+  if(raw.length!==8)return;
+  try{const r=await fetch(`https://viacep.com.br/ws/${raw}/json/`);const d=await r.json();if(!d.erro){el.style.borderColor='#2e7d32';setTimeout(()=>el.style.borderColor='',2000);}}catch(e){}
+};
+
+// ===== ADMIN =====
+const ADMIN_PASSWORD='bte2025@';
+let adminLogado=false;
+let unsubscribeAdmin=null;
+let allInscricoes=[];
+
+window.toggleAdmin=function(){
+  const p=document.getElementById('adminPanel');
+  if(p.classList.contains('open')){
     p.classList.remove('open');
-    if(unsubscribeAdmin){ unsubscribeAdmin(); unsubscribeAdmin=null; }
+    if(unsubscribeAdmin){unsubscribeAdmin();unsubscribeAdmin=null;}
   } else {
     p.classList.add('open');
     document.getElementById('adminLoginErr').style.display='none';
     document.getElementById('adminPwdInput').value='';
-    if(adminLogado){
-      mostrarPainelPrincipal();
-    } else {
+    if(adminLogado){mostrarPainelPrincipal();}
+    else{
       document.getElementById('adminLoginScreen').style.display='block';
       document.getElementById('adminMainScreen').style.display='none';
-      setTimeout(()=>document.getElementById('adminPwdInput').focus(), 100);
+      setTimeout(()=>document.getElementById('adminPwdInput').focus(),100);
     }
   }
 };
-
-window.doAdminLogin = function(){
-  const pwd = document.getElementById('adminPwdInput').value;
-  if(pwd === ADMIN_PASSWORD){
-    adminLogado = true;
+window.doAdminLogin=function(){
+  if(document.getElementById('adminPwdInput').value===ADMIN_PASSWORD){
+    adminLogado=true;
     document.getElementById('adminLoginErr').style.display='none';
     mostrarPainelPrincipal();
   } else {
@@ -1539,191 +1112,135 @@ window.doAdminLogin = function(){
     document.getElementById('adminPwdInput').focus();
   }
 };
-
-window.doAdminLogout = function(){
-  adminLogado = false;
-  if(unsubscribeAdmin){ unsubscribeAdmin(); unsubscribeAdmin=null; }
+window.doAdminLogout=function(){
+  adminLogado=false;
+  if(unsubscribeAdmin){unsubscribeAdmin();unsubscribeAdmin=null;}
   document.getElementById('adminLoginScreen').style.display='block';
   document.getElementById('adminMainScreen').style.display='none';
-  document.getElementById('adminPwdInput').value='';
 };
-
 function mostrarPainelPrincipal(){
   document.getElementById('adminLoginScreen').style.display='none';
   document.getElementById('adminMainScreen').style.display='block';
   iniciarListenerFirebase();
 }
 
-// ========================================================
-// ADMIN – LISTENER FIREBASE EM TEMPO REAL
-// ========================================================
 function iniciarListenerFirebase(){
-  if(unsubscribeAdmin) return; // já está ouvindo
-  document.getElementById('syncStatus').textContent = 'Conectando...';
-  const q = query(collection(db,'inscricoes'), orderBy('criadoEm','asc'));
-  unsubscribeAdmin = onSnapshot(q, (snapshot)=>{
-    allInscricoes = snapshot.docs.map(d=>({id:d.id,...d.data()}));
-    document.getElementById('syncStatus').textContent = 'Ao vivo · Firebase';
+  if(unsubscribeAdmin)return;
+  document.getElementById('syncStatus').textContent='Conectando...';
+  const q=query(collection(db,'inscricoes'),orderBy('criadoEm','asc'));
+  unsubscribeAdmin=onSnapshot(q,(snapshot)=>{
+    allInscricoes=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('syncStatus').textContent='Ao vivo · Firebase';
     renderAdminTabelas();
-  }, (err)=>{
-    console.error(err);
-    document.getElementById('syncStatus').textContent = '⚠ Erro de conexão';
-  });
+  },(err)=>{console.error(err);document.getElementById('syncStatus').textContent='⚠ Erro de conexão';});
 }
 
-// ========================================================
-// ADMIN – RENDER TABELAS
-// ========================================================
-const turmaNames = {'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
+const turmaNames={'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
+function formatarData(ts){if(!ts)return'–';const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});}
+function formatarNasc(n){if(!n)return'–';const[y,m,d]=n.split('-');return`${d}/${m}/${y}`;}
+function badgePgto(p){if(!p||p==='–')return'<span class="badge badge-espera">–</span>';if(p==='pix')return'<span class="badge badge-exp">Pix</span>';if(p==='card')return'<span class="badge badge-tor">Cartão</span>';return`<span class="badge">${p}</span>`;}
+function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">✅ Confirmado</span>';if(s==='pendente')return'<span class="badge badge-pendente">⏳ Pendente</span>';if(s==='espera')return'<span class="badge badge-espera">📋 Espera</span>';return`<span class="badge">${s}</span>`;}
 
-function formatarData(ts){
-  if(!ts) return '–';
-  const d = ts.toDate ? ts.toDate() : new Date(ts);
-  return d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
-}
-
-function formatarNasc(nasc){
-  if(!nasc) return '–';
-  const [y,m,d] = nasc.split('-');
-  return `${d}/${m}/${y}`;
-}
+// Confirmar pagamento pelo admin
+window.confirmarPagamento=async function(id,btn){
+  if(!confirm('Confirmar pagamento desta inscrição?'))return;
+  btn.disabled=true;btn.textContent='Confirmando...';
+  try{
+    await updateDoc(doc(db,'inscricoes',id),{status:'confirmado'});
+  }catch(err){console.error(err);btn.disabled=false;btn.textContent='Confirmar Pgto';}
+};
 
 function renderAdminTabelas(){
-  const exp  = allInscricoes.filter(i=>i.tipo==='exp' && i.status==='confirmado');
-  const tor  = allInscricoes.filter(i=>i.tipo==='tor' && i.status==='confirmado');
-  const wait = allInscricoes.filter(i=>i.status==='espera');
+  const exp=allInscricoes.filter(i=>i.tipo==='exp'&&i.status==='confirmado');
+  const tor=allInscricoes.filter(i=>i.tipo==='tor'&&i.status==='confirmado');
+  const pend=allInscricoes.filter(i=>i.status==='pendente');
+  const wait=allInscricoes.filter(i=>i.status==='espera');
 
-  // STATS
-  const vagasLivres = Object.values(data.turmas).reduce((a,t)=>a+(MAX_TURMA-t.inscritos),0);
-  document.getElementById('st-exp').textContent   = exp.length;
-  document.getElementById('st-tor').textContent   = tor.length;
-  document.getElementById('st-wait').textContent  = wait.length;
-  document.getElementById('st-vagas').textContent = vagasLivres;
-  document.getElementById('st-total').textContent = allInscricoes.length;
+  document.getElementById('st-exp').textContent=exp.length;
+  document.getElementById('st-tor').textContent=tor.length;
+  document.getElementById('st-pend').textContent=pend.length;
+  document.getElementById('st-wait').textContent=wait.length;
+  document.getElementById('st-total').textContent=allInscricoes.length;
 
-  // TABELA EXPERIÊNCIA
-  document.getElementById('tbodyExp').innerHTML = exp.length
-    ? exp.map((e,i)=>`<tr>
+  document.getElementById('tbodyExp').innerHTML=exp.length
+    ?exp.map((e,i)=>`<tr>
         <td>${i+1}</td>
         <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
-        <td><strong>${e.nome}</strong></td>
-        <td>${e.cpf||'–'}</td>
-        <td>${formatarNasc(e.nasc)}</td>
-        <td>${e.tel||'–'}</td>
-        <td>${e.cep||'–'}</td>
-        <td>${e.email||'–'}</td>
-        <td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma}</span></td>
+        <td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
+        <td>${formatarNasc(e.nasc)}</td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
+        <td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma||'–'}</span></td>
         <td>${e.praticou==='sim'?'Sim':'Não'}</td>
-        <td><span class="badge badge-ok">Confirmado</span></td>
-        <td>${formatarData(e.criadoEm)}</td>
-      </tr>`).join('')
-    : `<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
+        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
+        <td>${formatarData(e.criadoEm)}</td><td>–</td></tr>`).join('')
+    :`<tr class="empty-row"><td colspan="13">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
-  // TABELA TORNEIO
-  document.getElementById('tbodyTor').innerHTML = tor.length
-    ? tor.map((e,i)=>`<tr>
+  document.getElementById('tbodyTor').innerHTML=tor.length
+    ?tor.map((e,i)=>`<tr>
         <td>${i+1}</td>
         <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
-        <td><strong>${e.nome}</strong></td>
-        <td>${e.cpf||'–'}</td>
-        <td>${formatarNasc(e.nasc)}</td>
-        <td>${e.tel||'–'}</td>
-        <td>${e.cep||'–'}</td>
-        <td>${e.email||'–'}</td>
+        <td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
+        <td>${formatarNasc(e.nasc)}</td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
         <td><span class="badge badge-tor">${e.categoria||e.cat||'–'}</span></td>
-        <td><span class="badge badge-ok">Confirmado</span></td>
-        <td>${formatarData(e.criadoEm)}</td>
-      </tr>`).join('')
-    : `<tr class="empty-row"><td colspan="11">Nenhuma inscrição confirmada ainda.</td></tr>`;
+        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
+        <td>${formatarData(e.criadoEm)}</td><td>–</td></tr>`).join('')
+    :`<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
-  // TABELA ESPERA
-  document.getElementById('tbodyWait').innerHTML = wait.length
-    ? wait.map((e,i)=>`<tr>
+  document.getElementById('tbodyPend').innerHTML=pend.length
+    ?pend.map((e,i)=>`<tr>
         <td>${i+1}</td>
-        <td><strong>${e.nome}</strong></td>
-        <td>${e.cpf||'–'}</td>
-        <td>${e.tel||'–'}</td>
-        <td>${e.email||'–'}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#fff3e0;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
+        <td><strong>${e.nome}</strong></td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
         <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
-        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma):(e.categoria||e.cat||'–')}</td>
+        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
+        <td>${badgePgto(e.pagamento)}</td>
         <td>${formatarData(e.criadoEm)}</td>
+        <td><button class="btn-confirmar-pgto" onclick="confirmarPagamento('${e.id}',this)">✅ Confirmar Pgto</button></td>
       </tr>`).join('')
-    : `<tr class="empty-row"><td colspan="8">Nenhuma pessoa em lista de espera.</td></tr>`;
+    :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
+
+  document.getElementById('tbodyWait').innerHTML=wait.length
+    ?wait.map((e,i)=>`<tr>
+        <td>${i+1}</td><td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
+        <td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
+        <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
+        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
+        <td>${formatarData(e.criadoEm)}</td></tr>`).join('')
+    :`<tr class="empty-row"><td colspan="8">Nenhuma pessoa em lista de espera.</td></tr>`;
 }
 
-// ========================================================
-// ADMIN – TABS
-// ========================================================
-window.switchAdminTab = function(tab){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>
-    b.classList.toggle('active',['exp','tor','wait'][i]===tab));
+window.switchAdminTab=function(tab){
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('admin-'+tab).classList.add('active');
 };
-
-// ========================================================
-// ADMIN – BUSCA / FILTRO
-// ========================================================
-window.filterTable = function(tbodyId, term){
-  const rows = document.getElementById(tbodyId).querySelectorAll('tr:not(.empty-row)');
-  const t = term.toLowerCase();
-  rows.forEach(r=>{ r.style.display = r.textContent.toLowerCase().includes(t) ? '' : 'none'; });
+window.filterTable=function(tbodyId,term){
+  const rows=document.getElementById(tbodyId).querySelectorAll('tr:not(.empty-row)');
+  const t=term.toLowerCase();
+  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(t)?'':'none';});
 };
-
-// ========================================================
-// ADMIN – EXPORTAR CSV
-// ========================================================
-window.exportCSV = function(tipo){
-  let rows, headers;
+window.exportCSV=function(tipo){
+  let rows,headers;
+  const tNames={'1':'T1-08h','2':'T2-09h','3':'T3-10h','4':'T4-11h'};
   if(tipo==='exp'){
-    headers = ['Protocolo','Nome','CPF','Nascimento','Telefone','CEP','Email','Turma','Praticou?','Status','Cadastro em'];
-    rows = allInscricoes.filter(i=>i.tipo==='exp').map(e=>[
-      e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.cep||'',e.email||'',
-      turmaNames[e.turma]||e.turma||'',e.praticou==='sim'?'Sim':'Não',e.status||'',formatarData(e.criadoEm)
-    ]);
-  } else if(tipo==='tor'){
-    headers = ['Protocolo','Nome','CPF','Nascimento','Telefone','CEP','Email','Categoria','Status','Cadastro em'];
-    rows = allInscricoes.filter(i=>i.tipo==='tor').map(e=>[
-      e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.cep||'',e.email||'',
-      e.categoria||e.cat||'',e.status||'',formatarData(e.criadoEm)
-    ]);
-  } else {
-    headers = ['Nome','CPF','Telefone','Email','Tipo','Turma/Categoria','Cadastro em'];
-    rows = allInscricoes.filter(i=>i.status==='espera').map(e=>[
-      e.nome||'',e.cpf||'',e.tel||'',e.email||'',e.tipo==='exp'?'Experiência':'Torneio',
-      e.tipo==='exp'?(turmaNames[e.turma]||e.turma||''):(e.categoria||e.cat||''),
-      formatarData(e.criadoEm)
-    ]);
+    headers=['Protocolo','Nome','CPF','Nascimento','Telefone','Email','Turma','Praticou?','Pagamento','Status','Cadastro'];
+    rows=allInscricoes.filter(i=>i.tipo==='exp').map(e=>[e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.email||'',tNames[e.turma]||e.turma||'',e.praticou==='sim'?'Sim':'Não',e.pagamento||'–',e.status||'',formatarData(e.criadoEm)]);
+  }else if(tipo==='tor'){
+    headers=['Protocolo','Nome','CPF','Nascimento','Telefone','Email','Categoria','Pagamento','Status','Cadastro'];
+    rows=allInscricoes.filter(i=>i.tipo==='tor').map(e=>[e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.email||'',e.categoria||'',e.pagamento||'–',e.status||'',formatarData(e.criadoEm)]);
+  }else{
+    headers=['Nome','CPF','Telefone','Email','Tipo','Turma/Cat.','Cadastro'];
+    rows=allInscricoes.filter(i=>i.status==='espera').map(e=>[e.nome||'',e.cpf||'',e.tel||'',e.email||'',e.tipo==='exp'?'Experiência':'Torneio',e.tipo==='exp'?(tNames[e.turma]||e.turma||''):(e.categoria||e.cat||''),formatarData(e.criadoEm)]);
   }
-
-  const csv = [headers, ...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href=url; a.download=`bte_${tipo}_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click(); URL.revokeObjectURL(url);
+  const csv=[headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`bte_${tipo}_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
 };
 
-// ========================================================
 // INIT
-// ========================================================
-renderTurmas();
-renderCats();
-
-// SCROLL ANIMATIONS
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});
-},{threshold:.1});
-document.querySelectorAll('.what-card,.prof-card,.tl-item,.turma-card').forEach(el=>{
-  el.style.opacity='0'; el.style.transition='opacity .5s, transform .5s';
-  observer.observe(el);
-});
-
-// NAV MOBILE
-window.toggleMenu = function(){
-  document.getElementById('navLinks').classList.toggle('open');
-};
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
+document.querySelectorAll('.what-card,.prof-card,.tl-item').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';observer.observe(el);});
+window.toggleMenu=function(){document.getElementById('navLinks').classList.toggle('open');};
 </script>
-
 </body>
 </html>
