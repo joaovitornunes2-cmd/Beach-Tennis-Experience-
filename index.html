@@ -1145,7 +1145,7 @@ function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">
 window.confirmarPgto=async function(id){
   const insc=allInscricoes.find(i=>i.id===id);
   if(!insc)return;
-  const btn=document.getElementById('btn-'+id);
+  const btn=document.querySelector('[data-docid="'+id+'"]');
   const nome=insc.nome||'';const tel=insc.tel||'';const protocolo=insc.protocolo||'';
   const tipo=insc.tipo||'';const turmaOuCat=tipo==='exp'?(turmaNames[insc.turma]||insc.turma||''):(insc.categoria||insc.cat||'');
   if(!confirm('Confirmar pagamento de '+nome+'?'))return;
@@ -1205,7 +1205,7 @@ function renderAdminTabelas(){
         <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
         <td>${badgePgto(e.pagamento)}</td>
         <td>${formatarData(e.criadoEm)}</td>
-        <td><button class='btn-confirmar-pgto' id='btn-${e.id}' onclick='confirmarPgto(this.id.replace("btn-",""))'>✅ Confirmar Pgto</button></td>
+        <td><button class='btn-confirmar-pgto' data-docid='${e.id}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button></td>
       </tr>`).join('')
     :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
 
