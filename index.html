@@ -275,6 +275,12 @@ tbody tr:hover td{background:#fafafa}
 .modal-turma-card.full .modal-turma-num,
 .modal-turma-card.full .modal-turma-hora{color:#999}
 .modal-turma-card.selected{border-color:#CC1B1B;background:rgba(204,27,27,.05)}
+.modal-cats-grid{grid-template-columns:repeat(2,1fr)}
+.modal-cat-icon{font-size:1.4rem;margin-bottom:.25rem}
+.modal-cat-genero{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:.1rem}
+.modal-cat-nivel{font-size:.82rem;font-weight:600;color:#222}
+.modal-turma-card.selected .modal-cat-genero{color:#CC1B1B}
+.modal-turma-card.selected .modal-cat-nivel{color:#CC1B1B}
 .modal-turma-card.full{opacity:.6;cursor:default}
 .modal-turma-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;line-height:1}
 .modal-turma-hora{font-weight:700;font-size:.9rem;color:#111;margin:.2rem 0 .15rem}
@@ -731,26 +737,19 @@ select option:disabled{color:#bbb;font-style:italic}
       <div class="modal-step" id="mStepTor">
         <div class="modal-form-header">
           <h3>🏆 Torneio Super 8</h3>
-          <p>Preencha seus dados para garantir sua vaga no torneio.</p>
+          <p>Escolha sua categoria e preencha seus dados.</p>
         </div>
+        <label style="font-size:.8rem;font-weight:600;color:#444;display:block;margin-bottom:.5rem">Categoria *</label>
+        <div class="modal-turmas-grid modal-cats-grid" id="mCatsGrid"></div>
+        <input type="hidden" id="m_tor_cat" value="">
         <div class="modal-waitlist-note" id="mWaitTor">⚠️ Esta categoria está lotada. Você entrará na lista de espera.</div>
-        <div class="mfg">
+        <div class="mfg" style="margin-top:.75rem">
           <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
           <div class="mf-group"><label>CPF *</label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
           <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc"></div>
           <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
           <div class="mf-group"><label>CEP *</label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
           <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
-          <div class="mf-group full">
-            <label>Categoria *</label>
-            <select id="m_tor_cat" onchange="onModalCatSelect()">
-              <option value="">Selecione...</option>
-              <option value="masc_ini">Masculino – Iniciante</option>
-              <option value="masc_int">Masculino – Intermediário</option>
-              <option value="fem_ini">Feminino – Iniciante</option>
-              <option value="fem_int">Feminino – Intermediário</option>
-            </select>
-          </div>
         </div>
         <div class="modal-form-actions">
           <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
@@ -948,6 +947,7 @@ window.openModal = function(preChoice){
   document.getElementById('modalInscricao').classList.add('open');
   document.body.style.overflow='hidden';
   renderModalTurmas();
+  atualizarSelectCategorias();
   if(preChoice){selectChoice(preChoice);goToForm();}
 };
 window.closeModal=function(){
@@ -967,6 +967,7 @@ window.goToForm=function(){
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
   document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
   renderModalTurmas();
+  atualizarSelectCategorias();
 };
 window.backToChoice=function(){
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -998,46 +999,56 @@ function renderModalTurmas(){
   }
 }
 
-// Atualiza o select de categorias do Super 8 com estado Esgotado
+// Renderiza cards visuais de categoria do Super 8 (igual às turmas de iniciação)
 function atualizarSelectCategorias(){
-  const sel = document.getElementById('m_tor_cat');
-  if(!sel) return;
-  const catNames = {
-    masc_ini: 'Masculino – Iniciante',
-    masc_int: 'Masculino – Intermediário',
-    fem_ini:  'Feminino – Iniciante',
-    fem_int:  'Feminino – Intermediário'
-  };
-  const currentVal = sel.value;
-  sel.innerHTML = '<option value="">Selecione...</option>';
-  for(const [key, label] of Object.entries(catNames)){
-    const inscritos = vagasContagem.cats[key] || 0;
-    const isFull = inscritos >= MAX_CAT;
-    const opt = document.createElement('option');
-    opt.value = isFull ? '' : key;
-    opt.textContent = isFull ? label + ' — Esgotado' : label + ` (${MAX_CAT - inscritos} vagas)`;
-    opt.disabled = isFull;
-    if(isFull) opt.style.color = '#999';
-    if(key === currentVal && !isFull) opt.selected = true;
-    sel.appendChild(opt);
+  const grid = document.getElementById('mCatsGrid');
+  if(!grid) return;
+  const cats = [
+    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante'     },
+    { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário'  },
+    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante'     },
+    { key:'fem_int',  icon:'👩', genero:'Feminino',   nivel:'Intermediário'  },
+  ];
+  const selVal = document.getElementById('m_tor_cat').value;
+  grid.innerHTML = '';
+  for(const c of cats){
+    const inscritos = vagasContagem.cats[c.key] || 0;
+    const restantes = MAX_CAT - inscritos;
+    const isFull    = restantes <= 0;
+    const isSelected = selVal === c.key;
+    grid.innerHTML += `<div
+      class="modal-turma-card ${isFull?'full':''} ${isSelected?'selected':''}"
+      id="mcc_${c.key}"
+      ${isFull ? '' : `onclick="selectModalCat('${c.key}')"`}>
+      <div class="modal-cat-icon">${c.icon}</div>
+      <div class="modal-cat-genero">${c.genero}</div>
+      <div class="modal-cat-nivel">${c.nivel}</div>
+      <div class="modal-turma-vagas" style="margin-top:.35rem">
+        ${isFull
+          ? '<span style="color:#CC1B1B;font-weight:700;font-size:.75rem">Esgotado</span>'
+          : `<span style="font-size:.75rem">${restantes} vaga${restantes!==1?'s':''}</span>`}
+      </div>
+    </div>`;
   }
-  onModalCatSelect();
 }
 
 window.selectModalTurma=function(n){
   const inscritos = vagasContagem.turmas[n] || 0;
-  if(inscritos >= MAX_TURMA) return; // double-check no cliente
+  if(inscritos >= MAX_TURMA) return;
   document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
   document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value=n;
   document.getElementById('mWaitExp').style.display='none';
 };
+window.selectModalCat=function(key){
+  const inscritos = vagasContagem.cats[key] || 0;
+  if(inscritos >= MAX_CAT) return;
+  document.getElementById('m_tor_cat').value = key;
+  atualizarSelectCategorias(); // re-renderiza com novo selecionado
+  document.getElementById('mWaitTor').style.display='none';
+};
 window.onModalCatSelect=function(){
-  const v=document.getElementById('m_tor_cat').value;
-  const msg=document.getElementById('mWaitTor');
-  if(!v){msg.style.display='none';return;}
-  const inscritos = vagasContagem.cats[v] || 0;
-  msg.style.display=(inscritos>=MAX_CAT)?'block':'none';
+  // mantido para compatibilidade — lógica migrou para selectModalCat
 };
 
 // ===== PAGAMENTO =====
@@ -1124,7 +1135,7 @@ window.submitModalTor=async function(){
   const cep=document.getElementById('m_tor_cep').value.trim();
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
-  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos.');return;}
+  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
   const isWait=(vagasContagem.cats[cat]||0)>=MAX_CAT;
   const protocolo=gerarProtocolo('tor');
   currentProtocolo=protocolo;
