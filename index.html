@@ -265,6 +265,15 @@ tbody tr:hover td{background:#fafafa}
 .modal-turmas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
 .modal-turma-card{border:2px solid #e0e0e0;border-radius:10px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s}
 .modal-turma-card:hover{border-color:#CC1B1B}
+.modal-turma-card.full{
+  opacity:.55;
+  cursor:not-allowed;
+  background:#f5f5f5;
+  border-color:#ddd;
+  pointer-events:none;
+}
+.modal-turma-card.full .modal-turma-num,
+.modal-turma-card.full .modal-turma-hora{color:#999}
 .modal-turma-card.selected{border-color:#CC1B1B;background:rgba(204,27,27,.05)}
 .modal-turma-card.full{opacity:.6;cursor:default}
 .modal-turma-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;line-height:1}
@@ -319,6 +328,8 @@ tbody tr:hover td{background:#fafafa}
   .modal-turmas-grid{grid-template-columns:1fr 1fr}
   .modal-body{padding:1.25rem}
 }
+
+select option:disabled{color:#bbb;font-style:italic}
 </style>
 </head>
 <body>
@@ -844,7 +855,7 @@ tbody tr:hover td{background:#fafafa}
  * =====================================================================
  */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, query, orderBy, serverTimestamp }
+import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -870,12 +881,50 @@ const PIX_TOR   = '00020101021226650014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0
 const QR_EXP    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_exp_120.jpg.jpeg';
 const QR_TOR    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_tor_100.jpg.jpeg';
 
-let data = {
-  turmas:{1:{inscritos:0},2:{inscritos:0},3:{inscritos:0},4:{inscritos:0}},
-  cats:{masc_ini:{inscritos:0},masc_int:{inscritos:0},fem_ini:{inscritos:0},fem_int:{inscritos:0}}
+// ===== CONTROLE DE VAGAS VIA FIRESTORE (tempo real, servidor) =====
+// Conta inscrições reais do Firestore — nunca localStorage.
+// Status 'pendente' e 'confirmado' ocupam vaga. 'espera' não ocupa.
+// Listener público atualiza o modal automaticamente quando alguém se inscreve.
+
+let vagasContagem = {
+  turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
+  cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
-try{const s=localStorage.getItem('bte_data2');if(s)data=JSON.parse(s);}catch(e){}
-function save(){try{localStorage.setItem('bte_data2',JSON.stringify(data));}catch(e){}}
+
+async function sincronizarVagas() {
+  try {
+    for (let t = 1; t <= 4; t++) {
+      const snap = await getDocs(
+        query(collection(db, 'inscricoes'),
+          where('tipo', '==', 'exp'),
+          where('turma', '==', String(t)),
+          where('status', 'in', ['pendente', 'confirmado'])
+        )
+      );
+      vagasContagem.turmas[t] = snap.size;
+    }
+    for (const cat of ['masc_ini', 'masc_int', 'fem_ini', 'fem_int']) {
+      const snap = await getDocs(
+        query(collection(db, 'inscricoes'),
+          where('tipo', '==', 'tor'),
+          where('cat', '==', cat),
+          where('status', 'in', ['pendente', 'confirmado'])
+        )
+      );
+      vagasContagem.cats[cat] = snap.size;
+    }
+    renderModalTurmas();
+    atualizarSelectCategorias();
+  } catch(e) {
+    console.error('Erro ao sincronizar vagas:', e);
+  }
+}
+
+// Listener em tempo real: re-sincroniza vagas sempre que qualquer inscrição mudar
+onSnapshot(
+  query(collection(db, 'inscricoes')),
+  () => sincronizarVagas()
+);
 
 function gerarProtocolo(tipo){
   const prefix = tipo==='exp'?'EXP':'S8';
@@ -938,27 +987,57 @@ function renderModalTurmas(){
   grid.innerHTML='';
   const selVal=document.getElementById('m_exp_turma')?.value;
   for(let i=1;i<=4;i++){
-    const t=data.turmas[i];
-    const restantes=MAX_TURMA-t.inscritos;
-    const isFull=restantes<=0;
-    grid.innerHTML+=`<div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" onclick="${isFull?'':'selectModalTurma('+i+')'}">
+    const inscritos = vagasContagem.turmas[i] || 0;
+    const restantes = MAX_TURMA - inscritos;
+    const isFull = restantes <= 0;
+    grid.innerHTML+=`<div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" ${isFull?'':'onclick="selectModalTurma('+i+')"'}>
       <div class="modal-turma-num">T${i}</div>
       <div class="modal-turma-hora">${horarios[i-1]}</div>
-      <div class="modal-turma-vagas">${isFull?'Lotada':restantes+' vaga'+(restantes!==1?'s':'')}</div>
+      <div class="modal-turma-vagas">${isFull?'<span style="color:#CC1B1B;font-weight:700">Esgotado</span>':restantes+' vaga'+(restantes!==1?'s':'')}</div>
     </div>`;
   }
 }
+
+// Atualiza o select de categorias do Super 8 com estado Esgotado
+function atualizarSelectCategorias(){
+  const sel = document.getElementById('m_tor_cat');
+  if(!sel) return;
+  const catNames = {
+    masc_ini: 'Masculino – Iniciante',
+    masc_int: 'Masculino – Intermediário',
+    fem_ini:  'Feminino – Iniciante',
+    fem_int:  'Feminino – Intermediário'
+  };
+  const currentVal = sel.value;
+  sel.innerHTML = '<option value="">Selecione...</option>';
+  for(const [key, label] of Object.entries(catNames)){
+    const inscritos = vagasContagem.cats[key] || 0;
+    const isFull = inscritos >= MAX_CAT;
+    const opt = document.createElement('option');
+    opt.value = isFull ? '' : key;
+    opt.textContent = isFull ? label + ' — Esgotado' : label + ` (${MAX_CAT - inscritos} vagas)`;
+    opt.disabled = isFull;
+    if(isFull) opt.style.color = '#999';
+    if(key === currentVal && !isFull) opt.selected = true;
+    sel.appendChild(opt);
+  }
+  onModalCatSelect();
+}
+
 window.selectModalTurma=function(n){
+  const inscritos = vagasContagem.turmas[n] || 0;
+  if(inscritos >= MAX_TURMA) return; // double-check no cliente
   document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
   document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value=n;
-  document.getElementById('mWaitExp').style.display=(data.turmas[n].inscritos>=MAX_TURMA)?'block':'none';
+  document.getElementById('mWaitExp').style.display='none';
 };
 window.onModalCatSelect=function(){
   const v=document.getElementById('m_tor_cat').value;
   const msg=document.getElementById('mWaitTor');
   if(!v){msg.style.display='none';return;}
-  msg.style.display=(data.cats[v].inscritos>=MAX_CAT)?'block':'none';
+  const inscritos = vagasContagem.cats[v] || 0;
+  msg.style.display=(inscritos>=MAX_CAT)?'block':'none';
 };
 
 // ===== PAGAMENTO =====
@@ -1007,8 +1086,7 @@ window.submitModalExp=async function(){
   const turma=document.getElementById('m_exp_turma').value;
   const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
-  const t=data.turmas[turma];
-  const isWait=t.inscritos>=MAX_TURMA;
+  const isWait=(vagasContagem.turmas[turma]||0)>=MAX_TURMA;
   const protocolo=gerarProtocolo('exp');
   currentProtocolo=protocolo;
   const entry={protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
@@ -1019,7 +1097,7 @@ window.submitModalExp=async function(){
     btn.textContent='Salvando...';btn.disabled=true;
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){t.inscritos++;save();renderModalTurmas();}
+    if(!isWait){renderModalTurmas();atualizarSelectCategorias();}
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
@@ -1047,8 +1125,7 @@ window.submitModalTor=async function(){
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos.');return;}
-  const c=data.cats[cat];
-  const isWait=c.inscritos>=MAX_CAT;
+  const isWait=(vagasContagem.cats[cat]||0)>=MAX_CAT;
   const protocolo=gerarProtocolo('tor');
   currentProtocolo=protocolo;
   const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
@@ -1060,7 +1137,7 @@ window.submitModalTor=async function(){
     btn.textContent='Salvando...';btn.disabled=true;
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){c.inscritos++;save();}
+    if(!isWait){atualizarSelectCategorias();}
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
