@@ -858,7 +858,7 @@ select option:disabled{color:#bbb;font-style:italic}
  * =====================================================================
  */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
+import { getFirestore, collection, addDoc, doc, updateDoc, setDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -939,19 +939,25 @@ const unsubVagas = onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
 async function atualizarVagasNoServidor(tipo, chave) {
   try {
     const vagasRef = doc(db, 'config', 'vagas');
-    const campo = tipo === 'exp' ? \`turmas.\${chave}\` : \`cats.\${chave}\`;
+    // Monta o campo no formato "turmas.1" ou "cats.masc_ini"
+    const prefixo = tipo === 'exp' ? 'turmas' : 'cats';
+    const campo = prefixo + '.' + chave;
     const novoValor = tipo === 'exp'
       ? (vagasContagem.turmas[chave] || 0) + 1
       : (vagasContagem.cats[chave] || 0) + 1;
-    await updateDoc(vagasRef, { [campo]: novoValor }).catch(async () => {
-      // Doc não existe ainda — cria
-      const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-      await setDoc(vagasRef, {
-        turmas: { 1:0, 2:0, 3:0, 4:0 },
-        cats: { masc_ini:0, masc_int:0, fem_ini:0, fem_int:0 },
-        [campo.split('.')[0]]: { [campo.split('.')[1]]: novoValor }
-      }, { merge: true });
-    });
+    try {
+      // Tenta atualizar (doc já existe)
+      await updateDoc(vagasRef, { [campo]: novoValor });
+    } catch(updateErr) {
+      // Doc não existe ainda — cria com setDoc (importado estaticamente no topo)
+      const inicial = {
+        turmas: { '1':0, '2':0, '3':0, '4':0 },
+        cats: { masc_ini:0, masc_int:0, fem_ini:0, fem_int:0 }
+      };
+      if (tipo === 'exp') { inicial.turmas[chave] = novoValor; }
+      else                { inicial.cats[chave]   = novoValor; }
+      await setDoc(vagasRef, inicial);
+    }
   } catch(e) {
     console.error('Erro ao atualizar vagas:', e);
   }
