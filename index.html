@@ -846,6 +846,10 @@ select option:disabled{color:#bbb;font-style:italic}
  *       allow read, update, delete: if request.auth != null
  *         && request.auth.token.email == "joaovitornunes2@hotmail.com";
  *     }
+ *     match /config/{docId} {
+ *       allow read: if true;
+ *       allow write: if true;
+ *     }
  *   }
  * }
  *
@@ -890,28 +894,26 @@ let vagasContagem = {
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
 
+// =====================================================================
+// CONTROLE DE VAGAS — lê e escuta doc público "config/vagas" no Firestore.
+// Regra pública: allow read: if true  (apenas leitura, sem auth necessária).
+// Quem ESCREVE nesse doc: a função atualizarVagasNoServidor() chamada
+// internamente após cada inscrição bem-sucedida (ela usa auth do admin
+// ou roda client-side com regra allow write: if true para simplificar).
+// IMPORTANTE: adicionar ao Firestore Rules:
+//   match /config/{docId} { allow read: if true; allow write: if true; }
+// =====================================================================
+
 async function sincronizarVagas() {
   try {
-    for (let t = 1; t <= 4; t++) {
-      const snap = await getDocs(
-        query(collection(db, 'inscricoes'),
-          where('tipo', '==', 'exp'),
-          where('turma', '==', String(t)),
-          where('status', 'in', ['pendente', 'confirmado'])
-        )
-      );
-      vagasContagem.turmas[t] = snap.size;
-    }
-    for (const cat of ['masc_ini', 'masc_int', 'fem_ini', 'fem_int']) {
-      const snap = await getDocs(
-        query(collection(db, 'inscricoes'),
-          where('tipo', '==', 'tor'),
-          where('cat', '==', cat),
-          where('status', 'in', ['pendente', 'confirmado'])
-        )
-      );
-      vagasContagem.cats[cat] = snap.size;
-    }
+    const snap = await getDocs(query(collection(db, 'config')));
+    snap.forEach(d => {
+      if (d.id === 'vagas') {
+        const data = d.data();
+        if (data.turmas) vagasContagem.turmas = {...vagasContagem.turmas, ...data.turmas};
+        if (data.cats)   vagasContagem.cats   = {...vagasContagem.cats,   ...data.cats};
+      }
+    });
     renderModalTurmas();
     atualizarSelectCategorias();
   } catch(e) {
@@ -919,11 +921,41 @@ async function sincronizarVagas() {
   }
 }
 
-// Listener em tempo real: re-sincroniza vagas sempre que qualquer inscrição mudar
-onSnapshot(
-  query(collection(db, 'inscricoes')),
-  () => sincronizarVagas()
-);
+// Listener em tempo real no doc público config/vagas (sem auth)
+const unsubVagas = onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
+  if (snap.exists()) {
+    const data = snap.data();
+    if (data.turmas) vagasContagem.turmas = {...vagasContagem.turmas, ...data.turmas};
+    if (data.cats)   vagasContagem.cats   = {...vagasContagem.cats,   ...data.cats};
+    renderModalTurmas();
+    atualizarSelectCategorias();
+  }
+}, (err) => {
+  // Se config/vagas não existir ainda, faz contagem direta (primeira vez)
+  console.warn('config/vagas não encontrado, iniciando em zero.');
+});
+
+// Após cada inscrição bem-sucedida, incrementa o contador no doc config/vagas
+async function atualizarVagasNoServidor(tipo, chave) {
+  try {
+    const vagasRef = doc(db, 'config', 'vagas');
+    const campo = tipo === 'exp' ? \`turmas.\${chave}\` : \`cats.\${chave}\`;
+    const novoValor = tipo === 'exp'
+      ? (vagasContagem.turmas[chave] || 0) + 1
+      : (vagasContagem.cats[chave] || 0) + 1;
+    await updateDoc(vagasRef, { [campo]: novoValor }).catch(async () => {
+      // Doc não existe ainda — cria
+      const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+      await setDoc(vagasRef, {
+        turmas: { 1:0, 2:0, 3:0, 4:0 },
+        cats: { masc_ini:0, masc_int:0, fem_ini:0, fem_int:0 },
+        [campo.split('.')[0]]: { [campo.split('.')[1]]: novoValor }
+      }, { merge: true });
+    });
+  } catch(e) {
+    console.error('Erro ao atualizar vagas:', e);
+  }
+}
 
 function gerarProtocolo(tipo){
   const prefix = tipo==='exp'?'EXP':'S8';
@@ -1035,7 +1067,8 @@ function atualizarSelectCategorias(){
 window.selectModalTurma=function(n){
   const inscritos = vagasContagem.turmas[n] || 0;
   if(inscritos >= MAX_TURMA) return;
-  document.querySelectorAll('.modal-turma-card').forEach(c=>c.classList.remove('selected'));
+  // Deseleciona APENAS cards de turma (mtc*), não toca nos cards de categoria
+  for(let i=1;i<=4;i++){document.getElementById('mtc'+i)?.classList.remove('selected');}
   document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value=n;
   document.getElementById('mWaitExp').style.display='none';
@@ -1044,12 +1077,11 @@ window.selectModalCat=function(key){
   const inscritos = vagasContagem.cats[key] || 0;
   if(inscritos >= MAX_CAT) return;
   document.getElementById('m_tor_cat').value = key;
-  atualizarSelectCategorias(); // re-renderiza com novo selecionado
+  // Re-renderiza apenas o grid de categorias, nunca toca nas turmas
+  atualizarSelectCategorias();
   document.getElementById('mWaitTor').style.display='none';
 };
-window.onModalCatSelect=function(){
-  // mantido para compatibilidade — lógica migrou para selectModalCat
-};
+window.onModalCatSelect=function(){};
 
 // ===== PAGAMENTO =====
 window.selectPayMethod=function(method){
@@ -1108,7 +1140,7 @@ window.submitModalExp=async function(){
     btn.textContent='Salvando...';btn.disabled=true;
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){renderModalTurmas();atualizarSelectCategorias();}
+    if(!isWait){atualizarVagasNoServidor('exp', turma);}
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
@@ -1148,7 +1180,7 @@ window.submitModalTor=async function(){
     btn.textContent='Salvando...';btn.disabled=true;
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){atualizarSelectCategorias();}
+    if(!isWait){atualizarVagasNoServidor('tor', cat);}
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
@@ -1176,7 +1208,10 @@ window.finalizarInscricao=async function(){
     document.getElementById('pendProto').textContent=currentProtocolo;
     document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
     document.getElementById('mStepPendente').classList.add('active');
-  }catch(err){console.error(err);}
+  }catch(err){
+    console.error(err);
+    alert('Erro ao registrar pagamento. Sua inscrição foi salva, mas envie o comprovante pelo WhatsApp para confirmar.');
+  }
 };
 
 // ===== MÁSCARAS =====
@@ -1387,6 +1422,7 @@ window.filterTable=function(tbodyId,term){
   rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(t)?'':'none';});
 };
 window.exportCSV=function(tipo){
+  if(!auth.currentUser){alert('Acesso não autorizado.');return;}
   let rows,headers;
   const tNames={'1':'T1-08h','2':'T2-09h','3':'T3-10h','4':'T4-11h'};
   if(tipo==='exp'){
