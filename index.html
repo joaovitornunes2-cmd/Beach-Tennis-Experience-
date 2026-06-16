@@ -832,33 +832,8 @@ select option:disabled{color:#bbb;font-style:italic}
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
 <script type="module">
-/*
- * =====================================================================
- * REGRAS DE SEGURANÇA DO FIRESTORE — PUBLICAR NO FIREBASE CONSOLE
- * Firebase Console → Firestore → Regras → colar o bloco abaixo:
- * =====================================================================
- *
- * rules_version = '2';
- * service cloud.firestore {
- *   match /databases/{database}/documents {
- *     match /inscricoes/{docId} {
- *       allow create: if true;
- *       allow read, update, delete: if request.auth != null
- *         && request.auth.token.email == "joaovitornunes2@hotmail.com";
- *     }
- *     match /config/{docId} {
- *       allow read: if true;
- *       allow write: if true;
- *     }
- *   }
- * }
- *
- * USUÁRIO ADMIN — criar UMA VEZ via Firebase Console:
- *   Authentication → Add user → joaovitornunes2@hotmail.com → (senha forte)
- * =====================================================================
- */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, setDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
+import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -884,93 +859,49 @@ const PIX_TOR   = '00020101021226650014BR.GOV.BCB.PIX0122joao-vitor-63c@jim.com0
 const QR_EXP    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_exp_120.jpg.jpeg';
 const QR_TOR    = 'https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/qr_tor_100.jpg.jpeg';
 
-// ===== CONTROLE DE VAGAS VIA FIRESTORE (tempo real, servidor) =====
-// Conta inscrições reais do Firestore — nunca localStorage.
+// ===== CONTROLE DE VAGAS — FONTE ÚNICA DE VERDADE =====
+// Conta diretamente as inscrições reais do Firestore em tempo real.
 // Status 'pendente' e 'confirmado' ocupam vaga. 'espera' não ocupa.
-// Listener público atualiza o modal automaticamente quando alguém se inscreve.
+// Isso elimina qualquer contador auxiliar e garante consistência total.
 
 let vagasContagem = {
   turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
 
-// =====================================================================
-// CONTROLE DE VAGAS — lê e escuta doc público "config/vagas" no Firestore.
-// Regra pública: allow read: if true  (apenas leitura, sem auth necessária).
-// Quem ESCREVE nesse doc: a função atualizarVagasNoServidor() chamada
-// internamente após cada inscrição bem-sucedida (ela usa auth do admin
-// ou roda client-side com regra allow write: if true para simplificar).
-// IMPORTANTE: adicionar ao Firestore Rules:
-//   match /config/{docId} { allow read: if true; allow write: if true; }
-// =====================================================================
-
-async function sincronizarVagas() {
-  try {
-    const vagasDoc = await getDocs(query(collection(db, 'config')));
-    vagasDoc.forEach(d => {
-      if (d.id === 'vagas') {
-        normalizarVagas(d.data());
+// Listener público: escuta TODAS as inscrições com status pendente ou confirmado
+// e reconstrói o vagasContagem do zero a cada mudança — sem contador separado.
+const unsubVagasReal = onSnapshot(
+  query(
+    collection(db, 'inscricoes'),
+    where('status', 'in', ['pendente', 'confirmado'])
+  ),
+  (snapshot) => {
+    // Zera tudo antes de recontar
+    vagasContagem = {
+      turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
+      cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
+    };
+    snapshot.docs.forEach(d => {
+      const data = d.data();
+      if (data.tipo === 'exp' && data.turma) {
+        const t = Number(data.turma);
+        if (vagasContagem.turmas[t] !== undefined) {
+          vagasContagem.turmas[t]++;
+        }
+      } else if (data.tipo === 'tor' && data.cat) {
+        if (vagasContagem.cats[data.cat] !== undefined) {
+          vagasContagem.cats[data.cat]++;
+        }
       }
     });
     renderModalTurmas();
     atualizarSelectCategorias();
-  } catch(e) {
-    console.error('Erro ao sincronizar vagas:', e);
+  },
+  (err) => {
+    console.error('Erro ao escutar inscrições para vagas:', err);
   }
-}
-
-// Normaliza chaves de turmas para número (Firestore pode gravar como string ou int64)
-function normalizarVagas(data) {
-  if (data.turmas) {
-    const t = {};
-    for (const [k, v] of Object.entries(data.turmas)) { t[Number(k)] = Number(v); }
-    vagasContagem.turmas = {...vagasContagem.turmas, ...t};
-  }
-  if (data.cats) {
-    const c = {};
-    for (const [k, v] of Object.entries(data.cats)) { c[k] = Number(v); }
-    vagasContagem.cats = {...vagasContagem.cats, ...c};
-  }
-}
-
-// Listener em tempo real no doc público config/vagas (sem auth)
-const unsubVagas = onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
-  if (snap.exists()) {
-    normalizarVagas(snap.data());
-    renderModalTurmas();
-    atualizarSelectCategorias();
-  }
-}, (err) => {
-  console.warn('config/vagas nao encontrado, iniciando em zero.');
-});
-
-// Após cada inscrição bem-sucedida, incrementa o contador no doc config/vagas
-async function atualizarVagasNoServidor(tipo, chave) {
-  try {
-    const vagasRef = doc(db, 'config', 'vagas');
-    // Monta o campo no formato "turmas.1" ou "cats.masc_ini"
-    const prefixo = tipo === 'exp' ? 'turmas' : 'cats';
-    const campo = prefixo + '.' + chave;
-    const novoValor = tipo === 'exp'
-      ? (vagasContagem.turmas[chave] || 0) + 1
-      : (vagasContagem.cats[chave] || 0) + 1;
-    try {
-      // Tenta atualizar (doc já existe)
-      await updateDoc(vagasRef, { [campo]: novoValor });
-    } catch(updateErr) {
-      // Doc não existe ainda — cria com setDoc (importado estaticamente no topo)
-      const inicial = {
-        turmas: { '1':0, '2':0, '3':0, '4':0 },
-        cats: { masc_ini:0, masc_int:0, fem_ini:0, fem_int:0 }
-      };
-      if (tipo === 'exp') { inicial.turmas[chave] = novoValor; }
-      else                { inicial.cats[chave]   = novoValor; }
-      await setDoc(vagasRef, inicial);
-    }
-  } catch(e) {
-    console.error('Erro ao atualizar vagas:', e);
-  }
-}
+);
 
 function gerarProtocolo(tipo){
   const prefix = tipo==='exp'?'EXP':'S8';
@@ -1046,7 +977,6 @@ function renderModalTurmas(){
   }
 }
 
-// Renderiza cards visuais de categoria do Super 8 (igual às turmas de iniciação)
 function atualizarSelectCategorias(){
   const grid = document.getElementById('mCatsGrid');
   if(!grid) return;
@@ -1082,7 +1012,6 @@ function atualizarSelectCategorias(){
 window.selectModalTurma=function(n){
   const inscritos = vagasContagem.turmas[n] || 0;
   if(inscritos >= MAX_TURMA) return;
-  // Deseleciona APENAS cards de turma (mtc*), não toca nos cards de categoria
   for(let i=1;i<=4;i++){document.getElementById('mtc'+i)?.classList.remove('selected');}
   document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value=n;
@@ -1092,11 +1021,9 @@ window.selectModalCat=function(key){
   const inscritos = vagasContagem.cats[key] || 0;
   if(inscritos >= MAX_CAT) return;
   document.getElementById('m_tor_cat').value = key;
-  // Re-renderiza apenas o grid de categorias, nunca toca nas turmas
   atualizarSelectCategorias();
   document.getElementById('mWaitTor').style.display='none';
 };
-window.onModalCatSelect=function(){};
 
 // ===== PAGAMENTO =====
 window.selectPayMethod=function(method){
@@ -1134,6 +1061,8 @@ function setupPixUI(tipo){
 }
 
 // ===== SUBMIT EXPERIÊNCIA =====
+// Verifica vagas consultando o Firestore ao vivo no momento do submit,
+// evitando condição de corrida entre usuários simultâneos.
 window.submitModalExp=async function(){
   const nome=document.getElementById('m_exp_nome').value.trim();
   const cpf=document.getElementById('m_exp_cpf').value.trim();
@@ -1144,19 +1073,34 @@ window.submitModalExp=async function(){
   const turma=document.getElementById('m_exp_turma').value;
   const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
-  const isWait=(vagasContagem.turmas[turma]||0)>=MAX_TURMA;
-  const protocolo=gerarProtocolo('exp');
-  currentProtocolo=protocolo;
-  const entry={protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
-    status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
-  currentEntry={...entry,turma};
+
+  const btn=document.querySelector('#mStepExp .btn-modal-next');
+  btn.textContent='Verificando vagas...';btn.disabled=true;
+
   try{
-    const btn=document.querySelector('#mStepExp .btn-modal-next');
-    btn.textContent='Salvando...';btn.disabled=true;
+    // Consulta ao vivo para checar vagas reais no momento do clique
+    const snapCheck = await getDocs(
+      query(
+        collection(db, 'inscricoes'),
+        where('tipo', '==', 'exp'),
+        where('turma', '==', String(turma)),
+        where('status', 'in', ['pendente', 'confirmado'])
+      )
+    );
+    const isWait = snapCheck.size >= MAX_TURMA;
+
+    const protocolo=gerarProtocolo('exp');
+    currentProtocolo=protocolo;
+    const entry={protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
+      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+    currentEntry={...entry,turma};
+
+    btn.textContent='Salvando...';
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){atualizarVagasNoServidor('exp', turma);}
+
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
+
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
       document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -1168,12 +1112,12 @@ window.submitModalExp=async function(){
     }
   }catch(err){
     console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
-    const btn=document.querySelector('#mStepExp .btn-modal-next');
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
 
 // ===== SUBMIT TORNEIO =====
+// Mesma lógica: verifica vagas ao vivo no Firestore antes de salvar.
 window.submitModalTor=async function(){
   const nome=document.getElementById('m_tor_nome').value.trim();
   const cpf=document.getElementById('m_tor_cpf').value.trim();
@@ -1183,20 +1127,35 @@ window.submitModalTor=async function(){
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
-  const isWait=(vagasContagem.cats[cat]||0)>=MAX_CAT;
-  const protocolo=gerarProtocolo('tor');
-  currentProtocolo=protocolo;
-  const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
-  const entry={protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
-    status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
-  currentEntry={...entry};
+
+  const btn=document.querySelector('#mStepTor .btn-modal-next');
+  btn.textContent='Verificando vagas...';btn.disabled=true;
+
   try{
-    const btn=document.querySelector('#mStepTor .btn-modal-next');
-    btn.textContent='Salvando...';btn.disabled=true;
+    // Consulta ao vivo para checar vagas reais no momento do clique
+    const snapCheck = await getDocs(
+      query(
+        collection(db, 'inscricoes'),
+        where('tipo', '==', 'tor'),
+        where('cat', '==', cat),
+        where('status', 'in', ['pendente', 'confirmado'])
+      )
+    );
+    const isWait = snapCheck.size >= MAX_CAT;
+
+    const protocolo=gerarProtocolo('tor');
+    currentProtocolo=protocolo;
+    const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+    const entry={protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
+      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+    currentEntry={...entry};
+
+    btn.textContent='Salvando...';
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
-    if(!isWait){atualizarVagasNoServidor('tor', cat);}
+
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
+
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
       document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -1208,7 +1167,6 @@ window.submitModalTor=async function(){
     }
   }catch(err){
     console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
-    const btn=document.querySelector('#mStepTor .btn-modal-next');
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
@@ -1241,23 +1199,15 @@ window.buscaCEP=async function(form){
 };
 
 // ===== ADMIN =====
-// SEGURANÇA: autenticação via Firebase Auth (senha validada no servidor).
-// Para criar o usuário admin, execute UMA VEZ no console do Firebase:
-//   firebase auth:create-user --email joaovitornunes2@hotmail.com --password SUA_SENHA_FORTE
-// A senha NUNCA deve aparecer neste arquivo.
-
 let unsubscribeAdmin = null;
 let allInscricoes    = [];
 
-// Escuta mudanças de estado de autenticação (login/logout persistente na aba)
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Usuário autenticado — mostra painel principal se o panel estiver aberto
     if (document.getElementById('adminPanel').classList.contains('open')) {
       mostrarPainelPrincipal();
     }
   } else {
-    // Usuário deslogado — garante que o painel principal fique oculto
     if (unsubscribeAdmin) { unsubscribeAdmin(); unsubscribeAdmin = null; }
     document.getElementById('adminLoginScreen').style.display = 'block';
     document.getElementById('adminMainScreen').style.display  = 'none';
@@ -1284,7 +1234,7 @@ window.toggleAdmin = function() {
 };
 
 window.doAdminLogin = async function() {
-  const email = 'joaovitornunes2@hotmail.com'; // e-mail fixo do admin do evento
+  const email = 'joaovitornunes2@hotmail.com';
   const senha = document.getElementById('adminPwdInput').value;
   const errEl = document.getElementById('adminLoginErr');
   const btnEl = document.querySelector('.admin-login-btn');
@@ -1293,7 +1243,6 @@ window.doAdminLogin = async function() {
   btnEl.textContent = 'Entrando...';
   try {
     await signInWithEmailAndPassword(auth, email, senha);
-    // onAuthStateChanged acima chama mostrarPainelPrincipal() automaticamente
     errEl.style.display = 'none';
   } catch (err) {
     errEl.style.display = 'block';
@@ -1307,7 +1256,6 @@ window.doAdminLogin = async function() {
 
 window.doAdminLogout = async function() {
   await signOut(auth);
-  // onAuthStateChanged cuida do resto
 };
 
 function mostrarPainelPrincipal() {
@@ -1316,9 +1264,6 @@ function mostrarPainelPrincipal() {
   iniciarListenerFirebase();
 }
 
-// ===== PROTEÇÃO CONTRA XSS =====
-// Todos os dados dinâmicos vindos do Firestore passam por esta função
-// antes de serem inseridos no HTML do painel.
 function esc(str) {
   return String(str ?? '–')
     .replace(/&/g, '&amp;')
@@ -1345,18 +1290,15 @@ function formatarNasc(n){if(!n)return'–';const[y,m,d]=n.split('-');return`${d}
 function badgePgto(p){if(!p||p==='–')return'<span class="badge badge-espera">–</span>';if(p==='pix')return'<span class="badge badge-exp">Pix</span>';if(p==='card')return'<span class="badge badge-tor">Cartão</span>';return`<span class="badge">${p}</span>`;}
 function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">✅ Confirmado</span>';if(s==='pendente')return'<span class="badge badge-pendente">⏳ Pendente</span>';if(s==='espera')return'<span class="badge badge-espera">📋 Espera</span>';return`<span class="badge">${s}</span>`;}
 
-// Confirmar pagamento pelo admin
 window.confirmarPgto=async function(id){
   const insc=allInscricoes.find(i=>i.id===id);
   if(!insc)return;
-  // Guard: evita confirmação duplicada
   if(insc.status==='confirmado'){alert('Este pagamento já foi confirmado anteriormente.');return;}
   const btn=document.querySelector('[data-docid="'+id+'"]');
   const nome=insc.nome||'';const tel=insc.tel||'';const protocolo=insc.protocolo||'';
   const tipo=insc.tipo||'';const turmaOuCat=tipo==='exp'?(turmaNames[insc.turma]||insc.turma||''):(insc.categoria||insc.cat||'');
   if(!confirm('Confirmar pagamento de '+nome+'?'))return;
   if(btn){btn.disabled=true;btn.textContent='Confirmando...';}
-  // Abrir WhatsApp ANTES do await para evitar bloqueio do navegador
   const telLimpo=tel.replace(/\D/g,'');
   const telWA=telLimpo.startsWith('55')?telLimpo:'55'+telLimpo;
   const tipoLabel=tipo==='exp'?'Experiência para Iniciantes':'Torneio Super 8';
@@ -1460,9 +1402,6 @@ window.exportCSV=function(tipo){
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
 document.querySelectorAll('.what-card,.prof-card,.tl-item').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';observer.observe(el);});
 window.toggleMenu=function(){document.getElementById('navLinks').classList.toggle('open');};
-
-// Garante sincronização de vagas ao carregar a página
-sincronizarVagas();
 </script>
 </body>
 </html>
