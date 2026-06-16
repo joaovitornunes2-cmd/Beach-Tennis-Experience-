@@ -1142,10 +1142,14 @@ function badgePgto(p){if(!p||p==='–')return'<span class="badge badge-espera">�
 function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">✅ Confirmado</span>';if(s==='pendente')return'<span class="badge badge-pendente">⏳ Pendente</span>';if(s==='espera')return'<span class="badge badge-espera">📋 Espera</span>';return`<span class="badge">${s}</span>`;}
 
 // Confirmar pagamento pelo admin
-window.confirmarPagamento=async function(btn){
-  const id=btn.dataset.id,nome=btn.dataset.nome,tel=btn.dataset.tel,protocolo=btn.dataset.proto,tipo=btn.dataset.tipo,turmaOuCat=btn.dataset.turmacat;
+window.confirmarPgto=async function(id){
+  const insc=allInscricoes.find(i=>i.id===id);
+  if(!insc)return;
+  const btn=document.querySelector('button[onclick=\'confirmarPgto("'+id+'")\'');
+  const nome=insc.nome||'';const tel=insc.tel||'';const protocolo=insc.protocolo||'';
+  const tipo=insc.tipo||'';const turmaOuCat=tipo==='exp'?(turmaNames[insc.turma]||insc.turma||''):(insc.categoria||insc.cat||'');
   if(!confirm('Confirmar pagamento de '+nome+'?'))return;
-  btn.disabled=true;btn.textContent='Confirmando...';
+  if(btn){btn.disabled=true;btn.textContent='Confirmando...';}
   try{
     await updateDoc(doc(db,'inscricoes',id),{status:'confirmado'});
     const telLimpo=tel.replace(/\D/g,'');
@@ -1154,7 +1158,7 @@ window.confirmarPagamento=async function(btn){
     const detalhe=tipo==='exp'?'🕐 Horário: '+turmaOuCat:'🏆 Categoria: '+turmaOuCat;
     const msg=encodeURIComponent('Olá, '+nome+'! 🎾\n\nSeu pagamento foi confirmado e sua inscrição está *garantida* na *Beach Tennis Experience*!\n\n✅ *Inscrição confirmada*\n📋 Protocolo: *'+protocolo+'*\n🎯 Modalidade: *'+tipoLabel+'*\n'+detalhe+'\n🗓 Data: *20 de Junho de 2026*\n📍 Local: *SkyFit Passeio das Águas – Goiânia/GO*\n\nNos vemos na quadra! 🏖️\n_Equipe Beach Tennis Experience_');
     window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
-  }catch(err){console.error(err);btn.disabled=false;btn.textContent='Confirmar Pgto';}
+  }catch(err){console.error(err);if(btn){btn.disabled=false;btn.textContent='Confirmar Pgto';}}
 };
 
 function renderAdminTabelas(){
@@ -1201,7 +1205,7 @@ function renderAdminTabelas(){
         <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
         <td>${badgePgto(e.pagamento)}</td>
         <td>${formatarData(e.criadoEm)}</td>
-        <td><button class="btn-confirmar-pgto" onclick="confirmarPagamento(this)" data-id="${e.id}" data-nome="${(e.nome||'').replace(/"/g,'&quot;')}" data-tel="${e.tel||''}" data-proto="${e.protocolo||''}" data-tipo="${e.tipo||''}" data-turmacat="${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||''):(e.categoria||e.cat||'')}">✅ Confirmar Pgto</button></td>
+        <td><button class='btn-confirmar-pgto' onclick='confirmarPgto("'+e.id+'")'>✅ Confirmar Pgto</button></td>
       </tr>`).join('')
     :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
 
