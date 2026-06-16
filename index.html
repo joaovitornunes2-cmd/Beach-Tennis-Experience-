@@ -822,9 +822,32 @@ tbody tr:hover td{background:#fafafa}
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
 <script type="module">
+/*
+ * =====================================================================
+ * REGRAS DE SEGURANÇA DO FIRESTORE — PUBLICAR NO FIREBASE CONSOLE
+ * Firebase Console → Firestore → Regras → colar o bloco abaixo:
+ * =====================================================================
+ *
+ * rules_version = '2';
+ * service cloud.firestore {
+ *   match /databases/{database}/documents {
+ *     match /inscricoes/{docId} {
+ *       allow create: if true;
+ *       allow read, update, delete: if request.auth != null
+ *         && request.auth.token.email == "admin@beachtennisexp.com";
+ *     }
+ *   }
+ * }
+ *
+ * USUÁRIO ADMIN — criar UMA VEZ via Firebase Console:
+ *   Authentication → Add user → admin@beachtennisexp.com → (senha forte)
+ * =====================================================================
+ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, query, orderBy, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCCuHPBx9kd87AQHy8z3WU6Nlx6OL6Ads",
@@ -834,8 +857,9 @@ const firebaseConfig = {
   messagingSenderId: "997128122804",
   appId: "1:997128122804:web:991c9e3f87390518df82e1"
 };
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+const app  = initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
 
 // ===== CONSTANTES =====
 const MAX_TURMA = 6;
@@ -1079,49 +1103,91 @@ window.buscaCEP=async function(form){
 };
 
 // ===== ADMIN =====
-const ADMIN_PASSWORD='bte2025@';
-let adminLogado=false;
-let unsubscribeAdmin=null;
-let allInscricoes=[];
+// SEGURANÇA: autenticação via Firebase Auth (senha validada no servidor).
+// Para criar o usuário admin, execute UMA VEZ no console do Firebase:
+//   firebase auth:create-user --email admin@beachtennisexp.com --password SUA_SENHA_FORTE
+// A senha NUNCA deve aparecer neste arquivo.
 
-window.toggleAdmin=function(){
-  const p=document.getElementById('adminPanel');
-  if(p.classList.contains('open')){
+let unsubscribeAdmin = null;
+let allInscricoes    = [];
+
+// Escuta mudanças de estado de autenticação (login/logout persistente na aba)
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // Usuário autenticado — mostra painel principal se o panel estiver aberto
+    if (document.getElementById('adminPanel').classList.contains('open')) {
+      mostrarPainelPrincipal();
+    }
+  } else {
+    // Usuário deslogado — garante que o painel principal fique oculto
+    if (unsubscribeAdmin) { unsubscribeAdmin(); unsubscribeAdmin = null; }
+    document.getElementById('adminLoginScreen').style.display = 'block';
+    document.getElementById('adminMainScreen').style.display  = 'none';
+  }
+});
+
+window.toggleAdmin = function() {
+  const p = document.getElementById('adminPanel');
+  if (p.classList.contains('open')) {
     p.classList.remove('open');
-    if(unsubscribeAdmin){unsubscribeAdmin();unsubscribeAdmin=null;}
+    if (unsubscribeAdmin) { unsubscribeAdmin(); unsubscribeAdmin = null; }
   } else {
     p.classList.add('open');
-    document.getElementById('adminLoginErr').style.display='none';
-    document.getElementById('adminPwdInput').value='';
-    if(adminLogado){mostrarPainelPrincipal();}
-    else{
-      document.getElementById('adminLoginScreen').style.display='block';
-      document.getElementById('adminMainScreen').style.display='none';
-      setTimeout(()=>document.getElementById('adminPwdInput').focus(),100);
+    document.getElementById('adminLoginErr').style.display = 'none';
+    document.getElementById('adminPwdInput').value = '';
+    if (auth.currentUser) {
+      mostrarPainelPrincipal();
+    } else {
+      document.getElementById('adminLoginScreen').style.display = 'block';
+      document.getElementById('adminMainScreen').style.display  = 'none';
+      setTimeout(() => document.getElementById('adminPwdInput').focus(), 100);
     }
   }
 };
-window.doAdminLogin=function(){
-  if(document.getElementById('adminPwdInput').value===ADMIN_PASSWORD){
-    adminLogado=true;
-    document.getElementById('adminLoginErr').style.display='none';
-    mostrarPainelPrincipal();
-  } else {
-    document.getElementById('adminLoginErr').style.display='block';
-    document.getElementById('adminPwdInput').value='';
+
+window.doAdminLogin = async function() {
+  const email = 'admin@beachtennisexp.com'; // e-mail fixo do admin do evento
+  const senha = document.getElementById('adminPwdInput').value;
+  const errEl = document.getElementById('adminLoginErr');
+  const btnEl = document.querySelector('.admin-login-btn');
+  if (!senha) return;
+  btnEl.disabled = true;
+  btnEl.textContent = 'Entrando...';
+  try {
+    await signInWithEmailAndPassword(auth, email, senha);
+    // onAuthStateChanged acima chama mostrarPainelPrincipal() automaticamente
+    errEl.style.display = 'none';
+  } catch (err) {
+    errEl.style.display = 'block';
+    document.getElementById('adminPwdInput').value = '';
     document.getElementById('adminPwdInput').focus();
+  } finally {
+    btnEl.disabled = false;
+    btnEl.textContent = 'Entrar no painel';
   }
 };
-window.doAdminLogout=function(){
-  adminLogado=false;
-  if(unsubscribeAdmin){unsubscribeAdmin();unsubscribeAdmin=null;}
-  document.getElementById('adminLoginScreen').style.display='block';
-  document.getElementById('adminMainScreen').style.display='none';
+
+window.doAdminLogout = async function() {
+  await signOut(auth);
+  // onAuthStateChanged cuida do resto
 };
-function mostrarPainelPrincipal(){
-  document.getElementById('adminLoginScreen').style.display='none';
-  document.getElementById('adminMainScreen').style.display='block';
+
+function mostrarPainelPrincipal() {
+  document.getElementById('adminLoginScreen').style.display = 'none';
+  document.getElementById('adminMainScreen').style.display  = 'block';
   iniciarListenerFirebase();
+}
+
+// ===== PROTEÇÃO CONTRA XSS =====
+// Todos os dados dinâmicos vindos do Firestore passam por esta função
+// antes de serem inseridos no HTML do painel.
+function esc(str) {
+  return String(str ?? '–')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 function iniciarListenerFirebase(){
@@ -1145,6 +1211,8 @@ function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">
 window.confirmarPgto=async function(id){
   const insc=allInscricoes.find(i=>i.id===id);
   if(!insc)return;
+  // Guard: evita confirmação duplicada
+  if(insc.status==='confirmado'){alert('Este pagamento já foi confirmado anteriormente.');return;}
   const btn=document.querySelector('[data-docid="'+id+'"]');
   const nome=insc.nome||'';const tel=insc.tel||'';const protocolo=insc.protocolo||'';
   const tipo=insc.tipo||'';const turmaOuCat=tipo==='exp'?(turmaNames[insc.turma]||insc.turma||''):(insc.categoria||insc.cat||'');
@@ -1177,46 +1245,46 @@ function renderAdminTabelas(){
   document.getElementById('tbodyExp').innerHTML=exp.length
     ?exp.map((e,i)=>`<tr>
         <td>${i+1}</td>
-        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
-        <td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
-        <td>${formatarNasc(e.nasc)}</td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
-        <td><span class="badge badge-exp">${turmaNames[e.turma]||e.turma||'–'}</span></td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
+        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
+        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
+        <td><span class="badge badge-exp">${esc(turmaNames[e.turma]||e.turma)}</span></td>
         <td>${e.praticou==='sim'?'Sim':'Não'}</td>
         <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${formatarData(e.criadoEm)}</td><td>–</td></tr>`).join('')
+        <td>${esc(formatarData(e.criadoEm))}</td><td>–</td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="13">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
   document.getElementById('tbodyTor').innerHTML=tor.length
     ?tor.map((e,i)=>`<tr>
         <td>${i+1}</td>
-        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
-        <td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
-        <td>${formatarNasc(e.nasc)}</td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
-        <td><span class="badge badge-tor">${e.categoria||e.cat||'–'}</span></td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
+        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
+        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
+        <td><span class="badge badge-tor">${esc(e.categoria||e.cat)}</span></td>
         <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${formatarData(e.criadoEm)}</td><td>–</td></tr>`).join('')
+        <td>${esc(formatarData(e.criadoEm))}</td><td>–</td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
   document.getElementById('tbodyPend').innerHTML=pend.length
     ?pend.map((e,i)=>`<tr>
         <td>${i+1}</td>
-        <td><span style="font-family:monospace;font-size:.72rem;background:#fff3e0;padding:.15rem .5rem;border-radius:4px">${e.protocolo||'–'}</span></td>
-        <td><strong>${e.nome}</strong></td><td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#fff3e0;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
+        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
         <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
-        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
+        <td>${e.tipo==='exp'?esc(turmaNames[e.turma]||e.turma):esc(e.categoria||e.cat)}</td>
         <td>${badgePgto(e.pagamento)}</td>
-        <td>${formatarData(e.criadoEm)}</td>
-        <td><button class='btn-confirmar-pgto' data-docid='${e.id}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button></td>
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td><button class='btn-confirmar-pgto' data-docid='${esc(e.id)}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button></td>
       </tr>`).join('')
     :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
 
   document.getElementById('tbodyWait').innerHTML=wait.length
     ?wait.map((e,i)=>`<tr>
-        <td>${i+1}</td><td><strong>${e.nome}</strong></td><td>${e.cpf||'–'}</td>
-        <td>${e.tel||'–'}</td><td>${e.email||'–'}</td>
+        <td>${i+1}</td><td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
+        <td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
         <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
-        <td>${e.tipo==='exp'?(turmaNames[e.turma]||e.turma||'–'):(e.categoria||e.cat||'–')}</td>
-        <td>${formatarData(e.criadoEm)}</td></tr>`).join('')
+        <td>${e.tipo==='exp'?esc(turmaNames[e.turma]||e.turma):esc(e.categoria||e.cat)}</td>
+        <td>${esc(formatarData(e.criadoEm))}</td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="8">Nenhuma pessoa em lista de espera.</td></tr>`;
 }
 
