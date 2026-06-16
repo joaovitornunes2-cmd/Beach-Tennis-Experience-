@@ -1156,7 +1156,7 @@ window.confirmarPgto=async function(id){
     const telWA=telLimpo.startsWith('55')?telLimpo:'55'+telLimpo;
     const tipoLabel=tipo==='exp'?'Experiência para Iniciantes':'Torneio Super 8';
     const detalhe=tipo==='exp'?'🕐 Horário: '+turmaOuCat:'🏆 Categoria: '+turmaOuCat;
-    const msg=encodeURIComponent('Olá, '+nome+'! 🎾\n\nSeu pagamento foi confirmado e sua inscrição está *garantida* na *Beach Tennis Experience*!\n\n✅ *Inscrição confirmada*\n📋 Protocolo: *'+protocolo+'*\n🎯 Modalidade: *'+tipoLabel+'*\n'+detalhe+'\n🗓 Data: *20 de Junho de 2026*\n📍 Local: *SkyFit Passeio das Águas – Goiânia/GO*\n\nNos vemos na quadra! 🏖️\n_Equipe Beach Tennis Experience_');
+    const msg=encodeURIComponent('Olá, '+nome+'! 🎾\n\nSeu pagamento foi confirmado e sua inscrição está *garantida* na *Beach Tennis Experience*!\n\n✅ Inscrição confirmada\n🔑 Protocolo: *'+protocolo+'*\n🎾 Modalidade: *'+tipoLabel+'*\n'+detalhe+'\n📅 Data: *20 de Junho de 2026*\n📍 Local: *SkyFit Passeio das Águas – Goiânia/GO*\n\nNos vemos na quadra! 🏖️\n_Equipe Beach Tennis Experience_');
     window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
   }catch(err){console.error(err);if(btn){btn.disabled=false;btn.textContent='Confirmar Pgto';}}
 };
