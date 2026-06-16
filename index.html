@@ -1462,8 +1462,9 @@ window.exportCSV=function(tipo){
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
 document.querySelectorAll('.what-card,.prof-card,.tl-item').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';observer.observe(el);});
 window.toggleMenu=function(){document.getElementById('navLinks').classList.toggle('open');};
+
+// Garante sincronização de vagas ao carregar a página
+sincronizarVagas();
 </script>
 </body>
 </html>
-
-
