@@ -848,6 +848,8 @@ let vagasContagem = {
   turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
+// Flag: impede que os cards sejam renderizados antes do Firebase responder
+let vagasCarregadas = false;
 
 const unsubVagasReal = onSnapshot(
   query(
@@ -868,6 +870,7 @@ const unsubVagasReal = onSnapshot(
         if (vagasContagem.cats[data.cat] !== undefined) vagasContagem.cats[data.cat]++;
       }
     });
+    vagasCarregadas = true;
     renderModalTurmas();
     atualizarSelectCategorias();
   },
@@ -917,6 +920,12 @@ window.goToForm=function(){
   document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
   renderModalTurmas();
   atualizarSelectCategorias();
+  // Se o Firebase ainda não respondeu, aguarda e re-renderiza quando chegar
+  if(!vagasCarregadas){
+    const waitRender = setInterval(()=>{
+      if(vagasCarregadas){ renderModalTurmas(); atualizarSelectCategorias(); clearInterval(waitRender); }
+    }, 200);
+  }
 };
 window.backToChoice=function(){
   document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -933,6 +942,10 @@ window.backToFormFromPay=function(){
 function renderModalTurmas(){
   const grid=document.getElementById('mTurmasGrid');
   if(!grid)return;
+  if(!vagasCarregadas){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:.75rem;color:#888;font-size:.85rem;display:flex;align-items:center;justify-content:center;gap:.5rem"><div class="spinner"></div> Verificando vagas disponíveis...</div>';
+    return;
+  }
   const horarios=['08h – 09h','09h – 10h','10h – 11h','11h – 12h'];
   grid.innerHTML='';
   const selVal=document.getElementById('m_exp_turma')?.value;
@@ -951,6 +964,10 @@ function renderModalTurmas(){
 function atualizarSelectCategorias(){
   const grid = document.getElementById('mCatsGrid');
   if(!grid) return;
+  if(!vagasCarregadas){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:.75rem;color:#888;font-size:.85rem;display:flex;align-items:center;justify-content:center;gap:.5rem"><div class="spinner"></div> Verificando vagas disponíveis...</div>';
+    return;
+  }
   const cats = [
     { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante'      },
     { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário'  },
