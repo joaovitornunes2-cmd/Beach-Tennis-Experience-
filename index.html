@@ -906,12 +906,10 @@ let vagasContagem = {
 
 async function sincronizarVagas() {
   try {
-    const snap = await getDocs(query(collection(db, 'config')));
-    snap.forEach(d => {
+    const vagasDoc = await getDocs(query(collection(db, 'config')));
+    vagasDoc.forEach(d => {
       if (d.id === 'vagas') {
-        const data = d.data();
-        if (data.turmas) vagasContagem.turmas = {...vagasContagem.turmas, ...data.turmas};
-        if (data.cats)   vagasContagem.cats   = {...vagasContagem.cats,   ...data.cats};
+        normalizarVagas(d.data());
       }
     });
     renderModalTurmas();
