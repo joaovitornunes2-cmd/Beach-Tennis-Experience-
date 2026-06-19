@@ -301,17 +301,12 @@ tbody tr:hover td{background:#fafafa}
 .pay-method-desc{font-size:.75rem;color:#888;margin-top:.2rem}
 .pay-detail-box{display:none;margin-top:.5rem}
 .pay-detail-box.active{display:block}
-
-/* PIX — processado via WhatsApp (sem QR Code) */
-
-/* CARTÃO */
 .card-container{background:#fff8e1;border:1px solid #ffe082;border-radius:12px;padding:1.25rem;text-align:center}
 .card-icon-big{font-size:2.5rem;margin-bottom:.75rem}
 .card-title{font-weight:700;font-size:1rem;color:#111;margin-bottom:.5rem}
 .card-desc{font-size:.875rem;color:#555;line-height:1.6;margin-bottom:1rem}
 .btn-card-wa{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#25D366;color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:background .2s;width:100%}
 .btn-card-wa:hover{background:#1ebe5d}
-/* SUCESSO PENDENTE */
 .modal-pendente{text-align:center;padding:1rem 0}
 .pendente-ico{font-size:3.5rem;margin-bottom:1rem}
 .pendente-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem}
@@ -329,6 +324,22 @@ tbody tr:hover td{background:#fafafa}
 }
 
 select option:disabled{color:#bbb;font-style:italic}
+
+/* ===== CONFIG TOGGLES ===== */
+.config-section{padding:1.25rem 0}
+.config-group{margin-bottom:1.75rem}
+.config-group-title{font-size:.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.875rem}
+.config-toggles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem}
+.config-toggle-row{display:flex;align-items:center;justify-content:space-between;background:#f9f9f9;border:1.5px solid #eee;border-radius:10px;padding:.75rem 1rem;transition:border-color .2s}
+.config-toggle-row:hover{border-color:#CC1B1B}
+.config-toggle-label{font-size:.875rem;font-weight:600;color:#222}
+.config-toggle-sub{font-size:.72rem;color:#888;margin-top:.1rem}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:#ddd;border-radius:24px;transition:.3s}
+.toggle-slider:before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+input:checked + .toggle-slider{background:#2e7d32}
+input:checked + .toggle-slider:before{transform:translateX(20px)}
 </style>
 </head>
 <body>
@@ -389,7 +400,8 @@ select option:disabled{color:#bbb;font-style:italic}
         <a href="https://www.instagram.com/lupo_passeiodasaguas_goiania" target="_blank" rel="noopener noreferrer" class="sponsor-card" title="Lupo" style="padding:16px"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_lupo.jpg" alt="Lupo" style="object-fit:contain;object-position:center 58%"></a>
         <a href="https://www.instagram.com/dranubiacrispim" target="_blank" rel="noopener noreferrer" class="sponsor-card dark" title="Dra. Núbia Crispim" style="background:#000;padding:0"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/dra_nubia.jpg" alt="Dra. Núbia Crispim" style="object-fit:contain;transform:scale(1.15)"></a>
         <a href="https://www.instagram.com/instituto.vivasemdor" target="_blank" rel="noopener noreferrer" class="sponsor-card" title="Instituto Viva Sem Dor" style="background:#1a6b5a;padding:10px"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/logo_viva_sem_dor.jpg" alt="Instituto Viva Sem Dor" style="object-fit:contain;width:100%;height:100%"></a>
-<a href="https://www.fastspa.com.br" target="_blank" rel="noopener noreferrer" class="sponsor-card" title="Fast Spa"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/fast_spa.jpg" alt="Fast Spa" style="object-fit:contain;transform:scale(1.3)"></a>      </div>
+        <a href="https://www.fastspa.com.br" target="_blank" rel="noopener noreferrer" class="sponsor-card" title="Fast Spa"><img src="https://raw.githubusercontent.com/joaovitornunes2-cmd/Beach-Tennis-Experience-/main/images/fast_spa.jpg" alt="Fast Spa" style="object-fit:contain;transform:scale(1.3)"></a>
+      </div>
     </div>
   </div>
 </section>
@@ -605,6 +617,7 @@ select option:disabled{color:#bbb;font-style:italic}
           <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Super 8</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('pend')">⏳ Ag. Pagamento</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('wait')">📋 Lista Espera</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
         </div>
 
         <!-- TAB EXPERIÊNCIA -->
@@ -653,6 +666,56 @@ select option:disabled{color:#bbb;font-style:italic}
             <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
+
+        <!-- TAB CONFIGURAÇÕES -->
+        <div class="admin-section" id="admin-cfg">
+          <div class="config-section">
+            <div class="config-group">
+              <div class="config-group-title">🎾 Turmas — Experiência para Iniciantes</div>
+              <div class="config-toggles-grid">
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T1 — 08h às 09h</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t1" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T2 — 09h às 10h</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t2" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T3 — 10h às 11h</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t3" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T4 — 11h às 12h</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t4" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+            <div class="config-group">
+              <div class="config-group-title">🏆 Categorias — Super 8</div>
+              <div class="config-toggles-grid">
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">Masculino Iniciante</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_masc_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">Masculino Intermediário</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_masc_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">Feminino Iniciante</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_fem_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">Feminino Intermediário</div><div class="config-toggle-sub">Forçar como esgotada</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_fem_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:.8rem;color:#888;margin-top:.25rem">💡 Ativar o toggle força a turma/categoria a aparecer como <strong>Esgotada</strong> no site público, independentemente do número de inscritos. Salva automaticamente no Firebase.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -757,8 +820,6 @@ select option:disabled{color:#bbb;font-style:italic}
             <div class="pay-method-desc">Via WhatsApp</div>
           </div>
         </div>
-
-        <!-- PIX — redirecionamento para WhatsApp -->
         <div class="pay-detail-box" id="payDetailPix">
           <div class="card-container" style="background:#e8f5e9;border-color:#a5d6a7">
             <div class="card-icon-big">📱</div>
@@ -774,8 +835,6 @@ select option:disabled{color:#bbb;font-style:italic}
             <button class="btn-modal-next" onclick="finalizarInscricao()">Finalizei pelo WhatsApp →</button>
           </div>
         </div>
-
-        <!-- CARTÃO -->
         <div class="pay-detail-box" id="payDetailCard">
           <div class="card-container">
             <div class="card-icon-big">💳</div>
@@ -813,7 +872,7 @@ select option:disabled{color:#bbb;font-style:italic}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp }
+import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp, setDoc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -834,14 +893,25 @@ const auth = getAuth(app);
 const MAX_TURMA = 6;
 const MAX_CAT   = 8;
 const WA_NUM    = '5562998041804';
-// Pagamento via WhatsApp — Pix e Cartão processados manualmente pela organização
+
+// ===== CONFIG DE VAGAS FORÇADAS (admin pode sobrescrever) =====
+let configForcados = { turmas: {}, cats: {} };
+
+// Escuta config em tempo real para o site público
+onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
+  if (snap.exists()) {
+    const d = snap.data();
+    configForcados = { turmas: d.turmas || {}, cats: d.cats || {} };
+    renderModalTurmas();
+    atualizarSelectCategorias();
+  }
+});
 
 // ===== CONTROLE DE VAGAS — FONTE ÚNICA DE VERDADE =====
 let vagasContagem = {
   turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
-// Flag: impede que os cards sejam renderizados antes do Firebase responder
 let vagasCarregadas = false;
 
 const unsubVagasReal = onSnapshot(
@@ -913,7 +983,6 @@ window.goToForm=function(){
   document.getElementById(modalChoice==='exp'?'mStepExp':'mStepTor').classList.add('active');
   renderModalTurmas();
   atualizarSelectCategorias();
-  // Se o Firebase ainda não respondeu, aguarda e re-renderiza quando chegar
   if(!vagasCarregadas){
     const waitRender = setInterval(()=>{
       if(vagasCarregadas){ renderModalTurmas(); atualizarSelectCategorias(); clearInterval(waitRender); }
@@ -945,7 +1014,8 @@ function renderModalTurmas(){
   for(let i=1;i<=4;i++){
     const inscritos = vagasContagem.turmas[i] || 0;
     const restantes = MAX_TURMA - inscritos;
-    const isFull = restantes <= 0;
+    // Forçado pelo admin OU naturalmente esgotado
+    const isFull = restantes <= 0 || !!configForcados.turmas[String(i)];
     grid.innerHTML+=`<div class="modal-turma-card ${isFull?'full':''} ${selVal==i?'selected':''}" id="mtc${i}" ${isFull?'':'onclick="selectModalTurma('+i+')"'}>
       <div class="modal-turma-num">T${i}</div>
       <div class="modal-turma-hora">${horarios[i-1]}</div>
@@ -972,7 +1042,8 @@ function atualizarSelectCategorias(){
   for(const c of cats){
     const inscritos = vagasContagem.cats[c.key] || 0;
     const restantes = MAX_CAT - inscritos;
-    const isFull    = restantes <= 0;
+    // Forçado pelo admin OU naturalmente esgotado
+    const isFull    = restantes <= 0 || !!configForcados.cats[c.key];
     const isSelected = selVal === c.key;
     grid.innerHTML += `<div
       class="modal-turma-card ${isFull?'full':''} ${isSelected?'selected':''}"
@@ -992,7 +1063,7 @@ function atualizarSelectCategorias(){
 
 window.selectModalTurma=function(n){
   const inscritos = vagasContagem.turmas[n] || 0;
-  if(inscritos >= MAX_TURMA) return;
+  if(inscritos >= MAX_TURMA || configForcados.turmas[String(n)]) return;
   for(let i=1;i<=4;i++){document.getElementById('mtc'+i)?.classList.remove('selected');}
   document.getElementById('mtc'+n)?.classList.add('selected');
   document.getElementById('m_exp_turma').value=n;
@@ -1000,13 +1071,13 @@ window.selectModalTurma=function(n){
 };
 window.selectModalCat=function(key){
   const inscritos = vagasContagem.cats[key] || 0;
-  if(inscritos >= MAX_CAT) return;
+  if(inscritos >= MAX_CAT || configForcados.cats[key]) return;
   document.getElementById('m_tor_cat').value = key;
   atualizarSelectCategorias();
   document.getElementById('mWaitTor').style.display='none';
 };
 
-// ===== PAGAMENTO — PIX E CARTÃO VIA WHATSAPP =====
+// ===== PAGAMENTO =====
 window.selectPayMethod=function(method){
   currentPayMethod=method;
   document.getElementById('payMethodPix').classList.toggle('selected',method==='pix');
@@ -1028,7 +1099,6 @@ window.selectPayMethod=function(method){
 };
 
 function setupPixUI(tipo){
-  // Pix agora via WhatsApp — link montado em selectPayMethod
   const isExp = tipo === 'exp';
   document.getElementById('payValorDisplay').innerHTML = `R$ <span>${isExp ? '120' : '100'}</span>,00`;
 }
@@ -1049,25 +1119,15 @@ window.submitModalExp=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    // Verificar e-mail já cadastrado
-    const snapEmail = await getDocs(
-      query(collection(db, 'inscricoes'), where('email', '==', email))
-    );
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email)));
     if(snapEmail.size > 0){
       alert('Este e-mail já possui uma inscrição registrada. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
 
-    const snapCheck = await getDocs(
-      query(
-        collection(db, 'inscricoes'),
-        where('tipo', '==', 'exp'),
-        where('turma', '==', String(turma)),
-        where('status', 'in', ['pendente', 'confirmado'])
-      )
-    );
-    const isWait = snapCheck.size >= MAX_TURMA;
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', 'in', ['pendente', 'confirmado'])));
+    const isWait = snapCheck.size >= MAX_TURMA || !!configForcados.turmas[String(turma)];
 
     const protocolo=gerarProtocolo('exp');
     currentProtocolo=protocolo;
@@ -1111,25 +1171,15 @@ window.submitModalTor=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    // Verificar e-mail já cadastrado
-    const snapEmail = await getDocs(
-      query(collection(db, 'inscricoes'), where('email', '==', email))
-    );
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email)));
     if(snapEmail.size > 0){
       alert('Este e-mail já possui uma inscrição registrada. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
 
-    const snapCheck = await getDocs(
-      query(
-        collection(db, 'inscricoes'),
-        where('tipo', '==', 'tor'),
-        where('cat', '==', cat),
-        where('status', 'in', ['pendente', 'confirmado'])
-      )
-    );
-    const isWait = snapCheck.size >= MAX_CAT;
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', 'in', ['pendente', 'confirmado'])));
+    const isWait = snapCheck.size >= MAX_CAT || !!configForcados.cats[cat];
 
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
@@ -1246,7 +1296,48 @@ function mostrarPainelPrincipal() {
   document.getElementById('adminLoginScreen').style.display = 'none';
   document.getElementById('adminMainScreen').style.display  = 'block';
   iniciarListenerFirebase();
+  carregarConfig();
 }
+
+// ===== CONFIG ADMIN =====
+async function carregarConfig() {
+  try {
+    const snap = await getDoc(doc(db, 'config', 'vagas'));
+    if (snap.exists()) {
+      const d = snap.data();
+      configForcados = { turmas: d.turmas || {}, cats: d.cats || {} };
+    }
+    ['1','2','3','4'].forEach(t => {
+      const el = document.getElementById('cfg_t'+t);
+      if (el) el.checked = !!configForcados.turmas[t];
+    });
+    ['masc_ini','masc_int','fem_ini','fem_int'].forEach(c => {
+      const el = document.getElementById('cfg_'+c);
+      if (el) el.checked = !!configForcados.cats[c];
+    });
+    renderModalTurmas();
+    atualizarSelectCategorias();
+  } catch(e) { console.error('Erro ao carregar config:', e); }
+}
+
+window.salvarConfig = async function() {
+  const turmas = {};
+  ['1','2','3','4'].forEach(t => {
+    const el = document.getElementById('cfg_t'+t);
+    if (el) turmas[t] = el.checked;
+  });
+  const cats = {};
+  ['masc_ini','masc_int','fem_ini','fem_int'].forEach(c => {
+    const el = document.getElementById('cfg_'+c);
+    if (el) cats[c] = el.checked;
+  });
+  configForcados = { turmas, cats };
+  try {
+    await setDoc(doc(db, 'config', 'vagas'), { turmas, cats });
+  } catch(e) { console.error('Erro ao salvar config:', e); }
+  renderModalTurmas();
+  atualizarSelectCategorias();
+};
 
 function esc(str) {
   return String(str ?? '–')
@@ -1350,7 +1441,7 @@ function renderAdminTabelas(){
 }
 
 window.switchAdminTab=function(tab){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait'][i]===tab));
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','cfg'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('admin-'+tab).classList.add('active');
 };
