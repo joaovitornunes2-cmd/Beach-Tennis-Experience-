@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Beach Tennis Experience – 20 de Junho. Aulas guiadas para iniciantes e Torneio Super 8 para praticantes. Shopping Passeio das Águas, Academia Skyfit, Goiânia.">
-<title>Beach Tennis Experience – 20 de Junho</title>
+<meta name="description" content="2ª Edição Beach Tennis Experience – 22 de Agosto. Torneio Super 8 competitivo para praticantes. Shopping Passeio das Águas, Academia Skyfit, Goiânia.">
+<title>2ª Edição Beach Tennis Experience – 22 de Agosto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
@@ -340,6 +340,49 @@ select option:disabled{color:#bbb;font-style:italic}
 .toggle-slider:before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
 input:checked + .toggle-slider{background:#2e7d32}
 input:checked + .toggle-slider:before{transform:translateX(20px)}
+/* ===== AVALIAÇÕES ===== */
+.aval-section{background:#111111;padding:5rem 2rem}
+.aval-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:2.5rem}
+.aval-card{background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s}
+.aval-card:hover{border-color:rgba(204,27,27,.4)}
+.aval-stars{display:flex;gap:3px}
+.aval-star{color:#CC1B1B;font-size:1rem}
+.aval-star.empty{color:#333}
+.aval-texto{font-size:.9rem;color:rgba(255,255,255,.75);line-height:1.7;flex:1;font-style:italic}
+.aval-autor{display:flex;align-items:center;gap:.875rem;margin-top:.5rem}
+.aval-avatar{width:40px;height:40px;border-radius:50%;background:#CC1B1B;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#fff;flex-shrink:0;letter-spacing:1px}
+.aval-nome{font-weight:700;font-size:.9rem;color:#fff}
+.aval-cidade{font-size:.72rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:.1rem}
+.aval-empty-state{text-align:center;padding:3rem;color:rgba(255,255,255,.3);font-size:.9rem;grid-column:1/-1}
+.btn-aval{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);padding:.75rem 1.5rem;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:2rem}
+.btn-aval:hover{border-color:#CC1B1B;color:#fff;background:rgba(204,27,27,.08)}
+
+/* Modal avaliação */
+.modal-aval-step{display:none}
+.modal-aval-step.active{display:block}
+.star-selector{display:flex;gap:.5rem;margin:.5rem 0 1rem}
+.star-sel-btn{font-size:1.75rem;cursor:pointer;color:#333;transition:color .15s;background:none;border:none;padding:0;line-height:1}
+.star-sel-btn.on{color:#CC1B1B}
+.mf-group textarea{border:1.5px solid #e0e0e0;border-radius:6px;padding:.625rem .875rem;font-size:.9rem;font-family:'Inter',sans-serif;color:#222;resize:vertical;min-height:90px;width:100%;transition:border-color .2s}
+.mf-group textarea:focus{outline:none;border-color:#CC1B1B}
+
+/* Admin avaliações */
+.aval-admin-card{background:#f9f9f9;border:1.5px solid #eee;border-radius:10px;padding:1.25rem;margin-bottom:.875rem}
+.aval-admin-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.aval-admin-info{display:flex;flex-direction:column;gap:.2rem}
+.aval-admin-nome{font-weight:700;font-size:.9rem;color:#111}
+.aval-admin-meta{font-size:.75rem;color:#888}
+.aval-admin-texto{font-size:.875rem;color:#444;line-height:1.6;font-style:italic;margin-bottom:.875rem}
+.aval-admin-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn-aval-aprovar{background:#2e7d32;color:#fff;border:none;border-radius:6px;padding:.35rem .875rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.btn-aval-aprovar:hover{background:#1b5e20}
+.btn-aval-rejeitar{background:#c62828;color:#fff;border:none;border-radius:6px;padding:.35rem .875rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.btn-aval-rejeitar:hover{background:#b71c1c}
+.btn-aval-add{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
+.btn-aval-add:hover{background:#E83030}
+.aval-status-badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.aval-status-pend{background:#fff3e0;color:#e65100}
+.aval-status-ok{background:#e8f5e9;color:#2e7d32}
 </style>
 </head>
 <body>
@@ -364,21 +407,21 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
   <div class="hero-deco"></div>
   <div class="hero-deco2"></div>
   <div class="hero-inner">
-    <h1 class="fade-up delay-1">BEACH<br>TENNIS<br><span>EXPERIENCE</span></h1>
+    <h1 class="fade-up delay-1">2ª<br>EDIÇÃO<br><span>BTE</span></h1>
     <div class="hero-event-info fade-up delay-2">
-      <p class="hero-event-date">20 de Junho • SkyFit Passeio das Águas</p>
-      <p class="hero-event-tag">Aulas para iniciantes + Super 8 competitivo</p>
+      <p class="hero-event-date">22 de Agosto • SkyFit Passeio das Águas</p>
+      <p class="hero-event-tag">Torneio Super 8 · Experiência guiada esgotada</p>
       <span class="hero-badge-vagas">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Vagas Limitadas
       </span>
     </div>
-    <p class="hero-sub fade-up delay-2">Uma experiência completa para quem deseja conhecer, praticar e viver o Beach Tennis ao lado de profissionais experientes.</p>
+    <p class="hero-sub fade-up delay-2">A 2ª Edição chega com tudo. Vagas esgotadas para a experiência guiada — mas ainda dá tempo de garantir sua vaga no Super 8!</p>
     <div class="hero-info-stack fade-up delay-2">
-      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>20 de Junho</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>22 de Agosto de 2026</div>
       <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Shopping Passeio das Águas · SKYFIT Academia</div>
-      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Experiência de Beach Tennis</div>
-      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>Torneio Super 8</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>A partir das 09h00</div>
+      <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>Torneio Super 8 — vagas abertas</div>
     </div>
     <div class="hero-btns-stack fade-up delay-3">
       <a href="#inscricao" onclick="event.preventDefault();openModal()" class="btn-primary btn-full">Garanta sua vaga</a>
@@ -410,23 +453,25 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 
 <section class="cards-destaque-section">
   <div class="cards-destaque-grid">
-    <div class="card-destaque card-destaque--exp">
+    <div class="card-destaque card-destaque--exp" style="opacity:.75;position:relative">
+      <div style="position:absolute;top:1rem;right:1rem;background:#CC1B1B;color:#fff;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:.3rem .75rem;border-radius:20px">Esgotado</div>
       <div class="card-destaque__label">Iniciante</div>
       <h3 class="card-destaque__title">Experiência<br>para Iniciantes</h3>
       <ul class="card-destaque__list">
-        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Nunca jogou Beach Tennis?</li>
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Turmas de até 6 pessoas</li>
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Material disponível</li>
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Certificado de participação</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vagas encerradas para esta edição</li>
       </ul>
-      <a href="#" onclick="event.preventDefault();openModal('exp')" class="card-destaque__btn">Quero aprender Beach Tennis</a>
+      <div style="display:block;text-align:center;padding:1rem 1.5rem;border-radius:10px;font-weight:800;font-size:.95rem;background:#e0e0e0;color:#999;cursor:default">Vagas Esgotadas</div>
     </div>
     <div class="card-destaque card-destaque--tor">
       <div class="card-destaque__label">Competição</div>
       <h3 class="card-destaque__title">Super 8</h3>
       <ul class="card-destaque__list">
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Apenas 8 atletas por categoria</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Competição exclusiva</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Manhã — Iniciantes: 09h às 12h</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tarde — Intermediários: 14h às 17h</li>
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Troféu para o campeão</li>
       </ul>
       <a href="#" onclick="event.preventDefault();openModal('tor')" class="card-destaque__btn">Quero jogar o Super 8</a>
@@ -504,9 +549,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <h2 class="section-title" style="color:#fff">Cronograma do dia</h2>
       <p class="section-sub" style="color:rgba(255,255,255,0.65)">Um dia cheio de atividades, aprendizado e muita diversão.</p>
       <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h00</div><div class="tl-event">Início das Experiências Guiadas</div><div class="tl-desc">Abertura oficial do evento. Turma 1 inicia as aulas com os professores.</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h30</div><div class="tl-event">Início do Super 8</div><div class="tl-desc">Início do torneio nas categorias Masculino e Feminino.</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">09h00 – 12h00</div><div class="tl-event">Continuação das Turmas de Introdução</div><div class="tl-desc">Turmas 2, 3 e 4 realizadas sequencialmente com grupos de até 6 participantes.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h50</div><div class="tl-event">Abertura e credenciamento</div><div class="tl-desc">Recepção dos atletas, organização das quadras e início oficial da 2ª Edição BTE.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">09h00 – 12h00</div><div class="tl-event">Super 8 — Período da Manhã</div><div class="tl-desc">Categorias Masculino Iniciante e Feminino Iniciante disputam suas rodadas.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">14h00 – 17h00</div><div class="tl-event">Super 8 — Período da Tarde</div><div class="tl-desc">Categorias Masculino Intermediário e Feminino Intermediário entram em quadra.</div></div>
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Durante todo o dia</div><div class="tl-event">Programação simultânea</div>
           <div class="tl-all-day"><h4>Acontecendo ao longo do evento</h4>
             <div class="tl-tags">
@@ -535,6 +580,24 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 
 <div class="divider"></div>
 
+<!-- AVALIAÇÕES -->
+<section class="aval-section" id="avaliacoes">
+  <div class="container">
+    <div class="section-label" style="color:var(--yellow)">Avaliações reais</div>
+    <h2 class="section-title" style="color:#fff">Quem esteve lá, contou.</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.6)">Depoimentos de quem viveu a experiência do Beach Tennis Experience.</p>
+    <div class="aval-grid" id="avalGrid">
+      <div class="aval-empty-state" id="avalEmptyState">Nenhuma avaliação publicada ainda. Seja o primeiro!</div>
+    </div>
+    <button class="btn-aval" onclick="openModalAval()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Deixar minha avaliação
+    </button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -555,14 +618,14 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       </div>
       <div class="footer-col">
         <h4>Evento</h4>
-        <p>20 de Junho de 2026</p>
-        <p>A partir das 08h00</p>
+        <p>22 de Agosto de 2026</p>
+        <p>A partir das 09h00</p>
         <p>Shopping Passeio das Águas</p>
         <p style="font-size:.8rem;opacity:.7">Academia Skyfit · Goiânia/GO</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Beach Tennis Experience · Organizado por Clubinho das Raquetes · Realizado no CT SkyFit Passeio das Águas</p>
+      <p>© 2026 2ª Edição Beach Tennis Experience · Organizado por Clubinho das Raquetes · Realizado no CT SkyFit Passeio das Águas</p>
       <a href="#" onclick="event.preventDefault();openModal()" class="footer-cta">Quero participar →</a>
     </div>
   </div>
@@ -596,7 +659,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <div class="admin-header">
         <div>
           <h2>PAINEL ADMINISTRATIVO</h2>
-          <div class="admin-header-sub">Beach Tennis Experience · 20 de Junho</div>
+          <div class="admin-header-sub">2ª Edição Beach Tennis Experience · 22 de Agosto</div>
         </div>
         <div class="admin-header-right">
           <div class="admin-sync-badge"><div class="admin-sync-dot"></div><span id="syncStatus">Conectado ao Firebase</span></div>
@@ -617,6 +680,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Super 8</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('pend')">⏳ Ag. Pagamento</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('wait')">📋 Lista Espera</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('aval')">⭐ Avaliações</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
         </div>
 
@@ -665,6 +729,15 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th></tr></thead>
             <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
+        </div>
+
+        <!-- TAB AVALIAÇÕES -->
+        <div class="admin-section" id="admin-aval">
+          <div class="admin-toolbar">
+            <div style="font-size:.85rem;color:#666">Gerencie as avaliações enviadas pelos participantes.</div>
+            <button class="btn-aval-add" onclick="openAdminAddAval()">+ Adicionar avaliação</button>
+          </div>
+          <div id="adminAvalList"><div class="admin-loading"><div class="spinner"></div> Carregando avaliações...</div></div>
         </div>
 
         <!-- TAB CONFIGURAÇÕES -->
@@ -721,6 +794,113 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
   </div>
 </div>
 
+<!-- MODAL AVALIAÇÃO -->
+<div class="modal-overlay" id="modalAval">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Avaliação</h2>
+      <button class="modal-close" onclick="closeModalAval()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 0: verificar e-mail -->
+      <div class="modal-aval-step active" id="mAvalStep0">
+        <div class="modal-form-header">
+          <h3>Verificar participação</h3>
+          <p>Informe o e-mail que você usou na inscrição para deixar sua avaliação.</p>
+        </div>
+        <div class="mf-group" style="margin-bottom:1rem">
+          <label>E-mail cadastrado *</label>
+          <input type="email" id="aval_email" placeholder="seuemail@email.com">
+        </div>
+        <div id="aval_email_err" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.75rem">E-mail não encontrado. Verifique se é o mesmo usado na inscrição.</div>
+        <button class="btn-modal-next" id="btnVerificarEmail" onclick="verificarEmailAval()">Verificar e continuar →</button>
+      </div>
+
+      <!-- STEP 1: formulário de avaliação -->
+      <div class="modal-aval-step" id="mAvalStep1">
+        <div class="modal-form-header">
+          <h3>Deixe sua avaliação</h3>
+          <p id="aval_nome_confirmado" style="color:#CC1B1B;font-weight:600"></p>
+        </div>
+        <div class="mfg">
+          <div class="mf-group full">
+            <label>Nota *</label>
+            <div class="star-selector" id="starSelector">
+              <button class="star-sel-btn" data-val="1" onclick="selecionarEstrela(1)">★</button>
+              <button class="star-sel-btn" data-val="2" onclick="selecionarEstrela(2)">★</button>
+              <button class="star-sel-btn" data-val="3" onclick="selecionarEstrela(3)">★</button>
+              <button class="star-sel-btn" data-val="4" onclick="selecionarEstrela(4)">★</button>
+              <button class="star-sel-btn" data-val="5" onclick="selecionarEstrela(5)">★</button>
+            </div>
+          </div>
+          <div class="mf-group full">
+            <label>Sua avaliação * <span style="font-weight:400;color:#aaa">(máx. 200 caracteres)</span></label>
+            <textarea id="aval_texto" placeholder="Conte como foi sua experiência no evento..." maxlength="200" oninput="contarCaracteres()"></textarea>
+            <div style="text-align:right;font-size:.72rem;color:#aaa;margin-top:.25rem"><span id="aval_chars">0</span>/200</div>
+          </div>
+          <div class="mf-group">
+            <label>Cidade *</label>
+            <input type="text" id="aval_cidade" placeholder="Goiânia">
+          </div>
+        </div>
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="voltarAvalStep0()">← Voltar</button>
+          <button class="btn-modal-next" onclick="enviarAval()">Enviar avaliação</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: sucesso -->
+      <div class="modal-aval-step" id="mAvalStep2">
+        <div style="text-align:center;padding:1.5rem 0">
+          <div style="font-size:3rem;margin-bottom:1rem">🎾</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem">Obrigado!</div>
+          <p style="font-size:.9rem;color:#555;line-height:1.6;max-width:340px;margin:0 auto 1.5rem">Sua avaliação foi enviada e será publicada após aprovação da organização.</p>
+          <button class="btn-modal-next" onclick="closeModalAval()">Fechar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ADD AVALIAÇÃO (admin) -->
+<div class="modal-overlay" id="modalAdminAval">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Nova Avaliação</h2>
+      <button class="modal-close" onclick="closeAdminAddAval()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mfg">
+        <div class="mf-group full">
+          <label>Nome *</label>
+          <input type="text" id="adm_aval_nome" placeholder="Nome do participante">
+        </div>
+        <div class="mf-group">
+          <label>Cidade *</label>
+          <input type="text" id="adm_aval_cidade" placeholder="Goiânia">
+        </div>
+        <div class="mf-group">
+          <label>Nota *</label>
+          <div class="star-selector" id="starSelectorAdm">
+            <button class="star-sel-btn" data-val="1" onclick="selecionarEstrelaAdm(1)">★</button>
+            <button class="star-sel-btn" data-val="2" onclick="selecionarEstrelaAdm(2)">★</button>
+            <button class="star-sel-btn" data-val="3" onclick="selecionarEstrelaAdm(3)">★</button>
+            <button class="star-sel-btn" data-val="4" onclick="selecionarEstrelaAdm(4)">★</button>
+            <button class="star-sel-btn" data-val="5" onclick="selecionarEstrelaAdm(5)">★</button>
+          </div>
+        </div>
+        <div class="mf-group full">
+          <label>Texto da avaliação *</label>
+          <textarea id="adm_aval_texto" placeholder="Texto do depoimento..." maxlength="200" style="border:1.5px solid #e0e0e0;border-radius:6px;padding:.625rem .875rem;font-size:.9rem;font-family:'Inter',sans-serif;color:#222;resize:vertical;min-height:90px;width:100%"></textarea>
+        </div>
+      </div>
+      <button class="btn-modal-next" style="margin-top:1rem" onclick="salvarAdminAval()">Publicar avaliação</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL DE INSCRIÇÃO -->
 <div class="modal-overlay" id="modalInscricao">
   <div class="modal-box">
@@ -734,17 +914,18 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <div class="modal-step active" id="mStep0">
         <p class="modal-choice-title">Como você quer participar?</p>
         <div class="modal-choices">
-          <div class="choice-card" id="choiceExp" onclick="selectChoice('exp')">
+          <div class="choice-card" id="choiceExp" style="opacity:.55;cursor:not-allowed;pointer-events:none;position:relative">
+            <div style="position:absolute;top:.6rem;right:.6rem;background:#CC1B1B;color:#fff;font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px">Esgotado</div>
             <div class="choice-icon">🎾</div>
             <div class="choice-label">Iniciante</div>
             <div class="choice-name">Experiência Guiada</div>
-            <div class="choice-desc">Aprenda com professores certificados em turmas de até 6 pessoas.</div>
+            <div class="choice-desc">Vagas encerradas para esta edição. Fique de olho na próxima!</div>
           </div>
           <div class="choice-card" id="choiceTor" onclick="selectChoice('tor')">
             <div class="choice-icon">🏆</div>
             <div class="choice-label">Competição</div>
             <div class="choice-name">Super 8</div>
-            <div class="choice-desc">Dispute o torneio exclusivo com apenas 8 atletas por categoria.</div>
+            <div class="choice-desc">Dispute o torneio exclusivo. Iniciantes de manhã, Intermediários à tarde.</div>
           </div>
         </div>
         <button class="btn-modal-next" id="btnNextChoice" disabled onclick="goToForm()">Continuar →</button>
@@ -1032,10 +1213,10 @@ function atualizarSelectCategorias(){
     return;
   }
   const cats = [
-    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante'      },
-    { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário'  },
-    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante'      },
-    { key:'fem_int',  icon:'👩', genero:'Feminino',   nivel:'Intermediário'  },
+    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante',     horario:'09h – 12h' },
+    { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário', horario:'14h – 17h' },
+    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante',     horario:'09h – 12h' },
+    { key:'fem_int',  icon:'👩', genero:'Feminino',   nivel:'Intermediário', horario:'14h – 17h' },
   ];
   const selVal = document.getElementById('m_tor_cat').value;
   grid.innerHTML = '';
@@ -1052,6 +1233,7 @@ function atualizarSelectCategorias(){
       <div class="modal-cat-icon">${c.icon}</div>
       <div class="modal-cat-genero">${c.genero}</div>
       <div class="modal-cat-nivel">${c.nivel}</div>
+      <div style="font-size:.7rem;color:#CC1B1B;font-weight:700;margin:.25rem 0">${c.horario}</div>
       <div class="modal-turma-vagas" style="margin-top:.35rem">
         ${isFull
           ? '<span style="color:#CC1B1B;font-weight:700;font-size:.75rem">Esgotado</span>'
@@ -1375,7 +1557,7 @@ window.confirmarPgto=async function(id){
   const telWA=telLimpo.startsWith('55')?telLimpo:'55'+telLimpo;
   const tipoLabel=tipo==='exp'?'Experiência para Iniciantes':'Torneio Super 8';
   const detalhe=tipo==='exp'?'🕐 Horário: '+turmaOuCat:'🏆 Categoria: '+turmaOuCat;
-  const msg=encodeURIComponent('Olá, '+nome+'! 🎾\n\nSeu pagamento foi confirmado e sua inscrição está *garantida* na *Beach Tennis Experience*!\n\n✅ Inscrição confirmada\n🔑 Protocolo: *'+protocolo+'*\n🎾 Modalidade: *'+tipoLabel+'*\n'+detalhe+'\n📅 Data: *20 de Junho de 2026*\n📍 Local: *SkyFit Passeio das Águas – Goiânia/GO*\n\nNos vemos na quadra! 🏖️\n_Equipe Beach Tennis Experience_');
+  const msg=encodeURIComponent('Olá, '+nome+'! 🎾\n\nSeu pagamento foi confirmado e sua inscrição está *garantida* na *2ª Edição Beach Tennis Experience*!\n\n✅ Inscrição confirmada\n🔑 Protocolo: *'+protocolo+'*\n🎾 Modalidade: *'+tipoLabel+'*\n'+detalhe+'\n📅 Data: *22 de Agosto de 2026*\n📍 Local: *SkyFit Passeio das Águas – Goiânia/GO*\n\nNos vemos na quadra! 🏖️\n_Equipe Beach Tennis Experience_');
   window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
   try{
     await updateDoc(doc(db,'inscricoes',id),{status:'confirmado'});
@@ -1441,9 +1623,10 @@ function renderAdminTabelas(){
 }
 
 window.switchAdminTab=function(tab){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','cfg'][i]===tab));
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','aval','cfg'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('admin-'+tab).classList.add('active');
+  if(tab==='aval') iniciarListenerAval();
 };
 window.filterTable=function(tbodyId,term){
   const rows=document.getElementById(tbodyId).querySelectorAll('tr:not(.empty-row)');
@@ -1468,6 +1651,240 @@ window.exportCSV=function(tipo){
   const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=`bte_${tipo}_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
+};
+
+// ===== AVALIAÇÕES =====
+let avaliacoes = [];
+let avalEmailVerificado = null;
+let avalNomeVerificado  = null;
+let notaAval    = 0;
+let notaAvlAdm  = 0;
+let unsubAval   = null;
+
+// Listener público — só aprovadas
+onSnapshot(
+  query(collection(db,'avaliacoes'), where('status','==','aprovada'), orderBy('criadoEm','desc')),
+  (snap) => {
+    avaliacoes = snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderAvaliacoes();
+  }
+);
+
+function renderAvaliacoes(){
+  const grid = document.getElementById('avalGrid');
+  const empty = document.getElementById('avalEmptyState');
+  if(!grid) return;
+  if(avaliacoes.length === 0){
+    empty.style.display = 'block';
+    grid.querySelectorAll('.aval-card').forEach(c=>c.remove());
+    return;
+  }
+  empty.style.display = 'none';
+  grid.querySelectorAll('.aval-card').forEach(c=>c.remove());
+  avaliacoes.forEach(a => {
+    const iniciais = (a.nome||'?').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+    const stars = [1,2,3,4,5].map(s=>`<span class="aval-star${s<=(a.nota||5)?'':' empty'}">★</span>`).join('');
+    const card = document.createElement('div');
+    card.className = 'aval-card';
+    card.innerHTML = `
+      <div class="aval-stars">${stars}</div>
+      <p class="aval-texto">"${esc(a.texto)}"</p>
+      <div class="aval-autor">
+        <div class="aval-avatar">${iniciais}</div>
+        <div>
+          <div class="aval-nome">${esc(a.nome)}</div>
+          <div class="aval-cidade">${esc(a.cidade)}</div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+window.openModalAval = function(){
+  notaAval = 0; avalEmailVerificado = null; avalNomeVerificado = null;
+  document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mAvalStep0').classList.add('active');
+  document.getElementById('aval_email').value = '';
+  document.getElementById('aval_email_err').style.display = 'none';
+  document.getElementById('aval_texto').value = '';
+  document.getElementById('aval_cidade').value = '';
+  document.getElementById('aval_chars').textContent = '0';
+  document.querySelectorAll('#starSelector .star-sel-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('modalAval').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeModalAval = function(){
+  document.getElementById('modalAval').classList.remove('open');
+  document.body.style.overflow = '';
+};
+document.getElementById('modalAval').addEventListener('click',function(e){if(e.target===this)closeModalAval();});
+
+window.verificarEmailAval = async function(){
+  const email = document.getElementById('aval_email').value.trim();
+  const errEl = document.getElementById('aval_email_err');
+  const btn   = document.getElementById('btnVerificarEmail');
+  if(!email){ errEl.style.display='block'; errEl.textContent='Informe seu e-mail.'; return; }
+  btn.textContent='Verificando...'; btn.disabled=true;
+  try{
+    const snap = await getDocs(query(collection(db,'inscricoes'), where('email','==',email), where('status','in',['confirmado','pendente'])));
+    if(snap.empty){
+      errEl.style.display='block';
+      errEl.textContent='E-mail não encontrado. Verifique se é o mesmo usado na inscrição.';
+      btn.textContent='Verificar e continuar →'; btn.disabled=false;
+      return;
+    }
+    // verifica se já avaliou
+    const jaAvaliou = await getDocs(query(collection(db,'avaliacoes'), where('email','==',email)));
+    if(!jaAvaliou.empty){
+      errEl.style.display='block';
+      errEl.textContent='Você já enviou uma avaliação com este e-mail. Obrigado!';
+      btn.textContent='Verificar e continuar →'; btn.disabled=false;
+      return;
+    }
+    const insc = snap.docs[0].data();
+    avalEmailVerificado = email;
+    avalNomeVerificado  = insc.nome || '';
+    document.getElementById('aval_nome_confirmado').textContent = 'Olá, ' + avalNomeVerificado + '!';
+    errEl.style.display='none';
+    document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
+    document.getElementById('mAvalStep1').classList.add('active');
+  }catch(err){
+    console.error(err);
+    errEl.style.display='block';
+    errEl.textContent='Erro ao verificar. Tente novamente.';
+  }
+  btn.textContent='Verificar e continuar →'; btn.disabled=false;
+};
+
+window.voltarAvalStep0 = function(){
+  document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mAvalStep0').classList.add('active');
+};
+
+window.selecionarEstrela = function(n){
+  notaAval = n;
+  document.querySelectorAll('#starSelector .star-sel-btn').forEach(b=>{
+    b.classList.toggle('on', Number(b.dataset.val) <= n);
+  });
+};
+
+window.contarCaracteres = function(){
+  const len = document.getElementById('aval_texto').value.length;
+  document.getElementById('aval_chars').textContent = len;
+};
+
+window.enviarAval = async function(){
+  const texto  = document.getElementById('aval_texto').value.trim();
+  const cidade = document.getElementById('aval_cidade').value.trim();
+  if(!notaAval){ alert('Selecione uma nota de 1 a 5 estrelas.'); return; }
+  if(!texto){ alert('Escreva um texto para a avaliação.'); return; }
+  if(!cidade){ alert('Informe sua cidade.'); return; }
+  const btn = document.querySelector('#mAvalStep1 .btn-modal-next');
+  btn.textContent='Enviando...'; btn.disabled=true;
+  try{
+    await addDoc(collection(db,'avaliacoes'),{
+      nome:   avalNomeVerificado,
+      email:  avalEmailVerificado,
+      cidade, texto, nota: notaAval,
+      status: 'pendente',
+      criadoEm: serverTimestamp()
+    });
+    document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
+    document.getElementById('mAvalStep2').classList.add('active');
+  }catch(err){
+    console.error(err); alert('Erro ao enviar. Tente novamente.');
+  }
+  btn.textContent='Enviar avaliação'; btn.disabled=false;
+};
+
+// Admin — listener avaliações
+function iniciarListenerAval(){
+  if(unsubAval) return;
+  const q = query(collection(db,'avaliacoes'), orderBy('criadoEm','desc'));
+  unsubAval = onSnapshot(q, (snap)=>{
+    const todas = snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderAdminAval(todas);
+  });
+}
+
+function renderAdminAval(lista){
+  const el = document.getElementById('adminAvalList');
+  if(!el) return;
+  if(!lista.length){
+    el.innerHTML='<p style="color:#aaa;font-size:.875rem;padding:1rem 0">Nenhuma avaliação recebida ainda.</p>';
+    return;
+  }
+  el.innerHTML = lista.map(a=>{
+    const stars = [1,2,3,4,5].map(s=>`<span style="color:${s<=(a.nota||5)?'#CC1B1B':'#ddd'}">★</span>`).join('');
+    const badge = a.status==='aprovada'
+      ? '<span class="aval-status-badge aval-status-ok">Publicada</span>'
+      : '<span class="aval-status-badge aval-status-pend">Pendente</span>';
+    const acoes = a.status==='aprovada'
+      ? `<button class="btn-aval-rejeitar" onclick="rejeitarAval('${a.id}')">Remover</button>`
+      : `<button class="btn-aval-aprovar" onclick="aprovarAval('${a.id}')">Aprovar e publicar</button>
+         <button class="btn-aval-rejeitar" onclick="rejeitarAval('${a.id}')">Rejeitar</button>`;
+    return `<div class="aval-admin-card">
+      <div class="aval-admin-header">
+        <div class="aval-admin-info">
+          <div class="aval-admin-nome">${esc(a.nome)} — ${esc(a.cidade)} ${stars}</div>
+          <div class="aval-admin-meta">${esc(a.email||'')} · ${formatarData(a.criadoEm)}</div>
+        </div>
+        ${badge}
+      </div>
+      <p class="aval-admin-texto">"${esc(a.texto)}"</p>
+      <div class="aval-admin-actions">${acoes}</div>
+    </div>`;
+  }).join('');
+}
+
+window.aprovarAval = async function(id){
+  try{ await updateDoc(doc(db,'avaliacoes',id),{status:'aprovada'}); }
+  catch(e){ console.error(e); alert('Erro ao aprovar.'); }
+};
+window.rejeitarAval = async function(id){
+  if(!confirm('Remover esta avaliação?')) return;
+  try{ await updateDoc(doc(db,'avaliacoes',id),{status:'rejeitada'}); }
+  catch(e){ console.error(e); alert('Erro ao remover.'); }
+};
+
+// Admin — add avaliação manual
+window.openAdminAddAval = function(){
+  notaAvlAdm = 0;
+  document.getElementById('adm_aval_nome').value='';
+  document.getElementById('adm_aval_cidade').value='';
+  document.getElementById('adm_aval_texto').value='';
+  document.querySelectorAll('#starSelectorAdm .star-sel-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('modalAdminAval').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+window.closeAdminAddAval = function(){
+  document.getElementById('modalAdminAval').classList.remove('open');
+  document.body.style.overflow='';
+};
+document.getElementById('modalAdminAval').addEventListener('click',function(e){if(e.target===this)closeAdminAddAval();});
+
+window.selecionarEstrelaAdm = function(n){
+  notaAvlAdm = n;
+  document.querySelectorAll('#starSelectorAdm .star-sel-btn').forEach(b=>{
+    b.classList.toggle('on', Number(b.dataset.val) <= n);
+  });
+};
+
+window.salvarAdminAval = async function(){
+  const nome   = document.getElementById('adm_aval_nome').value.trim();
+  const cidade = document.getElementById('adm_aval_cidade').value.trim();
+  const texto  = document.getElementById('adm_aval_texto').value.trim();
+  if(!nome||!cidade||!texto||!notaAvlAdm){ alert('Preencha todos os campos e selecione uma nota.'); return; }
+  const btn = document.querySelector('#modalAdminAval .btn-modal-next');
+  btn.textContent='Salvando...'; btn.disabled=true;
+  try{
+    await addDoc(collection(db,'avaliacoes'),{
+      nome, cidade, texto, nota: notaAvlAdm,
+      email:'admin', status:'aprovada', criadoEm: serverTimestamp()
+    });
+    closeAdminAddAval();
+  }catch(err){ console.error(err); alert('Erro ao salvar.'); }
+  btn.textContent='Publicar avaliação'; btn.disabled=false;
 };
 
 // INIT
