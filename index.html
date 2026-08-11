@@ -383,6 +383,13 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .aval-status-badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .aval-status-pend{background:#fff3e0;color:#e65100}
 .aval-status-ok{background:#e8f5e9;color:#2e7d32}
+/* ===== ACEITES / REGULAMENTO ===== */
+.aceites-block{margin:.75rem 0 .25rem;display:flex;flex-direction:column;gap:.6rem}
+.aceite-row{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:#444;line-height:1.5;cursor:pointer}
+.aceite-row input[type=checkbox]{margin-top:.15rem;accent-color:#CC1B1B;width:15px;height:15px;flex-shrink:0;cursor:pointer}
+.aceite-row a{color:#CC1B1B;text-decoration:underline;font-weight:600}
+.aceite-row a:hover{color:#E83030}
+.aceite-err{font-size:.75rem;color:#c62828;margin-top:.1rem;display:none}
 </style>
 </head>
 <body>
@@ -410,13 +417,13 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     <h1 class="fade-up delay-1">2ª<br>EDIÇÃO<br><span>BTE</span></h1>
     <div class="hero-event-info fade-up delay-2">
       <p class="hero-event-date">22 de Agosto • SkyFit Passeio das Águas</p>
-      <p class="hero-event-tag">Torneio Super 8 · Experiência guiada esgotada</p>
+      <p class="hero-event-tag">Torneio Super 8</p>
       <span class="hero-badge-vagas">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Vagas Limitadas
       </span>
     </div>
-    <p class="hero-sub fade-up delay-2">A 2ª Edição chega com tudo. Vagas esgotadas para a experiência guiada — mas ainda dá tempo de garantir sua vaga no Super 8!</p>
+    <p class="hero-sub fade-up delay-2">A 2ª Edição chega com tudo. Vagas esgotadas para a experiência guiada, mas ainda dá tempo de garantir sua vaga no Super 8!</p>
     <div class="hero-info-stack fade-up delay-2">
       <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>22 de Agosto de 2026</div>
       <div class="info-pill-new"><span class="pill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Shopping Passeio das Águas · SKYFIT Academia</div>
@@ -942,7 +949,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div class="mfg">
           <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_exp_nome" placeholder="Seu nome completo"></div>
           <div class="mf-group"><label>CPF *</label><input type="text" id="m_exp_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
-          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_exp_nasc"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_exp_nasc" onchange="verificarMenor('exp')"></div>
           <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
           <div class="mf-group"><label>CEP *</label><input type="text" id="m_exp_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('exp')"></div>
           <div class="mf-group full"><label>E-mail *</label><input type="email" id="m_exp_email" placeholder="seuemail@email.com"></div>
@@ -955,6 +962,24 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           </div>
         </div>
         <input type="hidden" id="m_exp_turma" value="">
+        <div class="aceites-block" id="aceites_exp">
+          <label class="aceite-row">
+            <input type="checkbox" id="reg_aceito_exp">
+            <span>Li e aceito o <a href="./REGULAMENTO_BTE.pdf" target="_blank" rel="noopener">Regulamento Oficial</a> do Beach Tennis Experience.</span>
+          </label>
+          <div class="aceite-err" id="reg_err_exp">Você precisa aceitar o Regulamento para continuar.</div>
+          <div id="menor_aceite_exp" style="display:none">
+            <label class="aceite-row">
+              <input type="checkbox" id="menor_ok_exp">
+              <span>Declaro que minha participação ocorre com ciência do meu pai, mãe ou responsável legal e que estarei acompanhado por responsável durante o evento.</span>
+            </label>
+            <div class="aceite-err" id="menor_err_exp">Esta declaração é obrigatória para menores de 18 anos.</div>
+          </div>
+          <label class="aceite-row">
+            <input type="checkbox" id="mkt_aceito_exp">
+            <span>Quero receber novidades e convites para futuras experiências do Clubinho das Raquetes.</span>
+          </label>
+        </div>
         <div class="modal-form-actions">
           <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
           <button class="btn-modal-next" onclick="submitModalExp()">Ir para Pagamento →</button>
@@ -974,10 +999,28 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div class="mfg" style="margin-top:.75rem">
           <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
           <div class="mf-group"><label>CPF *</label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
-          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')"></div>
           <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
           <div class="mf-group"><label>CEP *</label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
           <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
+        </div>
+        <div class="aceites-block" id="aceites_tor">
+          <label class="aceite-row">
+            <input type="checkbox" id="reg_aceito_tor">
+            <span>Li e aceito o <a href="./REGULAMENTO_BTE.pdf" target="_blank" rel="noopener">Regulamento Oficial</a> do Beach Tennis Experience.</span>
+          </label>
+          <div class="aceite-err" id="reg_err_tor">Você precisa aceitar o Regulamento para continuar.</div>
+          <div id="menor_aceite_tor" style="display:none">
+            <label class="aceite-row">
+              <input type="checkbox" id="menor_ok_tor">
+              <span>Declaro que minha participação ocorre com ciência do meu pai, mãe ou responsável legal e que estarei acompanhado por responsável durante o evento.</span>
+            </label>
+            <div class="aceite-err" id="menor_err_tor">Esta declaração é obrigatória para menores de 18 anos.</div>
+          </div>
+          <label class="aceite-row">
+            <input type="checkbox" id="mkt_aceito_tor">
+            <span>Quero receber novidades e convites para futuras experiências do Clubinho das Raquetes.</span>
+          </label>
         </div>
         <div class="modal-form-actions">
           <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
@@ -1297,6 +1340,23 @@ window.submitModalExp=async function(){
   const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
 
+  // validação aceites
+  const regAceito = document.getElementById('reg_aceito_exp').checked;
+  const regErrEl  = document.getElementById('reg_err_exp');
+  regErrEl.style.display = regAceito ? 'none' : 'block';
+  if(!regAceito) return;
+
+  const eMenor = nasc && calcularIdade(nasc) < 18;
+  if(eMenor){
+    const menorOk = document.getElementById('menor_ok_exp').checked;
+    const menorErr = document.getElementById('menor_err_exp');
+    menorErr.style.display = menorOk ? 'none' : 'block';
+    if(!menorOk) return;
+  }
+
+  const mktAceito = document.getElementById('mkt_aceito_exp').checked;
+  const agora = new Date().toISOString();
+
   const btn=document.querySelector('#mStepExp .btn-modal-next');
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
@@ -1313,8 +1373,13 @@ window.submitModalExp=async function(){
 
     const protocolo=gerarProtocolo('exp');
     currentProtocolo=protocolo;
-    const entry={protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
-      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+    const entry={
+      protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
+      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
+      regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
+      marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
+      ...(eMenor?{declaracao_menor:true, declaracao_menor_em:agora}:{})
+    };
     currentEntry={...entry,turma};
 
     btn.textContent='Salvando...';
@@ -1349,6 +1414,23 @@ window.submitModalTor=async function(){
   const cat=document.getElementById('m_tor_cat').value;
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
 
+  // validação aceites
+  const regAceito = document.getElementById('reg_aceito_tor').checked;
+  const regErrEl  = document.getElementById('reg_err_tor');
+  regErrEl.style.display = regAceito ? 'none' : 'block';
+  if(!regAceito) return;
+
+  const eMenor = nasc && calcularIdade(nasc) < 18;
+  if(eMenor){
+    const menorOk = document.getElementById('menor_ok_tor').checked;
+    const menorErr = document.getElementById('menor_err_tor');
+    menorErr.style.display = menorOk ? 'none' : 'block';
+    if(!menorOk) return;
+  }
+
+  const mktAceito = document.getElementById('mkt_aceito_tor').checked;
+  const agora = new Date().toISOString();
+
   const btn=document.querySelector('#mStepTor .btn-modal-next');
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
@@ -1366,8 +1448,13 @@ window.submitModalTor=async function(){
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
     const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
-    const entry={protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
-      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp()};
+    const entry={
+      protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
+      status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
+      regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
+      marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
+      ...(eMenor?{declaracao_menor:true, declaracao_menor_em:agora}:{})
+    };
     currentEntry={...entry};
 
     btn.textContent='Salvando...';
@@ -1892,6 +1979,24 @@ window.salvarAdminAval = async function(){
   }catch(err){ console.error(err); alert('Erro ao salvar.'); }
   btn.textContent='Publicar avaliação'; btn.disabled=false;
 };
+
+// ===== MENOR DE IDADE =====
+function calcularIdade(nasc){
+  const hoje = new Date();
+  const dn   = new Date(nasc);
+  let idade  = hoje.getFullYear() - dn.getFullYear();
+  const m    = hoje.getMonth() - dn.getMonth();
+  if(m < 0 || (m === 0 && hoje.getDate() < dn.getDate())) idade--;
+  return idade;
+}
+
+function verificarMenor(formId){
+  const nascEl = document.getElementById(`m_${formId}_nasc`);
+  if(!nascEl || !nascEl.value) return;
+  const eMenor = calcularIdade(nascEl.value) < 18;
+  document.getElementById(`menor_aceite_${formId}`).style.display = eMenor ? 'block' : 'none';
+  if(!eMenor) document.getElementById(`menor_ok_${formId}`).checked = false;
+}
 
 // INIT
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
