@@ -1175,7 +1175,7 @@ let vagasCarregadas = false;
 const unsubVagasReal = onSnapshot(
   query(
     collection(db, 'inscricoes'),
-    where('status', 'in', ['pendente', 'confirmado'])
+    where('status', '==', 'confirmado')
   ),
   (snapshot) => {
     vagasContagem = {
@@ -1184,6 +1184,7 @@ const unsubVagasReal = onSnapshot(
     };
     snapshot.docs.forEach(d => {
       const data = d.data();
+      if ((data.edicao||1) !== 2) return; // ignora 1ª edição
       if (data.tipo === 'exp' && data.turma) {
         const t = Number(data.turma);
         if (vagasContagem.turmas[t] !== undefined) vagasContagem.turmas[t]++;
@@ -1402,8 +1403,9 @@ window.submitModalExp=async function(){
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', '==', 'confirmado'), where('edicao', '==', 2)));
-    const isWait = snapCheck.size >= MAX_TURMA || !!configForcados.turmas[String(turma)];
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', '==', 'confirmado')));
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === 2).length;
+    const isWait = vagasOcupadas >= MAX_TURMA || !!configForcados.turmas[String(turma)];
 
     const protocolo=gerarProtocolo('exp');
     currentProtocolo=protocolo;
@@ -1476,8 +1478,9 @@ window.submitModalTor=async function(){
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', '==', 'confirmado'), where('edicao', '==', 2)));
-    const isWait = snapCheck.size >= MAX_CAT || !!configForcados.cats[cat];
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', '==', 'confirmado')));
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === 2).length;
+    const isWait = vagasOcupadas >= MAX_CAT || !!configForcados.cats[cat];
 
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
