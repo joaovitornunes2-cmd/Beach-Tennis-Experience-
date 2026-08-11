@@ -206,6 +206,8 @@ tbody tr:hover td{background:#fafafa}
 .btn-confirmar-pgto{background:#2e7d32;color:#fff;border:none;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;white-space:nowrap}
 .btn-confirmar-pgto:hover{background:#1b5e20}
 .btn-confirmar-pgto:disabled{background:#aaa;cursor:default}
+.btn-excluir-insc{background:#fff;color:#c62828;border:1.5px solid #f5c6c6;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
+.btn-excluir-insc:hover{background:#fdecea;border-color:#c62828}
 @media(max-width:768px){
   .admin-stats{grid-template-columns:repeat(2,1fr)}
   .admin-body{padding:1.25rem}
@@ -756,7 +758,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <button class="btn-export" onclick="exportCSV('wait')">⬇ Exportar CSV</button>
           </div>
           <div class="admin-table-wrap">
-            <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th></tr></thead>
+            <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th><th>Ação</th></tr></thead>
             <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
@@ -1130,7 +1132,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp, setDoc, getDoc }
+import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp, setDoc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -1690,6 +1692,16 @@ window.confirmarPgto=async function(id){
   }catch(err){console.error(err);if(btn){btn.disabled=false;btn.textContent='Confirmar Pgto';}}
 };
 
+window.excluirInscricao=async function(id){
+  const insc=allInscricoes.find(i=>i.id===id);
+  if(!insc)return;
+  const nome=insc.nome||'participante';
+  if(!confirm('Excluir a inscrição de '+nome+'?\n\nEsta ação não pode ser desfeita.'))return;
+  try{
+    await deleteDoc(doc(db,'inscricoes',id));
+  }catch(err){console.error(err);alert('Erro ao excluir. Tente novamente.');}
+};
+
 function renderAdminTabelas(){
   const exp=allInscricoes.filter(i=>i.tipo==='exp'&&i.status==='confirmado');
   const tor=allInscricoes.filter(i=>i.tipo==='tor'&&i.status==='confirmado');
@@ -1711,7 +1723,8 @@ function renderAdminTabelas(){
         <td><span class="badge badge-exp">${esc(turmaNames[e.turma]||e.turma)}</span></td>
         <td>${e.praticou==='sim'?'Sim':'Não'}</td>
         <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${esc(formatarData(e.criadoEm))}</td><td>–</td></tr>`).join('')
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="13">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
   document.getElementById('tbodyTor').innerHTML=tor.length
@@ -1722,7 +1735,8 @@ function renderAdminTabelas(){
         <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
         <td><span class="badge badge-tor">${esc(e.categoria||e.cat)}</span></td>
         <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${esc(formatarData(e.criadoEm))}</td><td>–</td></tr>`).join('')
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
 
   document.getElementById('tbodyPend').innerHTML=pend.length
@@ -1734,7 +1748,10 @@ function renderAdminTabelas(){
         <td>${e.tipo==='exp'?esc(turmaNames[e.turma]||e.turma):esc(e.categoria||e.cat)}</td>
         <td>${badgePgto(e.pagamento)}</td>
         <td>${esc(formatarData(e.criadoEm))}</td>
-        <td><button class='btn-confirmar-pgto' data-docid='${esc(e.id)}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button></td>
+        <td style="display:flex;gap:.4rem;flex-wrap:wrap">
+          <button class='btn-confirmar-pgto' data-docid='${esc(e.id)}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button>
+          <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button>
+        </td>
       </tr>`).join('')
     :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
 
@@ -1744,8 +1761,9 @@ function renderAdminTabelas(){
         <td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
         <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
         <td>${e.tipo==='exp'?esc(turmaNames[e.turma]||e.turma):esc(e.categoria||e.cat)}</td>
-        <td>${esc(formatarData(e.criadoEm))}</td></tr>`).join('')
-    :`<tr class="empty-row"><td colspan="8">Nenhuma pessoa em lista de espera.</td></tr>`;
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
+    :`<tr class="empty-row"><td colspan="9">Nenhuma pessoa em lista de espera.</td></tr>`;
 }
 
 window.switchAdminTab=function(tab){
