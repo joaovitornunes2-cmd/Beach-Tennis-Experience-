@@ -391,6 +391,27 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .aceite-row a{color:#CC1B1B;text-decoration:underline;font-weight:600}
 .aceite-row a:hover{color:#E83030}
 .aceite-err{font-size:.75rem;color:#c62828;margin-top:.1rem;display:none}
+/* ===== PAINEL FINANCEIRO ===== */
+.fin-resumo{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.875rem;margin-bottom:2rem}
+.fin-card{background:#f9f9f9;border:1.5px solid #eee;border-radius:12px;padding:1.1rem 1rem;text-align:center}
+.fin-card.destaque{background:#111;border-color:#111}
+.fin-card.verde{border-color:#2e7d32;background:#f1f8f1}
+.fin-card.amarelo{border-color:#e65100;background:#fff8f0}
+.fin-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;margin-bottom:.25rem;color:#CC1B1B}
+.fin-card.destaque .fin-num{color:#CC1B1B}
+.fin-card.verde .fin-num{color:#2e7d32}
+.fin-card.amarelo .fin-num{color:#e65100}
+.fin-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888}
+.fin-card.destaque .fin-lbl{color:rgba(255,255,255,.5)}
+.fin-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;margin-bottom:2rem}
+.fin-cat-card{background:#f9f9f9;border:1.5px solid #eee;border-radius:10px;padding:1rem}
+.fin-cat-nome{font-weight:700;font-size:.875rem;color:#111;margin-bottom:.75rem;border-bottom:1px solid #eee;padding-bottom:.5rem}
+.fin-cat-row{display:flex;justify-content:space-between;font-size:.8rem;color:#555;padding:.2rem 0}
+.fin-cat-row span:last-child{font-weight:700;color:#111}
+.fin-cat-row.total{border-top:1px solid #eee;margin-top:.35rem;padding-top:.5rem;font-weight:700;color:#111}
+.fin-cat-row.total span:last-child{color:#CC1B1B}
+.badge-edicao{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.15rem .5rem;border-radius:20px;background:#e3f2fd;color:#1565c0;margin-left:.4rem;vertical-align:middle}
+.badge-edicao.e1{background:#f3e5f5;color:#6a1b9a}
 </style>
 </head>
 <body>
@@ -688,6 +709,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Super 8</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('pend')">⏳ Ag. Pagamento</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('wait')">📋 Lista Espera</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('fin')">💰 Financeiro</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('aval')">⭐ Avaliações</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
         </div>
@@ -737,6 +759,17 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th></tr></thead>
             <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
+        </div>
+
+        <!-- TAB FINANCEIRO -->
+        <div class="admin-section" id="admin-fin">
+          <div class="fin-resumo" id="finResumo">
+            <div class="admin-loading"><div class="spinner"></div> Carregando...</div>
+          </div>
+          <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.875rem">Detalhamento por categoria — 2ª Edição</h4>
+          <div class="fin-cats" id="finCats"></div>
+          <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin:.5rem 0 .875rem">Histórico — 1ª Edição</h4>
+          <div class="fin-cats" id="finCatsE1"></div>
         </div>
 
         <!-- TAB AVALIAÇÕES -->
@@ -1369,13 +1402,13 @@ window.submitModalExp=async function(){
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', 'in', ['pendente', 'confirmado'])));
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', '==', 'confirmado'), where('edicao', '==', 2)));
     const isWait = snapCheck.size >= MAX_TURMA || !!configForcados.turmas[String(turma)];
 
     const protocolo=gerarProtocolo('exp');
     currentProtocolo=protocolo;
     const entry={
-      protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',
+      protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',edicao:2,
       status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
       regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
       marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
@@ -1443,14 +1476,14 @@ window.submitModalTor=async function(){
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', 'in', ['pendente', 'confirmado'])));
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', '==', 'confirmado'), where('edicao', '==', 2)));
     const isWait = snapCheck.size >= MAX_CAT || !!configForcados.cats[cat];
 
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
     const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
     const entry={
-      protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',
+      protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',edicao:2,
       status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
       regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
       marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
@@ -1624,6 +1657,7 @@ function iniciarListenerFirebase(){
     allInscricoes=snapshot.docs.map(d=>({id:d.id,...d.data()}));
     document.getElementById('syncStatus').textContent='Ao vivo · Firebase';
     renderAdminTabelas();
+    if(document.getElementById('admin-fin')?.classList.contains('active')) renderFinanceiro();
   },(err)=>{console.error(err);document.getElementById('syncStatus').textContent='⚠ Erro de conexão';});
 }
 
@@ -1712,10 +1746,11 @@ function renderAdminTabelas(){
 }
 
 window.switchAdminTab=function(tab){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','aval','cfg'][i]===tab));
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','fin','aval','cfg'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('admin-'+tab).classList.add('active');
   if(tab==='aval') iniciarListenerAval();
+  if(tab==='fin') renderFinanceiro();
 };
 window.filterTable=function(tbodyId,term){
   const rows=document.getElementById(tbodyId).querySelectorAll('tr:not(.empty-row)');
@@ -1998,6 +2033,99 @@ function verificarMenor(formId){
   const eMenor = calcularIdade(nascEl.value) < 18;
   document.getElementById(`menor_aceite_${formId}`).style.display = eMenor ? 'block' : 'none';
   if(!eMenor) document.getElementById(`menor_ok_${formId}`).checked = false;
+}
+
+// ===== PAINEL FINANCEIRO =====
+const VALOR_INSCRICAO = 100;
+
+function renderFinanceiro(){
+  if(!allInscricoes.length){ renderAdminTabelas(); }
+
+  const e2 = allInscricoes.filter(i => (i.edicao||1) === 2);
+  const e1 = allInscricoes.filter(i => (i.edicao||1) === 1);
+
+  const confirmados2 = e2.filter(i => i.status === 'confirmado');
+  const pendentes2   = e2.filter(i => i.status === 'pendente');
+  const espera2      = e2.filter(i => i.status === 'espera');
+
+  const totalArrecadado = confirmados2.length * VALOR_INSCRICAO;
+  const totalPendente   = pendentes2.length * VALOR_INSCRICAO;
+  const totalPrevisto   = (confirmados2.length + pendentes2.length) * VALOR_INSCRICAO;
+
+  // Resumo geral
+  document.getElementById('finResumo').innerHTML = `
+    <div class="fin-card destaque">
+      <div class="fin-num">R$ ${totalArrecadado.toLocaleString('pt-BR')}</div>
+      <div class="fin-lbl">Total arrecadado</div>
+    </div>
+    <div class="fin-card verde">
+      <div class="fin-num">${confirmados2.length}</div>
+      <div class="fin-lbl">Pagamentos confirmados</div>
+    </div>
+    <div class="fin-card amarelo">
+      <div class="fin-num">${pendentes2.length}</div>
+      <div class="fin-lbl">Aguardando pagamento</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-num">${espera2.length}</div>
+      <div class="fin-lbl">Lista de espera</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-num">R$ ${totalPendente.toLocaleString('pt-BR')}</div>
+      <div class="fin-lbl">A receber (pendentes)</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-num">R$ ${totalPrevisto.toLocaleString('pt-BR')}</div>
+      <div class="fin-lbl">Previsão total</div>
+    </div>`;
+
+  // Detalhamento por categoria — 2ª edição
+  const catNames = {
+    masc_ini:'Masculino Iniciante', masc_int:'Masculino Intermediário',
+    fem_ini:'Feminino Iniciante',   fem_int:'Feminino Intermediário'
+  };
+  const turmaNames = {'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
+
+  const torCats = ['masc_ini','masc_int','fem_ini','fem_int'];
+  document.getElementById('finCats').innerHTML = torCats.map(cat => {
+    const conf = e2.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
+    const pend = e2.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='pendente').length;
+    const esp  = e2.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='espera').length;
+    const total = (conf+pend)*VALOR_INSCRICAO;
+    return `<div class="fin-cat-card">
+      <div class="fin-cat-nome">🏆 ${catNames[cat]}</div>
+      <div class="fin-cat-row"><span>Confirmados</span><span style="color:#2e7d32">${conf}</span></div>
+      <div class="fin-cat-row"><span>Pendentes</span><span style="color:#e65100">${pend}</span></div>
+      <div class="fin-cat-row"><span>Em espera</span><span>${esp}</span></div>
+      <div class="fin-cat-row"><span>Vagas ocupadas</span><span>${conf} / ${MAX_CAT}</span></div>
+      <div class="fin-cat-row total"><span>Receita confirmada</span><span>R$ ${(conf*VALOR_INSCRICAO).toLocaleString('pt-BR')}</span></div>
+      <div class="fin-cat-row"><span>Previsão total</span><span>R$ ${total.toLocaleString('pt-BR')}</span></div>
+    </div>`;
+  }).join('');
+
+  // Histórico 1ª edição
+  const e1tor = torCats.map(cat => {
+    const conf = e1.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
+    const total = e1.filter(i=>i.tipo==='tor'&&i.cat===cat).length;
+    return `<div class="fin-cat-card" style="opacity:.7">
+      <div class="fin-cat-nome">🏆 ${catNames[cat]} <span class="badge-edicao e1">1ª ed.</span></div>
+      <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
+      <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
+    </div>`;
+  }).join('');
+
+  const e1exp = [1,2,3,4].map(t => {
+    const conf = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)&&i.status==='confirmado').length;
+    const total = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)).length;
+    return `<div class="fin-cat-card" style="opacity:.7">
+      <div class="fin-cat-nome">🎾 ${turmaNames[t]} <span class="badge-edicao e1">1ª ed.</span></div>
+      <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
+      <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('finCatsE1').innerHTML = e1tor + e1exp ||
+    '<p style="color:#aaa;font-size:.875rem">Nenhum registro da 1ª edição encontrado.</p>';
 }
 
 // INIT
