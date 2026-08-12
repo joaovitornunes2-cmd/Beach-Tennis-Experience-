@@ -414,6 +414,33 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .fin-cat-row.total span:last-child{color:#CC1B1B}
 .badge-edicao{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.15rem .5rem;border-radius:20px;background:#e3f2fd;color:#1565c0;margin-left:.4rem;vertical-align:middle}
 .badge-edicao.e1{background:#f3e5f5;color:#6a1b9a}
+/* ===== FILTROS E ORDENAÇÃO ===== */
+.admin-filters{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.filter-select{border:1.5px solid #e0e0e0;border-radius:7px;padding:.4rem .75rem;font-size:.8rem;font-family:'Inter',sans-serif;color:#333;background:#fff;cursor:pointer;transition:border-color .2s}
+.filter-select:focus{outline:none;border-color:#CC1B1B}
+.sort-btn{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:7px;padding:.4rem .75rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555;transition:all .2s;white-space:nowrap}
+.sort-btn.active{background:#111;color:#fff;border-color:#111}
+.filter-count{font-size:.78rem;color:#888;margin-left:.25rem}
+
+/* ===== MODAL DE EDIÇÃO ===== */
+.modal-edit-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem}
+.modal-edit-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-edit-box{background:#fff;border-radius:14px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);margin:auto}
+.modal-edit-header{background:#111;padding:1.25rem 1.75rem;display:flex;justify-content:space-between;align-items:center}
+.modal-edit-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:#CC1B1B;margin:0}
+.modal-edit-body{padding:1.75rem}
+.modal-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.modal-edit-grid .full{grid-column:1/-1}
+.edit-mf{display:flex;flex-direction:column;gap:.3rem}
+.edit-mf label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555}
+.edit-mf input,.edit-mf select{border:1.5px solid #e0e0e0;border-radius:6px;padding:.55rem .8rem;font-size:.9rem;font-family:'Inter',sans-serif;color:#222;transition:border-color .2s;width:100%}
+.edit-mf input:focus,.edit-mf select:focus{outline:none;border-color:#CC1B1B}
+.edit-actions{display:flex;gap:.75rem;margin-top:1.25rem}
+.btn-edit-save{flex:1;background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.8rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.btn-edit-save:hover{background:#E83030}
+.btn-edit-cancel{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.8rem 1.25rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555}
+.btn-editar-insc{background:#fff;color:#1565c0;border:1.5px solid #bbdefb;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
+.btn-editar-insc:hover{background:#e3f2fd}
 </style>
 </head>
 <body>
@@ -719,8 +746,26 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <!-- TAB EXPERIÊNCIA -->
         <div class="admin-section active" id="admin-exp">
           <div class="admin-toolbar">
-            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyExp', this.value)"></div>
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchExp" placeholder="Buscar nome, CPF ou e-mail..." oninput="aplicarFiltrosExp()"></div>
             <button class="btn-export" onclick="exportCSV('exp')">⬇ Exportar CSV</button>
+          </div>
+          <div class="admin-filters">
+            <select class="filter-select" id="filtroTurmaExp" onchange="aplicarFiltrosExp()">
+              <option value="">Todas as turmas</option>
+              <option value="1">T1 — 08h</option>
+              <option value="2">T2 — 09h</option>
+              <option value="3">T3 — 10h</option>
+              <option value="4">T4 — 11h</option>
+            </select>
+            <select class="filter-select" id="filtroStatusExp" onchange="aplicarFiltrosExp()">
+              <option value="">Todos os status</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="pendente">Pendente</option>
+              <option value="espera">Lista de espera</option>
+            </select>
+            <button class="sort-btn active" id="sortExpNome" onclick="alternarOrdemExp('nome')">A–Z Nome</button>
+            <button class="sort-btn" id="sortExpData" onclick="alternarOrdemExp('data')">Mais recentes</button>
+            <span class="filter-count" id="countExp"></span>
           </div>
           <div class="admin-table-wrap">
             <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Turma</th><th>Praticou?</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
@@ -731,8 +776,26 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <!-- TAB TORNEIO -->
         <div class="admin-section" id="admin-tor">
           <div class="admin-toolbar">
-            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyTor', this.value)"></div>
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchTor" placeholder="Buscar nome, CPF ou e-mail..." oninput="aplicarFiltrosTor()"></div>
             <button class="btn-export" onclick="exportCSV('tor')">⬇ Exportar CSV</button>
+          </div>
+          <div class="admin-filters">
+            <select class="filter-select" id="filtroCategoriaTor" onchange="aplicarFiltrosTor()">
+              <option value="">Todas as categorias</option>
+              <option value="masc_ini">Masculino Iniciante</option>
+              <option value="masc_int">Masculino Intermediário</option>
+              <option value="fem_ini">Feminino Iniciante</option>
+              <option value="fem_int">Feminino Intermediário</option>
+            </select>
+            <select class="filter-select" id="filtroStatusTor" onchange="aplicarFiltrosTor()">
+              <option value="">Todos os status</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="pendente">Pendente</option>
+              <option value="espera">Lista de espera</option>
+            </select>
+            <button class="sort-btn active" id="sortTorNome" onclick="alternarOrdemTor('nome')">A–Z Nome</button>
+            <button class="sort-btn" id="sortTorData" onclick="alternarOrdemTor('data')">Mais recentes</button>
+            <span class="filter-count" id="countTor"></span>
           </div>
           <div class="admin-table-wrap">
             <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Categoria</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
@@ -940,6 +1003,49 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         </div>
       </div>
       <button class="btn-modal-next" style="margin-top:1rem" onclick="salvarAdminAval()">Publicar avaliação</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR INSCRIÇÃO -->
+<div class="modal-edit-overlay" id="modalEditInsc">
+  <div class="modal-edit-box">
+    <div class="modal-edit-header">
+      <h3>Editar inscrição</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharModalEdit()">✕</button>
+    </div>
+    <div class="modal-edit-body">
+      <input type="hidden" id="edit_doc_id">
+      <div class="modal-edit-grid">
+        <div class="edit-mf full"><label>Nome completo</label><input type="text" id="edit_nome"></div>
+        <div class="edit-mf"><label>CPF</label><input type="text" id="edit_cpf" oninput="maskCPF(this)"></div>
+        <div class="edit-mf"><label>Data de nascimento</label><input type="date" id="edit_nasc"></div>
+        <div class="edit-mf"><label>Telefone / WhatsApp</label><input type="tel" id="edit_tel" oninput="maskTel(this)"></div>
+        <div class="edit-mf"><label>CEP</label><input type="text" id="edit_cep" oninput="maskCEP(this)"></div>
+        <div class="edit-mf full"><label>E-mail</label><input type="email" id="edit_email"></div>
+        <div class="edit-mf full" id="edit_turma_wrap">
+          <label>Turma</label>
+          <select id="edit_turma">
+            <option value="1">T1 — 08h às 09h</option>
+            <option value="2">T2 — 09h às 10h</option>
+            <option value="3">T3 — 10h às 11h</option>
+            <option value="4">T4 — 11h às 12h</option>
+          </select>
+        </div>
+        <div class="edit-mf full" id="edit_cat_wrap">
+          <label>Categoria</label>
+          <select id="edit_cat">
+            <option value="masc_ini">Masculino Iniciante</option>
+            <option value="masc_int">Masculino Intermediário</option>
+            <option value="fem_ini">Feminino Iniciante</option>
+            <option value="fem_int">Feminino Intermediário</option>
+          </select>
+        </div>
+      </div>
+      <div class="edit-actions">
+        <button class="btn-edit-cancel" onclick="fecharModalEdit()">Cancelar</button>
+        <button class="btn-edit-save" onclick="salvarEdicaoInsc()">Salvar alterações</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1714,30 +1820,9 @@ function renderAdminTabelas(){
   document.getElementById('st-wait').textContent=wait.length;
   document.getElementById('st-total').textContent=allInscricoes.length;
 
-  document.getElementById('tbodyExp').innerHTML=exp.length
-    ?exp.map((e,i)=>`<tr>
-        <td>${i+1}</td>
-        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
-        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
-        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
-        <td><span class="badge badge-exp">${esc(turmaNames[e.turma]||e.turma)}</span></td>
-        <td>${e.praticou==='sim'?'Sim':'Não'}</td>
-        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${esc(formatarData(e.criadoEm))}</td>
-        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
-    :`<tr class="empty-row"><td colspan="13">Nenhuma inscrição confirmada ainda.</td></tr>`;
-
-  document.getElementById('tbodyTor').innerHTML=tor.length
-    ?tor.map((e,i)=>`<tr>
-        <td>${i+1}</td>
-        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
-        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
-        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
-        <td><span class="badge badge-tor">${esc(e.categoria||e.cat)}</span></td>
-        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
-        <td>${esc(formatarData(e.criadoEm))}</td>
-        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
-    :`<tr class="empty-row"><td colspan="12">Nenhuma inscrição confirmada ainda.</td></tr>`;
+  // Exp e Tor usam filtros próprios
+  aplicarFiltrosExp();
+  aplicarFiltrosTor();
 
   document.getElementById('tbodyPend').innerHTML=pend.length
     ?pend.map((e,i)=>`<tr>
@@ -2148,6 +2233,173 @@ function renderFinanceiro(){
   document.getElementById('finCatsE1').innerHTML = e1tor + e1exp ||
     '<p style="color:#aaa;font-size:.875rem">Nenhum registro da 1ª edição encontrado.</p>';
 }
+
+// ===== FILTROS E ORDENAÇÃO =====
+let ordemExp = 'nome';
+let ordemTor = 'nome';
+
+function aplicarFiltrosExp(){
+  const busca   = (document.getElementById('searchExp')?.value||'').toLowerCase();
+  const turma   = document.getElementById('filtroTurmaExp')?.value||'';
+  const status  = document.getElementById('filtroStatusExp')?.value||'';
+
+  let lista = allInscricoes.filter(i => i.tipo==='exp' && (i.edicao||1)===2);
+  if(turma)  lista = lista.filter(i => String(i.turma) === turma);
+  if(status) lista = lista.filter(i => i.status === status);
+  if(busca)  lista = lista.filter(i =>
+    (i.nome||'').toLowerCase().includes(busca) ||
+    (i.cpf||'').includes(busca) ||
+    (i.email||'').toLowerCase().includes(busca)
+  );
+
+  lista = ordenarLista(lista, ordemExp);
+  document.getElementById('countExp').textContent = lista.length + ' inscrito' + (lista.length!==1?'s':'');
+  renderTabelaExp(lista);
+}
+
+function aplicarFiltrosTor(){
+  const busca  = (document.getElementById('searchTor')?.value||'').toLowerCase();
+  const cat    = document.getElementById('filtroCategoriaTor')?.value||'';
+  const status = document.getElementById('filtroStatusTor')?.value||'';
+
+  let lista = allInscricoes.filter(i => i.tipo==='tor' && (i.edicao||1)===2);
+  if(cat)    lista = lista.filter(i => i.cat === cat);
+  if(status) lista = lista.filter(i => i.status === status);
+  if(busca)  lista = lista.filter(i =>
+    (i.nome||'').toLowerCase().includes(busca) ||
+    (i.cpf||'').includes(busca) ||
+    (i.email||'').toLowerCase().includes(busca)
+  );
+
+  lista = ordenarLista(lista, ordemTor);
+  document.getElementById('countTor').textContent = lista.length + ' inscrito' + (lista.length!==1?'s':'');
+  renderTabelaTor(lista);
+}
+
+function ordenarLista(lista, ordem){
+  return [...lista].sort((a,b) => {
+    if(ordem === 'nome') return (a.nome||'').localeCompare(b.nome||'', 'pt-BR');
+    if(ordem === 'data'){
+      const ta = a.criadoEm?.toMillis ? a.criadoEm.toMillis() : 0;
+      const tb = b.criadoEm?.toMillis ? b.criadoEm.toMillis() : 0;
+      return tb - ta;
+    }
+    return 0;
+  });
+}
+
+window.alternarOrdemExp = function(ordem){
+  ordemExp = ordem;
+  document.getElementById('sortExpNome').classList.toggle('active', ordem==='nome');
+  document.getElementById('sortExpData').classList.toggle('active', ordem==='data');
+  aplicarFiltrosExp();
+};
+
+window.alternarOrdemTor = function(ordem){
+  ordemTor = ordem;
+  document.getElementById('sortTorNome').classList.toggle('active', ordem==='nome');
+  document.getElementById('sortTorData').classList.toggle('active', ordem==='data');
+  aplicarFiltrosTor();
+};
+
+function renderTabelaExp(lista){
+  document.getElementById('tbodyExp').innerHTML = lista.length
+    ? lista.map((e,i)=>`<tr>
+        <td>${i+1}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
+        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
+        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
+        <td><span class="badge badge-exp">${esc(turmaNames[e.turma]||e.turma)}</span></td>
+        <td>${e.praticou==='sim'?'Sim':'Não'}</td>
+        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td style="display:flex;gap:.35rem;flex-wrap:wrap">
+          <button class='btn-editar-insc' onclick='abrirModalEdit("${esc(e.id)}")'>✏️ Editar</button>
+          <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑</button>
+        </td></tr>`).join('')
+    : `<tr class="empty-row"><td colspan="13">Nenhum resultado encontrado.</td></tr>`;
+}
+
+function renderTabelaTor(lista){
+  document.getElementById('tbodyTor').innerHTML = lista.length
+    ? lista.map((e,i)=>`<tr>
+        <td>${i+1}</td>
+        <td><span style="font-family:monospace;font-size:.72rem;background:#f5f5f5;padding:.15rem .5rem;border-radius:4px">${esc(e.protocolo)}</span></td>
+        <td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
+        <td>${esc(formatarNasc(e.nasc))}</td><td>${esc(e.tel)}</td><td>${esc(e.email)}</td>
+        <td><span class="badge badge-tor">${esc(e.categoria||e.cat)}</span></td>
+        <td>${badgePgto(e.pagamento)}</td><td>${badgeStatus(e.status)}</td>
+        <td>${esc(formatarData(e.criadoEm))}</td>
+        <td style="display:flex;gap:.35rem;flex-wrap:wrap">
+          <button class='btn-editar-insc' onclick='abrirModalEdit("${esc(e.id)}")'>✏️ Editar</button>
+          <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑</button>
+        </td></tr>`).join('')
+    : `<tr class="empty-row"><td colspan="12">Nenhum resultado encontrado.</td></tr>`;
+}
+
+// ===== MODAL DE EDIÇÃO =====
+window.abrirModalEdit = function(id){
+  const e = allInscricoes.find(i => i.id===id);
+  if(!e) return;
+  document.getElementById('edit_doc_id').value = id;
+  document.getElementById('edit_nome').value   = e.nome||'';
+  document.getElementById('edit_cpf').value    = e.cpf||'';
+  document.getElementById('edit_nasc').value   = e.nasc||'';
+  document.getElementById('edit_tel').value    = e.tel||'';
+  document.getElementById('edit_cep').value    = e.cep||'';
+  document.getElementById('edit_email').value  = e.email||'';
+  // Mostra campo correto
+  const isTor = e.tipo === 'tor';
+  document.getElementById('edit_turma_wrap').style.display = isTor ? 'none' : 'block';
+  document.getElementById('edit_cat_wrap').style.display   = isTor ? 'block' : 'none';
+  if(isTor) document.getElementById('edit_cat').value    = e.cat||'masc_ini';
+  else      document.getElementById('edit_turma').value  = e.turma||'1';
+  document.getElementById('modalEditInsc').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.fecharModalEdit = function(){
+  document.getElementById('modalEditInsc').classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+document.getElementById('modalEditInsc').addEventListener('click', function(e){
+  if(e.target===this) fecharModalEdit();
+});
+
+window.salvarEdicaoInsc = async function(){
+  const id    = document.getElementById('edit_doc_id').value;
+  const insc  = allInscricoes.find(i=>i.id===id);
+  if(!id||!insc) return;
+  const btn   = document.querySelector('#modalEditInsc .btn-edit-save');
+  btn.textContent='Salvando...'; btn.disabled=true;
+
+  const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+  const isTor = insc.tipo==='tor';
+  const updates = {
+    nome:  document.getElementById('edit_nome').value.trim(),
+    cpf:   document.getElementById('edit_cpf').value.trim(),
+    nasc:  document.getElementById('edit_nasc').value,
+    tel:   document.getElementById('edit_tel').value.trim(),
+    cep:   document.getElementById('edit_cep').value.trim(),
+    email: document.getElementById('edit_email').value.trim(),
+  };
+  if(isTor){
+    const cat = document.getElementById('edit_cat').value;
+    updates.cat = cat;
+    updates.categoria = catNames[cat]||cat;
+  } else {
+    updates.turma = document.getElementById('edit_turma').value;
+  }
+
+  try{
+    await updateDoc(doc(db,'inscricoes',id), updates);
+    fecharModalEdit();
+  }catch(err){
+    console.error(err); alert('Erro ao salvar. Tente novamente.');
+  }
+  btn.textContent='Salvar alterações'; btn.disabled=false;
+};
 
 // INIT
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
