@@ -1842,7 +1842,8 @@ function renderAdminTabelas(){
         <td>${esc(formatarData(e.criadoEm))}</td>
         <td style="display:flex;gap:.4rem;flex-wrap:wrap">
           <button class='btn-confirmar-pgto' data-docid='${esc(e.id)}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button>
-          <button class='btn-editar-insc' onclick='recuperarVenda("${esc(e.id)}")'>💬 Recuperar</button>
+          <button class='btn-editar-insc' onclick='recuperarVendaWA("${esc(e.id)}")'>💬 WhatsApp</button>
+          <button class='btn-editar-insc' onclick='recuperarVendaEmail("${esc(e.id)}")'>📧 E-mail</button>
           <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button>
         </td>
       </tr>`).join('')
@@ -2410,47 +2411,53 @@ window.salvarEdicaoInsc = async function(){
 };
 
 // ===== RECUPERAÇÃO DE VENDA =====
-window.recuperarVenda = async function(id){
+function getDadosRecuperacao(id){
   const e = allInscricoes.find(i=>i.id===id);
-  if(!e) return;
+  if(!e) return null;
   const nome = e.nome?.split(' ')[0] || 'atleta';
   const tel  = (e.tel||'').replace(/\D/g,'');
   const telWA = tel.startsWith('55') ? tel : '55'+tel;
-  const catOuTurma = e.tipo==='exp'
-    ? (turmaNames[e.turma]||e.turma||'')
-    : (e.categoria||e.cat||'');
+  const catOuTurma = e.tipo==='exp' ? (turmaNames[e.turma]||e.turma||'') : (e.categoria||e.cat||'');
   const horariosCat = {masc_ini:'09h às 12h',masc_int:'14h às 17h',fem_ini:'09h às 12h',fem_int:'14h às 17h'};
   const horarioTurma = {'1':'08h às 09h','2':'09h às 10h','3':'10h às 11h','4':'11h às 12h'};
   const horario = e.tipo==='exp' ? (horarioTurma[e.turma]||'') : (horariosCat[e.cat]||'');
+  return {e, nome, telWA, catOuTurma, horario};
+}
 
-  // WhatsApp
-  const msgWA = encodeURIComponent(
-    'Olá, '+nome+'! 👋\n\n' +
+window.recuperarVendaWA = function(id){
+  const d = getDadosRecuperacao(id);
+  if(!d) return;
+  const msg = encodeURIComponent(
+    'Olá, '+d.nome+'! 👋\n\n' +
     'Vimos que você iniciou sua inscrição na *2ª Edição Beach Tennis Experience* mas não concluiu o pagamento.\n\n' +
-    '🎾 *'+catOuTurma+'*\n' +
-    '⏰ Horário: *'+horario+'*\n' +
+    '🎾 *'+d.catOuTurma+'*\n' +
+    '⏰ Horário: *'+d.horario+'*\n' +
     '📅 *22 de Agosto de 2026* — SkyFit Passeio das Águas\n\n' +
     'Você ainda tem interesse em participar? Sua vaga está reservada, mas precisamos da confirmação do pagamento para garantir seu lugar.\n\n' +
     'Caso não consiga concluir, nos avise para podermos liberar a vaga para outro atleta que está na fila de espera. 😊\n\n' +
     '_Equipe Beach Tennis Experience_'
   );
-  window.open('https://wa.me/'+telWA+'?text='+msgWA, '_blank');
+  window.open('https://wa.me/'+d.telWA+'?text='+msg, '_blank');
+};
 
-  // E-mail automático via EmailJS
-  if(e.email){
-    try{
-      await emailjs.send('service_hcl2ec1', 'template_kzu3l8b', {
-        to_email: e.email,
-        nome:     e.nome||'',
-        categoria: catOuTurma,
-        horario:  horario,
-      });
-      // feedback sutil
-      const btn = document.querySelector(`[onclick*='recuperarVenda("${id}")']`);
-      if(btn){ btn.textContent='✅ Enviado'; setTimeout(()=>btn.textContent='💬 Recuperar', 3000); }
-    } catch(err){
-      console.error('Erro ao enviar e-mail:', err);
-    }
+window.recuperarVendaEmail = async function(id){
+  const d = getDadosRecuperacao(id);
+  if(!d) return;
+  if(!d.e.email){ alert('Este participante não possui e-mail cadastrado.'); return; }
+  const btn = document.querySelector(`[onclick*='recuperarVendaEmail("${id}")']`);
+  if(btn){ btn.textContent='Enviando...'; btn.disabled=true; }
+  try{
+    await emailjs.send('service_hcl2ec1', 'template_kzu3l8b', {
+      to_email:  d.e.email,
+      nome:      d.e.nome||'',
+      categoria: d.catOuTurma,
+      horario:   d.horario,
+    });
+    if(btn){ btn.textContent='✅ Enviado!'; setTimeout(()=>{ btn.textContent='📧 E-mail'; btn.disabled=false; }, 3000); }
+  } catch(err){
+    console.error('Erro ao enviar e-mail:', err);
+    alert('Erro ao enviar e-mail. Verifique a conexão e tente novamente.');
+    if(btn){ btn.textContent='📧 E-mail'; btn.disabled=false; }
   }
 };
 
