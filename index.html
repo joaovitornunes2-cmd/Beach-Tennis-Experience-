@@ -442,6 +442,8 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .btn-editar-insc{background:#fff;color:#1565c0;border:1.5px solid #bbdefb;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
 .btn-editar-insc:hover{background:#e3f2fd}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
 </head>
 <body>
 
@@ -2408,7 +2410,7 @@ window.salvarEdicaoInsc = async function(){
 };
 
 // ===== RECUPERAÇÃO DE VENDA =====
-window.recuperarVenda = function(id){
+window.recuperarVenda = async function(id){
   const e = allInscricoes.find(i=>i.id===id);
   if(!e) return;
   const nome = e.nome?.split(' ')[0] || 'atleta';
@@ -2421,7 +2423,8 @@ window.recuperarVenda = function(id){
   const horarioTurma = {'1':'08h às 09h','2':'09h às 10h','3':'10h às 11h','4':'11h às 12h'};
   const horario = e.tipo==='exp' ? (horarioTurma[e.turma]||'') : (horariosCat[e.cat]||'');
 
-  const msg = encodeURIComponent(
+  // WhatsApp
+  const msgWA = encodeURIComponent(
     'Olá, '+nome+'! 👋\n\n' +
     'Vimos que você iniciou sua inscrição na *2ª Edição Beach Tennis Experience* mas não concluiu o pagamento.\n\n' +
     '🎾 *'+catOuTurma+'*\n' +
@@ -2431,7 +2434,24 @@ window.recuperarVenda = function(id){
     'Caso não consiga concluir, nos avise para podermos liberar a vaga para outro atleta que está na fila de espera. 😊\n\n' +
     '_Equipe Beach Tennis Experience_'
   );
-  window.open('https://wa.me/'+telWA+'?text='+msg, '_blank');
+  window.open('https://wa.me/'+telWA+'?text='+msgWA, '_blank');
+
+  // E-mail automático via EmailJS
+  if(e.email){
+    try{
+      await emailjs.send('service_hcl2ec1', 'template_kzu3l8b', {
+        to_email: e.email,
+        nome:     e.nome||'',
+        categoria: catOuTurma,
+        horario:  horario,
+      });
+      // feedback sutil
+      const btn = document.querySelector(`[onclick*='recuperarVenda("${id}")']`);
+      if(btn){ btn.textContent='✅ Enviado'; setTimeout(()=>btn.textContent='💬 Recuperar', 3000); }
+    } catch(err){
+      console.error('Erro ao enviar e-mail:', err);
+    }
+  }
 };
 
 // INIT
