@@ -1143,7 +1143,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div class="mfg" style="margin-top:.75rem">
           <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
           <div class="mf-group"><label>CPF *</label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
-          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')" oninput="verificarMenor('tor')" onblur="verificarMenor('tor')"></div>
           <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
           <div class="mf-group"><label>CEP *</label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
           <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
@@ -1485,6 +1485,9 @@ window.submitModalExp=async function(){
   const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
 
+  // força verificação de menor antes de validar
+  verificarMenor('exp');
+
   // validação aceites
   const regAceito = document.getElementById('reg_aceito_exp').checked;
   const regErrEl  = document.getElementById('reg_err_exp');
@@ -1560,6 +1563,9 @@ window.submitModalTor=async function(){
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
+
+  // força verificação de menor antes de validar
+  verificarMenor('tor');
 
   // validação aceites
   const regAceito = document.getElementById('reg_aceito_tor').checked;
@@ -1842,6 +1848,7 @@ function renderAdminTabelas(){
         <td>${esc(formatarData(e.criadoEm))}</td>
         <td style="display:flex;gap:.4rem;flex-wrap:wrap">
           <button class='btn-confirmar-pgto' data-docid='${esc(e.id)}' onclick='confirmarPgto(this.getAttribute("data-docid"))'>✅ Confirmar Pgto</button>
+          <button class='btn-editar-insc' onclick='abrirModalEdit("${esc(e.id)}")'>✏️ Editar</button>
           <button class='btn-editar-insc' onclick='recuperarVendaWA("${esc(e.id)}")'>💬 WhatsApp</button>
           <button class='btn-editar-insc' onclick='recuperarVendaEmail("${esc(e.id)}")'>📧 E-mail</button>
           <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button>
@@ -1856,7 +1863,10 @@ function renderAdminTabelas(){
         <td><span class="badge ${e.tipo==='exp'?'badge-exp':'badge-tor'}">${e.tipo==='exp'?'Experiência':'Torneio'}</span></td>
         <td>${e.tipo==='exp'?esc(turmaNames[e.turma]||e.turma):esc(e.categoria||e.cat)}</td>
         <td>${esc(formatarData(e.criadoEm))}</td>
-        <td><button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button></td></tr>`).join('')
+        <td style="display:flex;gap:.35rem;flex-wrap:wrap">
+          <button class='btn-editar-insc' onclick='abrirModalEdit("${esc(e.id)}")'>✏️ Editar</button>
+          <button class='btn-excluir-insc' onclick='excluirInscricao("${esc(e.id)}")'>🗑 Excluir</button>
+        </td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="9">Nenhuma pessoa em lista de espera.</td></tr>`;
 }
 
