@@ -441,6 +441,36 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .btn-edit-cancel{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.8rem 1.25rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555}
 .btn-editar-insc{background:#fff;color:#1565c0;border:1.5px solid #bbdefb;border-radius:6px;padding:.3rem .75rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
 .btn-editar-insc:hover{background:#e3f2fd}
+/* ===== DISPARO EM MASSA ===== */
+.modal-disparo-overlay{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);overflow-y:auto;padding:2rem 1rem}
+.modal-disparo-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-disparo-box{background:#fff;border-radius:16px;width:100%;max-width:620px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5);margin:auto}
+.modal-disparo-header{background:#111;padding:1.25rem 1.75rem;display:flex;justify-content:space-between;align-items:center}
+.modal-disparo-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:#CC1B1B;margin:0}
+.modal-disparo-body{padding:1.75rem}
+.disparo-preview{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:1.1rem 1.25rem;font-size:.875rem;color:#166534;line-height:1.7;margin-bottom:1.25rem;white-space:pre-wrap;font-family:'Inter',sans-serif}
+.disparo-lista{max-height:220px;overflow-y:auto;border:1.5px solid #eee;border-radius:8px;margin-bottom:1.25rem}
+.disparo-item{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;border-bottom:1px solid #f5f5f5;font-size:.83rem}
+.disparo-item:last-child{border-bottom:none}
+.disparo-item-nome{font-weight:600;color:#111}
+.disparo-item-cat{font-size:.72rem;color:#888;margin-top:.1rem}
+.disparo-status{font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:20px}
+.disparo-status.pendente{background:#fff3e0;color:#e65100}
+.disparo-status.enviado{background:#e8f5e9;color:#2e7d32}
+.disparo-status.atual{background:#e3f2fd;color:#1565c0}
+.disparo-progress{background:#f5f5f5;border-radius:8px;height:8px;margin-bottom:.5rem;overflow:hidden}
+.disparo-progress-bar{height:100%;background:#CC1B1B;border-radius:8px;transition:width .4s}
+.disparo-progress-txt{font-size:.78rem;color:#888;text-align:center;margin-bottom:1.25rem}
+.btn-disparo-iniciar{width:100%;background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.9rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.btn-disparo-iniciar:hover{background:#E83030}
+.btn-disparo-iniciar:disabled{background:#aaa;cursor:default}
+.btn-disparo-proximo{width:100%;background:#2e7d32;color:#fff;border:none;border-radius:8px;padding:.9rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.btn-disparo-proximo:hover{background:#1b5e20}
+.disparo-filtro{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.disparo-filtro-btn{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:7px;padding:.35rem .875rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555;transition:all .2s}
+.disparo-filtro-btn.active{background:#111;color:#fff;border-color:#111}
+.btn-disparo-massa{background:#1a6b3c;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
+.btn-disparo-massa:hover{background:#145c32}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
@@ -722,6 +752,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <div class="admin-header-sub">2ª Edição Beach Tennis Experience · 22 de Agosto</div>
         </div>
         <div class="admin-header-right">
+          <button class="btn-disparo-massa" onclick="abrirDisparo()">📣 Confirmação de presença</button>
           <div class="admin-sync-badge"><div class="admin-sync-dot"></div><span id="syncStatus">Conectado ao Firebase</span></div>
           <button class="admin-logout" onclick="doAdminLogout()">Sair</button>
           <button class="admin-close" onclick="toggleAdmin()">✕</button>
@@ -1005,6 +1036,55 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         </div>
       </div>
       <button class="btn-modal-next" style="margin-top:1rem" onclick="salvarAdminAval()">Publicar avaliação</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DISPARO EM MASSA -->
+<div class="modal-disparo-overlay" id="modalDisparo">
+  <div class="modal-disparo-box">
+    <div class="modal-disparo-header">
+      <h3>📣 Confirmação de Presença</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharDisparo()">✕</button>
+    </div>
+    <div class="modal-disparo-body">
+
+      <!-- Filtro de público -->
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Enviar para:</div>
+      <div class="disparo-filtro">
+        <button class="disparo-filtro-btn active" onclick="setDisparoFiltro('todos')">Todos confirmados</button>
+        <button class="disparo-filtro-btn" onclick="setDisparoFiltro('tor')">Só Torneio</button>
+        <button class="disparo-filtro-btn" onclick="setDisparoFiltro('exp')">Só Experiência</button>
+      </div>
+
+      <!-- Preview da mensagem -->
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
+      <div class="disparo-preview" id="disparoPreview"></div>
+
+      <!-- Lista de destinatários -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
+        <div style="font-size:.78rem;color:#888" id="disparoContador"></div>
+      </div>
+      <div class="disparo-lista" id="disparoLista"></div>
+
+      <!-- Progresso -->
+      <div id="disparoProgressoWrap" style="display:none">
+        <div class="disparo-progress"><div class="disparo-progress-bar" id="disparoProgressBar" style="width:0%"></div></div>
+        <div class="disparo-progress-txt" id="disparoProgressTxt"></div>
+      </div>
+
+      <!-- Botões -->
+      <div id="disparoBtnIniciar">
+        <button class="btn-disparo-iniciar" onclick="iniciarDisparo()">📣 Iniciar disparo — WhatsApp</button>
+      </div>
+      <div id="disparoBtnProximo" style="display:none">
+        <button class="btn-disparo-proximo" onclick="proximoDisparo()">Abrir próximo →</button>
+      </div>
+      <div id="disparoFinalMsg" style="display:none;text-align:center;padding:1rem;background:#e8f5e9;border-radius:8px;color:#2e7d32;font-weight:700;font-size:.95rem">
+        ✅ Todos os participantes foram contatados!
+      </div>
+
     </div>
   </div>
 </div>
@@ -2470,6 +2550,155 @@ window.recuperarVendaEmail = async function(id){
     if(btn){ btn.textContent='📧 E-mail'; btn.disabled=false; }
   }
 };
+
+// ===== DISPARO EM MASSA =====
+let disparoFiltro = 'todos';
+let disparoFila   = [];
+let disparoIndex  = 0;
+
+const horariosCatDisp  = {masc_ini:'09h às 12h',masc_int:'14h às 17h',fem_ini:'09h às 12h',fem_int:'14h às 17h'};
+const horarioTurmaDisp = {'1':'08h às 09h','2':'09h às 10h','3':'10h às 11h','4':'11h às 12h'};
+
+function getMsgDisparo(e){
+  const nomeFirst = (e.nome||'participante').split(' ')[0];
+  const cat = e.tipo==='exp'
+    ? (turmaNames[e.turma]||e.turma||'Experiência para Iniciantes')
+    : (e.categoria||e.cat||'Super 8');
+  const horario = e.tipo==='exp'
+    ? (horarioTurmaDisp[e.turma]||'')
+    : (horariosCatDisp[e.cat]||'');
+
+  return `Olá, ${nomeFirst}! 🎾
+
+Estamos chegando ao dia do *2ª Edição Beach Tennis Experience* — 22 de Agosto de 2026, SkyFit Passeio das Águas, Goiânia/GO.
+
+Sua inscrição está *confirmada*! Veja seus detalhes:
+
+🏷 Modalidade: *${cat}*
+⏰ Horário: *${horario}*
+📍 Local: *SkyFit – Shopping Passeio das Águas*
+
+⚠️ *Atenção ao horário de chegada!* Para a melhor organização dos jogos e respeito a todos os participantes, solicitamos pontualidade. Tolerância máxima de *15 minutos* — após esse prazo, será declarado W.O. conforme o Regulamento Oficial.
+
+Contamos com a colaboração e comprometimento de cada um de vocês. Nos vemos na quadra! 🏖
+
+_Atenciosamente,_
+_Equipe Beach Tennis Experience_`;
+}
+
+function getListaDisparo(){
+  const confirmados = allInscricoes.filter(i=>i.status==='confirmado' && (i.edicao||1)===2);
+  if(disparoFiltro==='tor') return confirmados.filter(i=>i.tipo==='tor');
+  if(disparoFiltro==='exp') return confirmados.filter(i=>i.tipo==='exp');
+  return confirmados;
+}
+
+window.abrirDisparo = function(){
+  disparoFiltro = 'todos';
+  disparoIndex  = 0;
+  disparoFila   = [];
+  document.querySelectorAll('.disparo-filtro-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.getElementById('disparoProgressoWrap').style.display='none';
+  document.getElementById('disparoBtnIniciar').style.display='block';
+  document.getElementById('disparoBtnProximo').style.display='none';
+  document.getElementById('disparoFinalMsg').style.display='none';
+  atualizarUIDisparo();
+  document.getElementById('modalDisparo').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+
+window.fecharDisparo = function(){
+  document.getElementById('modalDisparo').classList.remove('open');
+  document.body.style.overflow='';
+};
+
+window.setDisparoFiltro = function(f){
+  disparoFiltro = f;
+  document.querySelectorAll('.disparo-filtro-btn').forEach((b,i)=>{
+    b.classList.toggle('active', ['todos','tor','exp'][i]===f);
+  });
+  atualizarUIDisparo();
+};
+
+function atualizarUIDisparo(){
+  const lista = getListaDisparo();
+  document.getElementById('disparoContador').textContent = lista.length + ' participante' + (lista.length!==1?'s':'');
+
+  // preview com dados do primeiro da lista
+  const ex = lista[0] || {tipo:'tor',cat:'masc_ini',nome:'Participante',turma:'1'};
+  document.getElementById('disparoPreview').textContent = getMsgDisparo(ex);
+
+  // lista de destinatários
+  document.getElementById('disparoLista').innerHTML = lista.length
+    ? lista.map(e=>`
+        <div class="disparo-item" id="ditem_${esc(e.id)}">
+          <div>
+            <div class="disparo-item-nome">${esc(e.nome)}</div>
+            <div class="disparo-item-cat">${e.tipo==='exp'?(turmaNames[e.turma]||e.turma):(e.categoria||e.cat)} · ${esc(e.tel)}</div>
+          </div>
+          <span class="disparo-status pendente" id="dst_${esc(e.id)}">Pendente</span>
+        </div>`).join('')
+    : '<div style="padding:1rem;text-align:center;color:#aaa;font-size:.85rem">Nenhum participante confirmado.</div>';
+}
+
+window.iniciarDisparo = function(){
+  disparoFila  = getListaDisparo();
+  disparoIndex = 0;
+  if(!disparoFila.length){ alert('Nenhum participante confirmado para este filtro.'); return; }
+  document.getElementById('disparoBtnIniciar').style.display='none';
+  document.getElementById('disparoProgressoWrap').style.display='block';
+  document.getElementById('disparoBtnProximo').style.display='block';
+  abrirProximoWA();
+};
+
+window.proximoDisparo = function(){
+  disparoIndex++;
+  if(disparoIndex >= disparoFila.length){
+    document.getElementById('disparoBtnProximo').style.display='none';
+    document.getElementById('disparoFinalMsg').style.display='block';
+    return;
+  }
+  abrirProximoWA();
+};
+
+function abrirProximoWA(){
+  const e   = disparoFila[disparoIndex];
+  const tel = (e.tel||'').replace(/\D/g,'');
+  const telWA = tel.startsWith('55') ? tel : '55'+tel;
+  const msg = encodeURIComponent(getMsgDisparo(e));
+
+  // marca como atual
+  document.querySelectorAll('.disparo-status').forEach(s=>{ if(s.classList.contains('atual')) s.classList.replace('atual','pendente'); });
+  const statusEl = document.getElementById('dst_'+e.id);
+  if(statusEl){ statusEl.textContent='Enviando...'; statusEl.className='disparo-status atual'; }
+
+  // abre WA
+  window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
+
+  // marca como enviado após 2s
+  setTimeout(()=>{
+    if(statusEl){ statusEl.textContent='Enviado'; statusEl.className='disparo-status enviado'; }
+    // scroll para próximo
+    const proximo = disparoFila[disparoIndex+1];
+    if(proximo){
+      const el = document.getElementById('ditem_'+proximo.id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }, 2000);
+
+  // progresso
+  const pct = Math.round(((disparoIndex+1)/disparoFila.length)*100);
+  document.getElementById('disparoProgressBar').style.width = pct+'%';
+  document.getElementById('disparoProgressTxt').textContent =
+    (disparoIndex+1)+' de '+disparoFila.length+' participantes ('+pct+'%)';
+
+  // botão próximo
+  const btnProx = document.querySelector('.btn-disparo-proximo');
+  if(btnProx){
+    const isUltimo = disparoIndex+1 >= disparoFila.length;
+    btnProx.textContent = isUltimo ? '✅ Finalizar' : 'Abrir próximo →';
+  }
+}
 
 // INIT
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
