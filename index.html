@@ -753,6 +753,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         </div>
         <div class="admin-header-right">
           <button class="btn-disparo-massa" onclick="abrirDisparo()">📣 Confirmação de presença</button>
+          <button class="btn-disparo-massa" style="background:#7b1fa2" onclick="abrirDisparoAgradecimento()">🏅 Agradecimento pós-evento</button>
           <div class="admin-sync-badge"><div class="admin-sync-dot"></div><span id="syncStatus">Conectado ao Firebase</span></div>
           <button class="admin-logout" onclick="doAdminLogout()">Sair</button>
           <button class="admin-close" onclick="toggleAdmin()">✕</button>
@@ -1083,6 +1084,47 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       </div>
       <div id="disparoFinalMsg" style="display:none;text-align:center;padding:1rem;background:#e8f5e9;border-radius:8px;color:#2e7d32;font-weight:700;font-size:.95rem">
         ✅ Todos os participantes foram contatados!
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGRADECIMENTO PÓS-EVENTO -->
+<div class="modal-disparo-overlay" id="modalAgradecimento">
+  <div class="modal-disparo-box">
+    <div class="modal-disparo-header" style="background:#4a0072">
+      <h3 style="color:#ce93d8">🏅 Agradecimento Pós-Evento</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharAgradecimento()">✕</button>
+    </div>
+    <div class="modal-disparo-body">
+
+      <div style="background:#f3e5f5;border:1.5px solid #ce93d8;border-radius:10px;padding:.875rem 1rem;margin-bottom:1.25rem;font-size:.82rem;color:#4a0072;line-height:1.6">
+        💜 Envie uma mensagem de agradecimento para todos que participaram da <strong>2ª Edição BTE</strong>. Cada mensagem é personalizada com o nome do participante.
+      </div>
+
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
+      <div class="disparo-preview" style="background:#f3e5f5;border-color:#ce93d8;color:#4a0072" id="agradPreview"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
+        <div style="font-size:.78rem;color:#888" id="agradContador"></div>
+      </div>
+      <div class="disparo-lista" id="agradLista"></div>
+
+      <div id="agradProgressoWrap" style="display:none">
+        <div class="disparo-progress"><div class="disparo-progress-bar" id="agradProgressBar" style="width:0%;background:#7b1fa2"></div></div>
+        <div class="disparo-progress-txt" id="agradProgressTxt"></div>
+      </div>
+
+      <div id="agradBtnIniciar">
+        <button class="btn-disparo-iniciar" style="background:#7b1fa2" onclick="iniciarAgradecimento()">🏅 Iniciar envio — WhatsApp</button>
+      </div>
+      <div id="agradBtnProximo" style="display:none">
+        <button class="btn-disparo-proximo" onclick="proximoAgradecimento()">Abrir próximo →</button>
+      </div>
+      <div id="agradFinalMsg" style="display:none;text-align:center;padding:1rem;background:#f3e5f5;border-radius:8px;color:#4a0072;font-weight:700;font-size:.95rem">
+        💜 Agradecimento enviado para todos os participantes!
       </div>
 
     </div>
@@ -2697,6 +2739,116 @@ function abrirProximoWA(){
   if(btnProx){
     const isUltimo = disparoIndex+1 >= disparoFila.length;
     btnProx.textContent = isUltimo ? '✅ Finalizar' : 'Abrir próximo →';
+  }
+}
+
+// ===== AGRADECIMENTO PÓS-EVENTO =====
+let agradIndex = 0;
+let agradFila  = [];
+
+function getMsgAgradecimento(e){
+  const nomeFirst = (e.nome||'participante').split(' ')[0];
+  const cat = e.tipo==='exp'
+    ? 'Experiência para Iniciantes'
+    : (e.categoria||e.cat||'Super 8');
+
+  return `Olá, ${nomeFirst}! 🎾
+
+Obrigado por ter feito parte da *2ª Edição Beach Tennis Experience*! Foi incrível ter você com a gente. 🏖
+
+O BTE vai além de uma experiência de torneio — é um *evento com propósito*. Sua participação contribuiu diretamente para o projeto social que leva esportes de raquetes para pessoas que não têm acesso. Você fez parte disso. 💚
+
+Em breve vêm mais novidades. Fique ligado!
+
+_João Leitão Coach e toda a Equipe Beach Tennis Experience_
+_Clubinho das Raquetes_ 🎾`;
+}
+
+window.abrirDisparoAgradecimento = function(){
+  agradIndex = 0;
+  agradFila  = allInscricoes.filter(i=>i.status==='confirmado'&&(i.edicao||1)===2);
+
+  document.getElementById('agradProgressoWrap').style.display='none';
+  document.getElementById('agradBtnIniciar').style.display='block';
+  document.getElementById('agradBtnProximo').style.display='none';
+  document.getElementById('agradFinalMsg').style.display='none';
+
+  // preview
+  const ex = agradFila[0] || {tipo:'tor',cat:'masc_ini',nome:'Participante'};
+  document.getElementById('agradPreview').textContent = getMsgAgradecimento(ex);
+
+  // contador
+  document.getElementById('agradContador').textContent = agradFila.length+' participante'+(agradFila.length!==1?'s':'');
+
+  // lista
+  document.getElementById('agradLista').innerHTML = agradFila.length
+    ? agradFila.map(e=>`
+        <div class="disparo-item" id="aitem_${esc(e.id)}">
+          <div>
+            <div class="disparo-item-nome">${esc(e.nome)}</div>
+            <div class="disparo-item-cat">${e.tipo==='exp'?(turmaNames[e.turma]||e.turma):(e.categoria||e.cat)} · ${esc(e.tel)}</div>
+          </div>
+          <span class="disparo-status pendente" id="ast_${esc(e.id)}">Pendente</span>
+        </div>`).join('')
+    : '<div style="padding:1rem;text-align:center;color:#aaa;font-size:.85rem">Nenhum participante confirmado encontrado.</div>';
+
+  document.getElementById('modalAgradecimento').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+
+window.fecharAgradecimento = function(){
+  document.getElementById('modalAgradecimento').classList.remove('open');
+  document.body.style.overflow='';
+};
+
+window.iniciarAgradecimento = function(){
+  if(!agradFila.length){ alert('Nenhum participante confirmado encontrado.'); return; }
+  agradIndex = 0;
+  document.getElementById('agradBtnIniciar').style.display='none';
+  document.getElementById('agradProgressoWrap').style.display='block';
+  document.getElementById('agradBtnProximo').style.display='block';
+  abrirAgradWA();
+};
+
+window.proximoAgradecimento = function(){
+  agradIndex++;
+  if(agradIndex >= agradFila.length){
+    document.getElementById('agradBtnProximo').style.display='none';
+    document.getElementById('agradFinalMsg').style.display='block';
+    return;
+  }
+  abrirAgradWA();
+};
+
+function abrirAgradWA(){
+  const e   = agradFila[agradIndex];
+  const tel = (e.tel||'').replace(/\D/g,'');
+  const telWA = tel.startsWith('55') ? tel : '55'+tel;
+  const msg = encodeURIComponent(getMsgAgradecimento(e));
+
+  document.querySelectorAll('[id^="ast_"]').forEach(s=>{ if(s.classList.contains('atual')) s.classList.replace('atual','pendente'); });
+  const statusEl = document.getElementById('ast_'+e.id);
+  if(statusEl){ statusEl.textContent='Enviando...'; statusEl.className='disparo-status atual'; }
+
+  window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
+
+  setTimeout(()=>{
+    if(statusEl){ statusEl.textContent='Enviado'; statusEl.className='disparo-status enviado'; }
+    const proximo = agradFila[agradIndex+1];
+    if(proximo){
+      const el = document.getElementById('aitem_'+proximo.id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }, 2000);
+
+  const pct = Math.round(((agradIndex+1)/agradFila.length)*100);
+  document.getElementById('agradProgressBar').style.width = pct+'%';
+  document.getElementById('agradProgressTxt').textContent =
+    (agradIndex+1)+' de '+agradFila.length+' participantes ('+pct+'%)';
+
+  const btnProx = document.querySelector('#agradBtnProximo button');
+  if(btnProx){
+    btnProx.textContent = agradIndex+1 >= agradFila.length ? '✅ Finalizar' : 'Abrir próximo →';
   }
 }
 
