@@ -908,8 +908,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           </div>
           <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.875rem">Detalhamento por categoria — 3ª Edição</h4>
           <div class="fin-cats" id="finCats"></div>
-          <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin:.5rem 0 .875rem">Histórico — 1ª Edição</h4>
-          <div class="fin-cats" id="finCatsE1"></div>
+          <div id="finHistorico"></div>
         </div>
 
         <!-- TAB AVALIAÇÕES -->
@@ -2534,29 +2533,46 @@ function renderFinanceiro(){
     </div>`;
   }).join('');
 
-  // Histórico 1ª edição
-  const e1tor = torCats.map(cat => {
-    const conf = e1.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
-    const total = e1.filter(i=>i.tipo==='tor'&&i.cat===cat).length;
-    return `<div class="fin-cat-card" style="opacity:.7">
-      <div class="fin-cat-nome">🏆 ${catNames[cat]} <span class="badge-edicao e1">1ª ed.</span></div>
-      <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
-      <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
-    </div>`;
-  }).join('');
+  // Histórico — todas as edições passadas (dinâmico)
+  const ordinals = ['','1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª','9ª','10ª'];
+  const badgeColors = ['','#6c7a89','#8e44ad','#c0392b','#1a6b3c','#e67e22','#2980b9','#7f8c8d','#27ae60','#e74c3c','#8e44ad'];
 
-  const e1exp = [1,2,3,4].map(t => {
-    const conf = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)&&i.status==='confirmado').length;
-    const total = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)).length;
-    return `<div class="fin-cat-card" style="opacity:.7">
-      <div class="fin-cat-nome">🎾 ${turmaNames[t]} <span class="badge-edicao e1">1ª ed.</span></div>
-      <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
-      <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
-    </div>`;
-  }).join('');
+  let historicHTML = '';
+  for (let num = 1; num < edicaoAtiva; num++) {
+    const inscrEd = e1.filter(i => (i.edicao||1) === num);
+    const ordLabel = ordinals[num] || `${num}ª`;
+    const bgColor = badgeColors[num] || '#6c7a89';
 
-  document.getElementById('finCatsE1').innerHTML = e1tor + e1exp ||
-    '<p style="color:#aaa;font-size:.875rem">Nenhum registro da 1ª edição encontrado.</p>';
+    const edTor = torCats.map(cat => {
+      const conf = inscrEd.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
+      const total = inscrEd.filter(i=>i.tipo==='tor'&&i.cat===cat).length;
+      if (total === 0) return '';
+      return `<div class="fin-cat-card" style="opacity:.7">
+        <div class="fin-cat-nome">🏆 ${catNames[cat]} <span class="badge-edicao" style="background:${bgColor}">${ordLabel} ed.</span></div>
+        <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
+        <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
+      </div>`;
+    }).join('');
+
+    const edExp = [1,2,3,4].map(t => {
+      const conf = inscrEd.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)&&i.status==='confirmado').length;
+      const total = inscrEd.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)).length;
+      if (total === 0) return '';
+      return `<div class="fin-cat-card" style="opacity:.7">
+        <div class="fin-cat-nome">🎾 ${turmaNames[t]} <span class="badge-edicao" style="background:${bgColor}">${ordLabel} ed.</span></div>
+        <div class="fin-cat-row"><span>Confirmados</span><span>${conf}</span></div>
+        <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
+      </div>`;
+    }).join('');
+
+    const edCards = edTor + edExp;
+    historicHTML += `
+      <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin:.5rem 0 .875rem">Histórico — ${ordLabel} Edição</h4>
+      <div class="fin-cats">${edCards || '<p style="color:#aaa;font-size:.875rem;padding:.5rem 0">Nenhum registro encontrado.</p>'}</div>`;
+  }
+
+  document.getElementById('finHistorico').innerHTML = historicHTML ||
+    '<p style="color:#aaa;font-size:.875rem">Nenhuma edição anterior registrada.</p>';
 }
 
 // ===== FILTROS E ORDENAÇÃO =====
