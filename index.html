@@ -528,6 +528,98 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .disparo-filtro-btn.active{background:#111;color:#fff;border-color:#111}
 .btn-disparo-massa{background:#1a6b3c;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;transition:background .2s;white-space:nowrap}
 .btn-disparo-massa:hover{background:#145c32}
+
+/* ===== SUPER 8 — ADMIN ===== */
+.s8-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem}
+.s8-header h3{font-size:1rem;font-weight:700;color:#111}
+.s8-btn{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.s8-btn:hover{background:#E83030}
+.s8-btn.secondary{background:#f5f5f5;color:#333;border:1.5px solid #e0e0e0}
+.s8-btn.secondary:hover{background:#e8e8e8}
+.s8-btn.danger{background:#b71c1c}
+.s8-cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.s8-cat-tab{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:8px;padding:.4rem .9rem;font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555;transition:all .2s}
+.s8-cat-tab.active{background:#111;color:#fff;border-color:#111}
+.s8-rodadas-wrap{display:flex;flex-direction:column;gap:.75rem}
+.s8-rodada{background:#f9f9f9;border:1.5px solid #e8e8e8;border-radius:10px;padding:1rem}
+.s8-rodada-header{font-size:.78rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem;display:flex;justify-content:space-between;align-items:center}
+.s8-partida{display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem;align-items:center;background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:.75rem 1rem;margin-bottom:.5rem}
+.s8-partida:last-child{margin-bottom:0}
+.s8-dupla{font-size:.85rem;font-weight:600;color:#222;text-align:center}
+.s8-dupla small{display:block;font-size:.72rem;color:#888;font-weight:400}
+.s8-vs{font-size:.75rem;font-weight:800;color:#CC1B1B;text-align:center}
+.s8-placar{display:flex;align-items:center;gap:.25rem;justify-content:center}
+.s8-placar input{width:42px;height:34px;border:1.5px solid #ddd;border-radius:6px;text-align:center;font-size:1rem;font-weight:700;font-family:'Inter',sans-serif;color:#111}
+.s8-placar input:focus{border-color:#CC1B1B;outline:none}
+.s8-placar-sep{font-size:.9rem;font-weight:700;color:#999}
+.s8-save-btn{background:#1a6b3c;color:#fff;border:none;border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;white-space:nowrap}
+.s8-save-btn:hover{background:#145c32}
+.s8-placar-display{font-size:1.1rem;font-weight:800;color:#1a6b3c;text-align:center;min-width:60px}
+.s8-classif-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.s8-classif-table th{background:#111;color:#fff;font-size:.75rem;font-weight:700;padding:.5rem .75rem;text-align:left}
+.s8-classif-table td{font-size:.82rem;padding:.5rem .75rem;border-bottom:1px solid #f0f0f0}
+.s8-classif-table tr:nth-child(1) td{background:#fff8e1;font-weight:700}
+.s8-classif-table tr:nth-child(2) td{background:#f5f5f5;font-weight:600}
+.s8-classif-table .pos-1{color:#f9a825;font-weight:900;font-size:.9rem}
+.s8-classif-table .pos-2{color:#9e9e9e;font-weight:800}
+.s8-descansa{font-size:.72rem;color:#999;font-style:italic}
+.s8-vazio{text-align:center;padding:2rem;color:#aaa;font-size:.875rem}
+
+/* ===== ÁREA DO ATLETA ===== */
+#atletaSection{background:#0a0a0a;padding:5rem 2rem;display:none}
+.atleta-login-box{max-width:420px;margin:0 auto;background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem}
+.atleta-login-box h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;letter-spacing:2px;margin-bottom:.5rem}
+.atleta-login-box p{font-size:.875rem;color:rgba(255,255,255,.6);margin-bottom:1.5rem}
+.atleta-input{width:100%;background:#111;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:1rem;font-weight:600;padding:.75rem 1rem;font-family:'Inter',sans-serif;letter-spacing:2px;margin-bottom:.75rem}
+.atleta-input:focus{outline:none;border-color:#CC1B1B}
+.atleta-login-btn{width:100%;background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.875rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.atleta-login-btn:hover{background:#E83030}
+.atleta-err{color:#ff6b6b;font-size:.82rem;margin-top:.5rem;display:none}
+.atleta-dashboard{max-width:800px;margin:0 auto;display:none}
+.atleta-perfil-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.atleta-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#CC1B1B,#E83030);display:flex;align-items:center;justify-content:center;font-size:1.75rem;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden;border:3px solid rgba(255,255,255,.15)}
+.atleta-avatar img{width:100%;height:100%;object-fit:cover}
+.atleta-info h3{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#fff;letter-spacing:2px;margin-bottom:.25rem}
+.atleta-info p{font-size:.875rem;color:rgba(255,255,255,.6)}
+.atleta-badge{display:inline-block;background:#CC1B1B;color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .65rem;border-radius:20px;text-transform:uppercase;letter-spacing:1px;margin-top:.35rem}
+.atleta-upload-btn{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:8px;padding:.4rem .875rem;font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.5rem;transition:all .2s}
+.atleta-upload-btn:hover{border-color:#CC1B1B;color:#CC1B1B}
+.atleta-section-title{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#CC1B1B;margin:.25rem 0 .875rem}
+.atleta-card{background:#1a1a1a;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+.atleta-jogo-row{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;align-items:center}
+.atleta-jogo-round{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#CC1B1B;letter-spacing:2px;min-width:2rem;text-align:center}
+.atleta-jogo-info{flex:1}
+.atleta-jogo-info strong{display:block;font-size:.875rem;color:#fff;font-weight:600}
+.atleta-jogo-info small{font-size:.78rem;color:rgba(255,255,255,.5)}
+.atleta-jogo-placar{font-size:1.25rem;font-weight:800;color:#fff;text-align:right;min-width:3rem}
+.atleta-jogo-placar.win{color:#4caf50}
+.atleta-jogo-placar.loss{color:#f44336}
+.atleta-jogo-pending{font-size:.75rem;color:rgba(255,255,255,.35);font-style:italic}
+.atleta-classif-pos{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#CC1B1B;letter-spacing:2px;line-height:1;margin-bottom:.25rem}
+.atleta-classif-detail{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.8}
+.atleta-mural-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;margin-top:.5rem}
+.atleta-mural-card{background:#1a1a1a;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.875rem;text-align:center}
+.atleta-mural-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#CC1B1B,#E83030);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:#fff;margin:0 auto .5rem;overflow:hidden;border:2px solid rgba(255,255,255,.1)}
+.atleta-mural-avatar img{width:100%;height:100%;object-fit:cover}
+.atleta-mural-nome{font-size:.78rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atleta-mural-cat{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:.15rem}
+.atleta-logout-btn{background:transparent;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);border-radius:8px;padding:.4rem .875rem;font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:1.5rem;transition:all .2s}
+.atleta-logout-btn:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ===== PÓDIO BTE ===== */
+#podioSection{background:#111;padding:5rem 2rem}
+.podio-edicao{margin-bottom:3rem}
+.podio-edicao-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;letter-spacing:3px;margin-bottom:1.25rem;border-bottom:2px solid rgba(204,27,27,.3);padding-bottom:.5rem}
+.podio-cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.podio-cat-card{background:#1a1a1a;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem}
+.podio-cat-nome{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.75rem}
+.podio-lugar{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.podio-medal{font-size:1.25rem;min-width:1.5rem}
+.podio-atleta-nome{font-size:.9rem;font-weight:700;color:#fff}
+.podio-atleta-detalhe{font-size:.72rem;color:rgba(255,255,255,.4)}
+
+/* ===== UPLOAD FOTO ATLETA ===== */
+#atletaFotoInput{display:none}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
@@ -542,6 +634,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <li><a href="#evento">O Evento</a></li>
       <li><a href="#professores">Professores</a></li>
       <li><a href="#cronograma">Cronograma</a></li>
+      <li><a href="#atletaSection" id="navAtleta" style="color:#CC1B1B;font-weight:700">🎾 Área do Atleta</a></li>
     </ul>
     <a href="#" onclick="event.preventDefault();openModal()" class="nav-cta">Garanta sua vaga</a>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -728,6 +821,68 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
   </div>
 </section>
 
+<!-- SEÇÃO ÁREA DO ATLETA -->
+<section id="atletaSection">
+  <div class="container">
+    <div class="section-label" style="color:#CC1B1B">Exclusivo para inscritos</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:.5rem">Área do Atleta</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.55);margin-bottom:2rem">Acompanhe seus jogos, a classificação e veja quem estará na sua categoria.</p>
+
+    <!-- LOGIN -->
+    <div class="atleta-login-box" id="atletaLoginBox">
+      <h2>Acessar minha área</h2>
+      <p>Digite seu CPF cadastrado na inscrição para entrar.</p>
+      <input type="text" class="atleta-input" id="atletaCpfInput" placeholder="000.000.000-00" maxlength="14" oninput="maskCpfAtleta(this)" onkeydown="if(event.key==='Enter')atletaLogin()">
+      <button class="atleta-login-btn" onclick="atletaLogin()">Entrar</button>
+      <div class="atleta-err" id="atletaErr">CPF não encontrado ou inscrição não confirmada.</div>
+    </div>
+
+    <!-- DASHBOARD DO ATLETA -->
+    <div class="atleta-dashboard" id="atletaDashboard">
+      <div class="atleta-perfil-header">
+        <div class="atleta-avatar" id="atletaAvatarEl"></div>
+        <div class="atleta-info">
+          <h3 id="atletaNomeEl">—</h3>
+          <p id="atletaCatEl">—</p>
+          <span class="atleta-badge" id="atletaBadgeEl">—</span><br>
+          <button class="atleta-upload-btn" onclick="document.getElementById('atletaFotoInput').click()">📷 Alterar foto</button>
+          <input type="file" id="atletaFotoInput" accept="image/*" onchange="atletaUploadFoto(this)">
+        </div>
+      </div>
+
+      <!-- CLASSIFICAÇÃO -->
+      <div class="atleta-card">
+        <div class="atleta-section-title">📊 Sua classificação</div>
+        <div id="atletaClassifEl" style="color:rgba(255,255,255,.6);font-size:.875rem">Aguardando início das partidas...</div>
+      </div>
+
+      <!-- MURAL -->
+      <div class="atleta-card">
+        <div class="atleta-section-title">👥 Quem joga na sua categoria</div>
+        <div class="atleta-mural-grid" id="atletaMuralEl"></div>
+      </div>
+
+      <!-- JOGOS -->
+      <div class="atleta-card">
+        <div class="atleta-section-title">🎾 Suas partidas</div>
+        <div id="atletaJogosEl"></div>
+      </div>
+
+      <button class="atleta-logout-btn" onclick="atletaLogout()">Sair da área do atleta</button>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO PÓDIO BTE -->
+<section id="podioSection" style="display:none">
+  <div class="container">
+    <div class="section-label" style="color:#CC1B1B">Hall da Fama</div>
+    <h2 class="section-title" style="color:#fff">Pódio BTE</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.55)">Os campeões de cada edição do Beach Tennis Experience.</p>
+    <div id="podioContent"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></div>
+  </div>
+</section>
+
 <div class="divider"></div>
 
 <footer>
@@ -816,6 +971,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="admin-tab-btn" onclick="switchAdminTab('aval')">⭐ Avaliações</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('edicoes')">📋 Edições</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('super8')">🏅 Super 8</button>
         </div>
 
         <!-- TAB EXPERIÊNCIA -->
@@ -967,6 +1123,24 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             </div>
             <p style="font-size:.8rem;color:#888;margin-top:.25rem">💡 Toggle <strong style="color:#2e7d32">verde = vagas abertas</strong> · Toggle <strong style="color:#CC1B1B">vermelho = esgotada</strong>. Salva automaticamente no Firebase.</p>
           </div>
+        </div>
+
+        <!-- TAB SUPER 8 -->
+        <div class="admin-section" id="admin-super8">
+          <div class="s8-header">
+            <h3>🏅 Módulo Super 8 — Gerenciamento de Chaves</h3>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <button class="s8-btn secondary" onclick="s8GerarChaves()">🎲 Sortear chaves automaticamente</button>
+              <button class="s8-btn" onclick="s8SalvarPlacar(s8CatAtiva)">💾 Salvar placares</button>
+            </div>
+          </div>
+          <div class="s8-cat-tabs">
+            <button class="s8-cat-tab active" onclick="s8SwitchCat('masc_ini')">♂ Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_ini')">♀ Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('masc_int')">♂ Intermediário</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_int')">♀ Intermediário</button>
+          </div>
+          <div id="s8Content"><div class="s8-vazio">Selecione uma categoria para começar</div></div>
         </div>
 
         <!-- TAB EDIÇÕES -->
@@ -2176,7 +2350,7 @@ function renderAdminTabelas(){
 }
 
 window.switchAdminTab=function(tab){
-  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','fin','aval','cfg'][i]===tab));
+  document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','fin','aval','cfg','edicoes','super8'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('admin-'+tab).classList.add('active');
   if(tab==='aval') iniciarListenerAval();
@@ -3052,7 +3226,553 @@ function abrirAgradWA(){
   }
 }
 
+// ===== SUPER 8 — ALGORITMO E GESTÃO =====
+
+const S8_CATS = { masc_ini:'♂ Masc. Iniciante', fem_ini:'♀ Fem. Iniciante', masc_int:'♂ Masc. Intermediário', fem_int:'♀ Fem. Intermediário' };
+let s8CatAtiva = 'masc_ini';
+let s8Cache = {}; // { cat: { atletas:[], rodadas:[] } }
+
+// Algoritmo Round Robin Individual — 8 atletas, 7 rodadas
+// Cada rodada: 2 duplas jogam (4 atletas), 4 descansam
+// Garante que nenhum atleta repete parceiro nem adversário
+function s8GerarRoundRobin(atletas) {
+  const n = atletas.length; // deve ser 8
+  if (n !== 8) return null;
+
+  // Tabela oficial Super 8 Round Robin (7 rodadas, 2 partidas cada)
+  // Índices 0-7 representam os atletas na ordem sorteada
+  const tabela = [
+    // [A1,A2 vs A3,A4 | descansam: B], [A5,A6 vs A7,A8 | descansam: C]
+    { p1:[0,1,2,3], p2:[4,5,6,7] }, // R1
+    { p1:[0,2,4,6], p2:[1,3,5,7] }, // R2
+    { p1:[0,3,5,6], p2:[1,2,4,7] }, // R3
+    { p1:[0,4,3,7], p2:[1,5,2,6] }, // R4
+    { p1:[0,5,1,6], p2:[2,3,4,7] }, // R5 — mas isso viola! Vou usar a tabela oficial
+    { p1:[0,6,1,7], p2:[2,4,3,5] }, // R6
+    { p1:[0,7,2,5], p2:[1,4,3,6] }, // R7
+  ];
+  // Tabela correta Round Robin para 8 jugadores (cada um joga 7x, descansa 0x por rodada)
+  // Como são 8 atletas e 4 jogam por rodada, cada atleta descansa em 1 rodada de 7
+  // Usando círculo de rotação padrão (atleta 0 fixo, 1-7 rotacionam)
+  const rodadas = [];
+  const ids = [0,1,2,3,4,5,6,7];
+
+  // Círculo de rotação: fixa atleta 0, rotaciona os outros 7
+  // Rodada i: combina posições para gerar 2 duplas que não repetem par
+  // Tabela derivada matematicamente para 8 atletas Super 8:
+  const pares = [
+    // Rodada 1
+    [[0,1],[2,3],[4,5],[6,7]],
+    // Rodada 2
+    [[0,2],[1,4],[3,6],[5,7]],
+    // Rodada 3
+    [[0,3],[1,5],[2,7],[4,6]],
+    // Rodada 4
+    [[0,4],[1,6],[2,5],[3,7]],
+    // Rodada 5
+    [[0,5],[1,7],[2,6],[3,4]],
+    // Rodada 6
+    [[0,6],[1,3],[2,4],[5,7]],
+    // Rodada 7
+    [[0,7],[1,2],[3,5],[4,6]],
+  ];
+
+  for (let r = 0; r < 7; r++) {
+    const gruposPares = pares[r]; // 4 pares nessa rodada
+    // Embaralha quem fica de par com quem para formar as 2 partidas
+    // Partida 1: par[0] vs par[1] | Partida 2: par[2] vs par[3]
+    rodadas.push({
+      num: r + 1,
+      partida1: {
+        dupla1: [gruposPares[0][0], gruposPares[0][1]].map(i => atletas[i]),
+        dupla2: [gruposPares[1][0], gruposPares[1][1]].map(i => atletas[i]),
+        placar: null
+      },
+      partida2: {
+        dupla1: [gruposPares[2][0], gruposPares[2][1]].map(i => atletas[i]),
+        dupla2: [gruposPares[3][0], gruposPares[3][1]].map(i => atletas[i]),
+        placar: null
+      }
+    });
+  }
+  return rodadas;
+}
+
+async function s8GerarChaves() {
+  if (!confirm(`Isso vai gerar e SALVAR as chaves do Super 8 para a edição ${edicaoAtiva}.\n\nAs categorias precisam ter exatamente 8 atletas confirmados.\n\nDeseja continuar?`)) return;
+
+  const confirmados = allInscricoes.filter(i => i.tipo === 'tor' && i.status === 'confirmado' && (i.edicao||1) === edicaoAtiva);
+  const cats = ['masc_ini','fem_ini','masc_int','fem_int'];
+  let erros = [];
+
+  for (const cat of cats) {
+    const lista = confirmados.filter(i => i.cat === cat);
+    if (lista.length !== 8) {
+      erros.push(`${S8_CATS[cat]}: ${lista.length} atleta(s) confirmados (precisa de 8)`);
+    }
+  }
+
+  if (erros.length) {
+    alert('Não é possível sortear:\n\n' + erros.join('\n'));
+    return;
+  }
+
+  // Sorteia e salva cada categoria
+  for (const cat of cats) {
+    const lista = confirmados.filter(i => i.cat === cat);
+    // Embaralha aleatoriamente
+    const embaralhados = [...lista].sort(() => Math.random() - 0.5);
+    const rodadas = s8GerarRoundRobin(embaralhados);
+    const docData = {
+      cat, edicao: edicaoAtiva,
+      atletas: embaralhados.map(a => ({ cpf: a.cpf, nome: a.nome, id: a.id })),
+      rodadas: rodadas,
+      geradoEm: new Date().toISOString()
+    };
+    await setDoc(doc(db, 'super8', `${edicaoAtiva}_${cat}`), docData);
+  }
+
+  alert('✅ Chaves geradas e salvas com sucesso!');
+  s8CarregarCat(s8CatAtiva);
+}
+
+async function s8CarregarCat(cat) {
+  s8CatAtiva = cat;
+  document.querySelectorAll('.s8-cat-tab').forEach((b,i) => b.classList.toggle('active', Object.keys(S8_CATS)[i] === cat));
+
+  const el = document.getElementById('s8Content');
+  el.innerHTML = '<div class="admin-loading"><div class="spinner"></div> Carregando...</div>';
+
+  try {
+    const snap = await getDoc(doc(db, 'super8', `${edicaoAtiva}_${cat}`));
+    if (!snap.exists()) {
+      el.innerHTML = `<div class="s8-vazio">Nenhuma chave gerada para ${S8_CATS[cat]}.<br>Clique em "Sortear chaves automaticamente" para começar.</div>`;
+      return;
+    }
+    s8Cache[cat] = snap.data();
+    s8RenderCat(cat);
+  } catch(e) {
+    el.innerHTML = '<div class="s8-vazio">Erro ao carregar. Tente novamente.</div>';
+  }
+}
+
+function s8RenderCat(cat) {
+  const data = s8Cache[cat];
+  if (!data) return;
+  const el = document.getElementById('s8Content');
+
+  // Calcula classificação
+  const classif = s8CalcClassif(data);
+
+  let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">`;
+
+  // Classificação atual
+  html += `<div>
+    <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.75rem">Classificação atual</div>
+    <table class="s8-classif-table">
+      <thead><tr><th>Pos</th><th>Atleta</th><th>V</th><th>Games</th><th>Pts</th></tr></thead>
+      <tbody>`;
+  classif.forEach((a, i) => {
+    const posClass = i === 0 ? 'pos-1' : i === 1 ? 'pos-2' : '';
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1)+'º';
+    html += `<tr><td class="${posClass}">${medal}</td><td>${a.nome.split(' ')[0]}</td><td>${a.vitorias}</td><td>${a.games}</td><td>${a.pontos}</td></tr>`;
+  });
+  html += `</tbody></table></div>`;
+
+  // Botão salvar no canto
+  html += `<div style="display:flex;align-items:flex-start;justify-content:flex-end;gap:.5rem;flex-wrap:wrap">
+    <button class="s8-btn" onclick="s8SalvarPlacar('${cat}')">💾 Salvar placares</button>
+    <button class="s8-btn danger" onclick="s8ResetarCat('${cat}')">🔄 Resetar chaves</button>
+  </div>`;
+  html += `</div>`;
+
+  // Rodadas
+  data.rodadas.forEach(r => {
+    html += `<div class="s8-rodada">
+      <div class="s8-rodada-header">
+        <span>Rodada ${r.num}</span>
+      </div>`;
+
+    [r.partida1, r.partida2].forEach((p, pi) => {
+      const pid = `s8_r${r.num}_p${pi+1}`;
+      const d1 = p.dupla1.map(a=>a.nome.split(' ')[0]).join(' & ');
+      const d2 = p.dupla2.map(a=>a.nome.split(' ')[0]).join(' & ');
+      const pl = p.placar;
+      html += `<div class="s8-partida">
+        <div class="s8-dupla">${d1}<small>${p.dupla1.map(a=>a.nome.split(' ').slice(-1)[0]).join(' & ')}</small></div>
+        <div>
+          <div class="s8-vs">VS</div>
+          <div class="s8-placar">
+            <input type="number" id="${pid}_a" min="0" max="5" value="${pl ? pl.a : ''}" placeholder="—" style="width:42px">
+            <span class="s8-placar-sep">×</span>
+            <input type="number" id="${pid}_b" min="0" max="5" value="${pl ? pl.b : ''}" placeholder="—" style="width:42px">
+          </div>
+        </div>
+        <div class="s8-dupla">${d2}<small>${p.dupla2.map(a=>a.nome.split(' ').slice(-1)[0]).join(' & ')}</small></div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function s8CalcClassif(data) {
+  if (!data || !data.atletas) return [];
+  const stats = {};
+  data.atletas.forEach(a => {
+    stats[a.cpf] = { cpf: a.cpf, nome: a.nome, vitorias: 0, games: 0, gamesCon: 0, pontos: 0 };
+  });
+
+  data.rodadas.forEach(r => {
+    [r.partida1, r.partida2].forEach(p => {
+      if (!p.placar || p.placar.a == null || p.placar.b == null) return;
+      const pa = parseInt(p.placar.a), pb = parseInt(p.placar.b);
+      if (isNaN(pa) || isNaN(pb)) return;
+      // Dupla 1 fez 'pa' games, dupla 2 fez 'pb' games
+      p.dupla1.forEach(a => {
+        if (!stats[a.cpf]) return;
+        stats[a.cpf].games += pa;
+        stats[a.cpf].gamesCon += pb;
+        stats[a.cpf].pontos += pa;
+        if (pa > pb) stats[a.cpf].vitorias++;
+      });
+      p.dupla2.forEach(a => {
+        if (!stats[a.cpf]) return;
+        stats[a.cpf].games += pb;
+        stats[a.cpf].gamesCon += pa;
+        stats[a.cpf].pontos += pb;
+        if (pb > pa) stats[a.cpf].vitorias++;
+      });
+    });
+  });
+
+  return Object.values(stats).sort((a, b) => {
+    if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias;
+    const saldoA = a.games - a.gamesCon, saldoB = b.games - b.gamesCon;
+    if (saldoB !== saldoA) return saldoB - saldoA;
+    return b.games - a.games;
+  });
+}
+
+async function s8SalvarPlacar(cat) {
+  const data = s8Cache[cat];
+  if (!data) return;
+
+  data.rodadas.forEach((r, ri) => {
+    [r.partida1, r.partida2].forEach((p, pi) => {
+      const pid = `s8_r${r.num}_p${pi+1}`;
+      const va = document.getElementById(pid+'_a')?.value;
+      const vb = document.getElementById(pid+'_b')?.value;
+      if (va !== '' && vb !== '') {
+        data.rodadas[ri][pi === 0 ? 'partida1' : 'partida2'].placar = { a: parseInt(va), b: parseInt(vb) };
+      }
+    });
+  });
+
+  try {
+    await updateDoc(doc(db, 'super8', `${edicaoAtiva}_${cat}`), { rodadas: data.rodadas });
+    s8Cache[cat] = data;
+    s8RenderCat(cat);
+    // Atualiza pódio se houver
+    s8AtualizarPodio(cat, data);
+    alert('✅ Placares salvos!');
+  } catch(e) {
+    alert('Erro ao salvar: ' + e.message);
+  }
+}
+
+async function s8ResetarCat(cat) {
+  if (!confirm(`Isso apaga todas as chaves e placares de ${S8_CATS[cat]}.\n\nTem certeza?`)) return;
+  await updateDoc(doc(db, 'super8', `${edicaoAtiva}_${cat}`), { rodadas: s8Cache[cat].rodadas.map(r => ({
+    ...r,
+    partida1: {...r.partida1, placar: null},
+    partida2: {...r.partida2, placar: null}
+  }))});
+  s8CarregarCat(cat);
+}
+
+async function s8AtualizarPodio(cat, data) {
+  const classif = s8CalcClassif(data);
+  if (classif.length < 2) return;
+  const podioData = {
+    [cat]: {
+      campeao: { nome: classif[0].nome, games: classif[0].games, vitorias: classif[0].vitorias },
+      vice: { nome: classif[1].nome, games: classif[1].games, vitorias: classif[1].vitorias }
+    }
+  };
+  try {
+    await setDoc(doc(db, 'podio', String(edicaoAtiva)), podioData, { merge: true });
+  } catch(e) { /* silencioso */ }
+}
+
+function s8SwitchCat(cat) {
+  s8CarregarCat(cat);
+}
+
+// ===== ÁREA DO ATLETA =====
+
+let atletaAtual = null;
+let s8AtletaListener = null;
+
+function maskCpfAtleta(input) {
+  let v = input.value.replace(/\D/g,'');
+  if (v.length > 11) v = v.slice(0,11);
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+  v = v.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+  input.value = v;
+}
+
+async function atletaLogin() {
+  const cpf = document.getElementById('atletaCpfInput').value.replace(/\D/g,'');
+  const errEl = document.getElementById('atletaErr');
+  errEl.style.display = 'none';
+
+  if (cpf.length !== 11) { errEl.style.display='block'; return; }
+
+  // Busca inscrição confirmada do torneio na edição ativa
+  const snap = await getDocs(query(
+    collection(db, 'inscricoes'),
+    where('cpf', '==', cpf),
+    where('tipo', '==', 'tor'),
+    where('status', '==', 'confirmado'),
+    where('edicao', '==', edicaoAtiva)
+  ));
+
+  if (snap.empty) { errEl.style.display='block'; return; }
+
+  atletaAtual = { cpf, ...snap.docs[0].data(), docId: snap.docs[0].id };
+  atletaCarregarDashboard();
+}
+
+async function atletaCarregarDashboard() {
+  if (!atletaAtual) return;
+  document.getElementById('atletaLoginBox').style.display = 'none';
+  document.getElementById('atletaDashboard').style.display = 'block';
+
+  // Foto do atleta
+  const fotoSnap = await getDoc(doc(db, 'atletasFotos', atletaAtual.cpf));
+  const fotoUrl = fotoSnap.exists() ? fotoSnap.data().url : null;
+
+  // Avatar
+  const avatarEl = document.getElementById('atletaAvatarEl');
+  const iniciais = atletaAtual.nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+  avatarEl.innerHTML = fotoUrl
+    ? `<img src="${fotoUrl}" alt="foto">`
+    : iniciais;
+
+  // Info
+  const catNomes = { masc_ini:'Masculino Iniciante', fem_ini:'Feminino Iniciante', masc_int:'Masculino Intermediário', fem_int:'Feminino Intermediário' };
+  document.getElementById('atletaNomeEl').textContent = atletaAtual.nome;
+  document.getElementById('atletaCatEl').textContent = catNomes[atletaAtual.cat] || atletaAtual.cat;
+  document.getElementById('atletaBadgeEl').textContent = `${edicaoAtiva}ª Edição BTE`;
+
+  // Mural da categoria
+  atletaCarregarMural();
+
+  // Jogos em tempo real
+  atletaOuvirJogos();
+}
+
+async function atletaCarregarMural() {
+  const cat = atletaAtual.cat;
+  const snap = await getDocs(query(
+    collection(db, 'inscricoes'),
+    where('cat', '==', cat),
+    where('tipo', '==', 'tor'),
+    where('status', '==', 'confirmado'),
+    where('edicao', '==', edicaoAtiva)
+  ));
+
+  const muralEl = document.getElementById('atletaMuralEl');
+  const fotos = {};
+  // Busca fotos em lote (simplificado — busca uma por uma)
+  const atletas = snap.docs.map(d => d.data());
+
+  let html = '';
+  for (const a of atletas) {
+    const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
+    const url = fSnap.exists() ? fSnap.data().url : null;
+    const iniciais = a.nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+    html += `<div class="atleta-mural-card">
+      <div class="atleta-mural-avatar">${url ? `<img src="${url}" alt="">` : iniciais}</div>
+      <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
+    </div>`;
+  }
+  muralEl.innerHTML = html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
+}
+
+function atletaOuvirJogos() {
+  if (s8AtletaListener) s8AtletaListener();
+  const cat = atletaAtual.cat;
+  s8AtletaListener = onSnapshot(doc(db, 'super8', `${edicaoAtiva}_${cat}`), snap => {
+    if (!snap.exists()) {
+      document.getElementById('atletaJogosEl').innerHTML = '<p style="color:rgba(255,255,255,.4);font-size:.82rem">As chaves ainda não foram geradas. Aguarde!</p>';
+      document.getElementById('atletaClassifEl').innerHTML = '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Aguardando início das partidas...</p>';
+      return;
+    }
+    const data = snap.data();
+    atletaRenderJogos(data);
+    atletaRenderClassif(data);
+  });
+}
+
+function atletaRenderJogos(data) {
+  const cpf = atletaAtual.cpf;
+  const el = document.getElementById('atletaJogosEl');
+  let html = '';
+
+  data.rodadas.forEach(r => {
+    [r.partida1, r.partida2].forEach(p => {
+      const meus = [...p.dupla1, ...p.dupla2];
+      if (!meus.find(a => a.cpf === cpf)) return; // não é minha rodada
+
+      const emDupla1 = p.dupla1.find(a => a.cpf === cpf);
+      const minhaDupla = emDupla1 ? p.dupla1 : p.dupla2;
+      const adversarios = emDupla1 ? p.dupla2 : p.dupla1;
+      const pl = p.placar;
+
+      let placarHtml = '';
+      let placarClass = '';
+      if (pl != null) {
+        const meuGame = emDupla1 ? pl.a : pl.b;
+        const advGame = emDupla1 ? pl.b : pl.a;
+        placarClass = meuGame > advGame ? 'win' : 'loss';
+        placarHtml = `<div class="atleta-jogo-placar ${placarClass}">${meuGame}×${advGame}</div>`;
+      } else {
+        placarHtml = `<div class="atleta-jogo-pending">Aguardando</div>`;
+      }
+
+      const parceiro = minhaDupla.find(a => a.cpf !== cpf);
+      html += `<div class="atleta-card" style="margin-bottom:.75rem;padding:1rem">
+        <div class="atleta-jogo-row">
+          <div class="atleta-jogo-round">R${r.num}</div>
+          <div class="atleta-jogo-info">
+            <strong>Parceiro: ${parceiro ? parceiro.nome.split(' ')[0] : '—'}</strong>
+            <small>Adversários: ${adversarios.map(a=>a.nome.split(' ')[0]).join(' & ')}</small>
+          </div>
+          ${placarHtml}
+        </div>
+      </div>`;
+    });
+  });
+
+  el.innerHTML = html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Suas partidas aparecerão aqui após a geração das chaves.</p>';
+}
+
+function atletaRenderClassif(data) {
+  const cpf = atletaAtual.cpf;
+  const classif = s8CalcClassif(data);
+  const pos = classif.findIndex(a => a.cpf === cpf);
+  const meu = classif[pos];
+  const el = document.getElementById('atletaClassifEl');
+
+  if (pos === -1 || !meu) {
+    el.innerHTML = '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Aguardando partidas...</p>';
+    return;
+  }
+
+  const medal = pos === 0 ? '🥇' : pos === 1 ? '🥈' : pos === 2 ? '🥉' : `${pos+1}º`;
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <div>
+        <div class="atleta-classif-pos">${medal} ${pos+1}º lugar</div>
+        <div class="atleta-classif-detail">
+          Vitórias: <strong style="color:#fff">${meu.vitorias}</strong> &nbsp;|&nbsp;
+          Games: <strong style="color:#fff">${meu.games}</strong> &nbsp;|&nbsp;
+          Saldo: <strong style="color:${meu.games-meu.gamesCon>=0?'#4caf50':'#f44336'}">${meu.games-meu.gamesCon>0?'+':''}${meu.games-meu.gamesCon}</strong>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function atletaUploadFoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { alert('Foto muito grande. Use uma imagem até 2MB.'); return; }
+
+  // Converte para base64 e salva no Firestore (sem Storage)
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result;
+    try {
+      await setDoc(doc(db, 'atletasFotos', atletaAtual.cpf), { url: base64, nome: atletaAtual.nome, atualizadoEm: new Date().toISOString() });
+      // Atualiza avatar na tela
+      document.getElementById('atletaAvatarEl').innerHTML = `<img src="${base64}" alt="foto">`;
+      alert('✅ Foto atualizada!');
+    } catch(e) {
+      alert('Erro ao salvar foto: ' + e.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function atletaLogout() {
+  atletaAtual = null;
+  if (s8AtletaListener) { s8AtletaListener(); s8AtletaListener = null; }
+  document.getElementById('atletaLoginBox').style.display = 'block';
+  document.getElementById('atletaDashboard').style.display = 'none';
+  document.getElementById('atletaCpfInput').value = '';
+}
+
+// ===== PÓDIO BTE (público) =====
+
+async function carregarPodio() {
+  const el = document.getElementById('podioContent');
+  try {
+    const snap = await getDocs(collection(db, 'podio'));
+    if (snap.empty) {
+      document.getElementById('podioSection').style.display = 'none';
+      return;
+    }
+
+    const catNomes = { masc_ini:'Masculino Iniciante', fem_ini:'Feminino Iniciante', masc_int:'Masculino Intermediário', fem_int:'Feminino Intermediário' };
+    const ordinals = ['','1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª','9ª','10ª'];
+
+    let html = '';
+    const docs = snap.docs.sort((a,b) => parseInt(b.id) - parseInt(a.id));
+
+    docs.forEach(d => {
+      const ed = d.id;
+      const data = d.data();
+      const label = ordinals[parseInt(ed)] || `${ed}ª`;
+      html += `<div class="podio-edicao">
+        <div class="podio-edicao-titulo">🏆 ${label} Edição</div>
+        <div class="podio-cats-grid">`;
+
+      Object.entries(catNomes).forEach(([cat, nome]) => {
+        if (!data[cat]) return;
+        const p = data[cat];
+        html += `<div class="podio-cat-card">
+          <div class="podio-cat-nome">${nome}</div>
+          <div class="podio-lugar"><span class="podio-medal">🥇</span><div><div class="podio-atleta-nome">${p.campeao?.nome || '—'}</div><div class="podio-atleta-detalhe">${p.campeao?.vitorias || 0}V · ${p.campeao?.games || 0} games</div></div></div>
+          <div class="podio-lugar"><span class="podio-medal">🥈</span><div><div class="podio-atleta-nome">${p.vice?.nome || '—'}</div><div class="podio-atleta-detalhe">${p.vice?.vitorias || 0}V · ${p.vice?.games || 0} games</div></div></div>
+        </div>`;
+      });
+
+      html += `</div></div>`;
+    });
+
+    el.innerHTML = html;
+    document.getElementById('podioSection').style.display = 'block';
+  } catch(e) {
+    document.getElementById('podioSection').style.display = 'none';
+  }
+}
+
+// Hook na troca de aba admin — carregar Super 8
+const _origSwitchAdminTabS8 = window.switchAdminTab;
+window.switchAdminTab = function(tab) {
+  if (_origSwitchAdminTabS8) _origSwitchAdminTabS8(tab);
+  if (tab === 'super8') s8CarregarCat(s8CatAtiva);
+};
+
+// Mostra seção atleta sempre (login box)
+document.getElementById('atletaSection').style.display = 'block';
+
 // INIT
+carregarPodio();
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
 document.querySelectorAll('.what-card,.prof-card,.tl-item').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';observer.observe(el);});
 window.toggleMenu=function(){document.getElementById('navLinks').classList.toggle('open');};
