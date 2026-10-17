@@ -1,5 +1,3 @@
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -227,7 +225,7 @@ tbody tr:hover td{background:#fafafa}
 .delay-1{animation-delay:.1s}
 .delay-2{animation-delay:.2s}
 .delay-3{animation-delay:.3s}
- 
+
 /* ===== MODAL ===== */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem}
 .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
@@ -291,7 +289,7 @@ tbody tr:hover td{background:#fafafa}
 .modal-turma-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:#CC1B1B;line-height:1}
 .modal-turma-hora{font-weight:700;font-size:.9rem;color:#111;margin:.2rem 0 .15rem}
 .modal-turma-vagas{font-size:.75rem;color:#888;text-transform:uppercase;letter-spacing:.5px}
- 
+
 /* PAGAMENTO */
 .pay-step-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#888;text-align:center;margin-bottom:1.25rem}
 .pay-valor{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#111;letter-spacing:2px;text-align:center;margin-bottom:1.5rem}
@@ -318,7 +316,7 @@ tbody tr:hover td{background:#fafafa}
 .pendente-protocolo{background:#f5f5f5;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#666;margin-bottom:1.5rem;text-align:center}
 .pendente-protocolo strong{color:#111;font-family:monospace;font-size:.9rem}
 .pendente-aviso{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:.875rem 1rem;font-size:.82rem;color:#795548;margin-bottom:1rem;text-align:left}
- 
+
 @media(max-width:540px){
   .modal-choices,.pay-methods{grid-template-columns:1fr}
   .mfg{grid-template-columns:1fr}
@@ -326,9 +324,9 @@ tbody tr:hover td{background:#fafafa}
   .modal-turmas-grid{grid-template-columns:1fr 1fr}
   .modal-body{padding:1.25rem}
 }
- 
+
 select option:disabled{color:#bbb;font-style:italic}
- 
+
 /* ===== CONFIG TOGGLES ===== */
 .config-section{padding:1.25rem 0}
 .config-group{margin-bottom:1.75rem}
@@ -361,7 +359,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .aval-empty-state{text-align:center;padding:3rem;color:rgba(255,255,255,.3);font-size:.9rem;grid-column:1/-1}
 .btn-aval{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);padding:.75rem 1.5rem;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:2rem}
 .btn-aval:hover{border-color:#CC1B1B;color:#fff;background:rgba(204,27,27,.08)}
- 
+
 /* Modal avaliação */
 .modal-aval-step{display:none}
 .modal-aval-step.active{display:block}
@@ -370,7 +368,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .star-sel-btn.on{color:#CC1B1B}
 .mf-group textarea{border:1.5px solid #e0e0e0;border-radius:6px;padding:.625rem .875rem;font-size:.9rem;font-family:'Inter',sans-serif;color:#222;resize:vertical;min-height:90px;width:100%;transition:border-color .2s}
 .mf-group textarea:focus{outline:none;border-color:#CC1B1B}
- 
+
 /* Admin avaliações */
 .aval-admin-card{background:#f9f9f9;border:1.5px solid #eee;border-radius:10px;padding:1.25rem;margin-bottom:.875rem}
 .aval-admin-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
@@ -416,6 +414,63 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .fin-cat-row.total span:last-child{color:#CC1B1B}
 .badge-edicao{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.15rem .5rem;border-radius:20px;background:#e3f2fd;color:#1565c0;margin-left:.4rem;vertical-align:middle}
 .badge-edicao.e1{background:#f3e5f5;color:#6a1b9a}
+/* ===== ABA EDIÇÕES ===== */
+.edicoes-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
+.btn-nova-edicao{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.6rem 1.25rem;font-weight:700;font-size:.85rem;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.btn-nova-edicao:hover{background:#E83030}
+.edicao-card{background:#fff;border:1.5px solid #e8e8e8;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;transition:box-shadow .2s}
+.edicao-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.edicao-card.ativa{border-color:#CC1B1B;border-width:2px}
+.edicao-card.finalizada{border-color:#2e7d32}
+.edicao-card.arquivada{opacity:.55;border-style:dashed}
+.edicao-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.edicao-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#111;letter-spacing:1px;line-height:1}
+.edicao-meta{flex:1}
+.edicao-nome{font-weight:700;font-size:1rem;color:#111;margin-bottom:.2rem}
+.edicao-data{font-size:.82rem;color:#666}
+.edicao-status-badge{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:.25rem .7rem;border-radius:20px;white-space:nowrap}
+.edicao-status-badge.ativa{background:#fdecea;color:#CC1B1B}
+.edicao-status-badge.finalizada{background:#e8f5e9;color:#2e7d32}
+.edicao-status-badge.arquivada{background:#f5f5f5;color:#888}
+.edicao-stats{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.8rem;color:#666;margin-bottom:.875rem}
+.edicao-stats span strong{color:#111;font-size:.95rem}
+.edicao-campeoes{background:#fffde7;border:1px solid #fff176;border-radius:8px;padding:.75rem 1rem;margin-bottom:.875rem;font-size:.82rem}
+.edicao-campeoes-titulo{font-weight:700;color:#795548;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
+.camp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.4rem}
+.camp-item{font-size:.8rem;color:#555}
+.camp-item strong{color:#111}
+.edicao-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn-ed-acao{border:none;border-radius:7px;padding:.45rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.btn-ed-finalizar{background:#CC1B1B;color:#fff}
+.btn-ed-finalizar:hover{background:#E83030}
+.btn-ed-editar{background:#e3f2fd;color:#1565c0}
+.btn-ed-editar:hover{background:#bbdefb}
+.btn-ed-arquivar{background:#f5f5f5;color:#555}
+.btn-ed-arquivar:hover{background:#e0e0e0}
+.btn-ed-restaurar{background:#e8f5e9;color:#2e7d32}
+.btn-ed-restaurar:hover{background:#c8e6c9}
+.edicoes-arquivadas-toggle{text-align:center;margin-top:1rem;font-size:.8rem;color:#888;cursor:pointer;user-select:none}
+.edicoes-arquivadas-toggle:hover{color:#555}
+/* modal finalizar evento */
+.modal-finalizar{max-width:560px}
+.finalizar-cats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
+.finalizar-cat-bloco{background:#f9f9f9;border:1.5px solid #e8e8e8;border-radius:8px;padding:.75rem}
+.finalizar-cat-titulo{font-weight:700;font-size:.78rem;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
+.finalizar-cat-bloco input{width:100%;border:1.5px solid #ddd;border-radius:6px;padding:.4rem .7rem;font-size:.82rem;font-family:'Inter',sans-serif;margin-bottom:.35rem}
+.finalizar-cat-bloco input:focus{outline:none;border-color:#CC1B1B}
+.finalizar-cat-bloco label{font-size:.72rem;color:#888;display:block;margin-bottom:.15rem}
+.btn-confirmar-finalizar{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.75rem 1.5rem;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Inter',sans-serif;width:100%;margin-top:.75rem;transition:background .2s}
+.btn-confirmar-finalizar:hover{background:#E83030}
+/* modal nova edição */
+.nova-edicao-form .mf-group{margin-bottom:.875rem}
+.nova-edicao-form label{display:block;font-size:.78rem;font-weight:700;color:#555;margin-bottom:.3rem}
+.nova-edicao-form input{width:100%;border:1.5px solid #ddd;border-radius:8px;padding:.55rem .9rem;font-size:.9rem;font-family:'Inter',sans-serif}
+.nova-edicao-form input:focus{outline:none;border-color:#CC1B1B}
+.vagas-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem}
+.vaga-config-item{display:flex;align-items:center;justify-content:space-between;background:#f9f9f9;border-radius:6px;padding:.4rem .75rem;font-size:.8rem}
+.vaga-config-item input[type=number]{width:52px;border:1.5px solid #ddd;border-radius:5px;padding:.25rem .4rem;font-size:.85rem;text-align:center;font-family:'Inter',sans-serif}
+.btn-criar-edicao{background:#CC1B1B;color:#fff;border:none;border-radius:8px;padding:.75rem 1.5rem;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Inter',sans-serif;width:100%;margin-top:.75rem}
+.btn-criar-edicao:hover{background:#E83030}
 /* ===== FILTROS E ORDENAÇÃO ===== */
 .admin-filters{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
 .filter-select{border:1.5px solid #e0e0e0;border-radius:7px;padding:.4rem .75rem;font-size:.8rem;font-family:'Inter',sans-serif;color:#333;background:#fff;cursor:pointer;transition:border-color .2s}
@@ -423,7 +478,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .sort-btn{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:7px;padding:.4rem .75rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:#555;transition:all .2s;white-space:nowrap}
 .sort-btn.active{background:#111;color:#fff;border-color:#111}
 .filter-count{font-size:.78rem;color:#888;margin-left:.25rem}
- 
+
 /* ===== MODAL DE EDIÇÃO ===== */
 .modal-edit-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem}
 .modal-edit-overlay.open{display:flex;align-items:flex-start;justify-content:center}
@@ -478,7 +533,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 <script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
 </head>
 <body>
- 
+
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">BTE</a>
@@ -494,7 +549,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </nav>
- 
+
 <section class="hero" id="hero">
   <div class="hero-deco"></div>
   <div class="hero-deco2"></div>
@@ -535,9 +590,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <section class="cards-destaque-section">
   <div class="cards-destaque-grid">
     <div class="card-destaque card-destaque--exp">
@@ -564,7 +619,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </section>
- 
+
 <section class="what-section" id="evento">
   <div class="container">
     <div class="section-label" style="color:var(--yellow)">No evento</div>
@@ -580,9 +635,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <section id="professores" style="background:#111111">
   <div class="container">
     <div class="section-label">Sua equipe</div>
@@ -616,9 +671,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <section class="schedule-section" id="cronograma">
   <div class="container">
     <div style="max-width:800px;margin:0 auto">
@@ -643,7 +698,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </section>
- 
+
 <section style="background:#111111;padding:3.5rem 2rem;text-align:center">
   <div class="container" style="max-width:600px">
     <p style="font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.75rem">Contato</p>
@@ -654,9 +709,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </a>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- AVALIAÇÕES -->
 <section class="aval-section" id="avaliacoes">
   <div class="container">
@@ -672,9 +727,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </button>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -705,12 +760,12 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </footer>
- 
+
 <button class="admin-toggle" onclick="toggleAdmin()">
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
   Painel Admin
 </button>
- 
+
 <!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
   <div class="admin-content">
@@ -760,8 +815,9 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="admin-tab-btn" onclick="switchAdminTab('fin')">💰 Financeiro</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('aval')">⭐ Avaliações</button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('edicoes')">📋 Edições</button>
         </div>
- 
+
         <!-- TAB EXPERIÊNCIA -->
         <div class="admin-section active" id="admin-exp">
           <div class="admin-toolbar">
@@ -791,7 +847,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <tbody id="tbodyExp"><tr><td colspan="13" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
- 
+
         <!-- TAB TORNEIO -->
         <div class="admin-section" id="admin-tor">
           <div class="admin-toolbar">
@@ -821,7 +877,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <tbody id="tbodyTor"><tr><td colspan="12" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
- 
+
         <!-- TAB PENDENTE -->
         <div class="admin-section" id="admin-pend">
           <div class="admin-toolbar">
@@ -832,7 +888,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <tbody id="tbodyPend"><tr><td colspan="10" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
- 
+
         <!-- TAB ESPERA -->
         <div class="admin-section" id="admin-wait">
           <div class="admin-toolbar">
@@ -844,7 +900,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
           </div>
         </div>
- 
+
         <!-- TAB FINANCEIRO -->
         <div class="admin-section" id="admin-fin">
           <div class="fin-resumo" id="finResumo">
@@ -855,7 +911,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin:.5rem 0 .875rem">Histórico — 1ª Edição</h4>
           <div class="fin-cats" id="finCatsE1"></div>
         </div>
- 
+
         <!-- TAB AVALIAÇÕES -->
         <div class="admin-section" id="admin-aval">
           <div class="admin-toolbar">
@@ -864,7 +920,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           </div>
           <div id="adminAvalList"><div class="admin-loading"><div class="spinner"></div> Carregando avaliações...</div></div>
         </div>
- 
+
         <!-- TAB CONFIGURAÇÕES -->
         <div class="admin-section" id="admin-cfg">
           <div class="config-section">
@@ -913,12 +969,125 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             <p style="font-size:.8rem;color:#888;margin-top:.25rem">💡 Toggle <strong style="color:#2e7d32">verde = vagas abertas</strong> · Toggle <strong style="color:#CC1B1B">vermelho = esgotada</strong>. Salva automaticamente no Firebase.</p>
           </div>
         </div>
- 
+
+        <!-- TAB EDIÇÕES -->
+        <div class="admin-section" id="admin-edicoes">
+          <div class="edicoes-header">
+            <div>
+              <div style="font-weight:700;font-size:1rem;color:#111">Gestão de Edições</div>
+              <div style="font-size:.8rem;color:#888;margin-top:.15rem">Finalize, edite ou arquive edições do evento</div>
+            </div>
+            <button class="btn-nova-edicao" onclick="abrirNovaEdicao()">+ Nova Edição</button>
+          </div>
+          <div id="edicoesList"><div class="admin-loading"><div class="spinner"></div> Carregando edições...</div></div>
+          <div class="edicoes-arquivadas-toggle" id="toggleArquivadas" onclick="toggleVerArquivadas()" style="display:none">▼ Ver edições arquivadas</div>
+          <div id="edicoesArquivadasList" style="display:none"></div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
- 
+
+<!-- MODAL FINALIZAR EVENTO -->
+<div class="modal-overlay" id="modalFinalizarEvento">
+  <div class="modal-box modal-finalizar">
+    <div class="modal-header">
+      <h2>🏁 Finalizar Evento</h2>
+      <button class="modal-close" onclick="fecharModalFinalizar()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.88rem;color:#555;margin-bottom:1rem">Registre os campeões e vices de cada categoria. Após confirmar, as inscrições serão congeladas e o evento ficará no histórico.</p>
+      <div class="finalizar-cats" id="finalizarCatsForm">
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Masc. Iniciante</div>
+          <label>Campeão</label><input type="text" id="fc_masc_ini_camp" placeholder="Nome do campeão">
+          <label>Vice-campeão</label><input type="text" id="fc_masc_ini_vice" placeholder="Nome do vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Masc. Intermediário</div>
+          <label>Campeão</label><input type="text" id="fc_masc_int_camp" placeholder="Nome do campeão">
+          <label>Vice-campeão</label><input type="text" id="fc_masc_int_vice" placeholder="Nome do vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Fem. Iniciante</div>
+          <label>Campeão</label><input type="text" id="fc_fem_ini_camp" placeholder="Nome da campeã">
+          <label>Vice-campeã</label><input type="text" id="fc_fem_ini_vice" placeholder="Nome da vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Fem. Intermediário</div>
+          <label>Campeão</label><input type="text" id="fc_fem_int_camp" placeholder="Nome da campeã">
+          <label>Vice-campeã</label><input type="text" id="fc_fem_int_vice" placeholder="Nome da vice">
+        </div>
+      </div>
+      <div id="finalizarErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-confirmar-finalizar" onclick="confirmarFinalizarEvento()">✅ Confirmar finalização</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVA EDIÇÃO -->
+<div class="modal-overlay" id="modalNovaEdicao">
+  <div class="modal-box" style="max-width:500px">
+    <div class="modal-header">
+      <h2>➕ Nova Edição</h2>
+      <button class="modal-close" onclick="fecharNovaEdicao()">✕</button>
+    </div>
+    <div class="modal-body nova-edicao-form">
+      <div class="mf-group">
+        <label>Nome do evento *</label>
+        <input type="text" id="ne_nome" placeholder="Ex: 4ª Edição Beach Tennis Experience">
+      </div>
+      <div class="mf-group">
+        <label>Data *</label>
+        <input type="date" id="ne_data">
+      </div>
+      <div class="mf-group">
+        <label>Local</label>
+        <input type="text" id="ne_local" placeholder="Ex: SkyFit Passeio das Águas">
+      </div>
+      <div class="mf-group">
+        <label>Vagas por categoria (Super 8)</label>
+        <div class="vagas-config-grid">
+          <div class="vaga-config-item"><span>Masc. Iniciante</span><input type="number" id="ne_v_masc_ini" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Masc. Interm.</span><input type="number" id="ne_v_masc_int" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Fem. Iniciante</span><input type="number" id="ne_v_fem_ini" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Fem. Interm.</span><input type="number" id="ne_v_fem_int" value="8" min="1" max="32"></div>
+        </div>
+      </div>
+      <div id="novaEdicaoErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-criar-edicao" onclick="confirmarNovaEdicao()">🚀 Criar nova edição e ativar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR EDIÇÃO -->
+<div class="modal-overlay" id="modalEditarEdicao">
+  <div class="modal-box" style="max-width:500px">
+    <div class="modal-header">
+      <h2>✏️ Editar Edição</h2>
+      <button class="modal-close" onclick="fecharEditarEdicao()">✕</button>
+    </div>
+    <div class="modal-body nova-edicao-form">
+      <input type="hidden" id="edit_ed_id">
+      <div class="mf-group">
+        <label>Nome do evento</label>
+        <input type="text" id="edit_ed_nome">
+      </div>
+      <div class="mf-group">
+        <label>Data</label>
+        <input type="date" id="edit_ed_data">
+      </div>
+      <div class="mf-group">
+        <label>Local</label>
+        <input type="text" id="edit_ed_local">
+      </div>
+      <div id="editarEdicaoErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-criar-edicao" onclick="confirmarEditarEdicao()">💾 Salvar alterações</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL AVALIAÇÃO -->
 <div class="modal-overlay" id="modalAval">
   <div class="modal-box">
@@ -927,7 +1096,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <button class="modal-close" onclick="closeModalAval()">✕</button>
     </div>
     <div class="modal-body">
- 
+
       <!-- STEP 0: verificar e-mail -->
       <div class="modal-aval-step active" id="mAvalStep0">
         <div class="modal-form-header">
@@ -941,7 +1110,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div id="aval_email_err" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.75rem">E-mail não encontrado. Verifique se é o mesmo usado na inscrição.</div>
         <button class="btn-modal-next" id="btnVerificarEmail" onclick="verificarEmailAval()">Verificar e continuar →</button>
       </div>
- 
+
       <!-- STEP 1: formulário de avaliação -->
       <div class="modal-aval-step" id="mAvalStep1">
         <div class="modal-form-header">
@@ -974,7 +1143,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="btn-modal-next" onclick="enviarAval()">Enviar avaliação</button>
         </div>
       </div>
- 
+
       <!-- STEP 2: sucesso -->
       <div class="modal-aval-step" id="mAvalStep2">
         <div style="text-align:center;padding:1.5rem 0">
@@ -984,11 +1153,11 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="btn-modal-next" onclick="closeModalAval()">Fechar</button>
         </div>
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL ADD AVALIAÇÃO (admin) -->
 <div class="modal-overlay" id="modalAdminAval">
   <div class="modal-box">
@@ -1025,7 +1194,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL DISPARO EM MASSA -->
 <div class="modal-disparo-overlay" id="modalDisparo">
   <div class="modal-disparo-box">
@@ -1034,7 +1203,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharDisparo()">✕</button>
     </div>
     <div class="modal-disparo-body">
- 
+
       <!-- Filtro de público -->
       <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Enviar para:</div>
       <div class="disparo-filtro">
@@ -1042,24 +1211,24 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <button class="disparo-filtro-btn" onclick="setDisparoFiltro('tor')">Só Torneio</button>
         <button class="disparo-filtro-btn" onclick="setDisparoFiltro('exp')">Só Experiência</button>
       </div>
- 
+
       <!-- Preview da mensagem -->
       <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
       <div class="disparo-preview" id="disparoPreview"></div>
- 
+
       <!-- Lista de destinatários -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
         <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
         <div style="font-size:.78rem;color:#888" id="disparoContador"></div>
       </div>
       <div class="disparo-lista" id="disparoLista"></div>
- 
+
       <!-- Progresso -->
       <div id="disparoProgressoWrap" style="display:none">
         <div class="disparo-progress"><div class="disparo-progress-bar" id="disparoProgressBar" style="width:0%"></div></div>
         <div class="disparo-progress-txt" id="disparoProgressTxt"></div>
       </div>
- 
+
       <!-- Botões -->
       <div id="disparoBtnIniciar">
         <button class="btn-disparo-iniciar" onclick="iniciarDisparo()">📣 Iniciar disparo — WhatsApp</button>
@@ -1070,11 +1239,11 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <div id="disparoFinalMsg" style="display:none;text-align:center;padding:1rem;background:#e8f5e9;border-radius:8px;color:#2e7d32;font-weight:700;font-size:.95rem">
         ✅ Todos os participantes foram contatados!
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL AGRADECIMENTO PÓS-EVENTO -->
 <div class="modal-disparo-overlay" id="modalAgradecimento">
   <div class="modal-disparo-box">
@@ -1083,25 +1252,25 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharAgradecimento()">✕</button>
     </div>
     <div class="modal-disparo-body">
- 
+
       <div style="background:#f3e5f5;border:1.5px solid #ce93d8;border-radius:10px;padding:.875rem 1rem;margin-bottom:1.25rem;font-size:.82rem;color:#4a0072;line-height:1.6">
         💜 Envie uma mensagem de agradecimento para todos que participaram da <strong>3ª Edição BTE</strong>. Cada mensagem é personalizada com o nome do participante.
       </div>
- 
+
       <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
       <div class="disparo-preview" style="background:#f3e5f5;border-color:#ce93d8;color:#4a0072" id="agradPreview"></div>
- 
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
         <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
         <div style="font-size:.78rem;color:#888" id="agradContador"></div>
       </div>
       <div class="disparo-lista" id="agradLista"></div>
- 
+
       <div id="agradProgressoWrap" style="display:none">
         <div class="disparo-progress"><div class="disparo-progress-bar" id="agradProgressBar" style="width:0%;background:#7b1fa2"></div></div>
         <div class="disparo-progress-txt" id="agradProgressTxt"></div>
       </div>
- 
+
       <div id="agradBtnIniciar">
         <button class="btn-disparo-iniciar" style="background:#7b1fa2" onclick="iniciarAgradecimento()">🏅 Iniciar envio — WhatsApp</button>
       </div>
@@ -1111,11 +1280,11 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <div id="agradFinalMsg" style="display:none;text-align:center;padding:1rem;background:#f3e5f5;border-radius:8px;color:#4a0072;font-weight:700;font-size:.95rem">
         💜 Agradecimento enviado para todos os participantes!
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL EDITAR INSCRIÇÃO -->
 <div class="modal-edit-overlay" id="modalEditInsc">
   <div class="modal-edit-box">
@@ -1158,7 +1327,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL DE INSCRIÇÃO -->
 <div class="modal-overlay" id="modalInscricao">
   <div class="modal-box">
@@ -1167,7 +1336,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
- 
+
       <!-- STEP 0: escolha -->
       <div class="modal-step active" id="mStep0">
         <p class="modal-choice-title">Como você quer participar?</p>
@@ -1187,7 +1356,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         </div>
         <button class="btn-modal-next" id="btnNextChoice" disabled onclick="goToForm()">Continuar →</button>
       </div>
- 
+
       <!-- STEP 1: Form Experiência -->
       <div class="modal-step" id="mStepExp">
         <div class="modal-form-header">
@@ -1235,7 +1404,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="btn-modal-next" onclick="submitModalExp()">Ir para Pagamento →</button>
         </div>
       </div>
- 
+
       <!-- STEP 1: Form Super 8 -->
       <div class="modal-step" id="mStepTor">
         <div class="modal-form-header">
@@ -1277,7 +1446,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="btn-modal-next" onclick="submitModalTor()">Ir para Pagamento →</button>
         </div>
       </div>
- 
+
       <!-- STEP 2: Pagamento -->
       <div class="modal-step" id="mStepPay">
         <p class="pay-step-title">Etapa 2 de 2 — Pagamento</p>
@@ -1325,7 +1494,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           </div>
         </div>
       </div>
- 
+
       <!-- STEP 3: Pendente -->
       <div class="modal-step" id="mStepPendente">
         <div class="modal-pendente">
@@ -1337,20 +1506,20 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <button class="btn-modal-next" onclick="closeModal()">Entendido, fechar</button>
         </div>
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <a href="https://wa.me/5562998041804" class="wa-float" target="_blank" title="WhatsApp">💬</a>
- 
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp, setDoc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
- 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBCCuHPBx9kd87AQHy8z3WU6Nlx6OL6Ads",
   authDomain: "beach-tennis-expercience.firebaseapp.com",
@@ -1362,15 +1531,46 @@ const firebaseConfig = {
 const app  = initializeApp(firebaseConfig);
 const db   = getFirestore(app);
 const auth = getAuth(app);
- 
+
 // ===== CONSTANTES =====
 const MAX_TURMA = 6;
 const MAX_CAT   = 8;
 const WA_NUM    = '5562998041804';
- 
+
+// ===== EDIÇÃO ATIVA — lida do Firestore =====
+let edicaoAtiva = 3; // fallback inicial
+let edicaoAtivaStatus = 'ativa'; // 'ativa' | 'finalizada'
+let maxVagasCats = { masc_ini: 8, masc_int: 8, fem_ini: 8, fem_int: 8 };
+
+// Escuta edição ativa em tempo real
+onSnapshot(doc(db, 'config', 'edicao_ativa'), (snap) => {
+  if (snap.exists()) {
+    const d = snap.data();
+    edicaoAtiva = d.numero || 3;
+    edicaoAtivaStatus = d.status || 'ativa';
+    if (d.vagas_cats) maxVagasCats = { ...maxVagasCats, ...d.vagas_cats };
+    // bloqueia inscrições se evento finalizado
+    atualizarBloqueioInscricoes();
+  }
+});
+
+function atualizarBloqueioInscricoes() {
+  const bloqueado = edicaoAtivaStatus !== 'ativa';
+  document.querySelectorAll('[onclick*="openModal"]').forEach(el => {
+    if (bloqueado) {
+      el.setAttribute('data-orig-onclick', el.getAttribute('onclick'));
+      el.setAttribute('onclick', "alert('Inscrições encerradas para esta edição.')");
+      el.style.opacity = '.6';
+    } else if (el.getAttribute('data-orig-onclick')) {
+      el.setAttribute('onclick', el.getAttribute('data-orig-onclick'));
+      el.style.opacity = '';
+    }
+  });
+}
+
 // ===== CONFIG DE VAGAS FORÇADAS (admin pode sobrescrever) =====
 let configForcados = { turmas: {}, cats: {} };
- 
+
 // Escuta config em tempo real para o site público
 onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
   if (snap.exists()) {
@@ -1380,14 +1580,14 @@ onSnapshot(doc(db, 'config', 'vagas'), (snap) => {
     atualizarSelectCategorias();
   }
 });
- 
+
 // ===== CONTROLE DE VAGAS — FONTE ÚNICA DE VERDADE =====
 let vagasContagem = {
   turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
   cats:   { masc_ini: 0, masc_int: 0, fem_ini: 0, fem_int: 0 }
 };
 let vagasCarregadas = false;
- 
+
 const unsubVagasReal = onSnapshot(
   query(
     collection(db, 'inscricoes'),
@@ -1400,7 +1600,7 @@ const unsubVagasReal = onSnapshot(
     };
     snapshot.docs.forEach(d => {
       const data = d.data();
-      if ((data.edicao||1) !== 2) return; // ignora 1ª edição
+      if ((data.edicao||1) !== edicaoAtiva) return; // filtra pela edição ativa
       if (data.tipo === 'exp' && data.turma) {
         const t = Number(data.turma);
         if (vagasContagem.turmas[t] !== undefined) vagasContagem.turmas[t]++;
@@ -1414,18 +1614,18 @@ const unsubVagasReal = onSnapshot(
   },
   (err) => { console.error('Erro ao escutar inscrições para vagas:', err); }
 );
- 
+
 function gerarProtocolo(tipo){
   const prefix = tipo==='exp'?'EXP':'S8';
   return `${prefix}-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2,5).toUpperCase()}`;
 }
- 
+
 // ===== ESTADO DO MODAL =====
 let modalChoice = null;
 let currentEntry = null;
 let currentPayMethod = null;
 let currentProtocolo = null;
- 
+
 // ===== MODAL =====
 window.openModal = function(preChoice){
   modalChoice=null; currentEntry=null; currentPayMethod=null; currentProtocolo=null;
@@ -1445,7 +1645,7 @@ window.closeModal=function(){
   document.body.style.overflow='';
 };
 document.getElementById('modalInscricao').addEventListener('click',function(e){if(e.target===this)closeModal();});
- 
+
 window.selectChoice=function(c){
   modalChoice=c;
   document.getElementById('choiceExp').classList.toggle('selected',c==='exp');
@@ -1475,7 +1675,7 @@ window.backToFormFromPay=function(){
   document.querySelectorAll('.pay-method-card').forEach(c=>c.classList.remove('selected'));
   document.querySelectorAll('.pay-detail-box').forEach(b=>b.classList.remove('active'));
 };
- 
+
 function renderModalTurmas(){
   const grid=document.getElementById('mTurmasGrid');
   if(!grid)return;
@@ -1498,7 +1698,7 @@ function renderModalTurmas(){
     </div>`;
   }
 }
- 
+
 function atualizarSelectCategorias(){
   const grid = document.getElementById('mCatsGrid');
   if(!grid) return;
@@ -1536,7 +1736,7 @@ function atualizarSelectCategorias(){
     </div>`;
   }
 }
- 
+
 window.selectModalTurma=function(n){
   const inscritos = vagasContagem.turmas[n] || 0;
   if(inscritos >= MAX_TURMA || configForcados.turmas[String(n)]) return;
@@ -1552,7 +1752,7 @@ window.selectModalCat=function(key){
   const isFull = inscritos >= MAX_CAT || !!configForcados.cats[key];
   document.getElementById('mWaitTor').style.display = isFull ? 'block' : 'none';
 };
- 
+
 // ===== PAGAMENTO =====
 window.selectPayMethod=function(method){
   currentPayMethod=method;
@@ -1573,12 +1773,12 @@ window.selectPayMethod=function(method){
     }
   }
 };
- 
+
 function setupPixUI(tipo){
   const isExp = tipo === 'exp';
   document.getElementById('payValorDisplay').innerHTML = `R$ <span>${isExp ? '120' : '100'}</span>,00`;
 }
- 
+
 // ===== SUBMIT EXPERIÊNCIA =====
 window.submitModalExp=async function(){
   const nome=document.getElementById('m_exp_nome').value.trim();
@@ -1590,16 +1790,16 @@ window.submitModalExp=async function(){
   const turma=document.getElementById('m_exp_turma').value;
   const praticou=document.querySelector('input[name="m_exp_praticou"]:checked')?.value||'nao';
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!turma){alert('Preencha todos os campos e selecione uma turma.');return;}
- 
+
   // força verificação de menor antes de validar
   verificarMenor('exp');
- 
+
   // validação aceites
   const regAceito = document.getElementById('reg_aceito_exp').checked;
   const regErrEl  = document.getElementById('reg_err_exp');
   regErrEl.style.display = regAceito ? 'none' : 'block';
   if(!regAceito) return;
- 
+
   const eMenor = nasc && calcularIdade(nasc) < 18;
   if(eMenor){
     const menorOk = document.getElementById('menor_ok_exp').checked;
@@ -1607,43 +1807,43 @@ window.submitModalExp=async function(){
     menorErr.style.display = menorOk ? 'none' : 'block';
     if(!menorOk) return;
   }
- 
+
   const mktAceito = document.getElementById('mkt_aceito_exp').checked;
   const agora = new Date().toISOString();
- 
+
   const btn=document.querySelector('#mStepExp .btn-modal-next');
   btn.textContent='Verificando vagas...';btn.disabled=true;
- 
+
   try{
-    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', 2)));
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', edicaoAtiva)));
     const inscAtiva = snapEmail.docs.filter(d => ['pendente','confirmado','espera'].includes(d.data().status));
     if(inscAtiva.length > 0){
       alert('Este e-mail já possui uma inscrição ativa na 3ª Edição. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
- 
+
     const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', '==', 'confirmado')));
-    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === 2).length;
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === edicaoAtiva).length;
     const isWait = vagasOcupadas >= MAX_TURMA || !!configForcados.turmas[String(turma)];
- 
+
     const protocolo=gerarProtocolo('exp');
     currentProtocolo=protocolo;
     const entry={
-      protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',edicao:2,
+      protocolo,nome,cpf,nasc,tel,cep,email,turma,praticou,tipo:'exp',edicao:edicaoAtiva,
       status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
       regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
       marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
       ...(eMenor?{declaracao_menor:true, declaracao_menor_em:agora}:{})
     };
     currentEntry={...entry,turma};
- 
+
     btn.textContent='Salvando...';
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
- 
+
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
- 
+
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
       document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -1658,7 +1858,7 @@ window.submitModalExp=async function(){
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
- 
+
 // ===== SUBMIT TORNEIO =====
 window.submitModalTor=async function(){
   const nome=document.getElementById('m_tor_nome').value.trim();
@@ -1669,16 +1869,16 @@ window.submitModalTor=async function(){
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
   if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
- 
+
   // força verificação de menor antes de validar
   verificarMenor('tor');
- 
+
   // validação aceites
   const regAceito = document.getElementById('reg_aceito_tor').checked;
   const regErrEl  = document.getElementById('reg_err_tor');
   regErrEl.style.display = regAceito ? 'none' : 'block';
   if(!regAceito) return;
- 
+
   const eMenor = nasc && calcularIdade(nasc) < 18;
   if(eMenor){
     const menorOk = document.getElementById('menor_ok_tor').checked;
@@ -1686,44 +1886,44 @@ window.submitModalTor=async function(){
     menorErr.style.display = menorOk ? 'none' : 'block';
     if(!menorOk) return;
   }
- 
+
   const mktAceito = document.getElementById('mkt_aceito_tor').checked;
   const agora = new Date().toISOString();
- 
+
   const btn=document.querySelector('#mStepTor .btn-modal-next');
   btn.textContent='Verificando vagas...';btn.disabled=true;
- 
+
   try{
-    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', 2)));
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', edicaoAtiva)));
     const inscAtiva = snapEmail.docs.filter(d => ['pendente','confirmado','espera'].includes(d.data().status));
     if(inscAtiva.length > 0){
       alert('Este e-mail já possui uma inscrição ativa na 3ª Edição. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
- 
+
     const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', '==', 'confirmado')));
-    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === 2).length;
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === edicaoAtiva).length;
     const isWait = vagasOcupadas >= MAX_CAT || !!configForcados.cats[cat];
- 
+
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
     const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
     const entry={
-      protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',edicao:2,
+      protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',edicao:edicaoAtiva,
       status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
       regulamento_aceito:true, regulamento_versao:'BTE2-1.0', regulamento_aceito_em:agora,
       marketing_autorizado:mktAceito, ...(mktAceito?{marketing_aceite_em:agora}:{}),
       ...(eMenor?{declaracao_menor:true, declaracao_menor_em:agora}:{})
     };
     currentEntry={...entry};
- 
+
     btn.textContent='Salvando...';
     const docRef=await addDoc(collection(db,'inscricoes'),entry);
     currentEntry.id=docRef.id;
- 
+
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
- 
+
     if(isWait){
       document.getElementById('pendProto').textContent=protocolo;
       document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));
@@ -1738,7 +1938,7 @@ window.submitModalTor=async function(){
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
- 
+
 // ===== FINALIZAR INSCRIÇÃO =====
 window.finalizarInscricao=async function(){
   if(!currentEntry?.id||!currentPayMethod){
@@ -1754,7 +1954,7 @@ window.finalizarInscricao=async function(){
     alert('Erro ao registrar pagamento. Sua inscrição foi salva — entre em contato pelo WhatsApp para confirmar.');
   }
 };
- 
+
 // ===== MÁSCARAS =====
 window.maskCPF=function(el){let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');el.value=v;};
 window.maskTel=function(el){let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');else if(v.length>6)v=v.replace(/(\d{2})(\d{4,5})(\d{0,4})/,'($1) $2-$3');else if(v.length>2)v=v.replace(/(\d{2})(\d+)/,'($1) $2');el.value=v;};
@@ -1765,11 +1965,11 @@ window.buscaCEP=async function(form){
   if(raw.length!==8)return;
   try{const r=await fetch(`https://viacep.com.br/ws/${raw}/json/`);const d=await r.json();if(!d.erro){el.style.borderColor='#2e7d32';setTimeout(()=>el.style.borderColor='',2000);}}catch(e){}
 };
- 
+
 // ===== ADMIN =====
 let unsubscribeAdmin = null;
 let allInscricoes    = [];
- 
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     if (document.getElementById('adminPanel').classList.contains('open')) mostrarPainelPrincipal();
@@ -1779,7 +1979,7 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById('adminMainScreen').style.display  = 'none';
   }
 });
- 
+
 window.toggleAdmin = function() {
   const p = document.getElementById('adminPanel');
   if (p.classList.contains('open')) {
@@ -1798,7 +1998,7 @@ window.toggleAdmin = function() {
     }
   }
 };
- 
+
 window.doAdminLogin = async function() {
   const email = 'joaovitornunes2@hotmail.com';
   const senha = document.getElementById('adminPwdInput').value;
@@ -1819,16 +2019,16 @@ window.doAdminLogin = async function() {
     btnEl.textContent = 'Entrar no painel';
   }
 };
- 
+
 window.doAdminLogout = async function() { await signOut(auth); };
- 
+
 function mostrarPainelPrincipal() {
   document.getElementById('adminLoginScreen').style.display = 'none';
   document.getElementById('adminMainScreen').style.display  = 'block';
   iniciarListenerFirebase();
   carregarConfig();
 }
- 
+
 // ===== CONFIG ADMIN =====
 async function carregarConfig() {
   try {
@@ -1850,7 +2050,7 @@ async function carregarConfig() {
     atualizarSelectCategorias();
   } catch(e) { console.error('Erro ao carregar config:', e); }
 }
- 
+
 window.salvarConfig = async function() {
   const turmas = {};
   ['1','2','3','4'].forEach(t => {
@@ -1869,13 +2069,13 @@ window.salvarConfig = async function() {
   renderModalTurmas();
   atualizarSelectCategorias();
 };
- 
+
 function esc(str) {
   return String(str ?? '–')
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
 }
- 
+
 function iniciarListenerFirebase(){
   if(unsubscribeAdmin)return;
   document.getElementById('syncStatus').textContent='Conectando...';
@@ -1887,13 +2087,13 @@ function iniciarListenerFirebase(){
     if(document.getElementById('admin-fin')?.classList.contains('active')) renderFinanceiro();
   },(err)=>{console.error(err);document.getElementById('syncStatus').textContent='⚠ Erro de conexão';});
 }
- 
+
 const turmaNames={'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
 function formatarData(ts){if(!ts)return'–';const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});}
 function formatarNasc(n){if(!n)return'–';const[y,m,d]=n.split('-');return`${d}/${m}/${y}`;}
 function badgePgto(p){if(!p||p==='–')return'<span class="badge badge-espera">–</span>';if(p==='pix')return'<span class="badge badge-exp">Pix</span>';if(p==='card')return'<span class="badge badge-tor">Cartão</span>';return`<span class="badge">${p}</span>`;}
 function badgeStatus(s){if(s==='confirmado')return'<span class="badge badge-ok">✅ Confirmado</span>';if(s==='pendente')return'<span class="badge badge-pendente">⏳ Pendente</span>';if(s==='espera')return'<span class="badge badge-espera">📋 Espera</span>';return`<span class="badge">${s}</span>`;}
- 
+
 window.confirmarPgto=async function(id){
   const insc=allInscricoes.find(i=>i.id===id);
   if(!insc)return;
@@ -1916,7 +2116,7 @@ window.confirmarPgto=async function(id){
     await updateDoc(doc(db,'inscricoes',id),{status:'confirmado'});
   }catch(err){console.error(err);if(btn){btn.disabled=false;btn.textContent='Confirmar Pgto';}}
 };
- 
+
 window.excluirInscricao=async function(id){
   const insc=allInscricoes.find(i=>i.id===id);
   if(!insc)return;
@@ -1926,23 +2126,23 @@ window.excluirInscricao=async function(id){
     await deleteDoc(doc(db,'inscricoes',id));
   }catch(err){console.error(err);alert('Erro ao excluir. Tente novamente.');}
 };
- 
+
 function renderAdminTabelas(){
   const exp=allInscricoes.filter(i=>i.tipo==='exp'&&i.status==='confirmado');
   const tor=allInscricoes.filter(i=>i.tipo==='tor'&&i.status==='confirmado');
   const pend=allInscricoes.filter(i=>i.status==='pendente');
   const wait=allInscricoes.filter(i=>i.status==='espera');
- 
+
   document.getElementById('st-exp').textContent=exp.length;
   document.getElementById('st-tor').textContent=tor.length;
   document.getElementById('st-pend').textContent=pend.length;
   document.getElementById('st-wait').textContent=wait.length;
   document.getElementById('st-total').textContent=allInscricoes.length;
- 
+
   // Exp e Tor usam filtros próprios
   aplicarFiltrosExp();
   aplicarFiltrosTor();
- 
+
   document.getElementById('tbodyPend').innerHTML=pend.length
     ?pend.map((e,i)=>`<tr>
         <td>${i+1}</td>
@@ -1961,7 +2161,7 @@ function renderAdminTabelas(){
         </td>
       </tr>`).join('')
     :`<tr class="empty-row"><td colspan="10">Nenhuma inscrição aguardando confirmação.</td></tr>`;
- 
+
   document.getElementById('tbodyWait').innerHTML=wait.length
     ?wait.map((e,i)=>`<tr>
         <td>${i+1}</td><td><strong>${esc(e.nome)}</strong></td><td>${esc(e.cpf)}</td>
@@ -1975,7 +2175,7 @@ function renderAdminTabelas(){
         </td></tr>`).join('')
     :`<tr class="empty-row"><td colspan="9">Nenhuma pessoa em lista de espera.</td></tr>`;
 }
- 
+
 window.switchAdminTab=function(tab){
   document.querySelectorAll('.admin-tab-btn').forEach((b,i)=>b.classList.toggle('active',['exp','tor','pend','wait','fin','aval','cfg'][i]===tab));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
@@ -2007,7 +2207,7 @@ window.exportCSV=function(tipo){
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=`bte_${tipo}_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
 };
- 
+
 // ===== AVALIAÇÕES =====
 let avaliacoes = [];
 let avalEmailVerificado = null;
@@ -2015,7 +2215,7 @@ let avalNomeVerificado  = null;
 let notaAval    = 0;
 let notaAvlAdm  = 0;
 let unsubAval   = null;
- 
+
 // Listener público — só aprovadas (sem orderBy para evitar índice composto)
 onSnapshot(
   query(collection(db,'avaliacoes'), where('status','==','aprovada')),
@@ -2030,7 +2230,7 @@ onSnapshot(
     renderAvaliacoes();
   }
 );
- 
+
 function renderAvaliacoes(){
   const grid = document.getElementById('avalGrid');
   const empty = document.getElementById('avalEmptyState');
@@ -2060,7 +2260,7 @@ function renderAvaliacoes(){
     grid.appendChild(card);
   });
 }
- 
+
 window.openModalAval = function(){
   notaAval = 0; avalEmailVerificado = null; avalNomeVerificado = null;
   document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
@@ -2079,7 +2279,7 @@ window.closeModalAval = function(){
   document.body.style.overflow = '';
 };
 document.getElementById('modalAval').addEventListener('click',function(e){if(e.target===this)closeModalAval();});
- 
+
 window.verificarEmailAval = async function(){
   const email = document.getElementById('aval_email').value.trim();
   const errEl = document.getElementById('aval_email_err');
@@ -2116,24 +2316,24 @@ window.verificarEmailAval = async function(){
   }
   btn.textContent='Verificar e continuar →'; btn.disabled=false;
 };
- 
+
 window.voltarAvalStep0 = function(){
   document.querySelectorAll('.modal-aval-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('mAvalStep0').classList.add('active');
 };
- 
+
 window.selecionarEstrela = function(n){
   notaAval = n;
   document.querySelectorAll('#starSelector .star-sel-btn').forEach(b=>{
     b.classList.toggle('on', Number(b.dataset.val) <= n);
   });
 };
- 
+
 window.contarCaracteres = function(){
   const len = document.getElementById('aval_texto').value.length;
   document.getElementById('aval_chars').textContent = len;
 };
- 
+
 window.enviarAval = async function(){
   const texto  = document.getElementById('aval_texto').value.trim();
   const cidade = document.getElementById('aval_cidade').value.trim();
@@ -2157,7 +2357,7 @@ window.enviarAval = async function(){
   }
   btn.textContent='Enviar avaliação'; btn.disabled=false;
 };
- 
+
 // Admin — listener avaliações
 function iniciarListenerAval(){
   if(unsubAval) return;
@@ -2167,7 +2367,7 @@ function iniciarListenerAval(){
     renderAdminAval(todas);
   });
 }
- 
+
 function renderAdminAval(lista){
   const el = document.getElementById('adminAvalList');
   if(!el) return;
@@ -2197,7 +2397,7 @@ function renderAdminAval(lista){
     </div>`;
   }).join('');
 }
- 
+
 window.aprovarAval = async function(id){
   try{ await updateDoc(doc(db,'avaliacoes',id),{status:'aprovada'}); }
   catch(e){ console.error(e); alert('Erro ao aprovar.'); }
@@ -2207,7 +2407,7 @@ window.rejeitarAval = async function(id){
   try{ await updateDoc(doc(db,'avaliacoes',id),{status:'rejeitada'}); }
   catch(e){ console.error(e); alert('Erro ao remover.'); }
 };
- 
+
 // Admin — add avaliação manual
 window.openAdminAddAval = function(){
   notaAvlAdm = 0;
@@ -2223,14 +2423,14 @@ window.closeAdminAddAval = function(){
   document.body.style.overflow='';
 };
 document.getElementById('modalAdminAval').addEventListener('click',function(e){if(e.target===this)closeAdminAddAval();});
- 
+
 window.selecionarEstrelaAdm = function(n){
   notaAvlAdm = n;
   document.querySelectorAll('#starSelectorAdm .star-sel-btn').forEach(b=>{
     b.classList.toggle('on', Number(b.dataset.val) <= n);
   });
 };
- 
+
 window.salvarAdminAval = async function(){
   const nome   = document.getElementById('adm_aval_nome').value.trim();
   const cidade = document.getElementById('adm_aval_cidade').value.trim();
@@ -2247,7 +2447,7 @@ window.salvarAdminAval = async function(){
   }catch(err){ console.error(err); alert('Erro ao salvar.'); }
   btn.textContent='Publicar avaliação'; btn.disabled=false;
 };
- 
+
 // ===== MENOR DE IDADE =====
 function calcularIdade(nasc){
   const hoje = new Date();
@@ -2257,7 +2457,7 @@ function calcularIdade(nasc){
   if(m < 0 || (m === 0 && hoje.getDate() < dn.getDate())) idade--;
   return idade;
 }
- 
+
 function verificarMenor(formId){
   const nascEl = document.getElementById(`m_${formId}_nasc`);
   if(!nascEl || !nascEl.value) return;
@@ -2265,24 +2465,24 @@ function verificarMenor(formId){
   document.getElementById(`menor_aceite_${formId}`).style.display = eMenor ? 'block' : 'none';
   if(!eMenor) document.getElementById(`menor_ok_${formId}`).checked = false;
 }
- 
+
 // ===== PAINEL FINANCEIRO =====
 const VALOR_INSCRICAO = 100;
- 
+
 function renderFinanceiro(){
   if(!allInscricoes.length){ renderAdminTabelas(); }
- 
-  const e2 = allInscricoes.filter(i => (i.edicao||1) === 2);
-  const e1 = allInscricoes.filter(i => (i.edicao||1) === 1);
- 
+
+  const e2 = allInscricoes.filter(i => (i.edicao||1) === edicaoAtiva);
+  const e1 = allInscricoes.filter(i => (i.edicao||1) < edicaoAtiva);
+
   const confirmados2 = e2.filter(i => i.status === 'confirmado');
   const pendentes2   = e2.filter(i => i.status === 'pendente');
   const espera2      = e2.filter(i => i.status === 'espera');
- 
+
   const totalArrecadado = confirmados2.length * VALOR_INSCRICAO;
   const totalPendente   = pendentes2.length * VALOR_INSCRICAO;
   const totalPrevisto   = (confirmados2.length + pendentes2.length) * VALOR_INSCRICAO;
- 
+
   // Resumo geral
   document.getElementById('finResumo').innerHTML = `
     <div class="fin-card destaque">
@@ -2309,14 +2509,14 @@ function renderFinanceiro(){
       <div class="fin-num">R$ ${totalPrevisto.toLocaleString('pt-BR')}</div>
       <div class="fin-lbl">Previsão total</div>
     </div>`;
- 
+
   // Detalhamento por categoria — 3ª edição
   const catNames = {
     masc_ini:'Masculino Iniciante', masc_int:'Masculino Intermediário',
     fem_ini:'Feminino Iniciante',   fem_int:'Feminino Intermediário'
   };
   const turmaNames = {'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
- 
+
   const torCats = ['masc_ini','masc_int','fem_ini','fem_int'];
   document.getElementById('finCats').innerHTML = torCats.map(cat => {
     const conf = e2.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
@@ -2333,7 +2533,7 @@ function renderFinanceiro(){
       <div class="fin-cat-row"><span>Previsão total</span><span>R$ ${total.toLocaleString('pt-BR')}</span></div>
     </div>`;
   }).join('');
- 
+
   // Histórico 1ª edição
   const e1tor = torCats.map(cat => {
     const conf = e1.filter(i=>i.tipo==='tor'&&i.cat===cat&&i.status==='confirmado').length;
@@ -2344,7 +2544,7 @@ function renderFinanceiro(){
       <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
     </div>`;
   }).join('');
- 
+
   const e1exp = [1,2,3,4].map(t => {
     const conf = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)&&i.status==='confirmado').length;
     const total = e1.filter(i=>i.tipo==='exp'&&String(i.turma)===String(t)).length;
@@ -2354,21 +2554,21 @@ function renderFinanceiro(){
       <div class="fin-cat-row"><span>Total inscritos</span><span>${total}</span></div>
     </div>`;
   }).join('');
- 
+
   document.getElementById('finCatsE1').innerHTML = e1tor + e1exp ||
     '<p style="color:#aaa;font-size:.875rem">Nenhum registro da 1ª edição encontrado.</p>';
 }
- 
+
 // ===== FILTROS E ORDENAÇÃO =====
 let ordemExp = 'nome';
 let ordemTor = 'nome';
- 
+
 function aplicarFiltrosExp(){
   const busca   = (document.getElementById('searchExp')?.value||'').toLowerCase();
   const turma   = document.getElementById('filtroTurmaExp')?.value||'';
   const status  = document.getElementById('filtroStatusExp')?.value||'';
- 
-  let lista = allInscricoes.filter(i => i.tipo==='exp' && (i.edicao||1)===2);
+
+  let lista = allInscricoes.filter(i => i.tipo==='exp' && (i.edicao||1)===edicaoAtiva);
   if(turma)  lista = lista.filter(i => String(i.turma) === turma);
   if(status) lista = lista.filter(i => i.status === status);
   if(busca)  lista = lista.filter(i =>
@@ -2376,18 +2576,18 @@ function aplicarFiltrosExp(){
     (i.cpf||'').includes(busca) ||
     (i.email||'').toLowerCase().includes(busca)
   );
- 
+
   lista = ordenarLista(lista, ordemExp);
   document.getElementById('countExp').textContent = lista.length + ' inscrito' + (lista.length!==1?'s':'');
   renderTabelaExp(lista);
 }
- 
+
 function aplicarFiltrosTor(){
   const busca  = (document.getElementById('searchTor')?.value||'').toLowerCase();
   const cat    = document.getElementById('filtroCategoriaTor')?.value||'';
   const status = document.getElementById('filtroStatusTor')?.value||'';
- 
-  let lista = allInscricoes.filter(i => i.tipo==='tor' && (i.edicao||1)===2);
+
+  let lista = allInscricoes.filter(i => i.tipo==='tor' && (i.edicao||1)===edicaoAtiva);
   if(cat)    lista = lista.filter(i => i.cat === cat);
   if(status) lista = lista.filter(i => i.status === status);
   if(busca)  lista = lista.filter(i =>
@@ -2395,12 +2595,12 @@ function aplicarFiltrosTor(){
     (i.cpf||'').includes(busca) ||
     (i.email||'').toLowerCase().includes(busca)
   );
- 
+
   lista = ordenarLista(lista, ordemTor);
   document.getElementById('countTor').textContent = lista.length + ' inscrito' + (lista.length!==1?'s':'');
   renderTabelaTor(lista);
 }
- 
+
 function ordenarLista(lista, ordem){
   return [...lista].sort((a,b) => {
     if(ordem === 'nome') return (a.nome||'').localeCompare(b.nome||'', 'pt-BR');
@@ -2412,21 +2612,21 @@ function ordenarLista(lista, ordem){
     return 0;
   });
 }
- 
+
 window.alternarOrdemExp = function(ordem){
   ordemExp = ordem;
   document.getElementById('sortExpNome').classList.toggle('active', ordem==='nome');
   document.getElementById('sortExpData').classList.toggle('active', ordem==='data');
   aplicarFiltrosExp();
 };
- 
+
 window.alternarOrdemTor = function(ordem){
   ordemTor = ordem;
   document.getElementById('sortTorNome').classList.toggle('active', ordem==='nome');
   document.getElementById('sortTorData').classList.toggle('active', ordem==='data');
   aplicarFiltrosTor();
 };
- 
+
 function renderTabelaExp(lista){
   document.getElementById('tbodyExp').innerHTML = lista.length
     ? lista.map((e,i)=>`<tr>
@@ -2444,7 +2644,7 @@ function renderTabelaExp(lista){
         </td></tr>`).join('')
     : `<tr class="empty-row"><td colspan="13">Nenhum resultado encontrado.</td></tr>`;
 }
- 
+
 function renderTabelaTor(lista){
   document.getElementById('tbodyTor').innerHTML = lista.length
     ? lista.map((e,i)=>`<tr>
@@ -2461,7 +2661,7 @@ function renderTabelaTor(lista){
         </td></tr>`).join('')
     : `<tr class="empty-row"><td colspan="12">Nenhum resultado encontrado.</td></tr>`;
 }
- 
+
 // ===== MODAL DE EDIÇÃO =====
 window.abrirModalEdit = function(id){
   const e = allInscricoes.find(i => i.id===id);
@@ -2482,23 +2682,23 @@ window.abrirModalEdit = function(id){
   document.getElementById('modalEditInsc').classList.add('open');
   document.body.style.overflow = 'hidden';
 };
- 
+
 window.fecharModalEdit = function(){
   document.getElementById('modalEditInsc').classList.remove('open');
   document.body.style.overflow = '';
 };
- 
+
 document.getElementById('modalEditInsc').addEventListener('click', function(e){
   if(e.target===this) fecharModalEdit();
 });
- 
+
 window.salvarEdicaoInsc = async function(){
   const id    = document.getElementById('edit_doc_id').value;
   const insc  = allInscricoes.find(i=>i.id===id);
   if(!id||!insc) return;
   const btn   = document.querySelector('#modalEditInsc .btn-edit-save');
   btn.textContent='Salvando...'; btn.disabled=true;
- 
+
   const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
   const isTor = insc.tipo==='tor';
   const updates = {
@@ -2516,7 +2716,7 @@ window.salvarEdicaoInsc = async function(){
   } else {
     updates.turma = document.getElementById('edit_turma').value;
   }
- 
+
   try{
     await updateDoc(doc(db,'inscricoes',id), updates);
     fecharModalEdit();
@@ -2525,7 +2725,7 @@ window.salvarEdicaoInsc = async function(){
   }
   btn.textContent='Salvar alterações'; btn.disabled=false;
 };
- 
+
 // ===== RECUPERAÇÃO DE VENDA =====
 function getDadosRecuperacao(id){
   const e = allInscricoes.find(i=>i.id===id);
@@ -2539,7 +2739,7 @@ function getDadosRecuperacao(id){
   const horario = e.tipo==='exp' ? (horarioTurma[e.turma]||'') : (horariosCat[e.cat]||'');
   return {e, nome, telWA, catOuTurma, horario};
 }
- 
+
 window.recuperarVendaWA = function(id){
   const d = getDadosRecuperacao(id);
   if(!d) return;
@@ -2555,7 +2755,7 @@ window.recuperarVendaWA = function(id){
   );
   window.open('https://wa.me/'+d.telWA+'?text='+msg, '_blank');
 };
- 
+
 window.recuperarVendaEmail = async function(id){
   const d = getDadosRecuperacao(id);
   if(!d) return;
@@ -2576,15 +2776,15 @@ window.recuperarVendaEmail = async function(id){
     if(btn){ btn.textContent='📧 E-mail'; btn.disabled=false; }
   }
 };
- 
+
 // ===== DISPARO EM MASSA =====
 let disparoFiltro = 'todos';
 let disparoFila   = [];
 let disparoIndex  = 0;
- 
+
 const horariosCatDisp  = {masc_ini:'09h às 12h',masc_int:'14h às 17h',fem_ini:'09h às 12h',fem_int:'14h às 17h'};
 const horarioTurmaDisp = {'1':'08h às 09h','2':'09h às 10h','3':'10h às 11h','4':'11h às 12h'};
- 
+
 function getMsgDisparo(e){
   const nomeFirst = (e.nome||'participante').split(' ')[0];
   const cat = e.tipo==='exp'
@@ -2593,32 +2793,32 @@ function getMsgDisparo(e){
   const horario = e.tipo==='exp'
     ? (horarioTurmaDisp[e.turma]||'')
     : (horariosCatDisp[e.cat]||'');
- 
+
   return `Olá, ${nomeFirst}! 🎾
- 
+
 Estamos chegando ao dia do *3ª Edição Beach Tennis Experience* — 28 de Novembro de 2026, SkyFit Passeio das Águas, Goiânia/GO.
- 
+
 Sua inscrição está *confirmada*! Veja seus detalhes:
- 
+
 🏷 Modalidade: *${cat}*
 ⏰ Horário: *${horario}*
 📍 Local: *SkyFit – Shopping Passeio das Águas*
- 
+
 ⚠️ *Atenção ao horário de chegada!* Para a melhor organização dos jogos e respeito a todos os participantes, solicitamos pontualidade. Tolerância máxima de *15 minutos* — após esse prazo, será declarado W.O. conforme o Regulamento Oficial.
- 
+
 Contamos com a colaboração e comprometimento de cada um de vocês. Nos vemos na quadra! 🏖
- 
+
 _Atenciosamente,_
 _Equipe Beach Tennis Experience_`;
 }
- 
+
 function getListaDisparo(){
-  const confirmados = allInscricoes.filter(i=>i.status==='confirmado' && (i.edicao||1)===2);
+  const confirmados = allInscricoes.filter(i=>i.status==='confirmado' && (i.edicao||1)===edicaoAtiva);
   if(disparoFiltro==='tor') return confirmados.filter(i=>i.tipo==='tor');
   if(disparoFiltro==='exp') return confirmados.filter(i=>i.tipo==='exp');
   return confirmados;
 }
- 
+
 window.abrirDisparo = function(){
   disparoFiltro = 'todos';
   disparoIndex  = 0;
@@ -2632,12 +2832,12 @@ window.abrirDisparo = function(){
   document.getElementById('modalDisparo').classList.add('open');
   document.body.style.overflow='hidden';
 };
- 
+
 window.fecharDisparo = function(){
   document.getElementById('modalDisparo').classList.remove('open');
   document.body.style.overflow='';
 };
- 
+
 window.setDisparoFiltro = function(f){
   disparoFiltro = f;
   document.querySelectorAll('.disparo-filtro-btn').forEach((b,i)=>{
@@ -2645,15 +2845,15 @@ window.setDisparoFiltro = function(f){
   });
   atualizarUIDisparo();
 };
- 
+
 function atualizarUIDisparo(){
   const lista = getListaDisparo();
   document.getElementById('disparoContador').textContent = lista.length + ' participante' + (lista.length!==1?'s':'');
- 
+
   // preview com dados do primeiro da lista
   const ex = lista[0] || {tipo:'tor',cat:'masc_ini',nome:'Participante',turma:'1'};
   document.getElementById('disparoPreview').textContent = getMsgDisparo(ex);
- 
+
   // lista de destinatários
   document.getElementById('disparoLista').innerHTML = lista.length
     ? lista.map(e=>`
@@ -2666,7 +2866,7 @@ function atualizarUIDisparo(){
         </div>`).join('')
     : '<div style="padding:1rem;text-align:center;color:#aaa;font-size:.85rem">Nenhum participante confirmado.</div>';
 }
- 
+
 window.iniciarDisparo = function(){
   disparoFila  = getListaDisparo();
   disparoIndex = 0;
@@ -2676,7 +2876,7 @@ window.iniciarDisparo = function(){
   document.getElementById('disparoBtnProximo').style.display='block';
   abrirProximoWA();
 };
- 
+
 window.proximoDisparo = function(){
   disparoIndex++;
   if(disparoIndex >= disparoFila.length){
@@ -2686,21 +2886,21 @@ window.proximoDisparo = function(){
   }
   abrirProximoWA();
 };
- 
+
 function abrirProximoWA(){
   const e   = disparoFila[disparoIndex];
   const tel = (e.tel||'').replace(/\D/g,'');
   const telWA = tel.startsWith('55') ? tel : '55'+tel;
   const msg = encodeURIComponent(getMsgDisparo(e));
- 
+
   // marca como atual
   document.querySelectorAll('.disparo-status').forEach(s=>{ if(s.classList.contains('atual')) s.classList.replace('atual','pendente'); });
   const statusEl = document.getElementById('dst_'+e.id);
   if(statusEl){ statusEl.textContent='Enviando...'; statusEl.className='disparo-status atual'; }
- 
+
   // abre WA
   window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
- 
+
   // marca como enviado após 2s
   setTimeout(()=>{
     if(statusEl){ statusEl.textContent='Enviado'; statusEl.className='disparo-status enviado'; }
@@ -2711,13 +2911,13 @@ function abrirProximoWA(){
       if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
     }
   }, 2000);
- 
+
   // progresso
   const pct = Math.round(((disparoIndex+1)/disparoFila.length)*100);
   document.getElementById('disparoProgressBar').style.width = pct+'%';
   document.getElementById('disparoProgressTxt').textContent =
     (disparoIndex+1)+' de '+disparoFila.length+' participantes ('+pct+'%)';
- 
+
   // botão próximo
   const btnProx = document.querySelector('.btn-disparo-proximo');
   if(btnProx){
@@ -2725,45 +2925,45 @@ function abrirProximoWA(){
     btnProx.textContent = isUltimo ? '✅ Finalizar' : 'Abrir próximo →';
   }
 }
- 
+
 // ===== AGRADECIMENTO PÓS-EVENTO =====
 let agradIndex = 0;
 let agradFila  = [];
- 
+
 function getMsgAgradecimento(e){
   const nomeFirst = (e.nome||'participante').split(' ')[0];
   const cat = e.tipo==='exp'
     ? 'Experiência para Iniciantes'
     : (e.categoria||e.cat||'Super 8');
- 
+
   return `Olá, ${nomeFirst}! 🎾
- 
+
 Obrigado por ter feito parte da *3ª Edição Beach Tennis Experience*! Foi incrível ter você com a gente. 🏖
- 
+
 O BTE vai além de uma experiência de torneio — é um *evento com propósito*. Sua participação contribuiu diretamente para o projeto social que leva esportes de raquetes para pessoas que não têm acesso. Você fez parte disso. 💚
- 
+
 Em breve vêm mais novidades. Fique ligado!
- 
+
 _João Leitão Coach e toda a Equipe Beach Tennis Experience_
 _Clubinho das Raquetes_ 🎾`;
 }
- 
+
 window.abrirDisparoAgradecimento = function(){
   agradIndex = 0;
-  agradFila  = allInscricoes.filter(i=>i.status==='confirmado'&&(i.edicao||1)===2);
- 
+  agradFila  = allInscricoes.filter(i=>i.status==='confirmado'&&(i.edicao||1)===edicaoAtiva);
+
   document.getElementById('agradProgressoWrap').style.display='none';
   document.getElementById('agradBtnIniciar').style.display='block';
   document.getElementById('agradBtnProximo').style.display='none';
   document.getElementById('agradFinalMsg').style.display='none';
- 
+
   // preview
   const ex = agradFila[0] || {tipo:'tor',cat:'masc_ini',nome:'Participante'};
   document.getElementById('agradPreview').textContent = getMsgAgradecimento(ex);
- 
+
   // contador
   document.getElementById('agradContador').textContent = agradFila.length+' participante'+(agradFila.length!==1?'s':'');
- 
+
   // lista
   document.getElementById('agradLista').innerHTML = agradFila.length
     ? agradFila.map(e=>`
@@ -2775,16 +2975,16 @@ window.abrirDisparoAgradecimento = function(){
           <span class="disparo-status pendente" id="ast_${esc(e.id)}">Pendente</span>
         </div>`).join('')
     : '<div style="padding:1rem;text-align:center;color:#aaa;font-size:.85rem">Nenhum participante confirmado encontrado.</div>';
- 
+
   document.getElementById('modalAgradecimento').classList.add('open');
   document.body.style.overflow='hidden';
 };
- 
+
 window.fecharAgradecimento = function(){
   document.getElementById('modalAgradecimento').classList.remove('open');
   document.body.style.overflow='';
 };
- 
+
 window.iniciarAgradecimento = function(){
   if(!agradFila.length){ alert('Nenhum participante confirmado encontrado.'); return; }
   agradIndex = 0;
@@ -2793,7 +2993,7 @@ window.iniciarAgradecimento = function(){
   document.getElementById('agradBtnProximo').style.display='block';
   abrirAgradWA();
 };
- 
+
 window.proximoAgradecimento = function(){
   agradIndex++;
   if(agradIndex >= agradFila.length){
@@ -2803,19 +3003,19 @@ window.proximoAgradecimento = function(){
   }
   abrirAgradWA();
 };
- 
+
 function abrirAgradWA(){
   const e   = agradFila[agradIndex];
   const tel = (e.tel||'').replace(/\D/g,'');
   const telWA = tel.startsWith('55') ? tel : '55'+tel;
   const msg = encodeURIComponent(getMsgAgradecimento(e));
- 
+
   document.querySelectorAll('[id^="ast_"]').forEach(s=>{ if(s.classList.contains('atual')) s.classList.replace('atual','pendente'); });
   const statusEl = document.getElementById('ast_'+e.id);
   if(statusEl){ statusEl.textContent='Enviando...'; statusEl.className='disparo-status atual'; }
- 
+
   window.open('https://wa.me/'+telWA+'?text='+msg,'_blank');
- 
+
   setTimeout(()=>{
     if(statusEl){ statusEl.textContent='Enviado'; statusEl.className='disparo-status enviado'; }
     const proximo = agradFila[agradIndex+1];
@@ -2824,23 +3024,270 @@ function abrirAgradWA(){
       if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
     }
   }, 2000);
- 
+
   const pct = Math.round(((agradIndex+1)/agradFila.length)*100);
   document.getElementById('agradProgressBar').style.width = pct+'%';
   document.getElementById('agradProgressTxt').textContent =
     (agradIndex+1)+' de '+agradFila.length+' participantes ('+pct+'%)';
- 
+
   const btnProx = document.querySelector('#agradBtnProximo button');
   if(btnProx){
     btnProx.textContent = agradIndex+1 >= agradFila.length ? '✅ Finalizar' : 'Abrir próximo →';
   }
 }
- 
+
 // INIT
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.style.opacity='1'});},{threshold:.1});
 document.querySelectorAll('.what-card,.prof-card,.tl-item').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .5s, transform .5s';observer.observe(el);});
 window.toggleMenu=function(){document.getElementById('navLinks').classList.toggle('open');};
+
+// ===== GESTÃO DE EDIÇÕES =====
+let edicoesCache = [];
+let mostrarArquivadas = false;
+let edicaoFinalizandoId = null;
+
+// Carrega edições quando aba é aberta
+async function carregarEdicoes() {
+  const lista = document.getElementById('edicoesList');
+  lista.innerHTML = '<div class="admin-loading"><div class="spinner"></div> Carregando...</div>';
+  try {
+    const snap = await getDocs(query(collection(db, 'edicoes'), orderBy('numero', 'desc')));
+    edicoesCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderEdicoes();
+  } catch(e) {
+    // Se coleção não existe ainda, mostra instrução
+    lista.innerHTML = '<p style="color:#888;font-size:.85rem;padding:1rem">Nenhuma edição registrada ainda. Clique em "Nova Edição" para começar.</p>';
+  }
+}
+
+function renderEdicoes() {
+  const ativas = edicoesCache.filter(e => e.status !== 'arquivada');
+  const arquivadas = edicoesCache.filter(e => e.status === 'arquivada');
+
+  const lista = document.getElementById('edicoesList');
+  lista.innerHTML = ativas.length === 0
+    ? '<p style="color:#888;font-size:.85rem;padding:1rem">Nenhuma edição ativa. Crie a primeira.</p>'
+    : ativas.map(e => renderCardEdicao(e)).join('');
+
+  const toggleArq = document.getElementById('toggleArquivadas');
+  const listaArq = document.getElementById('edicoesArquivadasList');
+  if (arquivadas.length > 0) {
+    toggleArq.style.display = 'block';
+    if (mostrarArquivadas) {
+      listaArq.style.display = 'block';
+      listaArq.innerHTML = arquivadas.map(e => renderCardEdicao(e)).join('');
+      toggleArq.textContent = '▲ Ocultar edições arquivadas';
+    } else {
+      listaArq.style.display = 'none';
+      toggleArq.textContent = `▼ Ver ${arquivadas.length} edição(ões) arquivada(s)`;
+    }
+  } else {
+    toggleArq.style.display = 'none';
+  }
+}
+
+function renderCardEdicao(e) {
+  const statusLabel = { ativa: '🔴 Ativa', finalizada: '✅ Finalizada', arquivada: '📦 Arquivada' };
+  const statusClass = e.status || 'ativa';
+  const dataFmt = e.data ? new Date(e.data + 'T12:00:00').toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+
+  let camposCamp = '';
+  if (e.status === 'finalizada' && e.campeoes) {
+    const cats = { masc_ini:'Masc. Iniciante', masc_int:'Masc. Intermediário', fem_ini:'Fem. Iniciante', fem_int:'Fem. Intermediário' };
+    camposCamp = `<div class="edicao-campeoes">
+      <div class="edicao-campeoes-titulo">🏆 Campeões registrados</div>
+      <div class="camp-grid">${Object.entries(cats).map(([k,v]) => {
+        const c = e.campeoes[k] || {};
+        return `<div class="camp-item"><strong>${v}</strong><br>🥇 ${c.camp||'—'} · 🥈 ${c.vice||'—'}</div>`;
+      }).join('')}</div>
+    </div>`;
+  }
+
+  let botoes = '';
+  if (statusClass === 'ativa') {
+    botoes = `<button class="btn-ed-acao btn-ed-finalizar" onclick="abrirModalFinalizar('${e.id}')">🏁 Finalizar evento</button>
+              <button class="btn-ed-acao btn-ed-editar" onclick="abrirEditarEdicao('${e.id}')">✏️ Editar</button>`;
+  } else if (statusClass === 'finalizada') {
+    botoes = `<button class="btn-ed-acao btn-ed-editar" onclick="abrirEditarEdicao('${e.id}')">✏️ Editar</button>
+              <button class="btn-ed-acao btn-ed-arquivar" onclick="arquivarEdicao('${e.id}')">📦 Arquivar</button>`;
+  } else {
+    botoes = `<button class="btn-ed-acao btn-ed-restaurar" onclick="restaurarEdicao('${e.id}')">↩️ Restaurar</button>`;
+  }
+
+  return `<div class="edicao-card ${statusClass}">
+    <div class="edicao-card-header">
+      <div class="edicao-num">${e.numero}ª</div>
+      <div class="edicao-meta">
+        <div class="edicao-nome">${e.nome || 'Beach Tennis Experience'}</div>
+        <div class="edicao-data">📅 ${dataFmt} · 📍 ${e.local||'—'}</div>
+      </div>
+      <span class="edicao-status-badge ${statusClass}">${statusLabel[statusClass]||statusClass}</span>
+    </div>
+    ${camposCamp}
+    <div class="edicao-actions">${botoes}</div>
+  </div>`;
+}
+
+window.toggleVerArquivadas = function() {
+  mostrarArquivadas = !mostrarArquivadas;
+  renderEdicoes();
+};
+
+// === FINALIZAR EVENTO ===
+window.abrirModalFinalizar = function(id) {
+  edicaoFinalizandoId = id;
+  document.getElementById('finalizarErr').style.display = 'none';
+  ['fc_masc_ini_camp','fc_masc_ini_vice','fc_masc_int_camp','fc_masc_int_vice',
+   'fc_fem_ini_camp','fc_fem_ini_vice','fc_fem_int_camp','fc_fem_int_vice'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('modalFinalizarEvento').classList.add('open');
+};
+
+window.fecharModalFinalizar = function() {
+  document.getElementById('modalFinalizarEvento').classList.remove('open');
+  edicaoFinalizandoId = null;
+};
+
+window.confirmarFinalizarEvento = async function() {
+  if (!edicaoFinalizandoId) return;
+  const campeoes = {
+    masc_ini: { camp: document.getElementById('fc_masc_ini_camp').value.trim(), vice: document.getElementById('fc_masc_ini_vice').value.trim() },
+    masc_int: { camp: document.getElementById('fc_masc_int_camp').value.trim(), vice: document.getElementById('fc_masc_int_vice').value.trim() },
+    fem_ini:  { camp: document.getElementById('fc_fem_ini_camp').value.trim(),  vice: document.getElementById('fc_fem_ini_vice').value.trim() },
+    fem_int:  { camp: document.getElementById('fc_fem_int_camp').value.trim(),  vice: document.getElementById('fc_fem_int_vice').value.trim() },
+  };
+  try {
+    const btn = document.querySelector('.btn-confirmar-finalizar');
+    btn.textContent = 'Salvando...'; btn.disabled = true;
+    await setDoc(doc(db, 'edicoes', edicaoFinalizandoId), { status: 'finalizada', campeoes, finalizadaEm: new Date().toISOString() }, { merge: true });
+    // Atualiza edição ativa para "finalizada" no config
+    await setDoc(doc(db, 'config', 'edicao_ativa'), { status: 'finalizada' }, { merge: true });
+    btn.textContent = '✅ Confirmar finalização'; btn.disabled = false;
+    fecharModalFinalizar();
+    await carregarEdicoes();
+    alert('Evento finalizado com sucesso! Inscrições congeladas.');
+  } catch(err) {
+    document.getElementById('finalizarErr').textContent = 'Erro ao finalizar: ' + err.message;
+    document.getElementById('finalizarErr').style.display = 'block';
+    document.querySelector('.btn-confirmar-finalizar').textContent = '✅ Confirmar finalização';
+    document.querySelector('.btn-confirmar-finalizar').disabled = false;
+  }
+};
+
+// === ARQUIVAR / RESTAURAR ===
+window.arquivarEdicao = async function(id) {
+  if (!confirm('Arquivar esta edição? Ela ficará oculta no site mas mantida no sistema.')) return;
+  await setDoc(doc(db, 'edicoes', id), { status: 'arquivada' }, { merge: true });
+  await carregarEdicoes();
+};
+
+window.restaurarEdicao = async function(id) {
+  if (!confirm('Restaurar esta edição para o status "finalizada"?')) return;
+  await setDoc(doc(db, 'edicoes', id), { status: 'finalizada' }, { merge: true });
+  await carregarEdicoes();
+};
+
+// === EDITAR EDIÇÃO ===
+window.abrirEditarEdicao = function(id) {
+  const ed = edicoesCache.find(e => e.id === id);
+  if (!ed) return;
+  document.getElementById('edit_ed_id').value = id;
+  document.getElementById('edit_ed_nome').value = ed.nome || '';
+  document.getElementById('edit_ed_data').value = ed.data || '';
+  document.getElementById('edit_ed_local').value = ed.local || '';
+  document.getElementById('editarEdicaoErr').style.display = 'none';
+  document.getElementById('modalEditarEdicao').classList.add('open');
+};
+
+window.fecharEditarEdicao = function() {
+  document.getElementById('modalEditarEdicao').classList.remove('open');
+};
+
+window.confirmarEditarEdicao = async function() {
+  const id = document.getElementById('edit_ed_id').value;
+  const nome = document.getElementById('edit_ed_nome').value.trim();
+  const data = document.getElementById('edit_ed_data').value;
+  const local = document.getElementById('edit_ed_local').value.trim();
+  if (!nome) {
+    document.getElementById('editarEdicaoErr').textContent = 'Nome é obrigatório.';
+    document.getElementById('editarEdicaoErr').style.display = 'block';
+    return;
+  }
+  try {
+    await setDoc(doc(db, 'edicoes', id), { nome, data, local }, { merge: true });
+    fecharEditarEdicao();
+    await carregarEdicoes();
+  } catch(err) {
+    document.getElementById('editarEdicaoErr').textContent = 'Erro: ' + err.message;
+    document.getElementById('editarEdicaoErr').style.display = 'block';
+  }
+};
+
+// === NOVA EDIÇÃO ===
+window.abrirNovaEdicao = function() {
+  const proxNum = edicoesCache.length > 0 ? Math.max(...edicoesCache.map(e=>e.numero||0)) + 1 : 4;
+  document.getElementById('ne_nome').value = `${proxNum}ª Edição Beach Tennis Experience`;
+  document.getElementById('ne_data').value = '';
+  document.getElementById('ne_local').value = 'SkyFit Passeio das Águas';
+  document.getElementById('ne_v_masc_ini').value = 8;
+  document.getElementById('ne_v_masc_int').value = 8;
+  document.getElementById('ne_v_fem_ini').value = 8;
+  document.getElementById('ne_v_fem_int').value = 8;
+  document.getElementById('novaEdicaoErr').style.display = 'none';
+  document.getElementById('modalNovaEdicao').classList.add('open');
+};
+
+window.fecharNovaEdicao = function() {
+  document.getElementById('modalNovaEdicao').classList.remove('open');
+};
+
+window.confirmarNovaEdicao = async function() {
+  const nome = document.getElementById('ne_nome').value.trim();
+  const data = document.getElementById('ne_data').value;
+  const local = document.getElementById('ne_local').value.trim();
+  const vagas_cats = {
+    masc_ini: parseInt(document.getElementById('ne_v_masc_ini').value)||8,
+    masc_int: parseInt(document.getElementById('ne_v_masc_int').value)||8,
+    fem_ini:  parseInt(document.getElementById('ne_v_fem_ini').value)||8,
+    fem_int:  parseInt(document.getElementById('ne_v_fem_int').value)||8,
+  };
+  if (!nome || !data) {
+    document.getElementById('novaEdicaoErr').textContent = 'Nome e data são obrigatórios.';
+    document.getElementById('novaEdicaoErr').style.display = 'block';
+    return;
+  }
+  const proxNum = edicoesCache.length > 0 ? Math.max(...edicoesCache.map(e=>e.numero||0)) + 1 : 4;
+  try {
+    const btn = document.querySelector('.btn-criar-edicao');
+    btn.textContent = 'Criando...'; btn.disabled = true;
+    // Cria o documento da nova edição
+    await addDoc(collection(db, 'edicoes'), {
+      numero: proxNum, nome, data, local, status: 'ativa',
+      vagas_cats, criadaEm: new Date().toISOString()
+    });
+    // Atualiza config/edicao_ativa
+    await setDoc(doc(db, 'config', 'edicao_ativa'), {
+      numero: proxNum, nome, data, local, status: 'ativa', vagas_cats
+    });
+    btn.textContent = '🚀 Criar nova edição e ativar'; btn.disabled = false;
+    fecharNovaEdicao();
+    await carregarEdicoes();
+    alert(`${proxNum}ª Edição criada e ativada! O site já está operando para a nova edição.`);
+  } catch(err) {
+    document.getElementById('novaEdicaoErr').textContent = 'Erro: ' + err.message;
+    document.getElementById('novaEdicaoErr').style.display = 'block';
+    document.querySelector('.btn-criar-edicao').textContent = '🚀 Criar nova edição e ativar';
+    document.querySelector('.btn-criar-edicao').disabled = false;
+  }
+};
+
+// Hook na troca de aba para carregar edições
+const _origSwitchAdminTab = window.switchAdminTab;
+window.switchAdminTab = function(tab) {
+  if (_origSwitchAdminTab) _origSwitchAdminTab(tab);
+  if (tab === 'edicoes') carregarEdicoes();
+};
 </script>
 </body>
 </html>
- 
