@@ -1762,10 +1762,7 @@ let vagasContagem = {
 let vagasCarregadas = false;
 
 const unsubVagasReal = onSnapshot(
-  query(
-    collection(db, 'inscricoes'),
-    where('status', '==', 'confirmado')
-  ),
+  collection(db, 'inscricoes'),
   (snapshot) => {
     vagasContagem = {
       turmas: { 1: 0, 2: 0, 3: 0, 4: 0 },
@@ -1773,6 +1770,7 @@ const unsubVagasReal = onSnapshot(
     };
     snapshot.docs.forEach(d => {
       const data = d.data();
+      if (data.status !== 'confirmado') return; // só confirmados
       if ((data.edicao||1) !== edicaoAtiva) return; // filtra pela edição ativa
       if (data.tipo === 'exp' && data.turma) {
         const t = Number(data.turma);
@@ -1785,7 +1783,7 @@ const unsubVagasReal = onSnapshot(
     renderModalTurmas();
     atualizarSelectCategorias();
   },
-  (err) => { console.error('Erro ao escutar inscrições para vagas:', err); }
+  (err) => { console.error('Erro ao escutar inscrições para vagas:', err); vagasCarregadas = true; renderModalTurmas(); atualizarSelectCategorias(); }
 );
 
 function gerarProtocolo(tipo){
