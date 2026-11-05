@@ -2039,7 +2039,8 @@ window.submitModalExp=async function(){
       document.getElementById('mStepPay').classList.add('active');
     }
   }catch(err){
-    console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
+    console.error(err);
+    alert('Erro (exp): ' + (err.code||err.message||JSON.stringify(err)));
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
@@ -2119,7 +2120,8 @@ window.submitModalTor=async function(){
       document.getElementById('mStepPay').classList.add('active');
     }
   }catch(err){
-    console.error(err);alert('Erro ao salvar. Verifique sua conexão.');
+    console.error(err);
+    alert('Erro (tor): ' + (err.code||err.message||JSON.stringify(err)));
     btn.textContent='Ir para Pagamento →';btn.disabled=false;
   }
 };
