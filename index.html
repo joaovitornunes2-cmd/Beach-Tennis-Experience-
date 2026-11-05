@@ -704,8 +704,8 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <h3 class="card-destaque__title">Super 8</h3>
       <ul class="card-destaque__list">
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Apenas 8 atletas por categoria</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Manhã — Iniciantes: 09h às 12h</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tarde — Intermediários: 14h às 17h</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Manhã — Categoria D (Iniciante): 09h às 12h</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tarde — Categoria C (Intermediário): 14h às 17h</li>
         <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Troféu para o campeão</li>
       </ul>
       <a href="#" onclick="event.preventDefault();openModal('tor')" class="card-destaque__btn">Quero jogar o Super 8</a>
@@ -775,8 +775,8 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <p class="section-sub" style="color:rgba(255,255,255,0.65)">Um dia cheio de atividades, aprendizado e muita diversão.</p>
       <div class="timeline">
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">08h50</div><div class="tl-event">Abertura e credenciamento</div><div class="tl-desc">Recepção dos atletas, organização das quadras e início oficial da 3ª Edição BTE.</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">09h00 – 12h00</div><div class="tl-event">Super 8 — Período da Manhã</div><div class="tl-desc">Categorias Masculino Iniciante e Feminino Iniciante disputam suas rodadas.</div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">14h00 – 17h00</div><div class="tl-event">Super 8 — Período da Tarde</div><div class="tl-desc">Categorias Masculino Intermediário e Feminino Intermediário entram em quadra.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">09h00 – 12h00</div><div class="tl-event">Super 8 — Período da Manhã</div><div class="tl-desc">Categorias D Masculino e D Feminino (Iniciante) disputam suas rodadas.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">14h00 – 17h00</div><div class="tl-event">Super 8 — Período da Tarde</div><div class="tl-desc">Categorias C Masculino e C Feminino (Intermediário) entram em quadra.</div></div>
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Durante todo o dia</div><div class="tl-event">Programação simultânea</div>
           <div class="tl-all-day"><h4>Acontecendo ao longo do evento</h4>
             <div class="tl-tags">
@@ -1013,10 +1013,10 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <div class="admin-filters">
             <select class="filter-select" id="filtroCategoriaTor" onchange="aplicarFiltrosTor()">
               <option value="">Todas as categorias</option>
-              <option value="masc_ini">Masculino Iniciante</option>
-              <option value="masc_int">Masculino Intermediário</option>
-              <option value="fem_ini">Feminino Iniciante</option>
-              <option value="fem_int">Feminino Intermediário</option>
+              <option value="masc_ini">D — Masculino Iniciante</option>
+              <option value="masc_int">C — Masculino Intermediário</option>
+              <option value="fem_ini">D — Feminino Iniciante</option>
+              <option value="fem_int">C — Feminino Intermediário</option>
             </select>
             <select class="filter-select" id="filtroStatusTor" onchange="aplicarFiltrosTor()">
               <option value="">Todos os status</option>
@@ -1104,19 +1104,19 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
               <div class="config-group-title">🏆 Categorias — Super 8</div>
               <div class="config-toggles-grid">
                 <div class="config-toggle-row">
-                  <div><div class="config-toggle-label">Masculino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <div><div class="config-toggle-label">D — Masculino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
                   <label class="toggle-switch"><input type="checkbox" id="cfg_masc_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
                 </div>
                 <div class="config-toggle-row">
-                  <div><div class="config-toggle-label">Masculino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <div><div class="config-toggle-label">C — Masculino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
                   <label class="toggle-switch"><input type="checkbox" id="cfg_masc_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
                 </div>
                 <div class="config-toggle-row">
-                  <div><div class="config-toggle-label">Feminino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <div><div class="config-toggle-label">D — Feminino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
                   <label class="toggle-switch"><input type="checkbox" id="cfg_fem_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
                 </div>
                 <div class="config-toggle-row">
-                  <div><div class="config-toggle-label">Feminino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <div><div class="config-toggle-label">C — Feminino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
                   <label class="toggle-switch"><input type="checkbox" id="cfg_fem_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
                 </div>
               </div>
@@ -1135,10 +1135,10 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
             </div>
           </div>
           <div class="s8-cat-tabs">
-            <button class="s8-cat-tab active" onclick="s8SwitchCat('masc_ini')">♂ Iniciante</button>
-            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_ini')">♀ Iniciante</button>
-            <button class="s8-cat-tab" onclick="s8SwitchCat('masc_int')">♂ Intermediário</button>
-            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_int')">♀ Intermediário</button>
+            <button class="s8-cat-tab active" onclick="s8SwitchCat('masc_ini')">♂ D – Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_ini')">♀ D – Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('masc_int')">♂ C – Intermediário</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_int')">♀ C – Intermediário</button>
           </div>
           <div id="s8Content"><div class="s8-vazio">Selecione uma categoria para começar</div></div>
         </div>
@@ -1173,22 +1173,22 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
       <p style="font-size:.88rem;color:#555;margin-bottom:1rem">Registre os campeões e vices de cada categoria. Após confirmar, as inscrições serão congeladas e o evento ficará no histórico.</p>
       <div class="finalizar-cats" id="finalizarCatsForm">
         <div class="finalizar-cat-bloco">
-          <div class="finalizar-cat-titulo">🏆 Masc. Iniciante</div>
+          <div class="finalizar-cat-titulo">🏆 Masc. D – Iniciante</div>
           <label>Campeão</label><input type="text" id="fc_masc_ini_camp" placeholder="Nome do campeão">
           <label>Vice-campeão</label><input type="text" id="fc_masc_ini_vice" placeholder="Nome do vice">
         </div>
         <div class="finalizar-cat-bloco">
-          <div class="finalizar-cat-titulo">🏆 Masc. Intermediário</div>
+          <div class="finalizar-cat-titulo">🏆 Masc. C – Intermediário</div>
           <label>Campeão</label><input type="text" id="fc_masc_int_camp" placeholder="Nome do campeão">
           <label>Vice-campeão</label><input type="text" id="fc_masc_int_vice" placeholder="Nome do vice">
         </div>
         <div class="finalizar-cat-bloco">
-          <div class="finalizar-cat-titulo">🏆 Fem. Iniciante</div>
+          <div class="finalizar-cat-titulo">🏆 Fem. D – Iniciante</div>
           <label>Campeão</label><input type="text" id="fc_fem_ini_camp" placeholder="Nome da campeã">
           <label>Vice-campeã</label><input type="text" id="fc_fem_ini_vice" placeholder="Nome da vice">
         </div>
         <div class="finalizar-cat-bloco">
-          <div class="finalizar-cat-titulo">🏆 Fem. Intermediário</div>
+          <div class="finalizar-cat-titulo">🏆 Fem. C – Intermediário</div>
           <label>Campeão</label><input type="text" id="fc_fem_int_camp" placeholder="Nome da campeã">
           <label>Vice-campeã</label><input type="text" id="fc_fem_int_vice" placeholder="Nome da vice">
         </div>
@@ -1486,10 +1486,10 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div class="edit-mf full" id="edit_cat_wrap">
           <label>Categoria</label>
           <select id="edit_cat">
-            <option value="masc_ini">Masculino Iniciante</option>
-            <option value="masc_int">Masculino Intermediário</option>
-            <option value="fem_ini">Feminino Iniciante</option>
-            <option value="fem_int">Feminino Intermediário</option>
+            <option value="masc_ini">D — Masculino Iniciante</option>
+            <option value="masc_int">C — Masculino Intermediário</option>
+            <option value="fem_ini">D — Feminino Iniciante</option>
+            <option value="fem_int">C — Feminino Intermediário</option>
           </select>
         </div>
       </div>
@@ -1878,28 +1878,32 @@ function atualizarSelectCategorias(){
     return;
   }
   const cats = [
-    { key:'masc_ini', icon:'👨', genero:'Masculino',  nivel:'Iniciante',     horario:'09h – 12h' },
-    { key:'masc_int', icon:'👨', genero:'Masculino',  nivel:'Intermediário', horario:'14h – 17h' },
-    { key:'fem_ini',  icon:'👩', genero:'Feminino',   nivel:'Iniciante',     horario:'09h – 12h' },
-    { key:'fem_int',  icon:'👩', genero:'Feminino',   nivel:'Intermediário', horario:'14h – 17h' },
+    { key:'masc_ini', genero:'Masculino', letra:'D', nivel:'Iniciante',     desc:'Primeiros torneios ou nunca competiu. Desenvolvendo os fundamentos.', horario:'09h – 12h' },
+    { key:'masc_int', genero:'Masculino', letra:'C', nivel:'Intermediário', desc:'Já tem experiência em torneios. Domina os fundamentos e tática básica.', horario:'14h – 17h' },
+    { key:'fem_ini',  genero:'Feminino',  letra:'D', nivel:'Iniciante',     desc:'Primeiros torneios ou nunca competiu. Desenvolvendo os fundamentos.', horario:'09h – 12h' },
+    { key:'fem_int',  genero:'Feminino',  letra:'C', nivel:'Intermediário', desc:'Já tem experiência em torneios. Domina os fundamentos e tática básica.', horario:'14h – 17h' },
   ];
   const selVal = document.getElementById('m_tor_cat').value;
   grid.innerHTML = '';
   for(const c of cats){
     const inscritos = vagasContagem.cats[c.key] || 0;
     const restantes = MAX_CAT - inscritos;
-    // Forçado pelo admin OU naturalmente esgotado
     const isFull    = restantes <= 0 || !!configForcados.cats[c.key];
     const isSelected = selVal === c.key;
     grid.innerHTML += `<div
       class="modal-turma-card ${isSelected?'selected':''} ${isFull?'fila':''}"
       id="mcc_${c.key}"
-      onclick="selectModalCat('${c.key}')">
-      <div class="modal-cat-icon">${c.icon}</div>
-      <div class="modal-cat-genero">${c.genero}</div>
-      <div class="modal-cat-nivel">${c.nivel}</div>
-      <div style="font-size:.7rem;color:#CC1B1B;font-weight:700;margin:.25rem 0">${c.horario}</div>
-      <div class="modal-turma-vagas" style="margin-top:.35rem">
+      onclick="selectModalCat('${c.key}')"
+      style="text-align:left;padding:1rem 1rem .85rem">
+      <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem">
+        <div style="width:36px;height:36px;border-radius:50%;background:#CC1B1B;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">${c.letra}</div>
+        <div>
+          <div style="font-weight:700;font-size:.85rem;line-height:1.1">${c.genero}</div>
+          <div style="font-size:.75rem;color:#CC1B1B;font-weight:700">${c.nivel} · ${c.horario}</div>
+        </div>
+      </div>
+      <div style="font-size:.72rem;color:#666;line-height:1.4;margin-bottom:.5rem">${c.desc}</div>
+      <div class="modal-turma-vagas" style="margin-top:0">
         ${isFull
           ? '<span style="color:#e65100;font-weight:700;font-size:.72rem">⏳ Fila de espera</span>'
           : `<span style="font-size:.75rem">${restantes} vaga${restantes!==1?'s':''}</span>`}
@@ -2079,7 +2083,7 @@ window.submitModalTor=async function(){
 
     const protocolo=gerarProtocolo('tor');
     currentProtocolo=protocolo;
-    const catNames={masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+    const catNames={masc_ini:'Super 8 Masculino D – Iniciante',masc_int:'Super 8 Masculino C – Intermediário',fem_ini:'Super 8 Feminino D – Iniciante',fem_int:'Super 8 Feminino C – Intermediário'};
     const entry={
       protocolo,nome,cpf,nasc,tel,cep,email,cat,categoria:catNames[cat],tipo:'tor',edicao:edicaoAtiva,
       status:isWait?'espera':'pendente',pagamento:'–',criadoEm:serverTimestamp(),
@@ -2683,8 +2687,8 @@ function renderFinanceiro(){
 
   // Detalhamento por categoria — 3ª edição
   const catNames = {
-    masc_ini:'Masculino Iniciante', masc_int:'Masculino Intermediário',
-    fem_ini:'Feminino Iniciante',   fem_int:'Feminino Intermediário'
+    masc_ini:'Masc. D – Iniciante', masc_int:'Masc. C – Intermediário',
+    fem_ini:'Fem. D – Iniciante',   fem_int:'Fem. C – Intermediário'
   };
   const turmaNames = {'1':'T1 – 08h','2':'T2 – 09h','3':'T3 – 10h','4':'T4 – 11h'};
 
@@ -2887,7 +2891,7 @@ window.salvarEdicaoInsc = async function(){
   const btn   = document.querySelector('#modalEditInsc .btn-edit-save');
   btn.textContent='Salvando...'; btn.disabled=true;
 
-  const catNames = {masc_ini:'Super 8 Masculino – Iniciante',masc_int:'Super 8 Masculino – Intermediário',fem_ini:'Super 8 Feminino – Iniciante',fem_int:'Super 8 Feminino – Intermediário'};
+  const catNames = {masc_ini:'Super 8 Masculino D – Iniciante',masc_int:'Super 8 Masculino C – Intermediário',fem_ini:'Super 8 Feminino D – Iniciante',fem_int:'Super 8 Feminino C – Intermediário'};
   const isTor = insc.tipo==='tor';
   const updates = {
     nome:  document.getElementById('edit_nome').value.trim(),
@@ -3226,7 +3230,7 @@ function abrirAgradWA(){
 
 // ===== SUPER 8 — ALGORITMO E GESTÃO =====
 
-const S8_CATS = { masc_ini:'♂ Masc. Iniciante', fem_ini:'♀ Fem. Iniciante', masc_int:'♂ Masc. Intermediário', fem_int:'♀ Fem. Intermediário' };
+const S8_CATS = { masc_ini:'♂ Masc. D – Iniciante', fem_ini:'♀ Fem. D – Iniciante', masc_int:'♂ Masc. C – Intermediário', fem_int:'♀ Fem. C – Intermediário' };
 let s8CatAtiva = 'masc_ini';
 let s8Cache = {}; // { cat: { atletas:[], rodadas:[] } }
 
