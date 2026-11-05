@@ -1786,6 +1786,15 @@ const unsubVagasReal = onSnapshot(
   },
   (err) => { console.error('Erro ao escutar inscrições para vagas:', err); vagasCarregadas = true; renderModalTurmas(); atualizarSelectCategorias(); }
 );
+// Timeout de segurança: se em 6s ainda não carregou, libera mesmo assim
+setTimeout(() => {
+  if (!vagasCarregadas) {
+    console.warn('Timeout: forçando vagasCarregadas=true');
+    vagasCarregadas = true;
+    renderModalTurmas();
+    atualizarSelectCategorias();
+  }
+}, 6000);
 
 function gerarProtocolo(tipo){
   const prefix = tipo==='exp'?'EXP':'S8';
