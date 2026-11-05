@@ -1590,10 +1590,10 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
         <div class="modal-waitlist-note" id="mWaitTor">⏳ Esta categoria está com vagas esgotadas. Ao confirmar, você entra na <strong>fila de espera</strong> — se uma vaga abrir, entraremos em contato.</div>
         <div class="mfg" style="margin-top:.75rem">
           <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
-          <div class="mf-group"><label>CPF *</label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
-          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')" oninput="verificarMenor('tor')" onblur="verificarMenor('tor')"></div>
+          <div class="mf-group"><label>CPF <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
+          <div class="mf-group"><label>Data de nascimento <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')" oninput="verificarMenor('tor')" onblur="verificarMenor('tor')"></div>
           <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
-          <div class="mf-group"><label>CEP *</label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
+          <div class="mf-group"><label>CEP <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
           <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
         </div>
         <div class="aceites-block" id="aceites_tor">
@@ -2043,7 +2043,7 @@ window.submitModalTor=async function(){
   const cep=document.getElementById('m_tor_cep').value.trim();
   const email=document.getElementById('m_tor_email').value.trim();
   const cat=document.getElementById('m_tor_cat').value;
-  if(!nome||!cpf||!nasc||!tel||!cep||!email||!cat){alert('Preencha todos os campos e selecione uma categoria.');return;}
+  if(!nome||!tel||!email||!cat){alert('Preencha Nome, Telefone, E-mail e selecione uma categoria.');return;}
 
   // força verificação de menor antes de validar
   verificarMenor('tor');
@@ -2054,7 +2054,7 @@ window.submitModalTor=async function(){
   regErrEl.style.display = regAceito ? 'none' : 'block';
   if(!regAceito) return;
 
-  const eMenor = nasc && calcularIdade(nasc) < 18;
+  const eMenor = nasc && nasc.length > 0 && calcularIdade(nasc) < 18;
   if(eMenor){
     const menorOk = document.getElementById('menor_ok_tor').checked;
     const menorErr = document.getElementById('menor_err_tor');
