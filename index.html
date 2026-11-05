@@ -2000,16 +2000,16 @@ window.submitModalExp=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', edicaoAtiva)));
-    const inscAtiva = snapEmail.docs.filter(d => ['pendente','confirmado','espera'].includes(d.data().status));
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email)));
+    const inscAtiva = snapEmail.docs.filter(d => (d.data().edicao||1)===edicaoAtiva && ['pendente','confirmado','espera'].includes(d.data().status));
     if(inscAtiva.length > 0){
       alert('Este e-mail já possui uma inscrição ativa na 3ª Edição. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma)), where('status', '==', 'confirmado')));
-    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === edicaoAtiva).length;
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'exp'), where('turma', '==', String(turma))));
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1)===edicaoAtiva && d.data().status==='confirmado').length;
     const isWait = vagasOcupadas >= MAX_TURMA || !!configForcados.turmas[String(turma)];
 
     const protocolo=gerarProtocolo('exp');
@@ -2079,16 +2079,16 @@ window.submitModalTor=async function(){
   btn.textContent='Verificando vagas...';btn.disabled=true;
 
   try{
-    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email), where('edicao', '==', edicaoAtiva)));
-    const inscAtiva = snapEmail.docs.filter(d => ['pendente','confirmado','espera'].includes(d.data().status));
+    const snapEmail = await getDocs(query(collection(db, 'inscricoes'), where('email', '==', email)));
+    const inscAtiva = snapEmail.docs.filter(d => (d.data().edicao||1)===edicaoAtiva && ['pendente','confirmado','espera'].includes(d.data().status));
     if(inscAtiva.length > 0){
       alert('Este e-mail já possui uma inscrição ativa na 3ª Edição. Caso precise de ajuda, entre em contato pelo WhatsApp.');
       btn.textContent='Ir para Pagamento →';btn.disabled=false;
       return;
     }
 
-    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat), where('status', '==', 'confirmado')));
-    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1) === edicaoAtiva).length;
+    const snapCheck = await getDocs(query(collection(db, 'inscricoes'), where('tipo', '==', 'tor'), where('cat', '==', cat)));
+    const vagasOcupadas = snapCheck.docs.filter(d => (d.data().edicao||1)===edicaoAtiva && d.data().status==='confirmado').length;
     const isWait = vagasOcupadas >= MAX_CAT || !!configForcados.cats[cat];
 
     const protocolo=gerarProtocolo('tor');
