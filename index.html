@@ -2267,7 +2267,7 @@ function esc(str) {
 function iniciarListenerFirebase(){
   if(unsubscribeAdmin)return;
   document.getElementById('syncStatus').textContent='Conectando...';
-  const q=query(collection(db,'inscricoes'),orderBy('criadoEm','asc'));
+  const q=query(collection(db,'inscricoes'),where('edicao','==',edicaoAtiva),orderBy('criadoEm','asc'));
   unsubscribeAdmin=onSnapshot(q,(snapshot)=>{
     allInscricoes=snapshot.docs.map(d=>({id:d.id,...d.data()}));
     document.getElementById('syncStatus').textContent='Ao vivo · Firebase';
@@ -2325,7 +2325,7 @@ function renderAdminTabelas(){
   document.getElementById('st-tor').textContent=tor.length;
   document.getElementById('st-pend').textContent=pend.length;
   document.getElementById('st-wait').textContent=wait.length;
-  document.getElementById('st-total').textContent=allInscricoes.length;
+  document.getElementById('st-total').textContent=exp.length+tor.length+pend.length+wait.length;
 
   // Exp e Tor usam filtros próprios
   aplicarFiltrosExp();
@@ -2386,7 +2386,7 @@ window.exportCSV=function(tipo){
   }else if(tipo==='tor'){
     headers=['Protocolo','Nome','CPF','Nascimento','Telefone','Email','Categoria','Pagamento','Status','Cadastro'];
     rows=allInscricoes.filter(i=>i.tipo==='tor').map(e=>[e.protocolo||'',e.nome||'',e.cpf||'',e.nasc||'',e.tel||'',e.email||'',e.categoria||'',e.pagamento||'–',e.status||'',formatarData(e.criadoEm)]);
-  }else{
+  }else if(tipo==='espera'){
     headers=['Nome','CPF','Telefone','Email','Tipo','Turma/Cat.','Cadastro'];
     rows=allInscricoes.filter(i=>i.status==='espera').map(e=>[e.nome||'',e.cpf||'',e.tel||'',e.email||'',e.tipo==='exp'?'Experiência':'Torneio',e.tipo==='exp'?(tNames[e.turma]||e.turma||''):(e.categoria||e.cat||''),formatarData(e.criadoEm)]);
   }
