@@ -2646,7 +2646,7 @@ function calcularIdade(nasc){
   return idade;
 }
 
-function verificarMenor(formId){
+window.verificarMenor = function(formId){
   const nascEl = document.getElementById(`m_${formId}_nasc`);
   if(!nascEl || !nascEl.value) return;
   const eMenor = calcularIdade(nascEl.value) < 18;
@@ -2768,7 +2768,7 @@ function renderFinanceiro(){
 let ordemExp = 'nome';
 let ordemTor = 'nome';
 
-function aplicarFiltrosExp(){
+window.aplicarFiltrosExp = function(){
   const busca   = (document.getElementById('searchExp')?.value||'').toLowerCase();
   const turma   = document.getElementById('filtroTurmaExp')?.value||'';
   const status  = document.getElementById('filtroStatusExp')?.value||'';
@@ -2787,7 +2787,7 @@ function aplicarFiltrosExp(){
   renderTabelaExp(lista);
 }
 
-function aplicarFiltrosTor(){
+window.aplicarFiltrosTor = function(){
   const busca  = (document.getElementById('searchTor')?.value||'').toLowerCase();
   const cat    = document.getElementById('filtroCategoriaTor')?.value||'';
   const status = document.getElementById('filtroStatusTor')?.value||'';
@@ -3313,7 +3313,7 @@ function s8GerarRoundRobin(atletas) {
   return rodadas;
 }
 
-async function s8GerarChaves() {
+window.s8GerarChaves = async function() {
   if (!confirm(`Isso vai gerar e SALVAR as chaves do Super 8 para a edição ${edicaoAtiva}.\n\nAs categorias precisam ter exatamente 8 atletas confirmados.\n\nDeseja continuar?`)) return;
 
   const confirmados = allInscricoes.filter(i => i.tipo === 'tor' && i.status === 'confirmado' && (i.edicao||1) === edicaoAtiva);
@@ -3470,7 +3470,7 @@ function s8CalcClassif(data) {
   });
 }
 
-async function s8SalvarPlacar(cat) {
+window.s8SalvarPlacar = async function(cat) {
   const data = s8Cache[cat];
   if (!data) return;
 
@@ -3497,7 +3497,7 @@ async function s8SalvarPlacar(cat) {
   }
 }
 
-async function s8ResetarCat(cat) {
+window.s8ResetarCat = async function(cat) {
   if (!confirm(`Isso apaga todas as chaves e placares de ${S8_CATS[cat]}.\n\nTem certeza?`)) return;
   await updateDoc(doc(db, 'super8', `${edicaoAtiva}_${cat}`), { rodadas: s8Cache[cat].rodadas.map(r => ({
     ...r,
@@ -3521,7 +3521,7 @@ async function s8AtualizarPodio(cat, data) {
   } catch(e) { /* silencioso */ }
 }
 
-function s8SwitchCat(cat) {
+window.s8SwitchCat = function(cat) {
   s8CarregarCat(cat);
 }
 
@@ -3728,7 +3728,7 @@ function atletaRenderClassif(data) {
     </div>`;
 }
 
-async function atletaUploadFoto(input) {
+window.atletaUploadFoto = async function(input) {
   const file = input.files[0];
   if (!file) return;
   if (file.size > 2 * 1024 * 1024) { alert('Foto muito grande. Use uma imagem até 2MB.'); return; }
