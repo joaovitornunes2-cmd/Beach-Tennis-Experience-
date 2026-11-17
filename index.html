@@ -3544,31 +3544,45 @@ async function atletaLogin() {
   const errEl = document.getElementById('atletaErr');
   errEl.style.display = 'none';
 
-  if (cpf.length !== 11) { errEl.style.display='block'; return; }
+  if (cpf.length !== 11) {
+    errEl.textContent = 'CPF inválido. Digite os 11 dígitos.';
+    errEl.style.display='block';
+    return;
+  }
 
-  // CPF formatado (com máscara) para caso esteja salvo assim no Firestore
   const cpfMask = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
   try {
-    // Busca por CPF sem máscara OU com máscara — apenas por CPF, sem filtros extras
-    // para evitar exigência de índice composto
     const [snap1, snap2] = await Promise.all([
       getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpf))),
       getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpfMask)))
     ]);
-    const allDocs = [...snap1.docs, ...snap2.docs]
-      .filter(d => d.data().tipo === 'tor' && d.data().status === 'confirmado');
 
-    if (allDocs.length === 0) { errEl.style.display='block'; return; }
+    const totalEncontrados = snap1.docs.length + snap2.docs.length;
+    const allRaw = [...snap1.docs, ...snap2.docs];
 
-    // Pega a inscrição da edição ativa; se não achar, pega a mais recente confirmada
+    // DEBUG: mostra o que foi encontrado
+    if (totalEncontrados === 0) {
+      errEl.textContent = `Nenhuma inscrição encontrada para este CPF.`;
+      errEl.style.display='block';
+      return;
+    }
+
+    const allDocs = allRaw.filter(d => d.data().tipo === 'tor' && d.data().status === 'confirmado');
+
+    if (allDocs.length === 0) {
+      const statuses = allRaw.map(d => `tipo=${d.data().tipo} status=${d.data().status}`).join(', ');
+      errEl.textContent = `Inscrição encontrada mas não confirmada. (${statuses})`;
+      errEl.style.display='block';
+      return;
+    }
+
     const docAtivo = allDocs.find(d => Number(d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
 
     atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
     atletaCarregarDashboard();
   } catch(e) {
-    console.error('Erro no login do atleta:', e);
-    errEl.textContent = 'Erro ao buscar inscrição. Tente novamente.';
+    errEl.textContent = 'ERRO: ' + (e.message || e.code || JSON.stringify(e));
     errEl.style.display = 'block';
   }
 }
