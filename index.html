@@ -3549,20 +3549,28 @@ async function atletaLogin() {
   // CPF formatado (com máscara) para caso esteja salvo assim no Firestore
   const cpfMask = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
-  // Busca por CPF sem máscara OU com máscara, tipo torneio, status confirmado
-  const [snap1, snap2] = await Promise.all([
-    getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpf),     where('tipo','==','tor'), where('status','==','confirmado'))),
-    getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpfMask), where('tipo','==','tor'), where('status','==','confirmado')))
-  ]);
-  const allDocs = [...snap1.docs, ...snap2.docs];
+  try {
+    // Busca por CPF sem máscara OU com máscara — apenas por CPF, sem filtros extras
+    // para evitar exigência de índice composto
+    const [snap1, snap2] = await Promise.all([
+      getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpf))),
+      getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpfMask)))
+    ]);
+    const allDocs = [...snap1.docs, ...snap2.docs]
+      .filter(d => d.data().tipo === 'tor' && d.data().status === 'confirmado');
 
-  if (allDocs.length === 0) { errEl.style.display='block'; return; }
+    if (allDocs.length === 0) { errEl.style.display='block'; return; }
 
-  // Pega a inscrição da edição ativa; se não achar, pega a mais recente confirmada
-  const docAtivo = allDocs.find(d => Number(d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
+    // Pega a inscrição da edição ativa; se não achar, pega a mais recente confirmada
+    const docAtivo = allDocs.find(d => Number(d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
 
-  atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
-  atletaCarregarDashboard();
+    atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
+    atletaCarregarDashboard();
+  } catch(e) {
+    console.error('Erro no login do atleta:', e);
+    errEl.textContent = 'Erro ao buscar inscrição. Tente novamente.';
+    errEl.style.display = 'block';
+  }
 }
 
 async function atletaCarregarDashboard() {
