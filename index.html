@@ -3546,19 +3546,20 @@ async function atletaLogin() {
 
   if (cpf.length !== 11) { errEl.style.display='block'; return; }
 
-  // Busca inscrição confirmada do torneio (qualquer edição, prioriza a mais recente)
-  const snap = await getDocs(query(
-    collection(db, 'inscricoes'),
-    where('cpf', '==', cpf),
-    where('tipo', '==', 'tor'),
-    where('status', '==', 'confirmado')
-  ));
+  // CPF formatado (com máscara) para caso esteja salvo assim no Firestore
+  const cpfMask = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
-  if (snap.empty) { errEl.style.display='block'; return; }
+  // Busca por CPF sem máscara OU com máscara, tipo torneio, status confirmado
+  const [snap1, snap2] = await Promise.all([
+    getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpf),     where('tipo','==','tor'), where('status','==','confirmado'))),
+    getDocs(query(collection(db,'inscricoes'), where('cpf','==',cpfMask), where('tipo','==','tor'), where('status','==','confirmado')))
+  ]);
+  const allDocs = [...snap1.docs, ...snap2.docs];
+
+  if (allDocs.length === 0) { errEl.style.display='block'; return; }
 
   // Pega a inscrição da edição ativa; se não achar, pega a mais recente confirmada
-  const docs = snap.docs;
-  const docAtivo = docs.find(d => (d.data().edicao||1) === edicaoAtiva) || docs[docs.length - 1];
+  const docAtivo = allDocs.find(d => (d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
 
   atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
   atletaCarregarDashboard();
