@@ -3568,7 +3568,7 @@ async function atletaLogin() {
       return;
     }
 
-    const allDocs = allRaw.filter(d => d.data().tipo === 'tor' && d.data().status === 'confirmado');
+    const allDocs = allRaw.filter(d => d.data().status === 'confirmado');
 
     if (allDocs.length === 0) {
       const statuses = allRaw.map(d => `tipo=${d.data().tipo} status=${d.data().status}`).join(', ');
