@@ -3540,7 +3540,9 @@ function maskCpfAtleta(input) {
 }
 
 async function atletaLogin() {
+  alert('atletaLogin chamado');
   const cpf = document.getElementById('atletaCpfInput').value.replace(/\D/g,'');
+  alert('CPF digitado: ' + cpf + ' (length=' + cpf.length + ')');
   const errEl = document.getElementById('atletaErr');
   errEl.style.display = 'none';
 
