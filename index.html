@@ -3559,7 +3559,7 @@ async function atletaLogin() {
   if (allDocs.length === 0) { errEl.style.display='block'; return; }
 
   // Pega a inscrição da edição ativa; se não achar, pega a mais recente confirmada
-  const docAtivo = allDocs.find(d => (d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
+  const docAtivo = allDocs.find(d => Number(d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
 
   atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
   atletaCarregarDashboard();
