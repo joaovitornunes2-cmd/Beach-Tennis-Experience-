@@ -833,7 +833,7 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
     <!-- LOGIN -->
     <div class="atleta-login-box" id="atletaLoginBox">
       <h2>Acessar minha área</h2>
-      <p>Digite seu CPF cadastrado na inscrição para entrar. (v2)</p>
+      <p>Digite seu CPF cadastrado na inscrição para entrar.</p>
       <input type="text" class="atleta-input" id="atletaCpfInput" placeholder="000.000.000-00" maxlength="14" oninput="maskCpfAtleta(this)" onkeydown="if(event.key==='Enter')atletaLogin()">
       <button class="atleta-login-btn" onclick="atletaLogin()">Entrar</button>
       <div class="atleta-err" id="atletaErr" style="display:none">CPF não encontrado ou inscrição não confirmada.</div>
@@ -3541,7 +3541,6 @@ window.maskCpfAtleta = function(input) {
 
 window.atletaLogin = async function() {
   const cpf = document.getElementById('atletaCpfInput').value.replace(/\D/g,'');
-  alert('CPF digitado: ' + cpf + ' (length=' + cpf.length + ')');
   const errEl = document.getElementById('atletaErr');
   errEl.style.display = 'none';
 
