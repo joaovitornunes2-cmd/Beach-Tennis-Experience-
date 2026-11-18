@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Beach Tennis Experience — 3ª Edição</title>
+<title>BTE 3ª Edição — Rascunho Hero</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap">
 <style>
 /*
@@ -1048,10 +1048,12 @@ html, body {
   .nav-mobile { display: none !important; }
 }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
 <nav class="nav" id="mainNav">
 
   <!-- Logo tipográfica BTE -->
@@ -1199,7 +1201,7 @@ html, body {
         <li>Certificado de participação</li>
         <li>Aula com professor especializado</li>
       </ul>
-      <a href="#" class="modal-card-btn">Quero aprender Beach Tennis</a>
+      <a href="#" class="modal-card-btn" onclick="event.preventDefault();openModal('exp')">Quero aprender Beach Tennis</a>
     </div>
 
     <div class="modal-card modal-card--tor" style="position:relative; overflow:hidden">
@@ -1227,7 +1229,7 @@ html, body {
         <li>Cat. C Intermediário: 14h–17h</li>
         <li>Troféu para o campeão</li>
       </ul>
-      <a href="#" class="modal-card-btn">Quero jogar o Super 8</a>
+      <a href="#" class="modal-card-btn" onclick="event.preventDefault();openModal('tor')">Quero jogar o Super 8</a>
     </div>
 
   </div>
@@ -1654,7 +1656,886 @@ html, body {
 
 </section>
 
-<script>emailjs.init('-rPKUpgHYCqGrzJ9H');</script>
+
+<section style="background:#111111;padding:3.5rem 2rem;text-align:center">
+  <div class="container" style="max-width:600px">
+    <p style="font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.75rem">Contato</p>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,2.75rem);color:#fff;letter-spacing:2px;line-height:1.1;margin-bottom:2rem">Dúvidas? Fale com a organização</h2>
+    <a href="https://wa.me/5562991552913" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.75rem;background:#25D366;color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:1.05rem;padding:1rem 2rem;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,211,102,0.3)" onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AVALIAÇÕES -->
+<section class="aval-section" id="avaliacoes">
+  <div class="container">
+    <div class="section-label" style="color:var(--yellow)">Avaliações reais</div>
+    <h2 class="section-title" style="color:#fff">Quem esteve lá, contou.</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.6)">Depoimentos de quem viveu a experiência do Beach Tennis Experience.</p>
+    <div class="aval-grid" id="avalGrid">
+      <div class="aval-empty-state" id="avalEmptyState">Nenhuma avaliação publicada ainda. Seja o primeiro!</div>
+    </div>
+    <button class="btn-aval" onclick="openModalAval()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Deixar minha avaliação
+    </button>
+  </div>
+</section>
+<section id="podioSection" style="display:none">
+  <div class="container">
+    <div class="section-label" style="color:#CC1B1B">Hall da Fama</div>
+    <h2 class="section-title" style="color:#fff">Pódio BTE</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.55)">Os campeões de cada edição do Beach Tennis Experience.</p>
+    <div id="podioContent"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">BEACH TENNIS EXPERIENCE</div>
+        <p>Uma experiência completa para quem deseja conhecer, praticar e viver o Beach Tennis ao lado de profissionais experientes.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/clubinhodasraquetes" class="social-link-ft" target="_blank">CR</a>
+          <a href="https://www.instagram.com/joaoleitaocoach" class="social-link-ft" target="_blank">JL</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5562991552913">WhatsApp</a>
+        <p style="margin-top:.5rem;font-size:.75rem;opacity:.5">Via WhatsApp</p>
+      </div>
+      <div class="footer-col">
+        <h4>Evento</h4>
+        <p>28 de Novembro de 2026</p>
+        <p>A partir das 09h00</p>
+        <p>Shopping Passeio das Águas</p>
+        <p style="font-size:.8rem;opacity:.7">Academia Skyfit · Goiânia/GO</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 3ª Edição Beach Tennis Experience · Organizado por Clubinho das Raquetes · Realizado no CT SkyFit Passeio das Águas</p>
+      <a href="#" onclick="event.preventDefault();openModal()" class="footer-cta">Quero participar →</a>
+    </div>
+  </div>
+</footer>
+
+<button class="admin-toggle" onclick="toggleAdmin()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+  Painel Admin
+</button>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-content">
+    <div id="adminLoginScreen">
+      <div style="background:#111;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#CC1B1B">PAINEL ADMINISTRATIVO</span>
+        <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="toggleAdmin()">✕</button>
+      </div>
+      <div class="admin-login">
+        <div class="admin-login-logo">🎾 BTE · Acesso Restrito</div>
+        <h3>Entre com sua senha</h3>
+        <p>Apenas a organização do evento tem acesso a este painel.</p>
+        <div class="admin-login-form">
+          <input type="password" id="adminPwdInput" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doAdminLogin()">
+          <div class="admin-login-err" id="adminLoginErr">Senha incorreta. Tente novamente.</div>
+          <button class="admin-login-btn" onclick="doAdminLogin()">Entrar no painel</button>
+        </div>
+      </div>
+    </div>
+    <div id="adminMainScreen" style="display:none">
+      <div class="admin-header">
+        <div>
+          <h2>PAINEL ADMINISTRATIVO</h2>
+          <div class="admin-header-sub">3ª Edição Beach Tennis Experience · 28 de Novembro</div>
+        </div>
+        <div class="admin-header-right">
+          <button class="btn-disparo-massa" onclick="abrirDisparo()">📣 Confirmação de presença</button>
+          <button class="btn-disparo-massa" style="background:#7b1fa2" onclick="abrirDisparoAgradecimento()">🏅 Agradecimento pós-evento</button>
+          <div class="admin-sync-badge"><div class="admin-sync-dot"></div><span id="syncStatus">Conectado ao Firebase</span></div>
+          <button class="admin-logout" onclick="doAdminLogout()">Sair</button>
+          <button class="admin-close" onclick="toggleAdmin()">✕</button>
+        </div>
+      </div>
+      <div class="admin-body">
+        <div class="admin-stats">
+          <div class="stat-box"><div class="num" id="st-exp">–</div><div class="lbl">Exp. Pagos</div></div>
+          <div class="stat-box"><div class="num" id="st-tor">–</div><div class="lbl">Torneio Pagos</div></div>
+          <div class="stat-box"><div class="num" id="st-pend">–</div><div class="lbl">Ag. Pagamento</div></div>
+          <div class="stat-box"><div class="num" id="st-wait">–</div><div class="lbl">Lista Espera</div></div>
+          <div class="stat-box"><div class="num" id="st-total">–</div><div class="lbl">Total</div></div>
+        </div>
+        <div class="tab-section-titles">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('exp')">🎾 Experiência</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('tor')">🏆 Super 8</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('pend')">⏳ Ag. Pagamento</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('wait')">📋 Lista Espera</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('fin')">💰 Financeiro</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('aval')">⭐ Avaliações</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('cfg')">⚙️ Configurações</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('edicoes')">📋 Edições</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('super8')">🏅 Super 8</button>
+        </div>
+
+        <!-- TAB EXPERIÊNCIA -->
+        <div class="admin-section active" id="admin-exp">
+          <div class="admin-toolbar">
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchExp" placeholder="Buscar nome, CPF ou e-mail..." oninput="aplicarFiltrosExp()"></div>
+            <button class="btn-export" onclick="exportCSV('exp')">⬇ Exportar CSV</button>
+          </div>
+          <div class="admin-filters">
+            <select class="filter-select" id="filtroTurmaExp" onchange="aplicarFiltrosExp()">
+              <option value="">Todas as turmas</option>
+              <option value="1">T1 — 08h</option>
+              <option value="2">T2 — 09h</option>
+              <option value="3">T3 — 10h</option>
+              <option value="4">T4 — 11h</option>
+            </select>
+            <select class="filter-select" id="filtroStatusExp" onchange="aplicarFiltrosExp()">
+              <option value="">Todos os status</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="pendente">Pendente</option>
+              <option value="espera">Lista de espera</option>
+            </select>
+            <button class="sort-btn active" id="sortExpNome" onclick="alternarOrdemExp('nome')">A–Z Nome</button>
+            <button class="sort-btn" id="sortExpData" onclick="alternarOrdemExp('data')">Mais recentes</button>
+            <span class="filter-count" id="countExp"></span>
+          </div>
+          <div class="admin-table-wrap">
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Turma</th><th>Praticou?</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
+            <tbody id="tbodyExp"><tr><td colspan="13" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
+          </div>
+        </div>
+
+        <!-- TAB TORNEIO -->
+        <div class="admin-section" id="admin-tor">
+          <div class="admin-toolbar">
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchTor" placeholder="Buscar nome, CPF ou e-mail..." oninput="aplicarFiltrosTor()"></div>
+            <button class="btn-export" onclick="exportCSV('tor')">⬇ Exportar CSV</button>
+          </div>
+          <div class="admin-filters">
+            <select class="filter-select" id="filtroCategoriaTor" onchange="aplicarFiltrosTor()">
+              <option value="">Todas as categorias</option>
+              <option value="masc_ini">D — Masculino Iniciante</option>
+              <option value="masc_int">C — Masculino Intermediário</option>
+              <option value="fem_ini">D — Feminino Iniciante</option>
+              <option value="fem_int">C — Feminino Intermediário</option>
+            </select>
+            <select class="filter-select" id="filtroStatusTor" onchange="aplicarFiltrosTor()">
+              <option value="">Todos os status</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="pendente">Pendente</option>
+              <option value="espera">Lista de espera</option>
+            </select>
+            <button class="sort-btn active" id="sortTorNome" onclick="alternarOrdemTor('nome')">A–Z Nome</button>
+            <button class="sort-btn" id="sortTorData" onclick="alternarOrdemTor('data')">Mais recentes</button>
+            <span class="filter-count" id="countTor"></span>
+          </div>
+          <div class="admin-table-wrap">
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Telefone</th><th>E-mail</th><th>Categoria</th><th>Pagamento</th><th>Status</th><th>Cadastro</th><th>Ação</th></tr></thead>
+            <tbody id="tbodyTor"><tr><td colspan="12" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
+          </div>
+        </div>
+
+        <!-- TAB PENDENTE -->
+        <div class="admin-section" id="admin-pend">
+          <div class="admin-toolbar">
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyPend', this.value)"></div>
+          </div>
+          <div class="admin-table-wrap">
+            <table><thead><tr><th>#</th><th>Protocolo</th><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Pagamento</th><th>Cadastro</th><th>Confirmar</th></tr></thead>
+            <tbody id="tbodyPend"><tr><td colspan="10" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
+          </div>
+        </div>
+
+        <!-- TAB ESPERA -->
+        <div class="admin-section" id="admin-wait">
+          <div class="admin-toolbar">
+            <div class="admin-search"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar..." oninput="filterTable('tbodyWait', this.value)"></div>
+            <button class="btn-export" onclick="exportCSV('wait')">⬇ Exportar CSV</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table><thead><tr><th>#</th><th>Nome</th><th>CPF</th><th>Telefone</th><th>E-mail</th><th>Tipo</th><th>Turma/Cat.</th><th>Cadastro</th><th>Ação</th></tr></thead>
+            <tbody id="tbodyWait"><tr><td colspan="8" class="empty-row"><div class="admin-loading"><div class="spinner"></div> Carregando...</div></td></tr></tbody></table>
+          </div>
+        </div>
+
+        <!-- TAB FINANCEIRO -->
+        <div class="admin-section" id="admin-fin">
+          <div class="fin-resumo" id="finResumo">
+            <div class="admin-loading"><div class="spinner"></div> Carregando...</div>
+          </div>
+          <h4 style="font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.875rem">Detalhamento por categoria — 3ª Edição</h4>
+          <div class="fin-cats" id="finCats"></div>
+          <div id="finHistorico"></div>
+        </div>
+
+        <!-- TAB AVALIAÇÕES -->
+        <div class="admin-section" id="admin-aval">
+          <div class="admin-toolbar">
+            <div style="font-size:.85rem;color:#666">Gerencie as avaliações enviadas pelos participantes.</div>
+            <button class="btn-aval-add" onclick="openAdminAddAval()">+ Adicionar avaliação</button>
+          </div>
+          <div id="adminAvalList"><div class="admin-loading"><div class="spinner"></div> Carregando avaliações...</div></div>
+        </div>
+
+        <!-- TAB CONFIGURAÇÕES -->
+        <div class="admin-section" id="admin-cfg">
+          <div class="config-section">
+            <div class="config-group">
+              <div class="config-group-title">🎾 Turmas — Experiência para Iniciantes</div>
+              <div class="config-toggles-grid">
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T1 — 08h às 09h</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t1" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T2 — 09h às 10h</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t2" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T3 — 10h às 11h</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t3" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">T4 — 11h às 12h</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_t4" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+            <div class="config-group">
+              <div class="config-group-title">🏆 Categorias — Super 8</div>
+              <div class="config-toggles-grid">
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">D — Masculino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_masc_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">C — Masculino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_masc_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">D — Feminino Iniciante</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_fem_ini" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="config-toggle-row">
+                  <div><div class="config-toggle-label">C — Feminino Intermediário</div><div class="config-toggle-sub">Vagas abertas</div></div>
+                  <label class="toggle-switch"><input type="checkbox" id="cfg_fem_int" onchange="salvarConfig()"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:.8rem;color:#888;margin-top:.25rem">💡 Toggle <strong style="color:#2e7d32">verde = vagas abertas</strong> · Toggle <strong style="color:#CC1B1B">vermelho = esgotada</strong>. Salva automaticamente no Firebase.</p>
+          </div>
+        </div>
+
+        <!-- TAB SUPER 8 -->
+        <div class="admin-section" id="admin-super8">
+          <div class="s8-header">
+            <h3>🏅 Módulo Super 8 — Gerenciamento de Chaves</h3>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <button class="s8-btn secondary" onclick="s8GerarChaves()">🎲 Sortear chaves automaticamente</button>
+              <button class="s8-btn" onclick="s8SalvarPlacar(s8CatAtiva)">💾 Salvar placares</button>
+            </div>
+          </div>
+          <div class="s8-cat-tabs">
+            <button class="s8-cat-tab active" onclick="s8SwitchCat('masc_ini')">♂ D – Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_ini')">♀ D – Iniciante</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('masc_int')">♂ C – Intermediário</button>
+            <button class="s8-cat-tab" onclick="s8SwitchCat('fem_int')">♀ C – Intermediário</button>
+          </div>
+          <div id="s8Content"><div class="s8-vazio">Selecione uma categoria para começar</div></div>
+        </div>
+
+        <!-- TAB EDIÇÕES -->
+        <div class="admin-section" id="admin-edicoes">
+          <div class="edicoes-header">
+            <div>
+              <div style="font-weight:700;font-size:1rem;color:#111">Gestão de Edições</div>
+              <div style="font-size:.8rem;color:#888;margin-top:.15rem">Finalize, edite ou arquive edições do evento</div>
+            </div>
+            <button class="btn-nova-edicao" onclick="abrirNovaEdicao()">+ Nova Edição</button>
+          </div>
+          <div id="edicoesList"><div class="admin-loading"><div class="spinner"></div> Carregando edições...</div></div>
+          <div class="edicoes-arquivadas-toggle" id="toggleArquivadas" onclick="toggleVerArquivadas()" style="display:none">▼ Ver edições arquivadas</div>
+          <div id="edicoesArquivadasList" style="display:none"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FINALIZAR EVENTO -->
+<div class="modal-overlay" id="modalFinalizarEvento">
+  <div class="modal-box modal-finalizar">
+    <div class="modal-header">
+      <h2>🏁 Finalizar Evento</h2>
+      <button class="modal-close" onclick="fecharModalFinalizar()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.88rem;color:#555;margin-bottom:1rem">Registre os campeões e vices de cada categoria. Após confirmar, as inscrições serão congeladas e o evento ficará no histórico.</p>
+      <div class="finalizar-cats" id="finalizarCatsForm">
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Masc. D – Iniciante</div>
+          <label>Campeão</label><input type="text" id="fc_masc_ini_camp" placeholder="Nome do campeão">
+          <label>Vice-campeão</label><input type="text" id="fc_masc_ini_vice" placeholder="Nome do vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Masc. C – Intermediário</div>
+          <label>Campeão</label><input type="text" id="fc_masc_int_camp" placeholder="Nome do campeão">
+          <label>Vice-campeão</label><input type="text" id="fc_masc_int_vice" placeholder="Nome do vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Fem. D – Iniciante</div>
+          <label>Campeão</label><input type="text" id="fc_fem_ini_camp" placeholder="Nome da campeã">
+          <label>Vice-campeã</label><input type="text" id="fc_fem_ini_vice" placeholder="Nome da vice">
+        </div>
+        <div class="finalizar-cat-bloco">
+          <div class="finalizar-cat-titulo">🏆 Fem. C – Intermediário</div>
+          <label>Campeão</label><input type="text" id="fc_fem_int_camp" placeholder="Nome da campeã">
+          <label>Vice-campeã</label><input type="text" id="fc_fem_int_vice" placeholder="Nome da vice">
+        </div>
+      </div>
+      <div id="finalizarErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-confirmar-finalizar" onclick="confirmarFinalizarEvento()">✅ Confirmar finalização</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVA EDIÇÃO -->
+<div class="modal-overlay" id="modalNovaEdicao">
+  <div class="modal-box" style="max-width:500px">
+    <div class="modal-header">
+      <h2>➕ Nova Edição</h2>
+      <button class="modal-close" onclick="fecharNovaEdicao()">✕</button>
+    </div>
+    <div class="modal-body nova-edicao-form">
+      <div class="mf-group">
+        <label>Nome do evento *</label>
+        <input type="text" id="ne_nome" placeholder="Ex: 4ª Edição Beach Tennis Experience">
+      </div>
+      <div class="mf-group">
+        <label>Data *</label>
+        <input type="date" id="ne_data">
+      </div>
+      <div class="mf-group">
+        <label>Local</label>
+        <input type="text" id="ne_local" placeholder="Ex: SkyFit Passeio das Águas">
+      </div>
+      <div class="mf-group">
+        <label>Vagas por categoria (Super 8)</label>
+        <div class="vagas-config-grid">
+          <div class="vaga-config-item"><span>Masc. Iniciante</span><input type="number" id="ne_v_masc_ini" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Masc. Interm.</span><input type="number" id="ne_v_masc_int" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Fem. Iniciante</span><input type="number" id="ne_v_fem_ini" value="8" min="1" max="32"></div>
+          <div class="vaga-config-item"><span>Fem. Interm.</span><input type="number" id="ne_v_fem_int" value="8" min="1" max="32"></div>
+        </div>
+      </div>
+      <div id="novaEdicaoErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-criar-edicao" onclick="confirmarNovaEdicao()">🚀 Criar nova edição e ativar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR EDIÇÃO -->
+<div class="modal-overlay" id="modalEditarEdicao">
+  <div class="modal-box" style="max-width:500px">
+    <div class="modal-header">
+      <h2>✏️ Editar Edição</h2>
+      <button class="modal-close" onclick="fecharEditarEdicao()">✕</button>
+    </div>
+    <div class="modal-body nova-edicao-form">
+      <input type="hidden" id="edit_ed_id">
+      <div class="mf-group">
+        <label>Nome do evento</label>
+        <input type="text" id="edit_ed_nome">
+      </div>
+      <div class="mf-group">
+        <label>Data</label>
+        <input type="date" id="edit_ed_data">
+      </div>
+      <div class="mf-group">
+        <label>Local</label>
+        <input type="text" id="edit_ed_local">
+      </div>
+      <div id="editarEdicaoErr" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.5rem"></div>
+      <button class="btn-criar-edicao" onclick="confirmarEditarEdicao()">💾 Salvar alterações</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AVALIAÇÃO -->
+<div class="modal-overlay" id="modalAval">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Avaliação</h2>
+      <button class="modal-close" onclick="closeModalAval()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 0: verificar e-mail -->
+      <div class="modal-aval-step active" id="mAvalStep0">
+        <div class="modal-form-header">
+          <h3>Verificar participação</h3>
+          <p>Informe o e-mail que você usou na inscrição para deixar sua avaliação.</p>
+        </div>
+        <div class="mf-group" style="margin-bottom:1rem">
+          <label>E-mail cadastrado *</label>
+          <input type="email" id="aval_email" placeholder="seuemail@email.com">
+        </div>
+        <div id="aval_email_err" style="display:none;background:#fdecea;border:1px solid #f5c6c6;border-radius:6px;padding:.6rem 1rem;font-size:.82rem;color:#c62828;margin-bottom:.75rem">E-mail não encontrado. Verifique se é o mesmo usado na inscrição.</div>
+        <button class="btn-modal-next" id="btnVerificarEmail" onclick="verificarEmailAval()">Verificar e continuar →</button>
+      </div>
+
+      <!-- STEP 1: formulário de avaliação -->
+      <div class="modal-aval-step" id="mAvalStep1">
+        <div class="modal-form-header">
+          <h3>Deixe sua avaliação</h3>
+          <p id="aval_nome_confirmado" style="color:#CC1B1B;font-weight:600"></p>
+        </div>
+        <div class="mfg">
+          <div class="mf-group full">
+            <label>Nota *</label>
+            <div class="star-selector" id="starSelector">
+              <button class="star-sel-btn" data-val="1" onclick="selecionarEstrela(1)">★</button>
+              <button class="star-sel-btn" data-val="2" onclick="selecionarEstrela(2)">★</button>
+              <button class="star-sel-btn" data-val="3" onclick="selecionarEstrela(3)">★</button>
+              <button class="star-sel-btn" data-val="4" onclick="selecionarEstrela(4)">★</button>
+              <button class="star-sel-btn" data-val="5" onclick="selecionarEstrela(5)">★</button>
+            </div>
+          </div>
+          <div class="mf-group full">
+            <label>Sua avaliação * <span style="font-weight:400;color:#aaa">(máx. 200 caracteres)</span></label>
+            <textarea id="aval_texto" placeholder="Conte como foi sua experiência no evento..." maxlength="200" oninput="contarCaracteres()"></textarea>
+            <div style="text-align:right;font-size:.72rem;color:#aaa;margin-top:.25rem"><span id="aval_chars">0</span>/200</div>
+          </div>
+          <div class="mf-group">
+            <label>Cidade *</label>
+            <input type="text" id="aval_cidade" placeholder="Goiânia">
+          </div>
+        </div>
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="voltarAvalStep0()">← Voltar</button>
+          <button class="btn-modal-next" onclick="enviarAval()">Enviar avaliação</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: sucesso -->
+      <div class="modal-aval-step" id="mAvalStep2">
+        <div style="text-align:center;padding:1.5rem 0">
+          <div style="font-size:3rem;margin-bottom:1rem">🎾</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:1.5px;color:#111;margin-bottom:.5rem">Obrigado!</div>
+          <p style="font-size:.9rem;color:#555;line-height:1.6;max-width:340px;margin:0 auto 1.5rem">Sua avaliação foi enviada e será publicada após aprovação da organização.</p>
+          <button class="btn-modal-next" onclick="closeModalAval()">Fechar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ADD AVALIAÇÃO (admin) -->
+<div class="modal-overlay" id="modalAdminAval">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Nova Avaliação</h2>
+      <button class="modal-close" onclick="closeAdminAddAval()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mfg">
+        <div class="mf-group full">
+          <label>Nome *</label>
+          <input type="text" id="adm_aval_nome" placeholder="Nome do participante">
+        </div>
+        <div class="mf-group">
+          <label>Cidade *</label>
+          <input type="text" id="adm_aval_cidade" placeholder="Goiânia">
+        </div>
+        <div class="mf-group">
+          <label>Nota *</label>
+          <div class="star-selector" id="starSelectorAdm">
+            <button class="star-sel-btn" data-val="1" onclick="selecionarEstrelaAdm(1)">★</button>
+            <button class="star-sel-btn" data-val="2" onclick="selecionarEstrelaAdm(2)">★</button>
+            <button class="star-sel-btn" data-val="3" onclick="selecionarEstrelaAdm(3)">★</button>
+            <button class="star-sel-btn" data-val="4" onclick="selecionarEstrelaAdm(4)">★</button>
+            <button class="star-sel-btn" data-val="5" onclick="selecionarEstrelaAdm(5)">★</button>
+          </div>
+        </div>
+        <div class="mf-group full">
+          <label>Texto da avaliação *</label>
+          <textarea id="adm_aval_texto" placeholder="Texto do depoimento..." maxlength="200" style="border:1.5px solid #e0e0e0;border-radius:6px;padding:.625rem .875rem;font-size:.9rem;font-family:'Inter',sans-serif;color:#222;resize:vertical;min-height:90px;width:100%"></textarea>
+        </div>
+      </div>
+      <button class="btn-modal-next" style="margin-top:1rem" onclick="salvarAdminAval()">Publicar avaliação</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DISPARO EM MASSA -->
+<div class="modal-disparo-overlay" id="modalDisparo">
+  <div class="modal-disparo-box">
+    <div class="modal-disparo-header">
+      <h3>📣 Confirmação de Presença</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharDisparo()">✕</button>
+    </div>
+    <div class="modal-disparo-body">
+
+      <!-- Filtro de público -->
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Enviar para:</div>
+      <div class="disparo-filtro">
+        <button class="disparo-filtro-btn active" onclick="setDisparoFiltro('todos')">Todos confirmados</button>
+        <button class="disparo-filtro-btn" onclick="setDisparoFiltro('tor')">Só Torneio</button>
+        <button class="disparo-filtro-btn" onclick="setDisparoFiltro('exp')">Só Experiência</button>
+      </div>
+
+      <!-- Preview da mensagem -->
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
+      <div class="disparo-preview" id="disparoPreview"></div>
+
+      <!-- Lista de destinatários -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
+        <div style="font-size:.78rem;color:#888" id="disparoContador"></div>
+      </div>
+      <div class="disparo-lista" id="disparoLista"></div>
+
+      <!-- Progresso -->
+      <div id="disparoProgressoWrap" style="display:none">
+        <div class="disparo-progress"><div class="disparo-progress-bar" id="disparoProgressBar" style="width:0%"></div></div>
+        <div class="disparo-progress-txt" id="disparoProgressTxt"></div>
+      </div>
+
+      <!-- Botões -->
+      <div id="disparoBtnIniciar">
+        <button class="btn-disparo-iniciar" onclick="iniciarDisparo()">📣 Iniciar disparo — WhatsApp</button>
+      </div>
+      <div id="disparoBtnProximo" style="display:none">
+        <button class="btn-disparo-proximo" onclick="proximoDisparo()">Abrir próximo →</button>
+      </div>
+      <div id="disparoFinalMsg" style="display:none;text-align:center;padding:1rem;background:#e8f5e9;border-radius:8px;color:#2e7d32;font-weight:700;font-size:.95rem">
+        ✅ Todos os participantes foram contatados!
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGRADECIMENTO PÓS-EVENTO -->
+<div class="modal-disparo-overlay" id="modalAgradecimento">
+  <div class="modal-disparo-box">
+    <div class="modal-disparo-header" style="background:#4a0072">
+      <h3 style="color:#ce93d8">🏅 Agradecimento Pós-Evento</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharAgradecimento()">✕</button>
+    </div>
+    <div class="modal-disparo-body">
+
+      <div style="background:#f3e5f5;border:1.5px solid #ce93d8;border-radius:10px;padding:.875rem 1rem;margin-bottom:1.25rem;font-size:.82rem;color:#4a0072;line-height:1.6">
+        💜 Envie uma mensagem de agradecimento para todos que participaram da <strong>3ª Edição BTE</strong>. Cada mensagem é personalizada com o nome do participante.
+      </div>
+
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:.5rem">Prévia da mensagem:</div>
+      <div class="disparo-preview" style="background:#f3e5f5;border-color:#ce93d8;color:#4a0072" id="agradPreview"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888">Destinatários</div>
+        <div style="font-size:.78rem;color:#888" id="agradContador"></div>
+      </div>
+      <div class="disparo-lista" id="agradLista"></div>
+
+      <div id="agradProgressoWrap" style="display:none">
+        <div class="disparo-progress"><div class="disparo-progress-bar" id="agradProgressBar" style="width:0%;background:#7b1fa2"></div></div>
+        <div class="disparo-progress-txt" id="agradProgressTxt"></div>
+      </div>
+
+      <div id="agradBtnIniciar">
+        <button class="btn-disparo-iniciar" style="background:#7b1fa2" onclick="iniciarAgradecimento()">🏅 Iniciar envio — WhatsApp</button>
+      </div>
+      <div id="agradBtnProximo" style="display:none">
+        <button class="btn-disparo-proximo" onclick="proximoAgradecimento()">Abrir próximo →</button>
+      </div>
+      <div id="agradFinalMsg" style="display:none;text-align:center;padding:1rem;background:#f3e5f5;border-radius:8px;color:#4a0072;font-weight:700;font-size:.95rem">
+        💜 Agradecimento enviado para todos os participantes!
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR INSCRIÇÃO -->
+<div class="modal-edit-overlay" id="modalEditInsc">
+  <div class="modal-edit-box">
+    <div class="modal-edit-header">
+      <h3>Editar inscrição</h3>
+      <button style="background:none;border:none;color:rgba(255,255,255,.6);font-size:1.5rem;cursor:pointer" onclick="fecharModalEdit()">✕</button>
+    </div>
+    <div class="modal-edit-body">
+      <input type="hidden" id="edit_doc_id">
+      <div class="modal-edit-grid">
+        <div class="edit-mf full"><label>Nome completo</label><input type="text" id="edit_nome"></div>
+        <div class="edit-mf"><label>CPF</label><input type="text" id="edit_cpf" oninput="maskCPF(this)"></div>
+        <div class="edit-mf"><label>Data de nascimento</label><input type="date" id="edit_nasc"></div>
+        <div class="edit-mf"><label>Telefone / WhatsApp</label><input type="tel" id="edit_tel" oninput="maskTel(this)"></div>
+        <div class="edit-mf"><label>CEP</label><input type="text" id="edit_cep" oninput="maskCEP(this)"></div>
+        <div class="edit-mf full"><label>E-mail</label><input type="email" id="edit_email"></div>
+        <div class="edit-mf full" id="edit_turma_wrap">
+          <label>Turma</label>
+          <select id="edit_turma">
+            <option value="1">T1 — 08h às 09h</option>
+            <option value="2">T2 — 09h às 10h</option>
+            <option value="3">T3 — 10h às 11h</option>
+            <option value="4">T4 — 11h às 12h</option>
+          </select>
+        </div>
+        <div class="edit-mf full" id="edit_cat_wrap">
+          <label>Categoria</label>
+          <select id="edit_cat">
+            <option value="masc_ini">D — Masculino Iniciante</option>
+            <option value="masc_int">C — Masculino Intermediário</option>
+            <option value="fem_ini">D — Feminino Iniciante</option>
+            <option value="fem_int">C — Feminino Intermediário</option>
+          </select>
+        </div>
+      </div>
+      <div class="edit-actions">
+        <button class="btn-edit-cancel" onclick="fecharModalEdit()">Cancelar</button>
+        <button class="btn-edit-save" onclick="salvarEdicaoInsc()">Salvar alterações</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE INSCRIÇÃO -->
+<div class="modal-overlay" id="modalInscricao">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Inscrição</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 0: escolha -->
+      <div class="modal-step active" id="mStep0">
+        <p class="modal-choice-title">Como você quer participar?</p>
+        <div class="modal-choices">
+          <div class="choice-card" id="choiceExp" onclick="selectChoice('exp')">
+            <div class="choice-icon">🎾</div>
+            <div class="choice-label">Iniciante</div>
+            <div class="choice-name">Experiência Guiada</div>
+            <div class="choice-desc">Aula guiada com professor. Turmas de até 6 pessoas, material incluído.</div>
+          </div>
+          <div class="choice-card" id="choiceTor" onclick="selectChoice('tor')">
+            <div class="choice-icon">🏆</div>
+            <div class="choice-label">Competição</div>
+            <div class="choice-name">Super 8</div>
+            <div class="choice-desc">Dispute o torneio exclusivo. Iniciantes de manhã, Intermediários à tarde.</div>
+          </div>
+        </div>
+        <button class="btn-modal-next" id="btnNextChoice" disabled onclick="goToForm()">Continuar →</button>
+      </div>
+
+      <!-- STEP 1: Form Experiência -->
+      <div class="modal-step" id="mStepExp">
+        <div class="modal-form-header">
+          <h3>🎾 Experiência para Iniciantes</h3>
+          <p>Preencha seus dados e escolha o horário da turma.</p>
+        </div>
+        <div class="modal-waitlist-note" id="mWaitExp">⚠️ Esta turma está lotada. Você entrará na lista de espera.</div>
+        <div class="modal-turmas-grid" id="mTurmasGrid"></div>
+        <div class="mfg">
+          <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_exp_nome" placeholder="Seu nome completo"></div>
+          <div class="mf-group"><label>CPF *</label><input type="text" id="m_exp_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
+          <div class="mf-group"><label>Data de nascimento *</label><input type="date" id="m_exp_nasc" onchange="verificarMenor('exp')"></div>
+          <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_exp_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
+          <div class="mf-group"><label>CEP *</label><input type="text" id="m_exp_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('exp')"></div>
+          <div class="mf-group full"><label>E-mail *</label><input type="email" id="m_exp_email" placeholder="seuemail@email.com"></div>
+          <div class="mf-group full">
+            <label>Já praticou Beach Tennis?</label>
+            <div class="mf-radio-row">
+              <label class="mf-radio"><input type="radio" name="m_exp_praticou" value="nao" checked> Não</label>
+              <label class="mf-radio"><input type="radio" name="m_exp_praticou" value="sim"> Sim</label>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="m_exp_turma" value="">
+        <div class="aceites-block" id="aceites_exp">
+          <label class="aceite-row">
+            <input type="checkbox" id="reg_aceito_exp">
+            <span>Li e aceito o <a href="./REGULAMENTO_BTE.pdf" target="_blank" rel="noopener">Regulamento Oficial</a> do Beach Tennis Experience.</span>
+          </label>
+          <div class="aceite-err" id="reg_err_exp">Você precisa aceitar o Regulamento para continuar.</div>
+          <div id="menor_aceite_exp" style="display:none">
+            <label class="aceite-row">
+              <input type="checkbox" id="menor_ok_exp">
+              <span>Declaro que minha participação ocorre com ciência do meu pai, mãe ou responsável legal e que estarei acompanhado por responsável durante o evento.</span>
+            </label>
+            <div class="aceite-err" id="menor_err_exp">Esta declaração é obrigatória para menores de 18 anos.</div>
+          </div>
+          <label class="aceite-row">
+            <input type="checkbox" id="mkt_aceito_exp">
+            <span>Quero receber novidades e convites para futuras experiências do Clubinho das Raquetes.</span>
+          </label>
+        </div>
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
+          <button class="btn-modal-next" onclick="submitModalExp()">Ir para Pagamento →</button>
+        </div>
+      </div>
+
+      <!-- STEP 1: Form Super 8 -->
+      <div class="modal-step" id="mStepTor">
+        <div class="modal-form-header">
+          <h3>🏆 Torneio Super 8</h3>
+          <p>Escolha sua categoria e preencha seus dados.</p>
+        </div>
+        <label style="font-size:.8rem;font-weight:600;color:#444;display:block;margin-bottom:.5rem">Categoria *</label>
+        <div class="modal-turmas-grid modal-cats-grid" id="mCatsGrid"></div>
+        <input type="hidden" id="m_tor_cat" value="">
+        <div class="modal-waitlist-note" id="mWaitTor">⏳ Esta categoria está com vagas esgotadas. Ao confirmar, você entra na <strong>fila de espera</strong> — se uma vaga abrir, entraremos em contato.</div>
+        <div class="mfg" style="margin-top:.75rem">
+          <div class="mf-group full"><label>Nome completo *</label><input type="text" id="m_tor_nome" placeholder="Seu nome completo"></div>
+          <div class="mf-group"><label>CPF <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="text" id="m_tor_cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)"></div>
+          <div class="mf-group"><label>Data de nascimento <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="date" id="m_tor_nasc" onchange="verificarMenor('tor')" oninput="verificarMenor('tor')" onblur="verificarMenor('tor')"></div>
+          <div class="mf-group"><label>Telefone / WhatsApp *</label><input type="tel" id="m_tor_tel" placeholder="(62) 99999-9999" maxlength="15" oninput="maskTel(this)"></div>
+          <div class="mf-group"><label>CEP <span style="font-size:.7rem;color:#aaa;font-weight:400">(opcional)</span></label><input type="text" id="m_tor_cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)" onblur="buscaCEP('tor')"></div>
+          <div class="mf-group"><label>E-mail *</label><input type="email" id="m_tor_email" placeholder="seuemail@email.com"></div>
+        </div>
+        <div class="aceites-block" id="aceites_tor">
+          <label class="aceite-row">
+            <input type="checkbox" id="reg_aceito_tor">
+            <span>Li e aceito o <a href="./REGULAMENTO_BTE.pdf" target="_blank" rel="noopener">Regulamento Oficial</a> do Beach Tennis Experience.</span>
+          </label>
+          <div class="aceite-err" id="reg_err_tor">Você precisa aceitar o Regulamento para continuar.</div>
+          <div id="menor_aceite_tor" style="display:none">
+            <label class="aceite-row">
+              <input type="checkbox" id="menor_ok_tor">
+              <span>Declaro que minha participação ocorre com ciência do meu pai, mãe ou responsável legal e que estarei acompanhado por responsável durante o evento.</span>
+            </label>
+            <div class="aceite-err" id="menor_err_tor">Esta declaração é obrigatória para menores de 18 anos.</div>
+          </div>
+          <label class="aceite-row">
+            <input type="checkbox" id="mkt_aceito_tor">
+            <span>Quero receber novidades e convites para futuras experiências do Clubinho das Raquetes.</span>
+          </label>
+        </div>
+        <div class="modal-form-actions">
+          <button class="btn-modal-back" onclick="backToChoice()">← Voltar</button>
+          <button class="btn-modal-next" onclick="submitModalTor()">Ir para Pagamento →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Pagamento -->
+      <div class="modal-step" id="mStepPay">
+        <p class="pay-step-title">Etapa 2 de 2 — Pagamento</p>
+        <div class="pay-valor" id="payValorDisplay">R$ <span>120</span>,00</div>
+        <div class="pay-methods">
+          <div class="pay-method-card" id="payMethodPix" onclick="selectPayMethod('pix')">
+            <div class="pay-method-icon">📱</div>
+            <div class="pay-method-name">Pix</div>
+            <div class="pay-method-desc">Via WhatsApp</div>
+          </div>
+          <div class="pay-method-card" id="payMethodCard" onclick="selectPayMethod('card')">
+            <div class="pay-method-icon">💳</div>
+            <div class="pay-method-name">Cartão de Crédito</div>
+            <div class="pay-method-desc">Via WhatsApp</div>
+          </div>
+        </div>
+        <div class="pay-detail-box" id="payDetailPix">
+          <div class="card-container" style="background:#e8f5e9;border-color:#a5d6a7">
+            <div class="card-icon-big">📱</div>
+            <div class="card-title">Pagamento via Pix</div>
+            <div class="card-desc">Para pagar via Pix, entre em contato com nossa equipe pelo WhatsApp. Vamos te enviar a chave e confirmar sua vaga com segurança!</div>
+            <a class="btn-card-wa" id="pixWaLink" href="#" target="_blank" style="background:#25D366">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Quero pagar com Pix pelo WhatsApp
+            </a>
+          </div>
+          <div class="modal-form-actions" style="margin-top:1rem">
+            <button class="btn-modal-back" onclick="backToFormFromPay()">← Voltar</button>
+            <button class="btn-modal-next" onclick="finalizarInscricao()">Finalizei pelo WhatsApp →</button>
+          </div>
+        </div>
+        <div class="pay-detail-box" id="payDetailCard">
+          <div class="card-container">
+            <div class="card-icon-big">💳</div>
+            <div class="card-title">Pagamento via Cartão de Crédito</div>
+            <div class="card-desc">Para pagar com cartão de crédito, entre em contato com nossa equipe pelo WhatsApp. Vamos te atender rapidinho e garantir sua vaga com segurança!</div>
+            <a class="btn-card-wa" id="cardWaLink" href="#" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Quero pagar com cartão pelo WhatsApp
+            </a>
+          </div>
+          <div class="modal-form-actions" style="margin-top:1rem">
+            <button class="btn-modal-back" onclick="backToFormFromPay()">← Voltar</button>
+            <button class="btn-modal-next" onclick="finalizarInscricao()">Finalizei pelo WhatsApp →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Pendente -->
+      <div class="modal-step" id="mStepPendente">
+        <div class="modal-pendente">
+          <div class="pendente-ico">⏳</div>
+          <div class="pendente-titulo">Inscrição Registrada!</div>
+          <p class="pendente-sub">Seus dados foram salvos. Assim que confirmarmos seu pagamento, sua vaga estará garantida.</p>
+          <div class="pendente-protocolo">Protocolo: <strong id="pendProto"></strong></div>
+          <div class="pendente-aviso">📌 <strong>Próximo passo:</strong> Entre em contato pelo WhatsApp <strong>(62) 99155-2913</strong> informando seu protocolo para finalizar o pagamento. Sua vaga será confirmada em até 24h.</div>
+          <button class="btn-modal-next" onclick="closeModal()">Entendido, fechar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/5562991552913" class="wa-float" target="_blank" title="WhatsApp">💬</a>
+
+
+
+<script>
+// background is photo — no canvas needed
+
+// ── Nav: scroll shrink + hamburguer mobile ──
+(function() {
+  const nav    = document.getElementById('mainNav');
+  const burger = document.getElementById('navBurger');
+  const mobile = document.getElementById('navMobile');
+
+  // Transparente no topo, sólido ao rolar
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('nav--scrolled');
+    } else {
+      nav.classList.remove('nav--scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Hamburguer
+  burger.addEventListener('click', () => {
+    const open = mobile.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+
+  // Fechar menu mobile ao clicar num link
+  mobile.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobile.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, getDocs, query, orderBy, where, serverTimestamp, setDoc, getDoc }
@@ -4033,353 +4914,6 @@ window.switchAdminTab = function(tab) {
   if (tab === 'edicoes') carregarEdicoes();
 };
 </script>
-
-
-<!-- ══ AVALIAÇÕES ══ -->
-<style>
-/* ══ AVALIAÇÕES ══════════════════════════════════════════════ */
-.aval-section-new {
-  padding: 6rem max(2rem, env(safe-area-inset-left,0px));
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-.aval-grid-new {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2.5rem;
-}
-.aval-card-new {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: border-color .22s, transform .22s;
-}
-.aval-card-new:hover {
-  border-color: rgba(204,27,27,.45);
-  transform: translateY(-2px);
-}
-.aval-stars-new {
-  display: flex;
-  gap: 3px;
-}
-.aval-star-new {
-  color: var(--red);
-  font-size: 1rem;
-  line-height: 1;
-}
-.aval-star-new.empty {
-  color: rgba(255,255,255,.12);
-}
-.aval-texto-new {
-  font-size: .9rem;
-  color: var(--fg2);
-  line-height: 1.75;
-  flex: 1;
-  font-style: italic;
-}
-.aval-autor-new {
-  display: flex;
-  align-items: center;
-  gap: .875rem;
-  margin-top: .25rem;
-}
-.aval-avatar-new {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  color: #fff;
-  flex-shrink: 0;
-  letter-spacing: 1px;
-}
-.aval-nome-new {
-  font-weight: 700;
-  font-size: .88rem;
-  color: var(--fg);
-}
-.aval-cidade-new {
-  font-size: .68rem;
-  color: rgba(245,245,245,.4);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-top: .15rem;
-}
-.aval-empty-new {
-  text-align: center;
-  padding: 3rem;
-  color: rgba(245,245,245,.25);
-  font-size: .9rem;
-  grid-column: 1/-1;
-}
-.btn-aval-new {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  background: transparent;
-  border: 1px solid rgba(245,245,245,.2);
-  color: rgba(245,245,245,.75);
-  padding: .8rem 1.75rem;
-  border-radius: 10px;
-  font-size: .875rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: border-color .2s, color .2s, background .2s;
-  margin-top: 2.25rem;
-  letter-spacing: .3px;
-}
-.btn-aval-new:hover {
-  border-color: rgba(204,27,27,.6);
-  color: #fff;
-  background: rgba(204,27,27,.08);
-}
-</style>
-
-<section id="avaliacoes">
-  <div class="aval-section-new">
-
-    <!-- Cabeçalho -->
-    <div class="sec-header">
-      <span class="sec-eyebrow">Avaliações reais</span>
-      <h2 class="sec-title">Quem esteve lá, contou.</h2>
-      <p class="sec-desc">Depoimentos de quem viveu a experiência do Beach Tennis Experience.</p>
-    </div>
-
-    <!-- Grid de cards -->
-    <div class="aval-grid-new" id="avalGrid">
-
-      <!-- Card 1 -->
-      <div class="aval-card-new">
-        <div class="aval-stars-new">
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-        </div>
-        <p class="aval-texto-new">"Experiência incrível! A organização estava impecável, os professores são muito dedicados e o ambiente foi super acolhedor. Com certeza voltarei na próxima edição."</p>
-        <div class="aval-autor-new">
-          <div class="aval-avatar-new">MF</div>
-          <div>
-            <div class="aval-nome-new">Mariana Ferreira</div>
-            <div class="aval-cidade-new">Goiânia, GO</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="aval-card-new">
-        <div class="aval-stars-new">
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-        </div>
-        <p class="aval-texto-new">"O Super 8 foi muito bem estruturado. Partidas rápidas, quadras de qualidade e ainda saí com um troféu. Parabéns a toda a equipe do BTE!"</p>
-        <div class="aval-autor-new">
-          <div class="aval-avatar-new">RC</div>
-          <div>
-            <div class="aval-nome-new">Rafael Costa</div>
-            <div class="aval-cidade-new">Aparecida de Goiânia, GO</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="aval-card-new">
-        <div class="aval-stars-new">
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new">★</span>
-          <span class="aval-star-new empty">★</span>
-        </div>
-        <p class="aval-texto-new">"Fiz a Experiência de Treino pela primeira vez e me surpreendi. O João Leitão tem um didática incrível para iniciantes. Já estou me inscrevendo na próxima edição."</p>
-        <div class="aval-autor-new">
-          <div class="aval-avatar-new">LS</div>
-          <div>
-            <div class="aval-nome-new">Larissa Souza</div>
-            <div class="aval-cidade-new">Goiânia, GO</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Botão deixar avaliação -->
-    <button class="btn-aval-new" onclick="window.openModalAval && window.openModalAval()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Deixar minha avaliação
-    </button>
-
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<style>
-.footer-new {
-  border-top: 1px solid rgba(245,245,245,.07);
-  padding: 4rem max(2rem, env(safe-area-inset-left,0px)) 2rem;
-  margin-top: 2rem;
-}
-.footer-inner-new {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.footer-top-new {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(245,245,245,.07);
-}
-@media(max-width: 700px) {
-  .footer-top-new {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-.footer-brand-new .footer-logo-new {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.75rem;
-  color: var(--red);
-  letter-spacing: 3px;
-  margin-bottom: .75rem;
-  display: block;
-}
-.footer-brand-new p {
-  font-size: .85rem;
-  color: rgba(245,245,245,.45);
-  line-height: 1.7;
-  max-width: 300px;
-}
-.footer-social-new {
-  display: flex;
-  gap: .6rem;
-  margin-top: 1.25rem;
-}
-.footer-social-link {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(245,245,245,.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(245,245,245,.5);
-  text-decoration: none;
-  transition: border-color .2s, color .2s;
-}
-.footer-social-link:hover {
-  border-color: rgba(245,245,245,.4);
-  color: var(--fg);
-}
-.footer-col-new h4 {
-  font-size: .65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  color: var(--red);
-  margin-bottom: 1rem;
-}
-.footer-col-new a,
-.footer-col-new p {
-  font-size: .85rem;
-  color: rgba(245,245,245,.5);
-  line-height: 2;
-  text-decoration: none;
-  display: block;
-  transition: color .2s;
-}
-.footer-col-new a:hover { color: var(--fg); }
-.footer-bottom-new {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.footer-bottom-new p {
-  font-size: .75rem;
-  color: rgba(245,245,245,.2);
-  line-height: 1.6;
-}
-.footer-cta-new {
-  background: var(--red);
-  color: #fff;
-  padding: .7rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 700;
-  text-decoration: none;
-  font-size: .85rem;
-  transition: background .2s;
-  white-space: nowrap;
-}
-.footer-cta-new:hover { background: #e83030; }
-</style>
-
-<footer class="footer-new">
-  <div class="footer-inner-new">
-    <div class="footer-top-new">
-
-      <!-- Brand -->
-      <div class="footer-brand-new">
-        <span class="footer-logo-new">BEACH TENNIS EXPERIENCE</span>
-        <p>Uma experiência completa para quem deseja conhecer, praticar e viver o Beach Tennis ao lado de profissionais experientes.</p>
-        <div class="footer-social-new">
-          <a href="https://www.instagram.com/clubinhodasraquetes" target="_blank" rel="noopener" class="footer-social-link" title="@clubinhodasraquetes">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/joaoleitaocoach" target="_blank" rel="noopener" class="footer-social-link" title="@joaoleitaocoach">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Contato -->
-      <div class="footer-col-new">
-        <h4>Contato</h4>
-        <a href="https://wa.me/5562991552913" target="_blank" rel="noopener">WhatsApp</a>
-        <p style="font-size:.75rem;opacity:.5;margin-top:-.25rem">(62) 99155-2913</p>
-      </div>
-
-      <!-- Evento -->
-      <div class="footer-col-new">
-        <h4>Evento</h4>
-        <p>28 de Novembro de 2026</p>
-        <p>A partir das 09h00</p>
-        <p>Shopping Passeio das Águas</p>
-        <p style="font-size:.78rem;opacity:.55">CT SkyFit · Goiânia/GO</p>
-      </div>
-
-    </div>
-
-    <!-- Bottom -->
-    <div class="footer-bottom-new">
-      <p>© 2026 3ª Edição Beach Tennis Experience · Organizado por Clubinho das Raquetes · Realizado no CT SkyFit Passeio das Águas</p>
-      <a href="#" onclick="event.preventDefault(); window.openModal && window.openModal()" class="footer-cta-new">Quero participar</a>
-    </div>
-
-    <!-- Link admin discreto -->
-    <div style="margin-top:2rem;text-align:center">
-      <a href="#" onclick="event.preventDefault(); window.toggleAdmin && window.toggleAdmin()" style="font-size:.7rem;color:rgba(245,245,245,.12);text-decoration:none;letter-spacing:1px;transition:color .2s" onmouseover="this.style.color='rgba(245,245,245,.35)'" onmouseout="this.style.color='rgba(245,245,245,.12)'">Área Administrativa</a>
-    </div>
-
-  </div>
-</footer>
 
 </body>
 </html>
