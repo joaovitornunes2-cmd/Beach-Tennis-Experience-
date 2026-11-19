@@ -118,15 +118,18 @@ section{padding:5rem 2rem}
 .tl-all-day h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#CC1B1B;margin-bottom:.75rem}
 .tl-tags{display:flex;flex-wrap:wrap;gap:.5rem}
 .tl-tag{background:var(--blue-dark);color:#fff;padding:.3rem .75rem;border-radius:20px;font-size:.8rem;font-weight:500;display:inline-flex;align-items:center;gap:.4rem}
-.social-project-card{margin-top:3rem;background:linear-gradient(135deg,rgba(204,27,27,0.12) 0%,rgba(204,27,27,0.05) 100%);border:1.5px solid rgba(204,27,27,0.35);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
-.social-project-inner{display:flex;flex-direction:column;gap:1.25rem;position:relative;z-index:1}
+.social-project-card{margin-top:3rem;background:linear-gradient(135deg,rgba(204,27,27,0.14) 0%,rgba(10,10,10,0.95) 60%);border:1.5px solid rgba(204,27,27,0.45);border-radius:20px;padding:2.25rem;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(204,27,27,0.15)}
+.social-project-card::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(204,27,27,0.18) 0%,transparent 70%);pointer-events:none}
+.social-project-inner{display:flex;flex-direction:column;gap:1.5rem;position:relative;z-index:1}
 .social-project-top{display:flex;gap:1.25rem;align-items:flex-start}
-.social-icon{flex-shrink:0;width:56px;height:56px;background:#CC1B1B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 20px rgba(204,27,27,0.4)}
-.social-label{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.5rem}
-.social-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:#fff;line-height:1.1;margin-bottom:.75rem}
-.social-desc{font-size:.9rem;color:rgba(255,255,255,0.72);line-height:1.75}
-.social-link{display:flex;align-items:center;gap:.5rem;color:#fff;background:#CC1B1B;padding:.625rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .2s,transform .2s;width:100%;box-sizing:border-box}
-.social-link:hover{background:#E83030;transform:translateY(-2px)}
+.social-icon{flex-shrink:0;width:60px;height:60px;background:linear-gradient(135deg,#CC1B1B,#E83030);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 6px 24px rgba(204,27,27,0.5)}
+.social-label{font-size:.68rem;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:#CC1B1B;margin-bottom:.4rem}
+.social-title{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;letter-spacing:1.5px;color:#fff;line-height:1.1;margin-bottom:.75rem}
+.social-desc{font-size:.9rem;color:rgba(255,255,255,0.75);line-height:1.8}
+.social-pillars{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.25rem}
+.social-pillar{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;color:rgba(255,255,255,0.8);font-weight:500}
+.social-link{display:flex;align-items:center;justify-content:center;gap:.5rem;color:#fff;background:#CC1B1B;padding:.75rem 1.5rem;border-radius:10px;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;width:100%;box-sizing:border-box;letter-spacing:.5px}
+.social-link:hover{background:#E83030;transform:translateY(-2px);box-shadow:0 6px 20px rgba(204,27,27,0.4)}
 footer{background:#111111;color:#fff;padding:3rem 2rem 1.5rem}
 .footer-inner{max-width:1200px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.1)}
@@ -754,10 +757,17 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
           <div class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <div>
             <p class="social-label">Impacto social</p>
-            <h3 class="social-title">Parte da receita deste evento vai além do esporte</h3>
-            <p class="social-desc">Uma parcela da receita arrecadada é destinada a um projeto social que leva os esportes de raquete para pessoas que talvez nunca tivessem a oportunidade de conhecer essas modalidades.</p>
+            <h3 class="social-title">Mais do que um torneio — uma causa.</h3>
+            <p class="social-desc">Todo o valor arrecadado no BTE é destinado ao <strong style="color:#fff">Projeto Clubinho das Raquetes Social</strong> — uma iniciativa que leva esporte de raquete e alimentação para crianças e jovens que talvez nunca tivessem essa oportunidade.</p>
           </div>
         </div>
+        <div class="social-pillars">
+          <span class="social-pillar">🎾 Beach Tennis</span>
+          <span class="social-pillar">🏓 Pickleball</span>
+          <span class="social-pillar">🎾 Padel</span>
+          <span class="social-pillar">🧺 Cestas Básicas</span>
+        </div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,0.5);font-style:italic;margin-top:-.25rem">Ao se inscrever, você joga — e transforma uma vida.</p>
         <a href="https://www.instagram.com/clubinhodasraquetesproject" target="_blank" class="social-link">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           @clubinhodasraquetesproject
