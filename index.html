@@ -3622,14 +3622,14 @@ async function atletaCarregarMural() {
     collection(db, 'inscricoes'),
     where('cat', '==', cat),
     where('tipo', '==', 'tor'),
-    where('status', '==', 'confirmado'),
-    where('edicao', '==', edicaoAtiva)
+    where('status', '==', 'confirmado')
   ));
 
   const muralEl = document.getElementById('atletaMuralEl');
-  const fotos = {};
-  // Busca fotos em lote (simplificado — busca uma por uma)
-  const atletas = snap.docs.map(d => d.data());
+  // Filtra pela edição ativa no JS (tolerante a edicao salvo como número ou string)
+  const atletas = snap.docs
+    .map(d => d.data())
+    .filter(a => Number(a.edicao||1) === Number(edicaoAtiva));
 
   let html = '';
   for (const a of atletas) {
