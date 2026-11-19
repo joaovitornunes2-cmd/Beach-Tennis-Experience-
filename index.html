@@ -3626,15 +3626,21 @@ async function atletaCarregarMural() {
   ));
 
   const muralEl = document.getElementById('atletaMuralEl');
-  const atletas = snap.docs
-    .map(d => d.data())
-    .filter(a =>
-      a.tipo === 'tor' &&
-      a.status === 'confirmado' &&
-      Number(a.edicao||1) === Number(edicaoAtiva)
-    );
+  const todos = snap.docs.map(d => d.data());
+  const atletas = todos.filter(a =>
+    a.tipo === 'tor' &&
+    a.status === 'confirmado' &&
+    Number(a.edicao||1) === Number(edicaoAtiva)
+  );
 
-  let html = '';
+  // DEBUG temporário — mostra diagnóstico na tela
+  const debugInfo = `<p style="color:#CC1B1B;font-size:.7rem;margin-bottom:.5rem">
+    🔍 cat buscada: "${cat}" | edicaoAtiva: ${edicaoAtiva}<br>
+    total cat: ${todos.length} | após filtro: ${atletas.length}<br>
+    ${todos.map(a=>`${a.nome?.split(' ')[0]||'?'} [tipo=${a.tipo} status=${a.status} ed=${a.edicao}]`).join('<br>')}
+  </p>`;
+
+  let html = debugInfo;
   for (const a of atletas) {
     const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
     const url = fSnap.exists() ? fSnap.data().url : null;
@@ -3644,7 +3650,8 @@ async function atletaCarregarMural() {
       <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
     </div>`;
   }
-  muralEl.innerHTML = html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
+  if (atletas.length === 0) html += '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
+  muralEl.innerHTML = html;
 }
 
 function atletaOuvirJogos() {
