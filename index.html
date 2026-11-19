@@ -3618,18 +3618,21 @@ async function atletaCarregarDashboard() {
 
 async function atletaCarregarMural() {
   const cat = atletaAtual.cat;
+  // Usa apenas 1 where para evitar necessidade de índice composto no Firestore
+  // Filtra status e edicao no JS
   const snap = await getDocs(query(
     collection(db, 'inscricoes'),
-    where('cat', '==', cat),
-    where('tipo', '==', 'tor'),
-    where('status', '==', 'confirmado')
+    where('cat', '==', cat)
   ));
 
   const muralEl = document.getElementById('atletaMuralEl');
-  // Filtra pela edição ativa no JS (tolerante a edicao salvo como número ou string)
   const atletas = snap.docs
     .map(d => d.data())
-    .filter(a => Number(a.edicao||1) === Number(edicaoAtiva));
+    .filter(a =>
+      a.tipo === 'tor' &&
+      a.status === 'confirmado' &&
+      Number(a.edicao||1) === Number(edicaoAtiva)
+    );
 
   let html = '';
   for (const a of atletas) {
