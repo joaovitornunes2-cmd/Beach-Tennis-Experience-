@@ -3628,21 +3628,20 @@ async function atletaCarregarMural() {
   const muralEl = document.getElementById('atletaMuralEl');
   try {
     const cat = atletaAtual.cat;
-    muralEl.innerHTML = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" carregando...</p>`;
 
-    // Usa apenas 1 where para evitar necessidade de índice composto no Firestore
-    // Timeout de 10s para não travar silenciosamente
-    const snapPromise = getDocs(query(collection(db, 'inscricoes'), where('cat', '==', cat)));
-    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT 10s')), 10000));
-    const snap = await Promise.race([snapPromise, timeoutPromise]);
+    const snap = await getDocs(query(collection(db, 'inscricoes'), where('cat', '==', cat)));
 
-    // DEBUG TEMPORÁRIO
-    const debugInfo = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" | docs=${snap.docs.length} | ${snap.docs.slice(0,3).map(d=>{const x=d.data();return `{cat:${x.cat},tipo:${x.tipo},st:${x.status}}`}).join(' | ')}</p>`;
-
-    // Mostra todos confirmados da categoria — sem filtro de edição
+    // Filtra: torneio, confirmado, e edição 3 (ou sem campo edicao = edição antiga sem campo)
+    // Usa 3 fixo pois edicaoAtiva pode não ter carregado ainda via onSnapshot
+    const EDICAO_ATUAL = 3;
     const atletas = snap.docs
       .map(d => d.data())
-      .filter(a => a.tipo === 'tor' && a.status === 'confirmado');
+      .filter(a => {
+        if (a.tipo !== 'tor' || a.status !== 'confirmado') return false;
+        const ed = a.edicao;
+        if (ed === undefined || ed === null || ed === '') return false; // sem campo = edição antiga, exclui
+        return Number(ed) === EDICAO_ATUAL;
+      });
 
     let html = '';
     for (const a of atletas) {
@@ -3660,9 +3659,9 @@ async function atletaCarregarMural() {
         <div class="atleta-mural-nome">${nome.split(' ')[0]} ${nome.split(' ').filter(Boolean).slice(-1)[0]}</div>
       </div>`;
     }
-    muralEl.innerHTML = debugInfo + (html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>');
+    muralEl.innerHTML = html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
   } catch(e) {
-    muralEl.innerHTML = `<p style="color:#f55;font-size:.75rem;margin:8px 0">ERRO MURAL: ${e.message || e.code || JSON.stringify(e)}</p>`;
+    muralEl.innerHTML = '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
   }
 }
 
