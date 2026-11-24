@@ -3630,16 +3630,11 @@ async function atletaCarregarMural() {
   ));
 
   const muralEl = document.getElementById('atletaMuralEl');
-  // Aceita edicao == edicaoAtiva OU edicao ausente/undefined (campo não existia em edições antigas do mesmo evento)
-  // Exclui explicitamente quem tem edicao de outra edição numerada
+  // Mostra todos confirmados da categoria — sem filtro de edição
+  // (categoria já é específica o suficiente; filtrar por edição causava bugs com edicao=undefined)
   const atletas = snap.docs
     .map(d => d.data())
-    .filter(a => {
-      if (a.tipo !== 'tor' || a.status !== 'confirmado') return false;
-      const ed = a.edicao;
-      if (ed === undefined || ed === null || ed === '') return true; // sem campo = inclui
-      return Number(ed) === Number(edicaoAtiva); // com campo = verifica edição
-    });
+    .filter(a => a.tipo === 'tor' && a.status === 'confirmado');
 
   let html = '';
   for (const a of atletas) {
