@@ -3625,36 +3625,39 @@ async function atletaCarregarDashboard() {
 }
 
 async function atletaCarregarMural() {
-  const cat = atletaAtual.cat;
-  // Usa apenas 1 where para evitar necessidade de índice composto no Firestore
-  // Filtra status e edicao no JS
-  const snap = await getDocs(query(
-    collection(db, 'inscricoes'),
-    where('cat', '==', cat)
-  ));
-
   const muralEl = document.getElementById('atletaMuralEl');
+  try {
+    const cat = atletaAtual.cat;
+    muralEl.innerHTML = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" carregando...</p>`;
 
-  // DEBUG TEMPORÁRIO — remover após diagnóstico
-  const debugInfo = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 DEBUG: cat="${cat}" | docs=${snap.docs.length} | ${snap.docs.slice(0,3).map(d=>{const x=d.data();return `{cat:${x.cat},tipo:${x.tipo},st:${x.status}}`}).join(' | ')}</p>`;
+    // Usa apenas 1 where para evitar necessidade de índice composto no Firestore
+    const snap = await getDocs(query(
+      collection(db, 'inscricoes'),
+      where('cat', '==', cat)
+    ));
 
-  // Mostra todos confirmados da categoria — sem filtro de edição
-  // (categoria já é específica o suficiente; filtrar por edição causava bugs com edicao=undefined)
-  const atletas = snap.docs
-    .map(d => d.data())
-    .filter(a => a.tipo === 'tor' && a.status === 'confirmado');
+    // DEBUG TEMPORÁRIO
+    const debugInfo = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" | docs=${snap.docs.length} | ${snap.docs.slice(0,3).map(d=>{const x=d.data();return `{cat:${x.cat},tipo:${x.tipo},st:${x.status}}`}).join(' | ')}</p>`;
 
-  let html = '';
-  for (const a of atletas) {
-    const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
-    const url = fSnap.exists() ? fSnap.data().url : null;
-    const iniciais = a.nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
-    html += `<div class="atleta-mural-card">
-      <div class="atleta-mural-avatar">${url ? `<img src="${url}" alt="">` : iniciais}</div>
-      <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
-    </div>`;
+    // Mostra todos confirmados da categoria — sem filtro de edição
+    const atletas = snap.docs
+      .map(d => d.data())
+      .filter(a => a.tipo === 'tor' && a.status === 'confirmado');
+
+    let html = '';
+    for (const a of atletas) {
+      const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
+      const url = fSnap.exists() ? fSnap.data().url : null;
+      const iniciais = a.nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+      html += `<div class="atleta-mural-card">
+        <div class="atleta-mural-avatar">${url ? `<img src="${url}" alt="">` : iniciais}</div>
+        <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
+      </div>`;
+    }
+    muralEl.innerHTML = debugInfo + (html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>');
+  } catch(e) {
+    muralEl.innerHTML = `<p style="color:#f55;font-size:.75rem;margin:8px 0">ERRO MURAL: ${e.message || e.code || JSON.stringify(e)}</p>`;
   }
-  muralEl.innerHTML = debugInfo + (html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>');
 }
 
 function atletaOuvirJogos() {
