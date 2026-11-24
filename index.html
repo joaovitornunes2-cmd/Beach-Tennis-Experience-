@@ -3631,10 +3631,10 @@ async function atletaCarregarMural() {
     muralEl.innerHTML = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" carregando...</p>`;
 
     // Usa apenas 1 where para evitar necessidade de índice composto no Firestore
-    const snap = await getDocs(query(
-      collection(db, 'inscricoes'),
-      where('cat', '==', cat)
-    ));
+    // Timeout de 10s para não travar silenciosamente
+    const snapPromise = getDocs(query(collection(db, 'inscricoes'), where('cat', '==', cat)));
+    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT 10s')), 10000));
+    const snap = await Promise.race([snapPromise, timeoutPromise]);
 
     // DEBUG TEMPORÁRIO
     const debugInfo = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 cat="${cat}" | docs=${snap.docs.length} | ${snap.docs.slice(0,3).map(d=>{const x=d.data();return `{cat:${x.cat},tipo:${x.tipo},st:${x.status}}`}).join(' | ')}</p>`;
@@ -3646,12 +3646,18 @@ async function atletaCarregarMural() {
 
     let html = '';
     for (const a of atletas) {
-      const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
-      const url = fSnap.exists() ? fSnap.data().url : null;
-      const iniciais = a.nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+      let url = null;
+      try {
+        if (a.cpf) {
+          const fSnap = await getDoc(doc(db, 'atletasFotos', a.cpf));
+          url = fSnap.exists() ? fSnap.data().url : null;
+        }
+      } catch(_) {}
+      const nome = a.nome || '?';
+      const iniciais = nome.split(' ').filter(Boolean).slice(0,2).map(n=>n[0]).join('').toUpperCase() || '?';
       html += `<div class="atleta-mural-card">
         <div class="atleta-mural-avatar">${url ? `<img src="${url}" alt="">` : iniciais}</div>
-        <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
+        <div class="atleta-mural-nome">${nome.split(' ')[0]} ${nome.split(' ').filter(Boolean).slice(-1)[0]}</div>
       </div>`;
     }
     muralEl.innerHTML = debugInfo + (html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>');
