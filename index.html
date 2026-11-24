@@ -3630,6 +3630,10 @@ async function atletaCarregarMural() {
   ));
 
   const muralEl = document.getElementById('atletaMuralEl');
+
+  // DEBUG TEMPORÁRIO — remover após diagnóstico
+  const debugInfo = `<p style="color:#ff0;font-size:.75rem;margin:8px 0">🔍 DEBUG: cat="${cat}" | docs=${snap.docs.length} | ${snap.docs.slice(0,3).map(d=>{const x=d.data();return `{cat:${x.cat},tipo:${x.tipo},st:${x.status}}`}).join(' | ')}</p>`;
+
   // Mostra todos confirmados da categoria — sem filtro de edição
   // (categoria já é específica o suficiente; filtrar por edição causava bugs com edicao=undefined)
   const atletas = snap.docs
@@ -3646,7 +3650,7 @@ async function atletaCarregarMural() {
       <div class="atleta-mural-nome">${a.nome.split(' ')[0]} ${a.nome.split(' ').slice(-1)[0]}</div>
     </div>`;
   }
-  muralEl.innerHTML = html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>';
+  muralEl.innerHTML = debugInfo + (html || '<p style="color:rgba(255,255,255,.4);font-size:.82rem">Nenhum atleta confirmado ainda.</p>');
 }
 
 function atletaOuvirJogos() {
