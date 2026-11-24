@@ -3581,7 +3581,11 @@ window.atletaLogin = async function() {
       return;
     }
 
-    const docAtivo = allDocs.find(d => Number(d.data().edicao||1) === edicaoAtiva) || allDocs[allDocs.length - 1];
+    // Prioridade: inscrição de torneio com maior número de edição > qualquer confirmado
+    const torDocs = allDocs.filter(d => d.data().tipo === 'tor');
+    const docAtivo = torDocs.length > 0
+      ? torDocs.reduce((best, cur) => Number(cur.data().edicao||0) >= Number(best.data().edicao||0) ? cur : best)
+      : allDocs[allDocs.length - 1];
 
     atletaAtual = { cpf, ...docAtivo.data(), docId: docAtivo.id };
     atletaCarregarDashboard();
